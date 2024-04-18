@@ -1,10 +1,12 @@
 ﻿using _Project.Scripts.UI_Scripts;
 using UnityEngine;
+using Zenject;
 
 namespace _Project.Scripts.Other
 {
 	public class Eyes : MonoBehaviour 
 	{
+		[Inject] private MenuManager _menuManager;  
 		private int play_screen = 0;
 		private float timeofmotion0;
 		private bool isEyeOpen;
@@ -41,11 +43,11 @@ namespace _Project.Scripts.Other
 		public void Ontotorialpanel()
 		{
 			tutorial_panel.SetActive (true);
-			MenuManager._instance.EnableFadePanel ();
+			_menuManager.EnableFadePanel ();
 		}
 		public void Closetutorialpanel()
 		{
-			MenuManager._instance.EnableFadePanel ();
+			_menuManager.EnableFadePanel ();
 			tutorial_panel.SetActive (false);
 		}
 	}

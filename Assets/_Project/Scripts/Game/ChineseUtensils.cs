@@ -4,11 +4,15 @@ using _Project.Scripts.Other;
 using _Project.Scripts.UI_Scripts;
 using _Project.Scripts.UI.Tutorial;
 using UnityEngine;
+using Zenject;
 
 namespace _Project.Scripts.Game
 {
 	public class ChineseUtensils : MonoBehaviour
 	{
+		
+		[Inject] private China_Manager _chinaManager;
+		[Inject] private UIManager _uiManager;   
 		private bool reachedDestination;
 		private bool scaleUp;
 		private bool isPicked;
@@ -81,19 +85,17 @@ namespace _Project.Scripts.Game
 					if(tutorialOn && !tutorialPick)
 					{
 						tutorialPick = true;
-						UIManager._instance.tutorialPanelBg.gameObject.SetActive (true);
-						China_Manager._instance.noodlesPlatesMotion[0].tutorialOn = true;
+						_uiManager.tutorialPanelBg.gameObject.SetActive (true);
+						_chinaManager.noodlesPlatesMotion[0].tutorialOn = true;
 						if(isPan)
-							UIManager._instance.tutorialPanelBg.OpenPopupChina ("TAP OR DRAG NOODLES ON \n THE PLATE.",false,false , 3);
+							_uiManager.tutorialPanelBg.OpenPopupChina ("TAP OR DRAG NOODLES ON \n THE PLATE.",false,false , 3);
 					}
 					if(!myReadyFood.activeInHierarchy)
 					{
-//					myFood.gameObject.SetActive (false);
 						myAlpha.ResetToBeginning ();
 						myAlpha.PlayForward ();
 						myReadyFood.gameObject.SetActive (true);
-						myReadyFood.GetComponent<SpriteRenderer>().sprite = China_Manager._instance.noodlesInPanVariations[3];
-//					foodCooked.Play ();
+						myReadyFood.GetComponent<SpriteRenderer>().sprite = _chinaManager.noodlesInPanVariations[3];
 					}
 				}
 				else if(heatingTimer > burningTimer && !isBurnt)
@@ -101,7 +103,7 @@ namespace _Project.Scripts.Game
 					if(!TutorialPanel.popupPanelActive)
 					{
 						isBurnt = true;  // burnt
-						myReadyFood.GetComponent<SpriteRenderer>().sprite = China_Manager._instance.noodlesInPanVariations[4];
+						myReadyFood.GetComponent<SpriteRenderer>().sprite = _chinaManager.noodlesInPanVariations[4];
 						mySmoke.gameObject.SetActive (true);
 						mySmoke.Play ();
 					}
@@ -126,18 +128,18 @@ namespace _Project.Scripts.Game
 		
 				scaleUp = true;
 				canMove = true;
-				China_Manager._instance.AllClickedBoolsReset();
-				China_Manager._instance.clickedUtensilsDestinationFunction = this;
+				_chinaManager.AllClickedBoolsReset();
+				_chinaManager.clickedUtensilsDestinationFunction = this;
 				iAmSelected = true;
 				if (isSoupContainer)
 				{
-					China_Manager._instance.clickedSoupContainer = true;
+					_chinaManager.clickedSoupContainer = true;
 					if (tutorialOn)
-						China_Manager._instance.firstSoupBowl.tutorialOn = true;
+						_chinaManager.firstSoupBowl.tutorialOn = true;
 				}
 				else
 				{
-					China_Manager._instance.clickedPan = true;
+					_chinaManager.clickedPan = true;
 				}
 
 				if (!isBurnt || isSoupContainer)
@@ -157,22 +159,21 @@ namespace _Project.Scripts.Game
 
 			}
 			else if ((!TutorialPanel.popupPanelActive || !China_Manager.tutorialEnd) &&
-			         noOfServingsAvailable <= 0) // Click on it to place ingredients
+			         noOfServingsAvailable <= 0) 
 			{
 				if (isPan)
 				{
-//				China_Manager._instance.clickedUtensilsDestinationFunction = this;
-					if (China_Manager._instance.clickedNoodlesVeg && !vegAdded)
+					if (_chinaManager.clickedNoodlesVeg && !vegAdded)
 					{
-						China_Manager._instance.clickedItemDestinationFunction.utensil = this;
-						China_Manager._instance.ObjectReached();
-						China_Manager._instance.AllClickedBoolsReset();
+						_chinaManager.clickedItemDestinationFunction.utensil = this;
+						_chinaManager.ObjectReached();
+						_chinaManager.AllClickedBoolsReset();
 					}
-					else if (China_Manager._instance.clickedNoodlesToCook && !noodlesAdded)
+					else if (_chinaManager.clickedNoodlesToCook && !noodlesAdded)
 					{
-						China_Manager._instance.clickedItemDestinationFunction.utensil = this;
-						China_Manager._instance.ObjectReached();
-						China_Manager._instance.AllClickedBoolsReset();
+						_chinaManager.clickedItemDestinationFunction.utensil = this;
+						_chinaManager.ObjectReached();
+						_chinaManager.AllClickedBoolsReset();
 					}
 					else
 					{
@@ -181,11 +182,11 @@ namespace _Project.Scripts.Game
 				}
 				else if (isSoupContainer)
 				{
-					if (China_Manager._instance.clickedSoupVeg && !vegAdded)
+					if (_chinaManager.clickedSoupVeg && !vegAdded)
 					{
-						China_Manager._instance.clickedItemDestinationFunction.utensil = this;
-						China_Manager._instance.ObjectReached();
-						China_Manager._instance.AllClickedBoolsReset();
+						_chinaManager.clickedItemDestinationFunction.utensil = this;
+						_chinaManager.ObjectReached();
+						_chinaManager.AllClickedBoolsReset();
 					}
 					else
 					{
@@ -247,8 +248,8 @@ namespace _Project.Scripts.Game
 		}
 		public void Deactivedustbin()
 		{
-			UIManager._instance.dustbin_textparent.SetActive (false);
-			UIManager._instance.dustbin_textparent.transform.position = UIManager._instance.dustbintextintialposition;
+			_uiManager.dustbin_textparent.SetActive (false);
+			_uiManager.dustbin_textparent.transform.position = _uiManager.dustbintextintialposition;
 		}
 
 		public void ClickedDestination()
@@ -262,12 +263,12 @@ namespace _Project.Scripts.Game
 					noOfServingsAvailable= 0;
 					myAlpha.gameObject.SetActive (false);
 					myFood.gameObject.SetActive (false);
-					myReadyFood.GetComponent<SpriteRenderer>().sprite = China_Manager._instance.soupContainerVariations[0];
+					myReadyFood.GetComponent<SpriteRenderer>().sprite = _chinaManager.soupContainerVariations[0];
 					myImage.sprite = ladleVariations[0];
 					vegAdded = false;
-					China_Manager._instance.clickedSoupContainer = false;
-					UIManager._instance.totalCoins-=China_Manager._instance.soupPrice;
-					UIManager._instance.coinsText.text = UIManager._instance.totalCoins.ToString ();
+					_chinaManager.clickedSoupContainer = false;
+					_uiManager.totalCoins -= _chinaManager.soupPrice;
+					_uiManager.coinsText.text = _uiManager.totalCoins.ToString ();
 			
 				}
 				else if(isPan)
@@ -282,20 +283,20 @@ namespace _Project.Scripts.Game
 					myImage.sprite = ladleVariations[0];
 					noodlesAdded = false;
 					vegAdded = false;
-					China_Manager._instance.clickedPan = false;
-					UIManager._instance.totalCoins-=China_Manager._instance.perfectNoodlesPrice;
-					UIManager._instance.coinsText.text = UIManager._instance.totalCoins.ToString ();
+					_chinaManager.clickedPan = false;
+					_uiManager.totalCoins-=_chinaManager.perfectNoodlesPrice;
+					_uiManager.coinsText.text = _uiManager.totalCoins.ToString ();
 					LevelSoundManager._instance.dustbin.Play();
-					if(UIManager._instance.totalCoins > 0) 
+					if(_uiManager.totalCoins > 0) 
 					{
-						UIManager._instance.dustbin_textparent.SetActive(true);
-						UIManager._instance.dustbin_text.text = "-"+China_Manager._instance.perfectNoodlesPrice.ToString(); 
+						_uiManager.dustbin_textparent.SetActive(true);
+						_uiManager.dustbin_text.text = "-"+_chinaManager.perfectNoodlesPrice.ToString(); 
 						Invoke("Deactivedustbin",1.0f);
 					}
-					if(UIManager._instance.totalCoins < 0)
+					if(_uiManager.totalCoins < 0)
 					{
-						UIManager._instance.totalCoins = 0;
-						UIManager._instance.coinsText.text = "0";
+						_uiManager.totalCoins = 0;
+						_uiManager.coinsText.text = "0";
 					}
 				}
 				iAmSelected = false;
@@ -320,20 +321,20 @@ namespace _Project.Scripts.Game
 								heatingTimer = 0;
 								myAlpha.gameObject.SetActive (false);
 								myFood.gameObject.SetActive (false);
-								myReadyFood.GetComponent<SpriteRenderer>().sprite = China_Manager._instance.soupContainerVariations[0];
+								myReadyFood.GetComponent<SpriteRenderer>().sprite = _chinaManager.soupContainerVariations[0];
 								myImage.sprite = ladleVariations[0];
 								vegAdded = false;
 							}
 							if(tutorialOn)
 							{
 								tutorialPick = false;
-								China_Manager._instance.firstSoupBowl.tutorialOn = true;
-								UIManager._instance.tutorialPanelBg.OpenPopupChina ("DRAG TO THE \n CUSTOMER.",false,false , 6);
+								_chinaManager.firstSoupBowl.tutorialOn = true;
+								_uiManager.tutorialPanelBg.OpenPopupChina ("DRAG TO THE \n CUSTOMER.",false,false , 6);
 								tutorialOn = false;
 							}
 							iAmSelected = false;
 					
-							China_Manager._instance.clickedSoupContainer = false;
+							_chinaManager.clickedSoupContainer = false;
 						}
 					}
 				}
@@ -348,9 +349,9 @@ namespace _Project.Scripts.Game
 							if(tutorialOn)
 							{
 								tutorialPick = false;
-								China_Manager._instance.firstCustomer.tutorialOn = true;
-								China_Manager._instance.noodlesPlatesMotion[0].tutorialOn = true;
-								UIManager._instance.tutorialPanelBg.OpenPopupChina ("DRAG TO THE \n CUSTOMER.",false,false , 6);
+								_chinaManager.firstCustomer.tutorialOn = true;
+								_chinaManager.noodlesPlatesMotion[0].tutorialOn = true;
+								_uiManager.tutorialPanelBg.OpenPopupChina ("DRAG TO THE \n CUSTOMER.",false,false , 6);
 								tutorialOn = false;
 							}
 							otherObjectMotion.myNoodles.SetActive (true);
@@ -358,12 +359,12 @@ namespace _Project.Scripts.Game
 							if(heatingTimer >= perfectTimer && !isBurnt)
 							{
 								otherObjectMotion.perfect = true;
-								otherObjectMotion.myNoodles.GetComponent<SpriteRenderer>().sprite = China_Manager._instance.noodlesInPlateVariations[1];
+								otherObjectMotion.myNoodles.GetComponent<SpriteRenderer>().sprite = _chinaManager.noodlesInPlateVariations[1];
 							
 							}
 							else if(!isBurnt)
 							{
-								otherObjectMotion.myNoodles.GetComponent<SpriteRenderer>().sprite = China_Manager._instance.noodlesInPlateVariations[0];
+								otherObjectMotion.myNoodles.GetComponent<SpriteRenderer>().sprite = _chinaManager.noodlesInPlateVariations[0];
 							}
 							noOfServingsAvailable--;
 							if(noOfServingsAvailable <= 0)
@@ -378,7 +379,7 @@ namespace _Project.Scripts.Game
 								noodlesAdded = false;
 								vegAdded = false;
 							}
-							China_Manager._instance.clickedPan = false;
+							_chinaManager.clickedPan = false;
 							iAmSelected = false;
 						}
 					}

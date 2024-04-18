@@ -4,11 +4,14 @@ using _Project.Scripts.Managers;
 using _Project.Scripts.UI_Scripts;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace _Project.Scripts.Other
 {
 	public class Handcuff : MonoBehaviour 
 	{
+		[Inject] private US_Manager _usManager;
+		[Inject] private UIManager _uiManager;   
 		public Text stolentext;
 		private void OnEnable()
 		{
@@ -30,14 +33,14 @@ namespace _Project.Scripts.Other
 				PlayerPrefs.SetString ("Handcuff", EncryptionHandler64.Encrypt (MenuManager.handcuffNo.ToString ()));
 				if(MenuManager.handcuffNo > 0)
 				{
-					US_Manager._instance.handcuff.SetActive(true);
+					_usManager.handcuff.SetActive(true);
 				}
 				else
 				{
-					US_Manager._instance.handcuff.SetActive(false);
+					_usManager.handcuff.SetActive(false);
 				}
 			} else {
-				UIManager._instance.EarnCoin();
+				_uiManager.EarnCoin();
 			}
 			gameObject.SetActive (false);
 		}

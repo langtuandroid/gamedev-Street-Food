@@ -7,11 +7,17 @@ using _Project.Scripts.Managers;
 using _Project.Scripts.UI_Scripts;
 using _Project.Scripts.UI.Tutorial;
 using UnityEngine;
+using Zenject;
 
 namespace _Project.Scripts.Entities.Customers
 {
-	public class Customer : MonoBehaviour 
+	public class Customer : MonoBehaviour
 	{
+		[Inject] private US_Manager _usManager;
+		[Inject] private Italy_Manager _italyManager;
+		[Inject] private China_Manager _chinaManager;
+		[Inject] private Australia_Manager _australiaManager;
+		[Inject] private UIManager _uiManager;
 		Vector3 scaleOfEatableOrder;
 		Vector3 scaleOfDrinkableOrder;
 		Vector3 scaleOfFries;
@@ -59,12 +65,12 @@ namespace _Project.Scripts.Entities.Customers
 
 		private void Start () 
 		{
-			UIManager._instance.n_Customer_served = PlayerPrefs.GetInt ("CustomerServed");
-			UIManager._instance.n_Perfect_achieved = PlayerPrefs.GetInt ("Perfectachieved");
+			_uiManager.n_Customer_served = PlayerPrefs.GetInt ("CustomerServed");
+			_uiManager.n_Perfect_achieved = PlayerPrefs.GetInt ("Perfectachieved");
 
 			scaleOfEatableOrder = plateOfEatableOrder.transform.localScale;
 			scaleOfDrinkableOrder = drinkingOrder.transform.localScale;
-			if(Australia_Manager._instance != null)
+			if(_australiaManager != null)
 			{
 				scaleOfFries = fries.transform.localScale;
 			}
@@ -86,9 +92,9 @@ namespace _Project.Scripts.Entities.Customers
 		
 		private void OnMouseDown()
 		{
-			if(Italy_Manager._instance != null )
+			if(_italyManager != null )
 			{
-				if(Italy_Manager._instance.firstOvenPizza.tutorialOn)
+				if(_italyManager.firstOvenPizza.tutorialOn)
 				{
 					allowClick = true;
 				}
@@ -98,31 +104,31 @@ namespace _Project.Scripts.Entities.Customers
 			{
 				if(LevelManager.levelNo <= 10)
 				{
-					if(US_Manager._instance.clickedCoke)
+					if(_usManager.clickedCoke)
 					{
-						US_Manager._instance.clickedItemDestinationFunction.customer = this;
+						_usManager.clickedItemDestinationFunction.customer = this;
 
 						for(int i = 0 ; i< myOrder.Count ; i++)
 						{
-							if(US_Manager._instance.clickedItemDestinationFunction.myType == myOrder[i])
+							if(_usManager.clickedItemDestinationFunction.myType == myOrder[i])
 							{
-								US_Manager._instance.ObjectReached();
+								_usManager.ObjectReached();
 								break;
 							}
 						}
-						US_Manager._instance.AllClickedBoolsReset ();
+						_usManager.AllClickedBoolsReset ();
 					}
-					else if(US_Manager._instance.clickedHotDog)
+					else if(_usManager.clickedHotDog)
 					{
-						US_Manager._instance.clickedHotDogDestinationFunction.customer = this;
-						US_Manager._instance.clickedHotDogDestinationFunction.otherObject = this.gameObject;
+						_usManager.clickedHotDogDestinationFunction.customer = this;
+						_usManager.clickedHotDogDestinationFunction.otherObject = this.gameObject;
 						bool foundOrder = false;
 						for(int i = 0 ; i< myOrder.Count ; i++)
 						{
-							if(US_Manager._instance.clickedHotDogDestinationFunction.myType == myOrder[i])
+							if(_usManager.clickedHotDogDestinationFunction.myType == myOrder[i])
 							{
 								LevelSoundManager._instance.customerEat.Play();
-								US_Manager._instance.HotDogReached();
+								_usManager.HotDogReached();
 								foundOrder = true;
 								break;
 							}
@@ -131,70 +137,68 @@ namespace _Project.Scripts.Entities.Customers
 						{
 							if(iHaveAMultipleTypeOrder != LevelManager.Orders.NONE)
 							{	
-
-
-								US_Manager._instance.clickedHotDogDestinationFunction.myTypeToEat = iHaveAMultipleTypeOrder;
-								US_Manager._instance.clickedHotDogDestinationFunction.wrongOrderGiven = true;
-								US_Manager._instance.HotDogReached();
+								_usManager.clickedHotDogDestinationFunction.myTypeToEat = iHaveAMultipleTypeOrder;
+								_usManager.clickedHotDogDestinationFunction.wrongOrderGiven = true;
+								_usManager.HotDogReached();
 							}
 						}
-						US_Manager._instance.AllClickedBoolsReset ();
+						_usManager.AllClickedBoolsReset ();
 					}
 					else
 					{
-						US_Manager._instance.AllClickedBoolsReset ();
+						_usManager.AllClickedBoolsReset ();
 					}
 				}
 				else if(LevelManager.levelNo > 10 && LevelManager.levelNo <= 20)
 				{
-					if(China_Manager._instance.clickedNoodlePlate)
+					if(_chinaManager.clickedNoodlePlate)
 					{
-						China_Manager._instance.clickedItemDestinationFunction.customer = this;
+						_chinaManager.clickedItemDestinationFunction.customer = this;
 
 						for(int i = 0 ; i< myOrder.Count ; i++)
 						{
-							if(China_Manager._instance.clickedItemDestinationFunction.myType == myOrder[i])
+							if(_chinaManager.clickedItemDestinationFunction.myType == myOrder[i])
 							{
-								China_Manager._instance.ObjectReached();
+								_chinaManager.ObjectReached();
 								break;
 							}
 						}
-						China_Manager._instance.AllClickedBoolsReset ();
+						_chinaManager.AllClickedBoolsReset ();
 					}
-					else if(China_Manager._instance.clickSoupBowl)
+					else if(_chinaManager.clickSoupBowl)
 					{
 						Debug.Log("here....");
-						China_Manager._instance.clickedItemDestinationFunction.customer = this;
+						_chinaManager.clickedItemDestinationFunction.customer = this;
 						for(int i = 0 ; i< myOrder.Count ; i++)
 						{
-							if(China_Manager._instance.clickedItemDestinationFunction.myType == myOrder[i])
+							if(_chinaManager.clickedItemDestinationFunction.myType == myOrder[i])
 							{
-								China_Manager._instance.ObjectReached();
+								_chinaManager.ObjectReached();
 								break;
 							}
 						}
-						China_Manager._instance.AllClickedBoolsReset ();
+						_chinaManager.AllClickedBoolsReset ();
 					}
 					else
 					{
-						China_Manager._instance.AllClickedBoolsReset ();
+						_chinaManager.AllClickedBoolsReset ();
 					}
 				}
 				else if(LevelManager.levelNo > 20 && LevelManager.levelNo <= 30)
 				{
-					if(Italy_Manager._instance.clickedOvenPizza)
+					if(_italyManager.clickedOvenPizza)
 					{
-						if(!Italy_Manager._instance.clickedPizzaDestinationFunction.isBurnt)
+						if(!_italyManager.clickedPizzaDestinationFunction.isBurnt)
 						{
-							Italy_Manager._instance.clickedPizzaDestinationFunction.customer = this;
-							Italy_Manager._instance.clickedPizzaDestinationFunction.otherObject = this.gameObject;
+							_italyManager.clickedPizzaDestinationFunction.customer = this;
+							_italyManager.clickedPizzaDestinationFunction.otherObject = this.gameObject;
 						
 							bool foundOrder = false;
 							for(int i = 0 ; i< myOrder.Count ; i++)
 							{
-								if(Italy_Manager._instance.clickedPizzaDestinationFunction.myType == myOrder[i])
+								if(_italyManager.clickedPizzaDestinationFunction.myType == myOrder[i])
 								{
-									Italy_Manager._instance.PizzaReached();
+									_italyManager.PizzaReached();
 									foundOrder = true;
 									break;
 								}
@@ -203,45 +207,45 @@ namespace _Project.Scripts.Entities.Customers
 							{
 								if(iHaveAMultipleTypeOrder != LevelManager.Orders.NONE)
 								{
-									Italy_Manager._instance.clickedPizzaDestinationFunction.wrongOrderGiven = true;
-									Italy_Manager._instance.PizzaReached();
+									_italyManager.clickedPizzaDestinationFunction.wrongOrderGiven = true;
+									_italyManager.PizzaReached();
 								}
 							}
-							Italy_Manager._instance.AllClickedBoolsReset ();
+							_italyManager.AllClickedBoolsReset ();
 						}
 					}
-					else if(Italy_Manager._instance.clickedCoke)
+					else if(_italyManager.clickedCoke)
 					{
-						Italy_Manager._instance.clickedItemDestinationFunction.customer = this;
+						_italyManager.clickedItemDestinationFunction.customer = this;
 					
 						for(int i = 0 ; i< myOrder.Count ; i++)
 						{
-							if(Italy_Manager._instance.clickedItemDestinationFunction.myType == myOrder[i])
+							if(_italyManager.clickedItemDestinationFunction.myType == myOrder[i])
 							{
-								Italy_Manager._instance.ObjectReached();
+								_italyManager.ObjectReached();
 								break;
 							}
 						}
-						Italy_Manager._instance.AllClickedBoolsReset ();
+						_italyManager.AllClickedBoolsReset ();
 					}
 					else
 					{
-						Italy_Manager._instance.AllClickedBoolsReset ();
+						_italyManager.AllClickedBoolsReset ();
 					}
 				}
 				else if(LevelManager.levelNo > 30 && LevelManager.levelNo <= 40)
 				{
-					if(Australia_Manager._instance.clickedBurger ) 
+					if(_australiaManager.clickedBurger ) 
 					{
-						Australia_Manager._instance.clickedHotDogDestinationFunction.customer = this;
-						Australia_Manager._instance.clickedHotDogDestinationFunction.otherObject = this.gameObject;
+						_australiaManager.clickedHotDogDestinationFunction.customer = this;
+						_australiaManager.clickedHotDogDestinationFunction.otherObject = this.gameObject;
 					
 						bool foundOrder = false;
 						for(int i = 0 ; i< myOrder.Count ; i++)
 						{
-							if(Australia_Manager._instance.clickedHotDogDestinationFunction.myType == myOrder[i])
+							if(_australiaManager.clickedHotDogDestinationFunction.myType == myOrder[i])
 							{
-								Australia_Manager._instance.HotDogReached();
+								_australiaManager.HotDogReached();
 								foundOrder = true;
 								break;
 							}
@@ -250,42 +254,42 @@ namespace _Project.Scripts.Entities.Customers
 						{
 							if(iHaveAMultipleTypeOrder != LevelManager.Orders.NONE)
 							{
-								Australia_Manager._instance.clickedHotDogDestinationFunction.wrongOrderGiven = true;
-								Australia_Manager._instance.HotDogReached();
+								_australiaManager.clickedHotDogDestinationFunction.wrongOrderGiven = true;
+								_australiaManager.HotDogReached();
 							}
 						}
-						Australia_Manager._instance.AllClickedBoolsReset ();
+						_australiaManager.AllClickedBoolsReset ();
 					}
-					else if(Australia_Manager._instance.clickedCoke)
+					else if(_australiaManager.clickedCoke)
 					{
-						Australia_Manager._instance.clickedItemDestinationFunction.customer = this;
+						_australiaManager.clickedItemDestinationFunction.customer = this;
 					
 						for(int i = 0 ; i< myOrder.Count ; i++)
 						{
-							if(Australia_Manager._instance.clickedItemDestinationFunction.myType == myOrder[i])
+							if(_australiaManager.clickedItemDestinationFunction.myType == myOrder[i])
 							{
-								Australia_Manager._instance.ObjectReached();
+								_australiaManager.ObjectReached();
 								break;
 							}
 						}
-						Australia_Manager._instance.AllClickedBoolsReset ();
+						_australiaManager.AllClickedBoolsReset ();
 					}
-					else if(Australia_Manager._instance.cickedFries)
+					else if(_australiaManager.cickedFries)
 					{
-						Australia_Manager._instance.clickedItemDestinationFunction.customer = this;
+						_australiaManager.clickedItemDestinationFunction.customer = this;
 						for(int i = 0 ; i< myOrder.Count ; i++)
 						{
-							if(Australia_Manager._instance.clickedItemDestinationFunction.myType == myOrder[i])
+							if(_australiaManager.clickedItemDestinationFunction.myType == myOrder[i])
 							{
-								Australia_Manager._instance.ObjectReached();
+								_australiaManager.ObjectReached();
 								break;
 							}
 						}
-						Australia_Manager._instance.AllClickedBoolsReset ();
+						_australiaManager.AllClickedBoolsReset ();
 					}
 					else
 					{
-						Australia_Manager._instance.AllClickedBoolsReset ();
+						_australiaManager.AllClickedBoolsReset ();
 					}
 				}
 
@@ -294,8 +298,8 @@ namespace _Project.Scripts.Entities.Customers
 
 					LevelSoundManager._instance.caught.Play();
 		
-					UIManager._instance.totalCoins+=coinsWithoutPaying;
-					UIManager._instance.CallIncrementCoint ();
+					_uiManager.totalCoins+=coinsWithoutPaying;
+					_uiManager.CallIncrementCoint ();
 					leavingWithoutPaying = false;
 				}
 			}
@@ -312,7 +316,7 @@ namespace _Project.Scripts.Entities.Customers
 					myWaitingTime+=Time.deltaTime;
 
 				Expressions();
-				if(US_Manager._instance != null)
+				if(_usManager != null)
 				{
 					if(myWaitingTime >= customerWaitingTime && US_Manager.tutorialEnd) 
 					{
@@ -321,7 +325,7 @@ namespace _Project.Scripts.Entities.Customers
 					
 					}
 				}
-				else if(China_Manager._instance != null)
+				else if(_chinaManager != null)
 				{
 					if(myWaitingTime >= customerWaitingTime && China_Manager.tutorialEnd) 
 					{
@@ -330,7 +334,7 @@ namespace _Project.Scripts.Entities.Customers
 					
 					}
 				}
-				else if(Italy_Manager._instance != null)
+				else if(_italyManager != null)
 				{
 					if(myWaitingTime >= customerWaitingTime && Italy_Manager.tutorialEnd)
 					{
@@ -339,7 +343,7 @@ namespace _Project.Scripts.Entities.Customers
 					
 					}
 				}
-				else if(Australia_Manager._instance != null)
+				else if(_australiaManager != null)
 				{
 					if(myWaitingTime >= customerWaitingTime && Australia_Manager.tutorialEnd) 
 					{
@@ -448,11 +452,11 @@ namespace _Project.Scripts.Entities.Customers
 		
 		public void Gold_Deactive()
 		{
-			UIManager._instance.gold_Collected.SetActive(false);
+			_uiManager.gold_Collected.SetActive(false);
 		}
 		public	void Stopa()
 		{
-			UIManager._instance.achievment_text.SetActive (false);
+			_uiManager.achievment_text.SetActive (false);
 		}
 		public IEnumerator MoveToPosition(Vector3 finalPos , bool toOrder)
 		{
@@ -476,35 +480,35 @@ namespace _Project.Scripts.Entities.Customers
 				orderPlaced = false;
 				if(myOrder.Count == 0)
 				{
-					UIManager._instance.n_Customer_served++;
+					_uiManager.n_Customer_served++;
 
-					PlayerPrefs.SetInt ("CustomerServed",UIManager._instance.n_Customer_served);
+					PlayerPrefs.SetInt ("CustomerServed",_uiManager.n_Customer_served);
 					if(PlayerPrefs.GetInt("CustomerServed") > 19 && PlayerPrefs.GetInt ("CustomerLevel1") == 0 )
 					{
 						PlayerPrefs.SetInt ("CustomerLevel1",1);
-						UIManager._instance.achievment_text.SetActive(true);
+						_uiManager.achievment_text.SetActive(true);
 						AchievementChild.check_claim++;
 						PlayerPrefs.SetInt("claimvalue",AchievementChild.check_claim);
-						Invoke("Stopa",4.0f);
+						Invoke(nameof(Stopa),4.0f);
 
 					}
 					if(PlayerPrefs.GetInt("CustomerServed") > 99 && PlayerPrefs.GetInt ("CustomerLevel2") == 0  )
 					{
 						PlayerPrefs.SetInt ("CustomerLevel2",1);
-						UIManager._instance.achievment_text.SetActive(true);
+						_uiManager.achievment_text.SetActive(true);
 						AchievementChild.check_claim++;
 						PlayerPrefs.SetInt("claimvalue",AchievementChild.check_claim);
-						Invoke("Stopa",4.0f);
+						Invoke(nameof(Stopa),4.0f);
 						
 					}
 					if(PlayerPrefs.GetInt("CustomerServed") > 999 && PlayerPrefs.GetInt ("CustomerLevel3") == 0 )
 					{
 						MenuManager.golds += 5;
-						UIManager._instance.achievment_text.SetActive(true);
+						_uiManager.achievment_text.SetActive(true);
 						PlayerPrefs.SetInt ("CustomerLevel3",1);
 						AchievementChild.check_claim++;
 						PlayerPrefs.SetInt("claimvalue",AchievementChild.check_claim);
-						Invoke("Stopa",4.0f);
+						Invoke(nameof(Stopa),4.0f);
 					}
 					
 					if(myFacialExpression!= null)
@@ -562,9 +566,9 @@ namespace _Project.Scripts.Entities.Customers
 						if(PlayerPrefs.HasKey ("Whistle"))
 						{
 							LevelSoundManager._instance.whistle.Play();
-							UIManager._instance.whistle.transform.localScale = new Vector3(1.2f,1.2f,0);
-							UIManager._instance.blow.SetActive(true);
-							UIManager._instance.Invoke("WhistleInitialpos",1.2f);
+							_uiManager.whistle.transform.localScale = new Vector3(1.2f,1.2f,0);
+							_uiManager.blow.SetActive(true);
+							_uiManager.Invoke("WhistleInitialpos",1.2f);
 						}
 						CustomerHandler._instance.noOfUnpayingCustomers++;
 						if(CustomerHandler._instance.noOfUnpayingCustomers >= CustomerHandler._instance.maxNoOfUnpayableCustomers)
@@ -580,7 +584,7 @@ namespace _Project.Scripts.Entities.Customers
 						int shouldGiveBonus = Random.Range(0,7);
 						if(shouldGiveBonus == 0)
 						{
-							int bonusVal = UIManager._instance.Bonus_coin;
+							int bonusVal = _uiManager.Bonus_coin;
 							if(!perfect)
 							{
 								bonusVal = Mathf.CeilToInt (bonusVal/2f);
@@ -605,13 +609,13 @@ namespace _Project.Scripts.Entities.Customers
 						if(perfect)
 						{
 							US_Manager.noOfPerfects++;
-							UIManager._instance.n_Perfect_achieved++;
-							PlayerPrefs.SetInt ("Perfectachieved", UIManager._instance.n_Perfect_achieved);
+							_uiManager.n_Perfect_achieved++;
+							PlayerPrefs.SetInt ("Perfectachieved", _uiManager.n_Perfect_achieved);
 						
 							if(PlayerPrefs.GetInt("Perfectachieved") > 9 && PlayerPrefs.GetInt ("PerfectLevel1")== 0 )
 							{
 								PlayerPrefs.SetInt ("PerfectLevel1",1)  ;
-								UIManager._instance.achievment_text.SetActive(true);
+								_uiManager.achievment_text.SetActive(true);
 								AchievementChild.check_claim++;
 								PlayerPrefs.SetInt("claimvalue",AchievementChild.check_claim);
 								Invoke(nameof(Stopa),4.0f);
@@ -620,7 +624,7 @@ namespace _Project.Scripts.Entities.Customers
 							if(PlayerPrefs.GetInt("Perfectachieved") > 99 && PlayerPrefs.GetInt ("PerfectLevel2")== 0 )
 							{
 								PlayerPrefs.SetInt ("PerfectLevel2",1);
-								UIManager._instance.achievment_text.SetActive(true);
+								_uiManager.achievment_text.SetActive(true);
 								AchievementChild.check_claim++;
 								PlayerPrefs.SetInt("claimvalue",AchievementChild.check_claim);
 								Invoke(nameof(Stopa),4.0f);
@@ -629,7 +633,7 @@ namespace _Project.Scripts.Entities.Customers
 							if(PlayerPrefs.GetInt("Perfectachieved") > 999 && PlayerPrefs.GetInt ("PerfectLevel3")== 0 )
 							{
 								PlayerPrefs.SetInt ("PerfectLevel3",1);
-								UIManager._instance.achievment_text.SetActive(true);
+								_uiManager.achievment_text.SetActive(true);
 								AchievementChild.check_claim++;
 								PlayerPrefs.SetInt("claimvalue",AchievementChild.check_claim);
 								Invoke(nameof(Stopa),4.0f);
@@ -638,8 +642,8 @@ namespace _Project.Scripts.Entities.Customers
 							
 							if(US_Manager.noOfPerfects >= 5)
 							{
-								UIManager._instance.gold_Collected.SetActive(false);
-								UIManager._instance.gold_Collected.SetActive(true);
+								_uiManager.gold_Collected.SetActive(false);
+								_uiManager.gold_Collected.SetActive(true);
 							
 								Debug.Log ("added gold");
 								Invoke(nameof(GoldAdd),1.5f);
@@ -666,7 +670,7 @@ namespace _Project.Scripts.Entities.Customers
 					{
 						if(CustomerHandler._instance.availablePositions.Count == 5)
 						{
-							UIManager._instance.OnGameOver ();
+							_uiManager.OnGameOver ();
 						}
 					}
 				}
@@ -719,7 +723,7 @@ namespace _Project.Scripts.Entities.Customers
 			}
 			else
 			{
-				if(Australia_Manager._instance != null)
+				if(_australiaManager != null)
 				{
 					friesTween.enabled = false;
 				}
@@ -810,7 +814,7 @@ namespace _Project.Scripts.Entities.Customers
 		{
 			MenuManager.golds++;
 			PlayerPrefs.SetString("Golds",EncryptionHandler64.Encrypt (MenuManager.golds.ToString ()));
-			UIManager._instance.goldText.text = MenuManager.golds.ToString ();
+			_uiManager.goldText.text = MenuManager.golds.ToString ();
 			LevelSoundManager._instance.coinAdd.Play ();
 		}
 
@@ -1161,12 +1165,12 @@ namespace _Project.Scripts.Entities.Customers
 		{ 
 			if(LevelManager.levelNo <= 10)
 			{
-				eatableOrder.sprite = US_Manager._instance.hotDogOrderVariations[orderNo-1];
+				eatableOrder.sprite = _usManager.hotDogOrderVariations[orderNo-1];
 			}
 			else if(LevelManager.levelNo > 20 && LevelManager.levelNo <= 30)
 			{
-				eatableOrder.sprite = Italy_Manager._instance.pizzaBakedVariations[orderNo-6];
-				pizzadot.sprite = Italy_Manager._instance.pizzaDot[orderNo-6];
+				eatableOrder.sprite = _italyManager.pizzaBakedVariations[orderNo-6];
+				pizzadot.sprite = _italyManager.pizzaDot[orderNo-6];
 
 
 			}

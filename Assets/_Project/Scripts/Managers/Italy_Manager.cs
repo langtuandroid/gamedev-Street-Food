@@ -5,11 +5,14 @@ using _Project.Scripts.Other;
 using _Project.Scripts.UI_Scripts;
 using _Project.Scripts.UI.Tutorial;
 using UnityEngine;
+using Zenject;
 
 namespace _Project.Scripts.Managers
 {
-	public class Italy_Manager : MonoBehaviour {
-
+	public class Italy_Manager : MonoBehaviour 
+	{
+		[Inject] private UIManager _uiManager;   
+		
 		public GameObject TheifPanel;
 		public int cokePrice;
 		public int lessBakedPizza;
@@ -32,22 +35,18 @@ namespace _Project.Scripts.Managers
 		public Availability []cokePlaces;  //9
 		public bool []fridePlaces;  //9
 		public GameObject []frideBottles;  //9
-		public int ovenFilledCount;
 		public int totalOvensAvailable;
 		public int platesFilledCount;
 		public int totalPlatesAvailable;
 		public int cokesFilled;
 		public int totalCokesAvailable;
 		public int fridgeFilledCount;
-		public static Italy_Manager _instance;
 		public bool clickedNonVeg;
 		public bool clickedVeg;
 		public bool clickedCheese;
-		public bool clickedChilledCoke;
 		public bool clickedCoke;
 		public bool clickedOvenPizza;
 		public bool clickedPlatePizza;
-		public MakeTikki clickedTikkiDestinationFunction;
 		public ObjectMotion clickedItemDestinationFunction;
 		public Pizza clickedPizzaDestinationFunction;
 		public GameObject dustbin;
@@ -77,12 +76,6 @@ namespace _Project.Scripts.Managers
 		public GameObject starting_text ;
 		public GameObject upgrade_bttn ;
 		public Sprite []cokeBottlesSprites;
-
-		private void Awake () 
-		{
-			_instance = this;
-		}
-
 		private void OnEnable()
 		{
 			if (LevelManager.levelNo == 21) {
@@ -163,15 +156,15 @@ namespace _Project.Scripts.Managers
 			tableCover.sprite = Resources.Load<Sprite> (PlayerPrefs.GetString ("Italy_TableCover"));
 			tableTop.sprite = Resources.Load<Sprite> (PlayerPrefs.GetString ("Italy_TableTop")) as Sprite;
 			char []coverVal = PlayerPrefs.GetString ("Italy_TableCover").ToCharArray ();
-			UIManager._instance._tabelcover = int.Parse (coverVal[coverVal.Length - 1].ToString ());
+			_uiManager._tabelcover = int.Parse (coverVal[coverVal.Length - 1].ToString ());
 			char []coverVal2 = PlayerPrefs.GetString ("Italy_TableTop").ToCharArray ();
-			UIManager._instance._tabeltop = int.Parse (coverVal[coverVal.Length - 1].ToString ());
+			_uiManager._tabeltop = int.Parse (coverVal[coverVal.Length - 1].ToString ());
 			if(MenuManager.cupcakeNo <= 0)
 			{
 				cupCake.gameObject.SetActive (false);
 			}
 
-			UIManager._instance.ForCoinAdd ();
+			_uiManager.ForCoinAdd ();
 			if(!PlayerPrefs.HasKey ("Fridge"))
 			{
 				cokeFridge.SetActive (false);
@@ -216,8 +209,8 @@ namespace _Project.Scripts.Managers
 				if(clickfirstBase)
 				{
 					vegetables.tutorialOn = true;
-					UIManager._instance.tutorialPanelBg.gameObject.SetActive (true);
-					UIManager._instance.tutorialPanelBg.OpenPopupItaly ("TAP OR DRAG VEGETABELS \n TO PIZZA BASE.",false,false , 1);
+					_uiManager.tutorialPanelBg.gameObject.SetActive (true);
+					_uiManager.tutorialPanelBg.OpenPopupItaly ("TAP OR DRAG VEGETABELS \n TO PIZZA BASE.",false,false , 1);
 				}
 				clickfirstBase = false;
 			}
@@ -484,7 +477,6 @@ namespace _Project.Scripts.Managers
 			clickedNonVeg = false;
 			clickedVeg = false;
 			clickedCheese = false;
-			clickedChilledCoke = false;
 			clickedCoke = false;
 			clickedOvenPizza = false;
 			clickedPlatePizza = false;

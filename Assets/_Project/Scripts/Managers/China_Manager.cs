@@ -5,11 +5,13 @@ using _Project.Scripts.Other;
 using _Project.Scripts.UI_Scripts;
 using _Project.Scripts.UI.Tutorial;
 using UnityEngine;
+using Zenject;
 
 namespace _Project.Scripts.Managers
 {
-	public class China_Manager : MonoBehaviour {
-
+	public class China_Manager : MonoBehaviour 
+	{
+		[Inject] private UIManager _uiManager;   
 		public GameObject TheifPanel;
 		public int soupPrice;
 		public int lessBakedNoodlesPrice;
@@ -31,7 +33,6 @@ namespace _Project.Scripts.Managers
 		public int totalPlatesAvailable;
 		public int bowlsFilled;
 		public int totalBowlsAvailable;
-		public static China_Manager _instance;
 		public bool clickedNoodlesToCook;
 		public bool clickedNoodlesVeg;
 		public bool clickedSoupVeg;
@@ -63,12 +64,6 @@ namespace _Project.Scripts.Managers
 		public GameObject handcuff ;
 		public GameObject starting_text ;
 		public bool c ;
-
-		private void Awake () {
-
-			_instance = this;
-		}
-
 		private void OnEnable()
 		{
 			if (LevelManager.levelNo == 11) {
@@ -139,16 +134,16 @@ namespace _Project.Scripts.Managers
 			}
 
 			char []coverVal = PlayerPrefs.GetString ("China_TableCover").ToCharArray ();
-			UIManager._instance._tabelcover = int.Parse (coverVal[coverVal.Length - 1].ToString ());
+			_uiManager._tabelcover = int.Parse (coverVal[coverVal.Length - 1].ToString ());
 			char []coverVal2 = PlayerPrefs.GetString ("China_TableTop").ToCharArray ();
-			UIManager._instance._tabeltop = int.Parse (coverVal[coverVal.Length - 1].ToString ());
+			_uiManager._tabeltop = int.Parse (coverVal[coverVal.Length - 1].ToString ());
 			tableCover.sprite = Resources.Load<Sprite> (PlayerPrefs.GetString ("China_TableTop")) as Sprite;
 			tableTop.sprite = Resources.Load<Sprite> (PlayerPrefs.GetString ("China_TableCover")) as Sprite;
 			if(MenuManager.cupcakeNo <= 0)
 			{
 				cupCake.gameObject.SetActive (false);
 			}
-			UIManager._instance.ForCoinAdd ();
+			_uiManager.ForCoinAdd ();
 		}
 
 		private void DeactivatePanSelection()
@@ -192,7 +187,7 @@ namespace _Project.Scripts.Managers
 				if(clickPlateTut)
 				{
 					noodles.tutorialOn = true;
-					UIManager._instance.tutorialPanelBg.OpenPopupChina ("TAP OR DRAG NOODLES TO\nTHE SKILLET.",false,false , 0);
+					_uiManager.tutorialPanelBg.OpenPopupChina ("TAP OR DRAG NOODLES TO\nTHE SKILLET.",false,false , 0);
 				}
 				clickPlateTut = false;
 			}
@@ -237,7 +232,7 @@ namespace _Project.Scripts.Managers
 				if(clickBowlTut)
 				{
 					soupVeg.tutorialOn = true;
-					UIManager._instance.tutorialPanelBg.OpenPopupChina ("TAP OR DRAG INGREDIENTS\nTO STOCKPOT.",false,false , 4);
+					_uiManager.tutorialPanelBg.OpenPopupChina ("TAP OR DRAG INGREDIENTS\nTO STOCKPOT.",false,false , 4);
 				}
 				clickBowlTut = false;
 			}

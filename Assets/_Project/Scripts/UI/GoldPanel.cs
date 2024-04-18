@@ -1,11 +1,14 @@
 ﻿using _Project.Scripts.UI_Scripts;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace _Project.Scripts.UI
 {
 	public class GoldPanel : MonoBehaviour 
 	{
+		[Inject] private MenuManager _menuManager;  
+		[Inject] private UIManager _uiManager;   
 		public Text totalCoinsText;
 		public Text totalGoldText;
 
@@ -18,30 +21,30 @@ namespace _Project.Scripts.UI
 		public void Cross()
 		{
 
-			if (UIManager._instance == null) {
+			if (_uiManager == null) {
 				GameObject upgradePanel = null;
-				if (MenuManager._instance.lastPanelName == "") {
+				if (_menuManager.lastPanelName == "") {
 					upgradePanel = (GameObject)Instantiate (Resources.Load ("UpgradePanel"));
 				} else {
-					upgradePanel = (GameObject)Instantiate (Resources.Load (MenuManager._instance.lastPanelName));
+					upgradePanel = (GameObject)Instantiate (Resources.Load (_menuManager.lastPanelName));
 				}
 				upgradePanel.transform.SetParent (transform.parent, false);
 				upgradePanel.transform.localScale = Vector3.one;
 				upgradePanel.transform.localPosition = Vector3.zero;
-				if (MenuManager._instance != null)
-					MenuManager._instance.EnableFadePanel ();
+				if (_menuManager != null)
+					_menuManager.EnableFadePanel ();
 				else
-					UIManager._instance.EnableFadePanel ();
+					_uiManager.EnableFadePanel ();
 				Destroy (gameObject);
 			} else {
 				GameObject upgradePanel = ( GameObject )Instantiate(Resources.Load ("UpgradePanel"));
 				upgradePanel.transform.SetParent(transform.parent,false);
 				upgradePanel.transform.localScale = Vector3.one;
 				upgradePanel.transform.localPosition = Vector3.zero;
-				if(MenuManager._instance != null)
-					MenuManager._instance.EnableFadePanel ();
+				if(_menuManager != null)
+					_menuManager.EnableFadePanel ();
 				else
-					UIManager._instance.EnableFadePanel ();
+					_uiManager.EnableFadePanel ();
 				Destroy (gameObject);
 			}
 		}

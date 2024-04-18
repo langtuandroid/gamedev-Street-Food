@@ -1,10 +1,12 @@
 ﻿using _Project.Scripts.UI_Scripts;
 using UnityEngine;
+using Zenject;
 
 namespace _Project.Scripts.UI.Tutorial
 {
-	public class tutorial : MonoBehaviour {
-
+	public class tutorial : MonoBehaviour 
+	{
+		[Inject] private MenuManager _menuManager;  
 		public GameObject tutorialpanel;
 		public GameObject image1;
 		public GameObject image2 ;
@@ -17,7 +19,7 @@ namespace _Project.Scripts.UI.Tutorial
 		{
 			PlayerPrefs.SetInt ("Stop", 2);
 			i_bttn.GetComponent<Animator> ().enabled = false;
-			MenuManager._instance.EnableFadePanel ();
+			_menuManager.EnableFadePanel ();
 			tutorialpanel.SetActive (true);
 			tutorial_hand.GetComponent<Animator> ().enabled = true;
 			Invoke ("Ontutorialstart",1.3f);

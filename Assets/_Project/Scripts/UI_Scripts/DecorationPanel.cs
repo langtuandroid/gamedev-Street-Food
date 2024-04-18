@@ -2,11 +2,14 @@
 using _Project.Scripts.UI.Tutorial;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace _Project.Scripts.UI_Scripts
 {
 	public class DecorationPanel : MonoBehaviour 
 	{
+		[Inject] private MenuManager _menuManager;  
+		[Inject] private UIManager _uiManager;   
 		public int noOfPanels;
 		public GameObject leftArrow , rightArrow;
 		public GameObject []panels;
@@ -62,17 +65,17 @@ namespace _Project.Scripts.UI_Scripts
 			upgradePanel.transform.localScale = Vector3.one;
 			upgradePanel.transform.localPosition = Vector3.zero;
 			Destroy (gameObject);
-			if(MenuManager._instance != null)
-				MenuManager._instance.EnableFadePanel ();
+			if(_menuManager != null)
+				_menuManager.EnableFadePanel ();
 			else
-				UIManager._instance.EnableFadePanel ();
+				_uiManager.EnableFadePanel ();
 		}
 
 		public void MoveRight()
 		{
 			if(selectedPanel < noOfPanels )
 			{
-				MenuManager._instance.EnableFadePanel();
+				_menuManager.EnableFadePanel();
 				panels[selectedPanel].SetActive (false);
 				selectedPanel++;
 				panels[selectedPanel].SetActive (true);
@@ -88,7 +91,7 @@ namespace _Project.Scripts.UI_Scripts
 		{
 			if(selectedPanel > 1)
 			{
-				MenuManager._instance.EnableFadePanel();
+				_menuManager.EnableFadePanel();
 				panels[selectedPanel].SetActive (false);
 				selectedPanel--;
 				panels[selectedPanel].SetActive (true);

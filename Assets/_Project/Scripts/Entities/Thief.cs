@@ -6,11 +6,17 @@ using _Project.Scripts.Managers;
 using _Project.Scripts.Other;
 using _Project.Scripts.UI_Scripts;
 using UnityEngine;
+using Zenject;
 
 namespace _Project.Scripts.Entities
 {
-	public class Thief : MonoBehaviour 
+	public class Thief : MonoBehaviour
 	{
+		[Inject] private US_Manager _usManager;
+		[Inject] private Italy_Manager _italyManager;
+		[Inject] private China_Manager _chinaManager;
+		[Inject] private Australia_Manager _australiaManager;
+		[Inject] private UIManager _uiManager;   
 		float speed = 1.5f;
 		int reachedPos = 4;
 		
@@ -25,7 +31,7 @@ namespace _Project.Scripts.Entities
 		}
 		private void Start () 
 		{
-			UIManager._instance.n_Thieves_caught=PlayerPrefs.GetInt ("ThiefCaught");
+			_uiManager.n_Thieves_caught=PlayerPrefs.GetInt ("ThiefCaught");
 			InvokeRepeating("Condition", 1f,1f);
 		}
 
@@ -48,19 +54,19 @@ namespace _Project.Scripts.Entities
 			{
 				if(LevelManager.levelNo > 0 && LevelManager.levelNo <= 10)
 				{
-					US_Manager._instance.TheifPanel.SetActive(true);
+					_usManager.TheifPanel.SetActive(true);
 				}
 				if(LevelManager.levelNo > 10 && LevelManager.levelNo <= 20)
 				{
-					China_Manager._instance.TheifPanel.SetActive(true);
+					_chinaManager.TheifPanel.SetActive(true);
 				}
 				if(LevelManager.levelNo > 20 && LevelManager.levelNo <= 30)
 				{
-					Italy_Manager._instance.TheifPanel.SetActive(true);
+					_italyManager.TheifPanel.SetActive(true);
 				}
 				if(LevelManager.levelNo > 30 && LevelManager.levelNo <= 40)
 				{
-					Australia_Manager._instance.TheifPanel.SetActive(true);
+					_australiaManager.TheifPanel.SetActive(true);
 				}
 				PlayerPrefs.SetInt ("HandCuffTut",2);
 			}
@@ -77,9 +83,7 @@ namespace _Project.Scripts.Entities
 
 		private void bringThiefAgain()
 		{
-			{
-				UIManager._instance.Handcuff ();
-			}
+			_uiManager.Handcuff ();
 		}
 
 		private IEnumerator MoveToPosition(Vector3 finalPos )
@@ -109,7 +113,7 @@ namespace _Project.Scripts.Entities
 
 		public void Stopa()
 		{
-			UIManager._instance.achievment_text.SetActive (false);
+			_uiManager.achievment_text.SetActive (false);
 		}
 
 		private void OnMouseDown()
@@ -117,13 +121,13 @@ namespace _Project.Scripts.Entities
 			if(MenuManager.handcuffNo > 0)
 			{
 				MenuManager.handcuffNo--;
-				UIManager._instance.n_Thieves_caught++;
-				PlayerPrefs.SetInt ("ThiefCaught",UIManager._instance.n_Thieves_caught);
+				_uiManager.n_Thieves_caught++;
+				PlayerPrefs.SetInt ("ThiefCaught", _uiManager.n_Thieves_caught);
 
 				if(PlayerPrefs.GetInt("ThiefCaught") > 9 && PlayerPrefs.GetInt ("ThiefLevel1") == 0)
 				{
 					PlayerPrefs.SetInt ("ThiefLevel1",1);
-					UIManager._instance.achievment_text.SetActive(true);
+					_uiManager.achievment_text.SetActive(true);
 					AchievementChild.check_claim++;
 					PlayerPrefs.SetInt("claimvalue",AchievementChild.check_claim);
 					Invoke(nameof(Stopa),4.0f);
@@ -131,7 +135,7 @@ namespace _Project.Scripts.Entities
 				if(PlayerPrefs.GetInt("ThiefCaught") > 99 && PlayerPrefs.GetInt ("ThiefLevel2") == 0)
 				{
 					PlayerPrefs.SetInt ("ThiefLevel2",1);
-					UIManager._instance.achievment_text.SetActive(true);
+					_uiManager.achievment_text.SetActive(true);
 					AchievementChild.check_claim++;
 					PlayerPrefs.SetInt("claimvalue",AchievementChild.check_claim);
 					Invoke(nameof(Stopa),4.0f);
@@ -139,7 +143,7 @@ namespace _Project.Scripts.Entities
 				if(PlayerPrefs.GetInt("ThiefCaught") > 999 && PlayerPrefs.GetInt ("ThiefLevel3") == 0)
 				{
 					PlayerPrefs.SetInt ("ThiefLevel3",1);
-					UIManager._instance.achievment_text.SetActive(true);
+					_uiManager.achievment_text.SetActive(true);
 					AchievementChild.check_claim++;
 					PlayerPrefs.SetInt("claimvalue",AchievementChild.check_claim);
 					Invoke(nameof(Stopa),4.0f);
@@ -148,14 +152,14 @@ namespace _Project.Scripts.Entities
 				transform.position = CustomerHandler._instance.customerEndPosition.position;
 				speed = 35;
 				isCaught = true;
-				UIManager._instance.totalCoins+=coinsStolen;
-				UIManager._instance.CallIncrementCoint ();
-				UIManager._instance.coincollect.Play();
+				_uiManager.totalCoins+=coinsStolen;
+				_uiManager.CallIncrementCoint ();
+				_uiManager.coincollect.Play();
 
 				PlayerPrefs.SetString ("Handcuff",EncryptionHandler64.Encrypt (MenuManager.handcuffNo.ToString ()));
 				if(MenuManager.handcuffNo <=0 )
 				{
-					US_Manager._instance.handcuff.SetActive(false);
+					_usManager.handcuff.SetActive(false);
 				}
 			}
 		}

@@ -1,11 +1,13 @@
 ﻿using _Project.Scripts.Additional;
 using _Project.Scripts.UI_Scripts;
 using UnityEngine;
+using Zenject;
 
 namespace _Project.Scripts.Other
 {
 	public class RadioChech : MonoBehaviour 
 	{
+		[Inject] private UIManager _uiManager;   
 		public GameObject radio_bttn ;
 		public GameObject cup_bttn ;
 		public GameObject radio_text ;
@@ -33,13 +35,13 @@ namespace _Project.Scripts.Other
 			if (MenuManager.golds >= 20)
 			{
 				MenuManager.golds -= 20;
-				UIManager._instance.goldText.text = MenuManager.golds.ToString ();
+				_uiManager.goldText.text = MenuManager.golds.ToString ();
 				PlayerPrefs.SetString ("Golds", EncryptionHandler64.Encrypt (MenuManager.golds.ToString ()));
 				PlayerPrefs.SetInt ("Radio", 1);
 			} 
 			else
 			{
-				UIManager._instance.EarnGold();
+				_uiManager.EarnGold();
 			}
 			gameObject.SetActive (false);
 		}
@@ -55,7 +57,7 @@ namespace _Project.Scripts.Other
 			} 
 			else 
 			{
-				UIManager._instance.EarnCoin() ;
+				_uiManager.EarnCoin() ;
 			}
 			gameObject.SetActive (false);
 		}

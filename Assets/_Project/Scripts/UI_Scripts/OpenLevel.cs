@@ -3,11 +3,13 @@ using _Project.Scripts.Entities.Loader;
 using _Project.Scripts.Game;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace _Project.Scripts.UI_Scripts
 {
-	public class OpenLevel : MonoBehaviour {
-
+	public class OpenLevel : MonoBehaviour 
+	{
+		[Inject] private MenuManager _menuManager;  
 		public GameObject myTick;
 		public GameObject myLock;
 		public int myLevel;
@@ -67,25 +69,25 @@ namespace _Project.Scripts.UI_Scripts
 				case "US":
 					finalLevel  = myLevel;
 					LevelManager.levelNo = finalLevel;
-					MenuManager._instance.loader.SetActive (true);
+					_menuManager.loader.SetActive (true);
 					Loader.levelToLoad = "US_Scene";
 					break;
 				case "China": 
 					finalLevel = 10+myLevel;
 					LevelManager.levelNo = finalLevel;
-					MenuManager._instance.loader.SetActive (true);
+					_menuManager.loader.SetActive (true);
 					Loader.levelToLoad = "ChinaScene";
 					break;
 				case "Italy": 
 					finalLevel = 20+myLevel;
 					LevelManager.levelNo = finalLevel;
-					MenuManager._instance.loader.SetActive (true);
+					_menuManager.loader.SetActive (true);
 					Loader.levelToLoad = "Italy_Scene";
 					break;
 				case "Aus": 
 					finalLevel = 30+myLevel;
 					LevelManager.levelNo = finalLevel;
-					MenuManager._instance.loader.SetActive (true);
+					_menuManager.loader.SetActive (true);
 					Loader.levelToLoad = "AustraliaScene";
 					break;
 			}

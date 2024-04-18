@@ -1,11 +1,13 @@
 ﻿using _Project.Scripts.Additional;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace _Project.Scripts.UI_Scripts
 {
-	public class DecorationItems : MonoBehaviour {
-
+	public class DecorationItems : MonoBehaviour 
+	{
+		[Inject] private MenuManager _menuManager;  
 		public GameObject myParent;
 		public Image myImage;
 		public Sprite []elementsToShow;
@@ -120,15 +122,15 @@ namespace _Project.Scripts.UI_Scripts
 			{
 				if((MenuManager.totalscore < elementsCoinPrice[clickedItem]) )
 				{
-					MenuManager._instance.lastPanel = myParent;
-					MenuManager._instance.lastPanelName = "DecorationPanel";
-					MenuManager._instance.Insufficinetcoin();
+					_menuManager.lastPanel = myParent;
+					_menuManager.lastPanelName = "DecorationPanel";
+					_menuManager.Insufficinetcoin();
 				}
 				else if((MenuManager.golds < elementsGoldPrice[clickedItem]))
 				{
-					MenuManager._instance.lastPanel = myParent;
-					MenuManager._instance.lastPanelName = "DecorationPanel";
-					MenuManager._instance.Insufficinetgold() ;
+					_menuManager.lastPanel = myParent;
+					_menuManager.lastPanelName = "DecorationPanel";
+					_menuManager.Insufficinetgold() ;
 				}
 			}
 		}

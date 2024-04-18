@@ -1,9 +1,13 @@
 ﻿using _Project.Scripts.UI_Scripts;
 using UnityEngine;
+using Zenject;
 
 namespace _Project.Scripts.Other
 {
-	public class InsuffcintCoin : MonoBehaviour {
+	public class InsuffcintCoin : MonoBehaviour 
+	{
+		[Inject] private MenuManager _menuManager;  
+		[Inject] private UIManager _uiManager;   
 		private void OnEnable()
 		{
 			transform.SetAsLastSibling ();
@@ -14,20 +18,20 @@ namespace _Project.Scripts.Other
 			specialPanel.transform.SetParent(transform.parent,false);
 			specialPanel.transform.localScale = Vector3.one;
 			specialPanel.transform.localPosition = Vector3.zero;
-			if(MenuManager._instance != null)
-				MenuManager._instance.EnableFadePanel ();
+			if(_menuManager != null)
+				_menuManager.EnableFadePanel ();
 			else
-				UIManager._instance.EnableFadePanel ();
+				_uiManager.EnableFadePanel ();
 			Destroy (gameObject);
 
-			Destroy (MenuManager._instance.lastPanel);
+			Destroy (_menuManager.lastPanel);
 	    
 		}
 
 		public void Close()
 		{
-			MenuManager._instance.lastPanel = null;
-			MenuManager._instance.lastPanelName = "";
+			_menuManager.lastPanel = null;
+			_menuManager.lastPanelName = "";
 			Destroy (gameObject);
 		}
 	}

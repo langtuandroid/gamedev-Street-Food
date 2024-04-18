@@ -2,11 +2,14 @@
 using _Project.Scripts.UI.Tutorial;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace _Project.Scripts.UI_Scripts
 {
 	public class EnvironmentPanel : MonoBehaviour 
 	{
+		[Inject] private MenuManager _menuManager;  
+		[Inject] private UIManager _uiManager;   
 		int noOfLevelsOpen;
 		public Text totalCoinsText;
 		public Text totalGoldText;
@@ -21,10 +24,10 @@ namespace _Project.Scripts.UI_Scripts
 			upgradePanel.transform.localScale = Vector3.one;
 			upgradePanel.transform.localPosition = Vector3.zero;
 			Destroy (gameObject);
-			if(MenuManager._instance != null)
-				MenuManager._instance.EnableFadePanel ();
+			if(_menuManager != null)
+				_menuManager.EnableFadePanel ();
 			else
-				UIManager._instance.EnableFadePanel ();
+				_uiManager.EnableFadePanel ();
 		}
 
 		private void OnEnable()
@@ -49,9 +52,9 @@ namespace _Project.Scripts.UI_Scripts
 		public void USLevel()
 		{
 			MenuManager.envNo = "US";
-			MenuManager._instance.EnableFadePanel ();
+			_menuManager.EnableFadePanel ();
 			Destroy (gameObject);
-			MenuManager._instance.levelPanel.SetActive (true);
+			_menuManager.levelPanel.SetActive (true);
 		}
 
 		public void AustraliaLevel()
@@ -63,21 +66,21 @@ namespace _Project.Scripts.UI_Scripts
 			{
 				Aus_lock.SetActive (false);
 				Destroy (gameObject);
-				MenuManager._instance.EnableFadePanel ();
-				MenuManager._instance.levelPanel.SetActive (true);
+				_menuManager.EnableFadePanel ();
+				_menuManager.levelPanel.SetActive (true);
 			}
 		}
 
 		void MenuPopup()
 		{
-			if(MenuManager._instance.popupPanel != null)
+			if(_menuManager.popupPanel != null)
 			{
-				MenuManager._instance.popupPanel.gameObject.SetActive (true);
+				_menuManager.popupPanel.gameObject.SetActive (true);
 			}
 			else
 			{
 				GameObject popupPanel = GeneratePopupPanel();
-				MenuManager._instance.popupPanel = popupPanel.GetComponent<PopupPanel>();
+				_menuManager.popupPanel = popupPanel.GetComponent<PopupPanel>();
 			}
 		
 		}
@@ -101,8 +104,8 @@ namespace _Project.Scripts.UI_Scripts
 			{
 				Italy_lock.SetActive(false);
 				Destroy(gameObject);
-				MenuManager._instance.EnableFadePanel();
-				MenuManager._instance.levelPanel.SetActive(true);
+				_menuManager.EnableFadePanel();
+				_menuManager.levelPanel.SetActive(true);
 			}
 		}
 
@@ -126,8 +129,8 @@ namespace _Project.Scripts.UI_Scripts
 			{
 				Aus_lock.SetActive (false);
 			}
-			MenuManager._instance.EnableFadePanel ();
-			MenuManager._instance.popupPanel.gameObject.SetActive (false);
+			_menuManager.EnableFadePanel ();
+			_menuManager.popupPanel.gameObject.SetActive (false);
 		
 		}
 
@@ -140,14 +143,14 @@ namespace _Project.Scripts.UI_Scripts
 			{
 				China_lock.SetActive (false);
 				Destroy (gameObject);
-				MenuManager._instance.EnableFadePanel ();
-				MenuManager._instance.levelPanel.SetActive (true);
+				_menuManager.EnableFadePanel ();
+				_menuManager.levelPanel.SetActive (true);
 			}
 		}
 
 		public void Cross()
 		{
-			MenuManager._instance.EnableFadePanel ();
+			_menuManager.EnableFadePanel ();
 			Destroy (gameObject);
 		}
 	}

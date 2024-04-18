@@ -2,11 +2,14 @@
 using _Project.Scripts.Additional;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace _Project.Scripts.UI_Scripts
 {
 	public class SpecialPanel : MonoBehaviour 
 	{
+		[Inject] private MenuManager _menuManager;  
+		[Inject] private UIManager _uiManager;   
 		public int bellValue;
 		public int whistleValue;
 		public int handcuffValue;
@@ -56,16 +59,16 @@ namespace _Project.Scripts.UI_Scripts
 
 		private void MenuPopup(string messagePopup)
 		{
-			if(MenuManager._instance.popupPanel != null)
+			if(_menuManager.popupPanel != null)
 			{
-				MenuManager._instance.popupPanel.gameObject.SetActive (true);
-				MenuManager._instance.popupPanel.EnablePopup (messagePopup,false);
+				_menuManager.popupPanel.gameObject.SetActive (true);
+				_menuManager.popupPanel.EnablePopup (messagePopup,false);
 			}
 			else
 			{
 				GameObject popupPanel = GeneratePopupPanel();
-				MenuManager._instance.popupPanel = popupPanel.GetComponent<PopupPanel>();
-				MenuManager._instance.popupPanel.EnablePopup (messagePopup,false);
+				_menuManager.popupPanel = popupPanel.GetComponent<PopupPanel>();
+				_menuManager.popupPanel.EnablePopup (messagePopup,false);
 			}
 		}
 
@@ -80,22 +83,22 @@ namespace _Project.Scripts.UI_Scripts
 
 		private void GamePopup(string messagePopup)
 		{
-			if(UIManager._instance.popupPanel != null)
+			if(_uiManager.popupPanel != null)
 			{
-				UIManager._instance.popupPanel.gameObject.SetActive (true);
-				UIManager._instance.popupPanel.EnablePopup (messagePopup,false);
+				_uiManager.popupPanel.gameObject.SetActive (true);
+				_uiManager.popupPanel.EnablePopup (messagePopup,false);
 			}
 			else
 			{
 				GameObject popupPanel = GeneratePopupPanel();
-				UIManager._instance.popupPanel = popupPanel.GetComponent<PopupPanel>();
-				UIManager._instance.popupPanel.EnablePopup (messagePopup,false);
+				_uiManager.popupPanel = popupPanel.GetComponent<PopupPanel>();
+				_uiManager.popupPanel.EnablePopup (messagePopup,false);
 			}
 		}
 	
 		public void ClickedHelp(int itemNo)
 		{
-			if(MenuManager._instance != null)
+			if(_menuManager != null)
 			{
 				MenuPopup(itemUsage[itemNo]);
 			}
@@ -128,14 +131,14 @@ namespace _Project.Scripts.UI_Scripts
 				}
 				else
 				{
-					MenuManager._instance.lastPanel = gameObject;
-					MenuManager._instance.lastPanelName = "SpecialPanel";
-					MenuManager._instance.Insufficinetgold();
+					_menuManager.lastPanel = gameObject;
+					_menuManager.lastPanelName = "SpecialPanel";
+					_menuManager.Insufficinetgold();
 				}
 			}
 			else
 			{
-				MenuManager._instance.Bellpurchase();
+				_menuManager.Bellpurchase();
 			}
 		}
 
@@ -159,14 +162,14 @@ namespace _Project.Scripts.UI_Scripts
 				}
 				else
 				{
-					MenuManager._instance.lastPanel = gameObject;
-					MenuManager._instance.lastPanelName = "SpecialPanel";
-					MenuManager._instance.Insufficinetgold();
+					_menuManager.lastPanel = gameObject;
+					_menuManager.lastPanelName = "SpecialPanel";
+					_menuManager.Insufficinetgold();
 				}
 			}
 			else
 			{
-				MenuManager._instance.Whistlepurchase();
+				_menuManager.Whistlepurchase();
 			}
 		}
 
@@ -190,14 +193,14 @@ namespace _Project.Scripts.UI_Scripts
 				}
 				else
 				{
-					MenuManager._instance.lastPanel = gameObject;
-					MenuManager._instance.lastPanelName = "SpecialPanel";
-					MenuManager._instance.Insufficinetgold();
+					_menuManager.lastPanel = gameObject;
+					_menuManager.lastPanelName = "SpecialPanel";
+					_menuManager.Insufficinetgold();
 				}
 			}
 			else
 			{
-				MenuManager._instance.Radiopurchase();
+				_menuManager.Radiopurchase();
 			}
 		}
 
@@ -218,9 +221,9 @@ namespace _Project.Scripts.UI_Scripts
 			}
 			else
 			{
-				MenuManager._instance.lastPanel = gameObject;
-				MenuManager._instance.lastPanelName = "SpecialPanel";
-				MenuManager._instance.Insufficinetcoin();
+				_menuManager.lastPanel = gameObject;
+				_menuManager.lastPanelName = "SpecialPanel";
+				_menuManager.Insufficinetcoin();
 			}
 		}
 
@@ -242,7 +245,7 @@ namespace _Project.Scripts.UI_Scripts
 			}
 			else
 			{
-				MenuManager._instance.Insufficinetcoin();
+				_menuManager.Insufficinetcoin();
 			}
 		}
 
@@ -252,10 +255,10 @@ namespace _Project.Scripts.UI_Scripts
 			upgradePanel.transform.SetParent(transform.parent,false);
 			upgradePanel.transform.localScale = Vector3.one;
 			upgradePanel.transform.localPosition = Vector3.zero;
-			if(MenuManager._instance != null)
-				MenuManager._instance.EnableFadePanel ();
+			if(_menuManager != null)
+				_menuManager.EnableFadePanel ();
 			else
-				UIManager._instance.EnableFadePanel ();
+				_uiManager.EnableFadePanel ();
 			Destroy (gameObject);
 		}
 

@@ -1,10 +1,12 @@
 ﻿using _Project.Scripts.UI_Scripts;
 using UnityEngine;
+using Zenject;
 
 namespace _Project.Scripts.Managers
 {
 	public class SoundManager : MonoBehaviour 
 	{
+		[Inject] private MenuManager _menuManager;  
 		public GameObject SoundON ;
 		public GameObject SoundOFF ;
 
@@ -61,14 +63,14 @@ namespace _Project.Scripts.Managers
 			PlayerPrefs.SetInt("SOUNDON",1);
 			AudioListener.volume = 0;
 			buttonsOn ();
-			MenuManager._instance.menuSoundButton.buttonsOn ();
+			_menuManager.menuSoundButton.buttonsOn ();
 		}
 		public void OnSoundOFFClick()
 		{
 			PlayerPrefs.SetInt("SOUNDON",0);
 			AudioListener.volume = 1;
 			ButtonsOff ();
-			MenuManager._instance.menuSoundButton.ButtonsOff ();
+			_menuManager.menuSoundButton.ButtonsOff ();
 		
 		}
 

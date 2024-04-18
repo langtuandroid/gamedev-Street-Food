@@ -3,11 +3,14 @@ using _Project.Scripts.Entities.Customers;
 using _Project.Scripts.Managers;
 using _Project.Scripts.UI_Scripts;
 using UnityEngine;
+using Zenject;
 
 namespace _Project.Scripts.Other
 {
 	public class Belltry : MonoBehaviour 
 	{
+		[Inject] private US_Manager _usManager;
+		[Inject] private UIManager _uiManager;   
 		private void OnEnable()
 		{
 			Invoke ("Timestop", 0.9f);
@@ -15,7 +18,7 @@ namespace _Project.Scripts.Other
 		}
 		public void ActiveBell()
 		{
-			US_Manager._instance.Bell.SetActive (true);
+			_usManager.Bell.SetActive (true);
 			CustomerHandler._instance.stop = false ;
 			gameObject.SetActive (false);
 			PlayerPrefs.SetInt ("try", 2);
@@ -30,7 +33,7 @@ namespace _Project.Scripts.Other
 				PlayerPrefs.SetString ("Handcuff", EncryptionHandler64.Encrypt (MenuManager.handcuffNo.ToString ()));
 				Application.LoadLevel (Application.loadedLevel);
 			} else {
-				UIManager._instance.EarnCoin();
+				_uiManager.EarnCoin();
 			}
 			gameObject.SetActive (false);
 
@@ -43,7 +46,7 @@ namespace _Project.Scripts.Other
 				PlayerPrefs.SetInt ("Whistle", 1);
 				Application.LoadLevel (Application.loadedLevel);
 			} else {
-				UIManager._instance.EarnGold();
+				_uiManager.EarnGold();
 			}
 		}
 		public void BuyBell()
@@ -51,14 +54,14 @@ namespace _Project.Scripts.Other
 			if (MenuManager.golds >= 30) {
 				MenuManager.golds -= 30;
 				PlayerPrefs.SetString ("Golds", EncryptionHandler64.Encrypt (MenuManager.golds.ToString ()));
-				UIManager._instance.goldText.text = MenuManager.golds.ToString ();
+				_uiManager.goldText.text = MenuManager.golds.ToString ();
 				PlayerPrefs.SetString ("Golds", EncryptionHandler64.Encrypt (MenuManager.golds.ToString ()));
 				PlayerPrefs.SetInt ("Bell", 1);
-				US_Manager._instance.Bell.SetActive(true);
+				_usManager.Bell.SetActive(true);
 				CustomerHandler._instance.stop = false ;
 			} else
 			{
-				UIManager._instance.EarnGold();
+				_uiManager.EarnGold();
 			}
 			gameObject.SetActive (false);
 		}
@@ -74,7 +77,7 @@ namespace _Project.Scripts.Other
 		public void IAP()
 		{
 			gameObject.SetActive (false);
-			UIManager._instance.IAPGold ();
+			_uiManager.IAPGold ();
 		}
 		public void PlayON()
 		{

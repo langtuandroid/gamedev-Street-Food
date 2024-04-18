@@ -4,11 +4,15 @@ using _Project.Scripts.Managers;
 using _Project.Scripts.UI_Scripts;
 using _Project.Scripts.UI.Tutorial;
 using UnityEngine;
+using Zenject;
 
 namespace _Project.Scripts.Other
 {
 	public class MakeTikki : MonoBehaviour 
 	{
+		[Inject] private US_Manager _usManager;
+		[Inject] private Australia_Manager _australiaManager;
+		[Inject] private UIManager _uiManager;   
 		private bool readyToPick;
 		private bool isPicked;
 		private bool reachedPlate;
@@ -34,7 +38,7 @@ namespace _Project.Scripts.Other
 
 		private void Start () 
 		{
-			if(US_Manager._instance != null)
+			if(_usManager != null)
 			{
 				isUS = true;
 			}
@@ -53,33 +57,33 @@ namespace _Project.Scripts.Other
 					if(tutorialOn)
 					{
 						tutorialPick = true;
-						UIManager._instance.tutorialPanelBg.gameObject.SetActive (true);
+						_uiManager.tutorialPanelBg.gameObject.SetActive (true);
 				
 						if(isUS)
 						{
-							US_Manager._instance.firstHotDog.tutorialOn = true;
-							UIManager._instance.tutorialPanelBg.OpenPopup ("TAP OR DRAG THIS TO \n THE BUN.",false,false , 2);
+							_usManager.firstHotDog.tutorialOn = true;
+							_uiManager.tutorialPanelBg.OpenPopup ("TAP OR DRAG THIS TO \n THE BUN.",false,false , 2);
 						}
 						else
 						{
-							Australia_Manager._instance.firstBurger.tutorialOn = true;
-							UIManager._instance.tutorialPanelBg.OpenPopupAustralia ("TAP OR DRAG TIKKI TO \n THE BUN.",false,false , 2);
+							_australiaManager.firstBurger.tutorialOn = true;
+							_uiManager.tutorialPanelBg.OpenPopupAustralia ("TAP OR DRAG TIKKI TO \n THE BUN.",false,false , 2);
 						}
 						tutorialOn = false;
 					}
 					if(isUS)
 					{
-						if(myRenderer.sprite == US_Manager._instance.hotDogTikkiVariations[1])
+						if(myRenderer.sprite == _usManager.hotDogTikkiVariations[1])
 						{
-							myRenderer.sprite = US_Manager._instance.hotDogTikkiVariations[2];
+							myRenderer.sprite = _usManager.hotDogTikkiVariations[2];
 							tikkiCompletelyBaked.Play ();
 						}
 					}
 					else
 					{
-						if(myRenderer.sprite == Australia_Manager._instance.burgerTikkiVariations[0])
+						if(myRenderer.sprite == _australiaManager.burgerTikkiVariations[0])
 						{
-							myRenderer.sprite = Australia_Manager._instance.burgerTikkiVariations[1];
+							myRenderer.sprite = _australiaManager.burgerTikkiVariations[1];
 							tikkiCompletelyBaked.Play ();
 						}
 					}
@@ -90,11 +94,11 @@ namespace _Project.Scripts.Other
 					{
 						if(isUS)
 						{
-							myRenderer.sprite = US_Manager._instance.hotDogTikkiVariations[3];
+							myRenderer.sprite = _usManager.hotDogTikkiVariations[3];
 						}
 						else
 						{
-							myRenderer.sprite = Australia_Manager._instance.burgerTikkiVariations[2];
+							myRenderer.sprite = _australiaManager.burgerTikkiVariations[2];
 						}
 						isBurnt = true; 
 						mySmoke.gameObject.SetActive (true);
@@ -135,11 +139,11 @@ namespace _Project.Scripts.Other
 
 			if(isUS)
 			{
-				myRenderer.sprite = US_Manager._instance.hotDogTikkiVariations[1];
+				myRenderer.sprite = _usManager.hotDogTikkiVariations[1];
 			}
 			else
 			{
-				myRenderer.sprite = Australia_Manager._instance.burgerTikkiVariations[0];
+				myRenderer.sprite = _australiaManager.burgerTikkiVariations[0];
 			}
 		}
 
@@ -150,15 +154,15 @@ namespace _Project.Scripts.Other
 			{
 				if(isUS)
 				{
-					US_Manager._instance.AllClickedBoolsReset ();
-					US_Manager._instance.clickedTikkiDestinationFunction = this;
-					US_Manager._instance.clickedTikki = true;
+					_usManager.AllClickedBoolsReset ();
+					_usManager.clickedTikkiDestinationFunction = this;
+					_usManager.clickedTikki = true;
 				}
 				else
 				{
-					Australia_Manager._instance.AllClickedBoolsReset ();
-					Australia_Manager._instance.clickedTikkiDestinationFunction = this;
-					Australia_Manager._instance.clickedTikki = true;
+					_australiaManager.AllClickedBoolsReset ();
+					_australiaManager.clickedTikkiDestinationFunction = this;
+					_australiaManager.clickedTikki = true;
 				}
 				iAmSelected = true;
 
@@ -225,13 +229,13 @@ namespace _Project.Scripts.Other
 					{
 						if(isUS)
 						{
-							US_Manager._instance.firstHotDog.tutorialOn = true;
-							UIManager._instance.tutorialPanelBg.OpenPopup ("TAP OR DRAG THIS TO \n THE CUSTOMER.",false,false , 3);
+							_usManager.firstHotDog.tutorialOn = true;
+							_uiManager.tutorialPanelBg.OpenPopup ("TAP OR DRAG THIS TO \n THE CUSTOMER.",false,false , 3);
 						}
 						else
 						{
-							Australia_Manager._instance.firstBurger.tutorialOn = true;
-							UIManager._instance.tutorialPanelBg.OpenPopupAustralia ("TAP OR DRAG BURGER TO \n THE CUSTOMER.",false,false , 3);
+							_australiaManager.firstBurger.tutorialOn = true;
+							_uiManager.tutorialPanelBg.OpenPopupAustralia ("TAP OR DRAG BURGER TO \n THE CUSTOMER.",false,false , 3);
 						}
 						tutorialPick = false;
 					}
@@ -286,32 +290,32 @@ namespace _Project.Scripts.Other
 						if(isUS)
 						{
 							availableHotDog.transform.GetComponent<HotDog>().perfect = true;
-							US_Manager._instance.hotdogOnPlates[availableHotDog.myPositionInArray].sprite = US_Manager._instance.hotDogVariations[2];
+							_usManager.hotdogOnPlates[availableHotDog.myPositionInArray].sprite = _usManager.hotDogVariations[2];
 
 						}
 						else
 						{
 							availableHotDog.transform.GetComponent<Burger>().perfect = true;
-							Australia_Manager._instance.burgerTikkiOnPlates[availableHotDog.myPositionInArray].sprite = Australia_Manager._instance.burgerTikkiVariations[1];
+							_australiaManager.burgerTikkiOnPlates[availableHotDog.myPositionInArray].sprite = _australiaManager.burgerTikkiVariations[1];
 						}
 					}
 					else
 					{
 						LevelSoundManager._instance.bttn_click.Play();
 						if(isUS)
-							US_Manager._instance.hotdogOnPlates[availableHotDog.myPositionInArray].sprite = US_Manager._instance.hotDogVariations[1];
+							_usManager.hotdogOnPlates[availableHotDog.myPositionInArray].sprite = _usManager.hotDogVariations[1];
 						else
-							Australia_Manager._instance.burgerTikkiOnPlates[availableHotDog.myPositionInArray].sprite = Australia_Manager._instance.burgerTikkiVariations[0];
+							_australiaManager.burgerTikkiOnPlates[availableHotDog.myPositionInArray].sprite = _australiaManager.burgerTikkiVariations[0];
 					}
 					if(isUS)
 					{
-						US_Manager._instance.grillsFilledCount--;
-						US_Manager._instance.clickedTikki = false;
+						_usManager.grillsFilledCount--;
+						_usManager.clickedTikki = false;
 					}
 					else
 					{
-						Australia_Manager._instance.grillsFilledCount--;
-						Australia_Manager._instance.clickedTikki = false;
+						_australiaManager.grillsFilledCount--;
+						_australiaManager.clickedTikki = false;
 					}
 				}
 				else
@@ -326,33 +330,33 @@ namespace _Project.Scripts.Other
 				transform.gameObject.SetActive(false);
 				if(isUS)
 				{
-					US_Manager._instance.grillsFilledCount--;
-					US_Manager._instance.clickedTikki = false;
+					_usManager.grillsFilledCount--;
+					_usManager.clickedTikki = false;
 				}
 				else
 				{
-					Australia_Manager._instance.grillsFilledCount--;
-					Australia_Manager._instance.clickedTikki = false;
+					_australiaManager.grillsFilledCount--;
+					_australiaManager.clickedTikki = false;
 				}
-				UIManager._instance.totalCoins-=10;
+				_uiManager.totalCoins-=10;
 				LevelSoundManager._instance.dustbin.Play();
-				if(UIManager._instance.totalCoins > 0){
-					UIManager._instance.dustbin_textparent.SetActive(true);
-					UIManager._instance.dustbin_text.text = "-10" ; 
+				if(_uiManager.totalCoins > 0){
+					_uiManager.dustbin_textparent.SetActive(true);
+					_uiManager.dustbin_text.text = "-10" ; 
 					Invoke(nameof(Deactivedustbin),1.0f);
 				}
-				UIManager._instance.coinsText.text = UIManager._instance.totalCoins.ToString ();
-				if(UIManager._instance.totalCoins < 0)
+				_uiManager.coinsText.text = _uiManager.totalCoins.ToString ();
+				if(_uiManager.totalCoins < 0)
 				{
-					UIManager._instance.totalCoins = 0;
-					UIManager._instance.coinsText.text = "0";
+					_uiManager.totalCoins = 0;
+					_uiManager.coinsText.text = "0";
 				}
 			}
 		}
 		public void Deactivedustbin()
 		{
-			UIManager._instance.dustbin_textparent.SetActive (false);
-			UIManager._instance.dustbin_textparent.transform.position = UIManager._instance.dustbintextintialposition;
+			_uiManager.dustbin_textparent.SetActive (false);
+			_uiManager.dustbin_textparent.transform.position = _uiManager.dustbintextintialposition;
 		}
 		
 		private void OnTriggerStay(Collider other)

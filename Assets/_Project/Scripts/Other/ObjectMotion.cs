@@ -8,11 +8,17 @@ using _Project.Scripts.Managers;
 using _Project.Scripts.UI_Scripts;
 using _Project.Scripts.UI.Tutorial;
 using UnityEngine;
+using Zenject;
 
 namespace _Project.Scripts.Other
 {
 	public class ObjectMotion : MonoBehaviour 
 	{
+		[Inject] private US_Manager _usManager;
+		[Inject] private Italy_Manager _italyManager;
+		[Inject] private China_Manager _chinaManager;
+		[Inject] private Australia_Manager _australiaManager;
+		[Inject] private UIManager _uiManager;   
 		private bool reachedDestination;
 		private bool scaleUp;
 		private bool _canMove;
@@ -57,9 +63,9 @@ namespace _Project.Scripts.Other
 		private void Start () 
 		{
 			colliderSize = transform.GetComponent<BoxCollider> ().size;
-			UIManager._instance.n_Cokes_served = PlayerPrefs.GetInt ("CokesServed");
-			UIManager._instance.n_Noodles_served = PlayerPrefs.GetInt ("NoodlesServed");
-			UIManager._instance.n_French_fries_served = PlayerPrefs.GetInt ("FrenchfriesServed");
+			_uiManager.n_Cokes_served = PlayerPrefs.GetInt ("CokesServed");
+			_uiManager.n_Noodles_served = PlayerPrefs.GetInt ("NoodlesServed");
+			_uiManager.n_French_fries_served = PlayerPrefs.GetInt ("FrenchfriesServed");
 			myOriginalPos = transform.position;
 			myLocalScale = transform.localScale;
 		}
@@ -86,7 +92,7 @@ namespace _Project.Scripts.Other
 	
 		public void Stopa()
 		{
-			UIManager._instance.achievment_text.SetActive (false);
+			_uiManager.achievment_text.SetActive (false);
 		}
 		
 
@@ -100,23 +106,23 @@ namespace _Project.Scripts.Other
 					{
 						startAnimating = false;
 						scaleUp = true;
-						if(US_Manager._instance != null)
+						if(_usManager != null)
 						{
-							US_Manager._instance.AllClickedBoolsReset ();
-							US_Manager._instance.clickedItemDestinationFunction = this;
-							US_Manager._instance.clickedCoke = true;
+							_usManager.AllClickedBoolsReset ();
+							_usManager.clickedItemDestinationFunction = this;
+							_usManager.clickedCoke = true;
 						}
-						else if(Italy_Manager._instance != null)
+						else if(_italyManager != null)
 						{
-							Italy_Manager._instance.AllClickedBoolsReset ();
-							Italy_Manager._instance.clickedItemDestinationFunction = this;
-							Italy_Manager._instance.clickedCoke = true;
+							_italyManager.AllClickedBoolsReset ();
+							_italyManager.clickedItemDestinationFunction = this;
+							_italyManager.clickedCoke = true;
 						}
-						else if(Australia_Manager._instance != null)
+						else if(_australiaManager != null)
 						{
-							Australia_Manager._instance.AllClickedBoolsReset ();
-							Australia_Manager._instance.clickedItemDestinationFunction = this;
-							Australia_Manager._instance.clickedCoke = true;
+							_australiaManager.AllClickedBoolsReset ();
+							_australiaManager.clickedItemDestinationFunction = this;
+							_australiaManager.clickedCoke = true;
 						}
 						iAmSelected = true;
 						_canMove = true;
@@ -131,59 +137,59 @@ namespace _Project.Scripts.Other
 					_canMove = true;
 					if(isRedSauce)
 					{
-						US_Manager._instance.AllClickedBoolsReset ();
-						US_Manager._instance.clickedItemDestinationFunction = this;
-						US_Manager._instance.clickedRedSauce = true;
+						_usManager.AllClickedBoolsReset ();
+						_usManager.clickedItemDestinationFunction = this;
+						_usManager.clickedRedSauce = true;
 						iAmSelected = true;
 
 					}
 					else if(isYellowSauce)
 					{
-						US_Manager._instance.AllClickedBoolsReset ();
-						US_Manager._instance.clickedItemDestinationFunction = this;
-						US_Manager._instance.clickedYellowSauce = true;
+						_usManager.AllClickedBoolsReset ();
+						_usManager.clickedItemDestinationFunction = this;
+						_usManager.clickedYellowSauce = true;
 						iAmSelected = true;
 					}
 					else if(isNoodlesToCook)
 					{
-						China_Manager._instance.AllClickedBoolsReset ();
-						China_Manager._instance.clickedItemDestinationFunction = this;
-						China_Manager._instance.clickedNoodlesToCook = true;
+						_chinaManager.AllClickedBoolsReset ();
+						_chinaManager.clickedItemDestinationFunction = this;
+						_chinaManager.clickedNoodlesToCook = true;
 						iAmSelected = true;
 					}
 					else if(isNoodlesVeg)
 					{
-						China_Manager._instance.AllClickedBoolsReset ();
-						China_Manager._instance.clickedItemDestinationFunction = this;
-						China_Manager._instance.clickedNoodlesVeg = true;
+						_chinaManager.AllClickedBoolsReset ();
+						_chinaManager.clickedItemDestinationFunction = this;
+						_chinaManager.clickedNoodlesVeg = true;
 						iAmSelected = true;
 					}
 					else if(isSoupVeg)
 					{
-						China_Manager._instance.AllClickedBoolsReset ();
-						China_Manager._instance.clickedItemDestinationFunction = this;
-						China_Manager._instance.clickedSoupVeg = true;
+						_chinaManager.AllClickedBoolsReset ();
+						_chinaManager.clickedItemDestinationFunction = this;
+						_chinaManager.clickedSoupVeg = true;
 						iAmSelected = true;
 					}
 					else if(isNoodlesPlate)
 					{
-						if(China_Manager._instance.clickedPan)
+						if(_chinaManager.clickedPan)
 						{
-							if(!China_Manager._instance.clickedUtensilsDestinationFunction.isBurnt)
+							if(!_chinaManager.clickedUtensilsDestinationFunction.isBurnt)
 							{
-								China_Manager._instance.clickedUtensilsDestinationFunction.otherObject = this.gameObject;
-								China_Manager._instance.UtensilReached ();
+								_chinaManager.clickedUtensilsDestinationFunction.otherObject = this.gameObject;
+								_chinaManager.UtensilReached ();
 							}
-							China_Manager._instance.AllClickedBoolsReset ();
+							_chinaManager.AllClickedBoolsReset ();
 						}
 						else
 						{
-							if((tutorialOn && !China_Manager._instance.panUtensil[0].tutorialOn ) || China_Manager.tutorialEnd)
+							if((tutorialOn && !_chinaManager.panUtensil[0].tutorialOn ) || China_Manager.tutorialEnd)
 							{
 								transform.GetComponent<BoxCollider> ().size = new Vector3(colliderSize.x/2f , colliderSize.y/2f , colliderSize.z);
-								China_Manager._instance.AllClickedBoolsReset ();
-								China_Manager._instance.clickedItemDestinationFunction = this;
-								China_Manager._instance.clickedNoodlePlate = true;
+								_chinaManager.AllClickedBoolsReset ();
+								_chinaManager.clickedItemDestinationFunction = this;
+								_chinaManager.clickedNoodlePlate = true;
 								iAmSelected = true;
 							}
 							else
@@ -194,68 +200,68 @@ namespace _Project.Scripts.Other
 					}
 					else if(isSoupBowl)
 					{
-						if(China_Manager._instance.clickedSoupContainer)
+						if(_chinaManager.clickedSoupContainer)
 						{
-							China_Manager._instance.clickedUtensilsDestinationFunction.otherObject = this.gameObject;
-							China_Manager._instance.UtensilReached ();
-							China_Manager._instance.AllClickedBoolsReset ();
+							_chinaManager.clickedUtensilsDestinationFunction.otherObject = this.gameObject;
+							_chinaManager.UtensilReached ();
+							_chinaManager.AllClickedBoolsReset ();
 						}
 						else
 						{
 							transform.GetComponent<BoxCollider> ().size = new Vector3(colliderSize.x/2f , colliderSize.y/2f , colliderSize.z);
-							China_Manager._instance.AllClickedBoolsReset ();
-							China_Manager._instance.clickedItemDestinationFunction = this;
-							China_Manager._instance.clickSoupBowl = true;
+							_chinaManager.AllClickedBoolsReset ();
+							_chinaManager.clickedItemDestinationFunction = this;
+							_chinaManager.clickSoupBowl = true;
 							iAmSelected = true;
 						}
 					}
 					else if(isPizzaVeg)
 					{
-						Italy_Manager._instance.AllClickedBoolsReset ();
-						Italy_Manager._instance.clickedItemDestinationFunction = this;
-						Italy_Manager._instance.clickedVeg = true;
+						_italyManager.AllClickedBoolsReset ();
+						_italyManager.clickedItemDestinationFunction = this;
+						_italyManager.clickedVeg = true;
 						iAmSelected = true;
 					}
 					else if(isPizzaNonVeg)
 					{
-						Italy_Manager._instance.AllClickedBoolsReset ();
-						Italy_Manager._instance.clickedItemDestinationFunction = this;
-						Italy_Manager._instance.clickedNonVeg = true;
+						_italyManager.AllClickedBoolsReset ();
+						_italyManager.clickedItemDestinationFunction = this;
+						_italyManager.clickedNonVeg = true;
 						iAmSelected = true;
 					}
 					else if(isCheese)
 					{
-						Italy_Manager._instance.AllClickedBoolsReset ();
-						Italy_Manager._instance.clickedItemDestinationFunction = this;
-						Italy_Manager._instance.clickedCheese = true;
+						_italyManager.AllClickedBoolsReset ();
+						_italyManager.clickedItemDestinationFunction = this;
+						_italyManager.clickedCheese = true;
 						iAmSelected = true;
 					}
 					else if(isTomato)
 					{
-						Australia_Manager._instance.AllClickedBoolsReset ();
-						Australia_Manager._instance.clickedItemDestinationFunction = this;
-						Australia_Manager._instance.clickedTomato = true;
+						_australiaManager.AllClickedBoolsReset ();
+						_australiaManager.clickedItemDestinationFunction = this;
+						_australiaManager.clickedTomato = true;
 						iAmSelected = true;
 					}
 					else if(isOnion)
 					{
-						Australia_Manager._instance.AllClickedBoolsReset ();
-						Australia_Manager._instance.clickedItemDestinationFunction = this;
-						Australia_Manager._instance.clickedOnion = true;
+						_australiaManager.AllClickedBoolsReset ();
+						_australiaManager.clickedItemDestinationFunction = this;
+						_australiaManager.clickedOnion = true;
 						iAmSelected = true;
 					}
 					else if(isCabbage)
 					{
-						Australia_Manager._instance.AllClickedBoolsReset ();
-						Australia_Manager._instance.clickedItemDestinationFunction = this;
-						Australia_Manager._instance.clickedCabbage = true;
+						_australiaManager.AllClickedBoolsReset ();
+						_australiaManager.clickedItemDestinationFunction = this;
+						_australiaManager.clickedCabbage = true;
 						iAmSelected = true;
 					}
 					else if(isFries)
 					{
-						Australia_Manager._instance.AllClickedBoolsReset ();
-						Australia_Manager._instance.clickedItemDestinationFunction = this;
-						Australia_Manager._instance.cickedFries = true;
+						_australiaManager.AllClickedBoolsReset ();
+						_australiaManager.clickedItemDestinationFunction = this;
+						_australiaManager.cickedFries = true;
 						iAmSelected = true;
 					}
 				}
@@ -525,37 +531,37 @@ namespace _Project.Scripts.Other
 		private void FriesReachedDestination()
 		{
 			LevelSoundManager._instance.customerEat.Play ();
-			UIManager._instance.n_French_fries_served++;
-			PlayerPrefs.SetInt ("FrenchfriesServed", UIManager._instance.n_French_fries_served);
+			_uiManager.n_French_fries_served++;
+			PlayerPrefs.SetInt ("FrenchfriesServed", _uiManager.n_French_fries_served);
 	
 			if(PlayerPrefs.GetInt("FrenchfriesServed") > 9 && PlayerPrefs.GetInt ("FrenchfriesLevel1")==0)
 			{
 				PlayerPrefs.SetInt ("FrenchfriesLevel1",1);
-				UIManager._instance.achievment_text.SetActive(true);
+				_uiManager.achievment_text.SetActive(true);
 				AchievementChild.check_claim++;
 				PlayerPrefs.SetInt("claimvalue",AchievementChild.check_claim);
-				Invoke("Stopa",4.0f);
+				Invoke(nameof(Stopa),4.0f);
 			}
 			if(PlayerPrefs.GetInt("FrenchfriesServed") > 99 && PlayerPrefs.GetInt ("FrenchfriesLevel2")==0)
 			{
 				PlayerPrefs.SetInt ("FrenchfriesLevel2",1);
-				UIManager._instance.achievment_text.SetActive(true);
+				_uiManager.achievment_text.SetActive(true);
 				AchievementChild.check_claim++;
 				PlayerPrefs.SetInt("claimvalue",AchievementChild.check_claim);
-				Invoke("Stopa",4.0f);
+				Invoke(nameof(Stopa),4.0f);
 			}
 			if(PlayerPrefs.GetInt("FrenchfriesServed") > 999 && PlayerPrefs.GetInt ("FrenchfriesLevel3")==0)
 			{
 				PlayerPrefs.SetInt ("FrenchfriesLevel3" ,1);
-				UIManager._instance.achievment_text.SetActive(true);
+				_uiManager.achievment_text.SetActive(true);
 				AchievementChild.check_claim++;
 				PlayerPrefs.SetInt("claimvalue",AchievementChild.check_claim);
-				Invoke("Stopa",4.0f);
+				Invoke(nameof(Stopa),4.0f);
 			}
 
-			if(Australia_Manager._instance != null)
+			if(_australiaManager != null)
 			{
-				Australia_Manager._instance.friesFilled--;
+				_australiaManager.friesFilled--;
 			}
 
 			myParentHolder.available = true;
@@ -570,8 +576,8 @@ namespace _Project.Scripts.Other
 				}
 			}
 			
-			customer.coinsSpent+=Australia_Manager._instance.cokePrice;
-			Australia_Manager._instance.cickedFries = false;
+			customer.coinsSpent+=_australiaManager.cokePrice;
+			_australiaManager.cickedFries = false;
 
 			if(customer.shouldBePerfectIfServed)
 			{
@@ -588,8 +594,8 @@ namespace _Project.Scripts.Other
 			{
 				tutorialOn = false;
 				CustomerHandler._instance.InitializeCustomer ();
-				Destroy(UIManager._instance.tutorialPanelCanvas.gameObject); 
-				Destroy(UIManager._instance.tutorialPanelBg.gameObject);
+				Destroy(_uiManager.tutorialPanelCanvas.gameObject); 
+				Destroy(_uiManager.tutorialPanelBg.gameObject);
 				Australia_Manager.tutorialEnd = true;
 			}
 		}
@@ -626,15 +632,15 @@ namespace _Project.Scripts.Other
 			{
 				availablePizza.myType = LevelManager.Orders.VEG_PIZZA;
 				availablePizza.myToppings.gameObject.SetActive (true);
-				availablePizza.myToppings.sprite = Italy_Manager._instance.pizzaToppings[0];
+				availablePizza.myToppings.sprite = _italyManager.pizzaToppings[0];
 				availablePizza.vegetable = true;
-				Italy_Manager._instance.clickedVeg = false;
+				_italyManager.clickedVeg = false;
 				if(tutorialOn)
 				{
 					tutorialOn = false;
-					Italy_Manager._instance.cheese.tutorialOn = true;
-					UIManager._instance.tutorialPanelBg.gameObject.SetActive (true);
-					UIManager._instance.tutorialPanelBg.OpenPopupItaly ("TAP OR DRAG CHEESE TO \n PIZZA BASE.",false,false , 2);
+					_italyManager.cheese.tutorialOn = true;
+					_uiManager.tutorialPanelBg.gameObject.SetActive (true);
+					_uiManager.tutorialPanelBg.OpenPopupItaly ("TAP OR DRAG CHEESE TO \n PIZZA BASE.",false,false , 2);
 				}
 			}
 		}
@@ -643,11 +649,11 @@ namespace _Project.Scripts.Other
 		{
 			if(!availablePizza.vegetable)
 			{
-				Italy_Manager._instance.clickedNonVeg = false;
+				_italyManager.clickedNonVeg = false;
 			
 				availablePizza.myType = LevelManager.Orders.NON_VEG_PIZZA;
 				availablePizza.myToppings.gameObject.SetActive (true);
-				availablePizza.myToppings.sprite = Italy_Manager._instance.pizzaToppings[1];
+				availablePizza.myToppings.sprite = _italyManager.pizzaToppings[1];
 				availablePizza.vegetable = true;
 			}
 		}
@@ -656,15 +662,15 @@ namespace _Project.Scripts.Other
 		{
 			if(!availablePizza.cheese)
 			{
-				Italy_Manager._instance.clickedCheese = false;
+				_italyManager.clickedCheese = false;
 				availablePizza.myCheese.SetActive (true);
 				availablePizza.cheese = true;
 				if(tutorialOn)
 				{
 					tutorialOn = false;
-					Italy_Manager._instance.firstPizza.tutorialOn = true;
-					UIManager._instance.tutorialPanelBg.gameObject.SetActive (true);
-					UIManager._instance.tutorialPanelBg.OpenPopupItaly ("TAP OR DRAG PIZZA \n TO OVEN.",false,false , 3);
+					_italyManager.firstPizza.tutorialOn = true;
+					_uiManager.tutorialPanelBg.gameObject.SetActive (true);
+					_uiManager.tutorialPanelBg.OpenPopupItaly ("TAP OR DRAG PIZZA \n TO OVEN.",false,false , 3);
 				}
 			}
 		}
@@ -685,23 +691,23 @@ namespace _Project.Scripts.Other
 					utensil.scaledImage.gameObject.SetActive (true);
 					utensil.scaledImage.ResetToBeginning ();
 					utensil.scaledImage.PlayForward();
-					utensil.scaledImage.GetComponent<SpriteRenderer>().sprite =  China_Manager._instance.noodlesInPanVariations[0];
+					utensil.scaledImage.GetComponent<SpriteRenderer>().sprite =  _chinaManager.noodlesInPanVariations[0];
 				}
 				else 
 				{
 					if(tutorialOn)
 					{
 						tutorialOn = false;
-						China_Manager._instance.noodlesVeg.tutorialOn = true;
-						UIManager._instance.tutorialPanelBg.OpenPopupChina ("TAP OR DRAG INGREDIENTS\nTO THE SKILLET.",false,false , 1);
+						_chinaManager.noodlesVeg.tutorialOn = true;
+						_uiManager.tutorialPanelBg.OpenPopupChina ("TAP OR DRAG INGREDIENTS\nTO THE SKILLET.",false,false , 1);
 					}
-					utensil.myFood.sprite = China_Manager._instance.noodlesInPanVariations[0];
+					utensil.myFood.sprite = _chinaManager.noodlesInPanVariations[0];
 					utensil.myScale.enabled = true;
 					utensil.myScale.ResetToBeginning ();
 					utensil.myScale.PlayForward();
 				}
 			}
-			China_Manager._instance.clickedNoodlesToCook = false;
+			_chinaManager.clickedNoodlesToCook = false;
 		}
 
 		private void VegForNoodlesReachedDestination()
@@ -716,13 +722,13 @@ namespace _Project.Scripts.Other
 					if(tutorialOn)
 					{
 						tutorialOn = false;
-						China_Manager._instance.panUtensil[0].tutorialOn = true;
-						UIManager._instance.tutorialPanelBg.OpenPopupChina ("WAIT FOR THE \n NOODLES TO COOK",false,false , 3);
+						_chinaManager.panUtensil[0].tutorialOn = true;
+						_uiManager.tutorialPanelBg.OpenPopupChina ("WAIT FOR THE \n NOODLES TO COOK",false,false , 3);
 					}
 					utensil.scaledImage.gameObject.SetActive (true);
 					utensil.scaledImage.ResetToBeginning ();
 					utensil.scaledImage.PlayForward();
-					utensil.scaledImage.GetComponent<SpriteRenderer>().sprite =  China_Manager._instance.noodlesInPanVariations[2];
+					utensil.scaledImage.GetComponent<SpriteRenderer>().sprite =  _chinaManager.noodlesInPanVariations[2];
 					utensil.noOfServingsAvailable = 2;
 				}
 				else 
@@ -731,10 +737,10 @@ namespace _Project.Scripts.Other
 					utensil.myScale.enabled = true;
 					utensil.myScale.ResetToBeginning ();
 					utensil.myScale.PlayForward();
-					utensil.myFood.sprite = China_Manager._instance.noodlesInPanVariations[2];
+					utensil.myFood.sprite = _chinaManager.noodlesInPanVariations[2];
 				}
 			}
-			China_Manager._instance.clickedNoodlesVeg = false;
+			_chinaManager.clickedNoodlesVeg = false;
 		}
 
 		private void VegForSoupReachedDestination()
@@ -745,26 +751,26 @@ namespace _Project.Scripts.Other
 			utensil.myAlpha.gameObject.SetActive (true);
 			utensil.myAlpha.ResetToBeginning ();
 			utensil.myAlpha.PlayForward ();
-			China_Manager._instance.clickedSoupVeg = false;
+			_chinaManager.clickedSoupVeg = false;
 			if(tutorialOn)
 			{
 				tutorialOn = false;
-				China_Manager._instance.soupUtensils[0].tutorialOn = true;
-				UIManager._instance.tutorialPanelBg.OpenPopupChina ("TAP OR DRAG THIS TO \n  SOUP BOWL.",false,false , 5);
+				_chinaManager.soupUtensils[0].tutorialOn = true;
+				_uiManager.tutorialPanelBg.OpenPopupChina ("TAP OR DRAG THIS TO \n  SOUP BOWL.",false,false , 5);
 			}
 		}
 
 		private void NoodlesPlateReachedDestination()
 		{
 			LevelSoundManager._instance.customerEat.Play ();
-			UIManager._instance.n_Noodles_served++;
-			PlayerPrefs.SetInt ("NoodlesServed",UIManager._instance.n_Noodles_served);
+			_uiManager.n_Noodles_served++;
+			PlayerPrefs.SetInt ("NoodlesServed",_uiManager.n_Noodles_served);
 
 			if(PlayerPrefs.GetInt("NoodlesServed") > 9 && PlayerPrefs.GetInt ("NoodlesLevel1")==0)
 			{
 				PlayerPrefs.SetInt ("NoodlesLevel1",1);
 				MenuManager.totalscore+=100;
-				UIManager._instance.achievment_text.SetActive(true);
+				_uiManager.achievment_text.SetActive(true);
 				AchievementChild.check_claim++;
 				PlayerPrefs.SetInt("claimvalue",AchievementChild.check_claim);
 				Invoke(nameof(Stopa),4.0f);
@@ -772,7 +778,7 @@ namespace _Project.Scripts.Other
 			if(PlayerPrefs.GetInt("NoodlesServed") > 99 && PlayerPrefs.GetInt ("NoodlesLevel2")==0)
 			{
 				PlayerPrefs.SetInt ("NoodlesLevel2",1);
-				UIManager._instance.achievment_text.SetActive(true);
+				_uiManager.achievment_text.SetActive(true);
 				AchievementChild.check_claim++;
 				PlayerPrefs.SetInt("claimvalue",AchievementChild.check_claim);
 				Invoke(nameof(Stopa),4.0f);
@@ -781,12 +787,12 @@ namespace _Project.Scripts.Other
 			if(PlayerPrefs.GetInt("NoodlesServed") > 999 && PlayerPrefs.GetInt ("NoodlesLevel3")==0)
 			{
 				PlayerPrefs.SetInt ("NoodlesLevel3",1);
-				UIManager._instance.achievment_text.SetActive(true);
+				_uiManager.achievment_text.SetActive(true);
 				AchievementChild.check_claim++;
 				PlayerPrefs.SetInt("claimvalue",AchievementChild.check_claim);
 				Invoke(nameof(Stopa),4.0f);
 			}
-			China_Manager._instance.platesFilledCount--;
+			_chinaManager.platesFilledCount--;
 			myParentHolder.available = true;
 			customer.myOrder.Remove (myType);
 			customer.RemoveOrderFromBoard (myType);
@@ -794,10 +800,10 @@ namespace _Project.Scripts.Other
 			if(tutorialOn)
 			{
 				tutorialOn = false;
-				China_Manager._instance.firstCustomer.tutorialOn = true;
-				UIManager._instance.tutorialPanelCanvas.gameObject.SetActive (false);
-				UIManager._instance.tutorialPanelBg.gameObject.SetActive (true);
-				UIManager._instance.tutorialPanelBg.OpenPopupChina ("PUT BURNT NOODLES\nIN THE DUSTBIN!",false,false , 11 , 1);
+				_chinaManager.firstCustomer.tutorialOn = true;
+				_uiManager.tutorialPanelCanvas.gameObject.SetActive (false);
+				_uiManager.tutorialPanelBg.gameObject.SetActive (true);
+				_uiManager.tutorialPanelBg.OpenPopupChina ("PUT BURNT NOODLES\nIN THE DUSTBIN!",false,false , 11 , 1);
 			}
 			customer.iHaveAMultipleTypeOrder = LevelManager.Orders.NONE;
 			if(customer.myOrder.Count > 0)
@@ -810,12 +816,12 @@ namespace _Project.Scripts.Other
 			}
 			if(perfect)
 			{
-				customer.coinsSpent+=China_Manager._instance.perfectNoodlesPrice;
+				customer.coinsSpent+=_chinaManager.perfectNoodlesPrice;
 				customer.perfect = true;
 			}
 			else
 			{
-				customer.coinsSpent+=China_Manager._instance.lessBakedNoodlesPrice;
+				customer.coinsSpent+=_chinaManager.lessBakedNoodlesPrice;
 			}
 
 			if(customer.myOrder.Count <= 0)
@@ -824,13 +830,13 @@ namespace _Project.Scripts.Other
 			transform.position = myOriginalPos;
 			myNoodles.SetActive (false);
 			transform.gameObject.SetActive(false);
-			China_Manager._instance.clickedNoodlePlate = false;
+			_chinaManager.clickedNoodlePlate = false;
 		}
 
 		private void SoupBowlReachedDestination()
 		{
 			LevelSoundManager._instance.drink.Play ();
-			China_Manager._instance.bowlsFilled--;
+			_chinaManager.bowlsFilled--;
 			myParentHolder.available = true;
 			customer.myOrder.Remove (myType);
 			customer.RemoveOrderFromBoard (myType);
@@ -839,9 +845,9 @@ namespace _Project.Scripts.Other
 			{
 
 				tutorialOn = false;
-				UIManager._instance.tutorialPanelBg.gameObject.SetActive (false);
-				UIManager._instance.tutorialPanelCanvas.gameObject.SetActive (true);
-				UIManager._instance.tutorialPanelCanvas.OpenPopupChina ("ONE SOUP CONTAINER CAN FILL TWO SOUP BOWLS!",true,false , 16 , 1);
+				_uiManager.tutorialPanelBg.gameObject.SetActive (false);
+				_uiManager.tutorialPanelCanvas.gameObject.SetActive (true);
+				_uiManager.tutorialPanelCanvas.OpenPopupChina ("ONE SOUP CONTAINER CAN FILL TWO SOUP BOWLS!",true,false , 16 , 1);
 			
 			}
 			if(customer.myOrder.Count > 0)
@@ -852,7 +858,7 @@ namespace _Project.Scripts.Other
 					customer.myWaitingTime = 0;
 				}
 			}
-			customer.coinsSpent+=China_Manager._instance.soupPrice;
+			customer.coinsSpent+=_chinaManager.soupPrice;
 			if(customer.shouldBePerfectIfServed)
 			{
 				customer.perfect = true;
@@ -863,7 +869,7 @@ namespace _Project.Scripts.Other
 			mySoup.SetActive (false);
 			transform.position = myOriginalPos;
 			transform.gameObject.SetActive(false);
-			China_Manager._instance.clickSoupBowl = false;
+			_chinaManager.clickSoupBowl = false;
 		
 		}
 
@@ -874,45 +880,45 @@ namespace _Project.Scripts.Other
 		private void RedSauceReachedDestination()
 		{
 			availableHotDog.redSauce = true;
-			US_Manager._instance.hotDogSaucesOnPlates[availableHotDog.GetComponent<Availability>().myPositionInArray].gameObject.SetActive (true);
-			US_Manager._instance.hotDogSaucesOnPlates[availableHotDog.GetComponent<Availability>().myPositionInArray].sprite = US_Manager._instance.hotDogSauces[0];
+			_usManager.hotDogSaucesOnPlates[availableHotDog.GetComponent<Availability>().myPositionInArray].gameObject.SetActive (true);
+			_usManager.hotDogSaucesOnPlates[availableHotDog.GetComponent<Availability>().myPositionInArray].sprite = _usManager.hotDogSauces[0];
 			if(availableHotDog.tikki)
 			{
 				availableHotDog.transform.GetComponent<HotDog>().myType = LevelManager.Orders.HOTDOG_RED;
 			}
 
-			US_Manager._instance.clickedRedSauce = false;
+			_usManager.clickedRedSauce = false;
 		}
 
 		private void YellowSauceReachedDestination()
 		{
 			availableHotDog.yellowSauce = true;
-			US_Manager._instance.hotDogSaucesOnPlates[availableHotDog.GetComponent<Availability>().myPositionInArray].gameObject.SetActive (true);
-			US_Manager._instance.hotDogSaucesOnPlates[availableHotDog.GetComponent<Availability>().myPositionInArray].sprite = US_Manager._instance.hotDogSauces[1];
+			_usManager.hotDogSaucesOnPlates[availableHotDog.GetComponent<Availability>().myPositionInArray].gameObject.SetActive (true);
+			_usManager.hotDogSaucesOnPlates[availableHotDog.GetComponent<Availability>().myPositionInArray].sprite = _usManager.hotDogSauces[1];
 			if(availableHotDog.tikki)
 			{
 				availableHotDog.transform.GetComponent<HotDog>().myType = LevelManager.Orders.HOTDOG_YELLOW;
 			}
-			US_Manager._instance.clickedYellowSauce = false;
+			_usManager.clickedYellowSauce = false;
 		}
 
 		#endregion
 
 		private void CokeReachedDestination()
 		{
-			UIManager._instance.n_Cokes_served++;
+			_uiManager.n_Cokes_served++;
 			int rad = Random.Range (0, 6);
 			if (rad <= 4) {
 				LevelSoundManager._instance.drink.Play ();
 			} else {
 				LevelSoundManager._instance.drink2.Play ();
 			}
-			PlayerPrefs.SetInt ("CokesServed",UIManager._instance.n_Cokes_served);
+			PlayerPrefs.SetInt ("CokesServed",_uiManager.n_Cokes_served);
 	
 			if(PlayerPrefs.GetInt("CokesServed") > 9 && PlayerPrefs.GetInt ("CokeLevel1")==0)
 			{
 				PlayerPrefs.SetInt ("CokeLevel1",1);
-				UIManager._instance.achievment_text.SetActive(true);
+				_uiManager.achievment_text.SetActive(true);
 				AchievementChild.check_claim++;
 				PlayerPrefs.SetInt("claimvalue",AchievementChild.check_claim);
 				Invoke(nameof(Stopa),4.0f);
@@ -920,7 +926,7 @@ namespace _Project.Scripts.Other
 			if(PlayerPrefs.GetInt("CokesServed") > 99 && PlayerPrefs.GetInt ("CokeLevel2")==0)
 			{
 				PlayerPrefs.SetInt ("CokeLevel2",1);
-				UIManager._instance.achievment_text.SetActive(true);
+				_uiManager.achievment_text.SetActive(true);
 				AchievementChild.check_claim++;
 				PlayerPrefs.SetInt("claimvalue",AchievementChild.check_claim);
 				Invoke(nameof(Stopa),4.0f);
@@ -928,23 +934,23 @@ namespace _Project.Scripts.Other
 			if(PlayerPrefs.GetInt("CokesServed") > 999 && PlayerPrefs.GetInt ("CokeLevel3")==0)
 			{
 				PlayerPrefs.SetInt ("CokeLevel3",1);
-				UIManager._instance.achievment_text.SetActive(true);
+				_uiManager.achievment_text.SetActive(true);
 				AchievementChild.check_claim++;
 				PlayerPrefs.SetInt("claimvalue",AchievementChild.check_claim);
 				Invoke(nameof(Stopa),4.0f);
 			}
 
-			if(US_Manager._instance != null)
+			if(_usManager != null)
 			{
-				US_Manager._instance.cokesFilled--;
+				_usManager.cokesFilled--;
 			}
-			else if(Italy_Manager._instance != null)
+			else if(_italyManager != null)
 			{
-				Italy_Manager._instance.cokesFilled--;
+				_italyManager.cokesFilled--;
 			}
-			else if(Australia_Manager._instance != null)
+			else if(_australiaManager != null)
 			{
-				Australia_Manager._instance.cokesFilled--;
+				_australiaManager.cokesFilled--;
 			}
 			myParentHolder.available = true;
 			customer.myOrder.Remove (myType);
@@ -959,24 +965,24 @@ namespace _Project.Scripts.Other
 				}
 			}
 
-			if(US_Manager._instance != null)
+			if(_usManager != null)
 			{
-				customer.coinsSpent+=US_Manager._instance.cokePrice;
-				US_Manager._instance.clickedCoke = false;
+				customer.coinsSpent+=_usManager.cokePrice;
+				_usManager.clickedCoke = false;
 			}
-			else if(Italy_Manager._instance != null)
+			else if(_italyManager != null)
 			{
-				customer.coinsSpent+=Italy_Manager._instance.cokePrice;
+				customer.coinsSpent+=_italyManager.cokePrice;
 				if(isChilled)
 				{
 					customer.coinsSpent+=15;
 				}
-				Italy_Manager._instance.clickedCoke = false;
+				_italyManager.clickedCoke = false;
 			}
-			else if(Australia_Manager._instance != null)
+			else if(_australiaManager != null)
 			{
-				customer.coinsSpent+=Australia_Manager._instance.cokePrice;
-				Australia_Manager._instance.clickedCoke = false;
+				customer.coinsSpent+=_australiaManager.cokePrice;
+				_australiaManager.clickedCoke = false;
 			}
 
 

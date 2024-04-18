@@ -2,11 +2,13 @@
 using _Project.Scripts.Game;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace _Project.Scripts.UI_Scripts
 {
-	public class EquipmentShopItems : MonoBehaviour {
-
+	public class EquipmentShopItems : MonoBehaviour 
+	{
+		[Inject] private MenuManager _menuManager;  
 		public static EquipmentShopItems _instance;
 		public GameObject []upgradeNoImages;
 		public Sprite []upgradeImages;
@@ -112,16 +114,16 @@ namespace _Project.Scripts.UI_Scripts
 			{
 				if((MenuManager.totalscore < coinsToUpgradeLevel[upgradeValue]) )
 				{
-					MenuManager._instance.lastPanel = equipmentPanel.gameObject;
-					MenuManager._instance.lastPanelName = "EquipmentUpdrade";
-					MenuManager._instance.Insufficinetcoin();	
+					_menuManager.lastPanel = equipmentPanel.gameObject;
+					_menuManager.lastPanelName = "EquipmentUpdrade";
+					_menuManager.Insufficinetcoin();	
 
 				}
 				else if((MenuManager.golds < goldToUpgradeLevel[upgradeValue]))
 				{
-					MenuManager._instance.Insufficinetgold();
-					MenuManager._instance.lastPanel = equipmentPanel.gameObject;
-					MenuManager._instance.lastPanelName = "EquipmentUpdrade";
+					_menuManager.Insufficinetgold();
+					_menuManager.lastPanel = equipmentPanel.gameObject;
+					_menuManager.lastPanelName = "EquipmentUpdrade";
 
 				}
 			}

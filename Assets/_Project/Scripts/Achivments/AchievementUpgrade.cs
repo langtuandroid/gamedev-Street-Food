@@ -22,15 +22,12 @@ namespace _Project.Scripts.Achivments
 		private void CallIncrementCoin()
 		{
 			StopCoroutine (nameof(IncrementCoins));
-
 			StartCoroutine (nameof(IncrementCoins));
-
 		}
 
 		private void CallIncrementgold()
 		{
 			StopCoroutine (nameof(IncrementGold));
-		
 			StartCoroutine (nameof(IncrementGold));
 		}
 

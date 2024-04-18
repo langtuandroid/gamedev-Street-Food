@@ -5,11 +5,17 @@ using _Project.Scripts.Other;
 using _Project.Scripts.UI_Scripts;
 using _Project.Scripts.UI.Tutorial;
 using UnityEngine;
+using Zenject;
 
 namespace _Project.Scripts.Entities.Customers
 {
 	public class CustomerHandler : MonoBehaviour 
 	{
+		[Inject] private UIManager _uiManager;
+		[Inject] private Australia_Manager _australiaManager;
+		[Inject] private China_Manager _chinaManager;
+		[Inject] private US_Manager _usManager;
+		[Inject] private Italy_Manager _italyManager;
 		bool wait=true;
 		public int noOfCustomers;
 		public float gameTimer = 120.0f;
@@ -148,18 +154,18 @@ namespace _Project.Scripts.Entities.Customers
 			timerStopped = true;
 			if(availablePositions.Count == 5)
 			{
-				UIManager._instance.OnGameOver ();
+				_uiManager.OnGameOver ();
 			}
 		}
 
 		public void BellPanelCheck()
 		{
-			UIManager._instance.BellPanelTry();
+			_uiManager.BellPanelTry();
 		}
 
 		public void BellPanelSeven()
 		{
-			UIManager._instance.BellPanelBuy ();
+			_uiManager.BellPanelBuy ();
 		}
 
 		public void InitializeCustomer()
@@ -199,23 +205,23 @@ namespace _Project.Scripts.Entities.Customers
 			{
 				availablePosForCustomer = 1;
 				if (LevelManager.levelNo == 1)
-					US_Manager._instance.firstCustomer = customerPool[customerNo];
+					_usManager.firstCustomer = customerPool[customerNo];
 				else if (LevelManager.levelNo == 31 || LevelManager.levelNo == 32)
 				{
-					Australia_Manager._instance.firstCustomer = customerPool[customerNo];
+					_australiaManager.firstCustomer = customerPool[customerNo];
 					if (LevelManager.levelNo == 32)
 					{
-						Australia_Manager._instance.firstCustomer.tutorialOn = true;
+						_australiaManager.firstCustomer.tutorialOn = true;
 					}
 				}
 				else if (LevelManager.levelNo == 11 || LevelManager.levelNo == 13)
 				{
-					China_Manager._instance.firstCustomer = customerPool[customerNo];
-					China_Manager._instance.firstCustomer.tutorialOn = true;
+					_chinaManager.firstCustomer = customerPool[customerNo];
+					_chinaManager.firstCustomer.tutorialOn = true;
 				}
 				else if (LevelManager.levelNo == 21 || LevelManager.levelNo == 22)
 				{
-					Italy_Manager._instance.firstCustomer = customerPool[customerNo];
+					_italyManager.firstCustomer = customerPool[customerNo];
 				}
 			}
 

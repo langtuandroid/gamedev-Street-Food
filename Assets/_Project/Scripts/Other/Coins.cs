@@ -3,11 +3,15 @@ using _Project.Scripts.Entities.Customers;
 using _Project.Scripts.Managers;
 using _Project.Scripts.UI_Scripts;
 using UnityEngine;
+using Zenject;
 
 namespace _Project.Scripts.Other
 {
 	public class Coins : MonoBehaviour 
 	{
+		[Inject] private US_Manager _usManager;
+		[Inject] private China_Manager _chinaManager;
+		[Inject] private UIManager _uiManager;   
 		public int positionTaken;
 		public int myAmount;
 		public GameObject perfectText;
@@ -90,8 +94,8 @@ namespace _Project.Scripts.Other
 				transform.position = Vector3.MoveTowards(transform.position, finalPos, 0.25f);
 				yield return 0;
 			}
-			UIManager._instance.CallIncrementCoint ();
-			UIManager._instance.coincollect.Play();
+			_uiManager.CallIncrementCoint ();
+			_uiManager.coincollect.Play();
 			gameObject.SetActive (false);
 		}
 
@@ -101,26 +105,26 @@ namespace _Project.Scripts.Other
 			if(tutorialOn)
 			{
 				tutorialOn = false;
-				UIManager._instance.tutorialPanelBg.gameObject.SetActive (false);
-				UIManager._instance.tutorialPanelCanvas.gameObject.SetActive (true);
-				UIManager._instance.tutorialPanelCanvas.OpenPopup ("YOUR EARNINGS HELP TO BUY UPGRADES.",true,false , 5 , 1);
+				_uiManager.tutorialPanelBg.gameObject.SetActive (false);
+				_uiManager.tutorialPanelCanvas.gameObject.SetActive (true);
+				_uiManager.tutorialPanelCanvas.OpenPopup ("YOUR EARNINGS HELP TO BUY UPGRADES.",true,false , 5 , 1);
 			}
 
-			if(US_Manager._instance != null)
+			if(_usManager != null)
 			{
-				US_Manager._instance.clickedCoke = false;
-				US_Manager._instance.clickedHotDog = false;
-				US_Manager._instance.clickedTikki = false;
-				US_Manager._instance.clickedRedSauce = false;
-				US_Manager._instance.clickedYellowSauce = false;
+				_usManager.clickedCoke = false;
+				_usManager.clickedHotDog = false;
+				_usManager.clickedTikki = false;
+				_usManager.clickedRedSauce = false;
+				_usManager.clickedYellowSauce = false;
 			}
-			else if(China_Manager._instance != null)
+			else if(_chinaManager != null)
 			{
-				China_Manager._instance.AllClickedBoolsReset();
+				_chinaManager.AllClickedBoolsReset();
 			}
 
-			UIManager._instance.totalCoins+=UIManager._instance.Bonus_coin;
-			UIManager._instance.totalCoins+=myAmount;
+			_uiManager.totalCoins+=_uiManager.Bonus_coin;
+			_uiManager.totalCoins+=myAmount;
 
 			StartCoroutine (MoveCoins());
 			CustomerHandler._instance.availablePositions.Add (positionTaken);
@@ -129,7 +133,7 @@ namespace _Project.Scripts.Other
 			{
 				if(CustomerHandler._instance.availablePositions.Count == 5)
 				{
-					UIManager._instance.OnGameOver ();
+					_uiManager.OnGameOver ();
 				}
 			}
 		}
@@ -142,7 +146,7 @@ namespace _Project.Scripts.Other
 			{
 				if(CustomerHandler._instance.availablePositions.Count == 5)
 				{
-					UIManager._instance.OnGameOver ();
+					_uiManager.OnGameOver ();
 				}
 			}
 			gameObject.SetActive (false);

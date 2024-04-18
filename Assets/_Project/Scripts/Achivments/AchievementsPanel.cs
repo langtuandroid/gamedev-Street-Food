@@ -1,11 +1,14 @@
 ﻿using _Project.Scripts.UI_Scripts;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace _Project.Scripts.Achivments
 {
 	public class AchievementsPanel : MonoBehaviour 
 	{
+		[Inject] private MenuManager _menuManager;  
+		[Inject] private UIManager _uiManager;   
 		public Text totalCoinsText;
 		public Text totalGoldText;
 
@@ -16,12 +19,12 @@ namespace _Project.Scripts.Achivments
 	
 		public void Close()
 		{
-			if(MenuManager._instance != null)
-				MenuManager._instance.EnableFadePanel ();
+			if(_menuManager != null)
+				_menuManager.EnableFadePanel ();
 			else
 			{
-				UIManager._instance.gameOverPanel.SetActive (true);
-				UIManager._instance.EnableFadePanel ();
+				_uiManager.gameOverPanel.SetActive (true);
+				_uiManager.EnableFadePanel ();
 			}
 			Destroy (gameObject);
 		}

@@ -5,18 +5,20 @@ using _Project.Scripts.Managers;
 using _Project.Scripts.UI;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace _Project.Scripts.UI_Scripts
 {
-	public class MenuManager : MonoBehaviour {
-
+	public class MenuManager : MonoBehaviour 
+	{
+		[Inject] private UIManager _uiManager;   
 		public static string envNo = "US";
 		public GameObject levelPanel;
 		public GameObject fadePanel;
 		public Image fadePanelImage;
 		public PopupPanel popupPanel; 
 		public PopupPanel2 popupPanel2 ;
-		public static MenuManager _instance;
+		
 		public static int golds;
 		public static int totalscore;
 		public static int cupcakeNo;
@@ -32,7 +34,6 @@ namespace _Project.Scripts.UI_Scripts
 
 		void Start () 
 		{
-			_instance = this;
 			Application.targetFrameRate = 120;
 			AchievementChild.check_claim = (PlayerPrefs.GetInt("claimvalue"));
 
@@ -242,13 +243,13 @@ namespace _Project.Scripts.UI_Scripts
 			specialPanel.transform.SetParent(transform.parent,false);
 			specialPanel.transform.localScale = Vector3.one;
 			specialPanel.transform.localPosition = Vector3.zero;
-			if(MenuManager._instance != null)
-				MenuManager._instance.EnableFadePanel ();
-			else
-				UIManager._instance.EnableFadePanel ();
-			Destroy (gameObject);
-			
+			EnableFadePanel ();
 
+			if (false)
+			{
+				_uiManager.EnableFadePanel ();
+			}
+			Destroy (gameObject);
 		}
 		public GameObject GeneratePopupPanel()
 		{

@@ -4,11 +4,17 @@ using _Project.Scripts.UI_Scripts;
 using _Project.Scripts.UI.Tutorial;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace _Project.Scripts.Audio
 {
-	public class AutoType : MonoBehaviour 
+	public class AutoType : MonoBehaviour
 	{
+		[Inject] private US_Manager _usManager;
+		[Inject] private China_Manager _chinaManager;
+		[Inject] private Australia_Manager _australiaManager;
+		[Inject] private UIManager _uiManager;
+		[Inject] private Italy_Manager _italyManager;
 		private string _message;
 		private int noOfExtraPopup;
 		
@@ -64,77 +70,77 @@ namespace _Project.Scripts.Audio
 				imageToDeactivate.SetActive (false);
 				if(LevelManager.levelNo == 1)
 				{
-					US_Manager._instance.clickfirstBun = true;
-					UIManager._instance.tutorialPanelBg.gameObject.SetActive (true);
-					UIManager._instance.tutorialPanelBg.OpenPopup ("TAP BUN \n TO PUT ON THE PLATE.",false,false , 0);
+					_usManager.clickfirstBun = true;
+					_uiManager.tutorialPanelBg.gameObject.SetActive (true);
+					_uiManager.tutorialPanelBg.OpenPopup ("TAP BUN \n TO PUT ON THE PLATE.",false,false , 0);
 				}
 				else if(LevelManager.levelNo == 2)
 				{
-					UIManager._instance.tutorialPanelBg.gameObject.SetActive (true);
-					UIManager._instance.tutorialPanelBg.OpenPopup ("TWO NEW ITEMS \n HAVE BEEN ADDED.",false,false , 7 , 1);
+					_uiManager.tutorialPanelBg.gameObject.SetActive (true);
+					_uiManager.tutorialPanelBg.OpenPopup ("TWO NEW ITEMS \n HAVE BEEN ADDED.",false,false , 7 , 1);
 				}
 				else if(LevelManager.levelNo == 3)
 				{
-					UIManager._instance.tutorialPanelBg.gameObject.SetActive (true);
-					UIManager._instance.tutorialPanelBg.OpenPopup ("A NEW ITEM \n HAS BEEN ADDED.",false,true , 8 , 1);
+					_uiManager.tutorialPanelBg.gameObject.SetActive (true);
+					_uiManager.tutorialPanelBg.OpenPopup ("A NEW ITEM \n HAS BEEN ADDED.",false,true , 8 , 1);
 				}
 				else if(LevelManager.levelNo == 11)
 				{
 
-					China_Manager._instance.clickPlateTut = true;
-					UIManager._instance.tutorialPanelBg.gameObject.SetActive (true);
-					UIManager._instance.tutorialPanelBg.OpenPopupChina ("TAP TO \n PLACE THE PLATE.",false,false , 9);
+					_chinaManager.clickPlateTut = true;
+					_uiManager.tutorialPanelBg.gameObject.SetActive (true);
+					_uiManager.tutorialPanelBg.OpenPopupChina ("TAP TO \n PLACE THE PLATE.",false,false , 9);
 				}
 				else if(LevelManager.levelNo == 13)
 				{
-					China_Manager._instance.clickBowlTut = true;
-					UIManager._instance.tutorialPanelBg.gameObject.SetActive (true);
-					UIManager._instance.tutorialPanelBg.OpenPopupChina ("CLICK BOWL TO\n PUT ON TRAY.",false,false , 10);
+					_chinaManager.clickBowlTut = true;
+					_uiManager.tutorialPanelBg.gameObject.SetActive (true);
+					_uiManager.tutorialPanelBg.OpenPopupChina ("CLICK BOWL TO\n PUT ON TRAY.",false,false , 10);
 				}
 				else if(LevelManager.levelNo == 21)
 				{
-					Italy_Manager._instance.clickfirstBase = true;
-					UIManager._instance.tutorialPanelBg.gameObject.SetActive (true);
-					UIManager._instance.tutorialPanelBg.OpenPopupItaly ("CLICK PIZZA\n BASE TO PUT ON \n THE PLATE",false,false , 0);
+					_italyManager.clickfirstBase = true;
+					_uiManager.tutorialPanelBg.gameObject.SetActive (true);
+					_uiManager.tutorialPanelBg.OpenPopupItaly ("CLICK PIZZA\n BASE TO PUT ON \n THE PLATE",false,false , 0);
 				}
 				else if(LevelManager.levelNo == 22)
 				{
-					UIManager._instance.tutorialPanelBg.gameObject.SetActive (true);
-					UIManager._instance.tutorialPanelBg.OpenPopupItaly ("NON VEG TOPPINGS \n FOR PIZZA \n HAS BEEN ADDED.",false,true , 5 , 1);
+					_uiManager.tutorialPanelBg.gameObject.SetActive (true);
+					_uiManager.tutorialPanelBg.OpenPopupItaly ("NON VEG TOPPINGS \n FOR PIZZA \n HAS BEEN ADDED.",false,true , 5 , 1);
 				}
 				else if(LevelManager.levelNo == 23)
 				{
-					UIManager._instance.tutorialPanelBg.gameObject.SetActive (true);
-					UIManager._instance.tutorialPanelBg.OpenPopupItaly ("A NEW ITEM \n HAS BEEN ADDED.",false,true , 6 , 1);
+					_uiManager.tutorialPanelBg.gameObject.SetActive (true);
+					_uiManager.tutorialPanelBg.OpenPopupItaly ("A NEW ITEM \n HAS BEEN ADDED.",false,true , 6 , 1);
 				}
 				else if(LevelManager.levelNo == 31)
 				{
-					Australia_Manager._instance.clickfirstBun = true;
-					UIManager._instance.tutorialPanelBg.gameObject.SetActive (true);
-					UIManager._instance.tutorialPanelBg.OpenPopupAustralia ("TAP THE BUN TO \n PUT IT ON THE PLATE.",false,false , 0);
+					_australiaManager.clickfirstBun = true;
+					_uiManager.tutorialPanelBg.gameObject.SetActive (true);
+					_uiManager.tutorialPanelBg.OpenPopupAustralia ("TAP THE BUN TO \n PUT IT ON THE PLATE.",false,false , 0);
 				}
 				else if(LevelManager.levelNo == 32)
 				{
-					Australia_Manager._instance.clickFirstFryer = true;
-					UIManager._instance.tutorialPanelBg.gameObject.SetActive (true);
-					UIManager._instance.tutorialPanelBg.OpenPopupAustralia ("TAP DEEP FRIYER \n TO MAKE FRIES.",false,false , 8);
+					_australiaManager.clickFirstFryer = true;
+					_uiManager.tutorialPanelBg.gameObject.SetActive (true);
+					_uiManager.tutorialPanelBg.OpenPopupAustralia ("TAP DEEP FRIYER \n TO MAKE FRIES.",false,false , 8);
 				}
 				else if(LevelManager.levelNo == 33)
 				{
-					UIManager._instance.tutorialPanelBg.gameObject.SetActive (true);
-					UIManager._instance.tutorialPanelBg.OpenPopupAustralia ("VEG TOPPINGS \n FOR BURGER \n HAS BEEN ADDED.",false,true , 4 , 1);
+					_uiManager.tutorialPanelBg.gameObject.SetActive (true);
+					_uiManager.tutorialPanelBg.OpenPopupAustralia ("VEG TOPPINGS \n FOR BURGER \n HAS BEEN ADDED.",false,true , 4 , 1);
 				}
 				else if(LevelManager.levelNo == 34)
 				{
-					UIManager._instance.tutorialPanelBg.gameObject.SetActive (true);
-					UIManager._instance.tutorialPanelBg.OpenPopupAustralia ("A NEW ITEM \n FOR BURGER \n HAS BEEN ADDED.",false,true , 5 , 1);
+					_uiManager.tutorialPanelBg.gameObject.SetActive (true);
+					_uiManager.tutorialPanelBg.OpenPopupAustralia ("A NEW ITEM \n FOR BURGER \n HAS BEEN ADDED.",false,true , 5 , 1);
 				}
 				else
 				{
 					if(noOfExtraPopup > 0)
 					{
-						UIManager._instance.tutorialPanelBg.gameObject.SetActive (true);
-						UIManager._instance.tutorialPanelBg.SpecialTutorials ();
+						_uiManager.tutorialPanelBg.gameObject.SetActive (true);
+						_uiManager.tutorialPanelBg.SpecialTutorials ();
 					}
 					else
 					{
@@ -155,8 +161,8 @@ namespace _Project.Scripts.Audio
 							Australia_Manager.tutorialEnd = true;
 						}
 						TutorialPanel.popupPanelActive = false;
-						Destroy(UIManager._instance.tutorialPanelCanvas.gameObject); 
-						Destroy(UIManager._instance.tutorialPanelBg.gameObject);
+						Destroy(_uiManager.tutorialPanelCanvas.gameObject); 
+						Destroy(_uiManager.tutorialPanelBg.gameObject);
 						Destroy (transform.parent.gameObject);
 					}
 

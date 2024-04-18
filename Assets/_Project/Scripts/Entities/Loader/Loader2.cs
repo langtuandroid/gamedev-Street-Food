@@ -1,11 +1,13 @@
 ﻿using _Project.Scripts.UI_Scripts;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace _Project.Scripts.Entities.Loader
 {
 	public class Loader2 : MonoBehaviour 
 	{
+		[Inject] private MenuManager _menuManager;   
 		private int rand;
 		private bool started;
 		private int a = 0;
@@ -52,10 +54,8 @@ namespace _Project.Scripts.Entities.Loader
 			loader.value += 0.015f ;
 			if (loader.value >= 0.9f) 
 			{
-				MenuManager._instance.Achievments();
-					
+				_menuManager.Achievments();
 			}
-		
 		}
 	}
 }

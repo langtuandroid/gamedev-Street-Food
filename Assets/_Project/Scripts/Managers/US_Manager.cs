@@ -5,12 +5,13 @@ using _Project.Scripts.Other;
 using _Project.Scripts.UI_Scripts;
 using _Project.Scripts.UI.Tutorial;
 using UnityEngine;
+using Zenject;
 
 namespace _Project.Scripts.Managers
 {
 	public class US_Manager : MonoBehaviour 
 	{
-		public static US_Manager _instance;
+		[Inject] private UIManager _uiManager;   
 		
 		public GameObject TheifPanel;
 		public int cokePrice;
@@ -63,12 +64,7 @@ namespace _Project.Scripts.Managers
 		public GameObject Bell ;
 		public GameObject handcuff ;
 		public GameObject starting_text ;
-
-		private void Awake () 
-		{
-			_instance = this;
-		}
-
+		
 		private void OnEnable()
 		{
 			if (LevelManager.levelNo == 1) {
@@ -148,8 +144,8 @@ namespace _Project.Scripts.Managers
 				grills[i].SetActive (true);
 			}
 			char []coverVal = PlayerPrefs.GetString ("US_TableCover").ToCharArray ();
-			UIManager._instance._tabelcover = int.Parse (coverVal[coverVal.Length - 1].ToString ());
-			UIManager._instance.ForCoinAdd ();
+			_uiManager._tabelcover = int.Parse (coverVal[coverVal.Length - 1].ToString ());
+			_uiManager.ForCoinAdd ();
 			tableCover.sprite = Resources.Load<Sprite> (PlayerPrefs.GetString ("US_TableCover"));
 			tableTop.sprite = Resources.Load<Sprite> (PlayerPrefs.GetString ("US_TableTop")) as Sprite;
 			if(MenuManager.cupcakeNo <= 0)
@@ -181,8 +177,8 @@ namespace _Project.Scripts.Managers
 				}
 				if(clickFirstTikki)
 				{
-					UIManager._instance.tutorialPanelBg.gameObject.SetActive (true);
-					UIManager._instance.tutorialPanelBg.OpenPopup ("WAIT FOR THE SAUSAGE \n TO BAKE",false,false , 2);
+					_uiManager.tutorialPanelBg.gameObject.SetActive (true);
+					_uiManager.tutorialPanelBg.OpenPopup ("WAIT FOR THE SAUSAGE \n TO BAKE",false,false , 2);
 					firstTikki.tutorialOn = true;
 				}
 				clickFirstTikki = false;
@@ -225,8 +221,8 @@ namespace _Project.Scripts.Managers
 				if(clickfirstBun)
 				{
 					clickFirstTikki = true;
-					UIManager._instance.tutorialPanelBg.gameObject.SetActive (true);
-					UIManager._instance.tutorialPanelBg.OpenPopup ("TAP SAUSAGE TO PUT \n ON THE GRILLS",false,false , 1);
+					_uiManager.tutorialPanelBg.gameObject.SetActive (true);
+					_uiManager.tutorialPanelBg.OpenPopup ("TAP SAUSAGE TO PUT \n ON THE GRILLS",false,false , 1);
 				}
 				clickfirstBun = false;
 			}

@@ -6,11 +6,14 @@ using _Project.Scripts.Other;
 using _Project.Scripts.UI_Scripts;
 using _Project.Scripts.UI.Tutorial;
 using UnityEngine;
+using Zenject;
 
 namespace _Project.Scripts.Food
 {
 	public class Burger : MonoBehaviour 
 	{
+		[Inject] private Australia_Manager _australiaManager;
+		[Inject] private UIManager _uiManager;   
 		private bool scaleUp;
 		private bool reachedCustomer;
 		private Vector3 colliderSize;
@@ -41,7 +44,7 @@ namespace _Project.Scripts.Food
 
 		private void Start()
 		{
-			UIManager._instance.n_Burger_served=PlayerPrefs.GetInt ("BurgerServed");
+			_uiManager.n_Burger_served=PlayerPrefs.GetInt ("BurgerServed");
 			myLocalScale = transform.localScale;
 			myOriginalPos = transform.position;
 			if(!orderBurger)
@@ -80,37 +83,37 @@ namespace _Project.Scripts.Food
 		{
 			if(!TutorialPanel.popupPanelActive || Australia_Manager.tutorialEnd || Australia_Manager.tutorialEnd || tutorialOn)
 			{
-				Australia_Manager._instance.clickedHotDogDestinationFunction = this;
+				_australiaManager.clickedHotDogDestinationFunction = this;
 				canMove = true;
 				Vector3 myPos = Camera.main.WorldToScreenPoint (transform.position);
 				myTouchPos =  Camera.main.ScreenToWorldPoint (new Vector3(Input.mousePosition.x, Input.mousePosition.y , myPos.z));
-				if(Australia_Manager._instance.clickedTikki && !tikki)
+				if(_australiaManager.clickedTikki && !tikki)
 				{
-					if(!Australia_Manager._instance.clickedTikkiDestinationFunction.isBurnt)
+					if(!_australiaManager.clickedTikkiDestinationFunction.isBurnt)
 					{
-						Australia_Manager._instance.clickedTikkiDestinationFunction.availableHotDog = this.GetComponent<Availability>();
-						Australia_Manager._instance.TikkiReached ();
+						_australiaManager.clickedTikkiDestinationFunction.availableHotDog = this.GetComponent<Availability>();
+						_australiaManager.TikkiReached ();
 
 					}
-					Australia_Manager._instance.AllClickedBoolsReset ();
+					_australiaManager.AllClickedBoolsReset ();
 				}
-				else if(Australia_Manager._instance.clickedTomato && !tomato)
+				else if(_australiaManager.clickedTomato && !tomato)
 				{
-					Australia_Manager._instance.clickedItemDestinationFunction.availableBurger = this;
-					Australia_Manager._instance.ObjectReached ();
-					Australia_Manager._instance.AllClickedBoolsReset ();
+					_australiaManager.clickedItemDestinationFunction.availableBurger = this;
+					_australiaManager.ObjectReached ();
+					_australiaManager.AllClickedBoolsReset ();
 				}
-				else if(Australia_Manager._instance.clickedOnion && !onion)
+				else if(_australiaManager.clickedOnion && !onion)
 				{
-					Australia_Manager._instance.clickedItemDestinationFunction.availableBurger = this;
-					Australia_Manager._instance.ObjectReached ();
-					Australia_Manager._instance.AllClickedBoolsReset ();
+					_australiaManager.clickedItemDestinationFunction.availableBurger = this;
+					_australiaManager.ObjectReached ();
+					_australiaManager.AllClickedBoolsReset ();
 				}
-				else if(Australia_Manager._instance.clickedCabbage && !cabbage)
+				else if(_australiaManager.clickedCabbage && !cabbage)
 				{
-					Australia_Manager._instance.clickedItemDestinationFunction.availableBurger = this;
-					Australia_Manager._instance.ObjectReached ();
-					Australia_Manager._instance.AllClickedBoolsReset ();
+					_australiaManager.clickedItemDestinationFunction.availableBurger = this;
+					_australiaManager.ObjectReached ();
+					_australiaManager.AllClickedBoolsReset ();
 				}
 				else 
 				{
@@ -118,10 +121,10 @@ namespace _Project.Scripts.Food
 					{
 						if(tutorialOn)
 						{
-							Australia_Manager._instance.firstCustomer.tutorialOn = true;
+							_australiaManager.firstCustomer.tutorialOn = true;
 						}
-						Australia_Manager._instance.AllClickedBoolsReset ();
-						Australia_Manager._instance.clickedBurger = true;
+						_australiaManager.AllClickedBoolsReset ();
+						_australiaManager.clickedBurger = true;
 						
 						scaleUp = true;
 						if(!orderBurger)
@@ -130,7 +133,7 @@ namespace _Project.Scripts.Food
 					}
 					else
 					{
-						Australia_Manager._instance.clickedHotDogDestinationFunction = null;
+						_australiaManager.clickedHotDogDestinationFunction = null;
 						canMove = false;
 						error.SetActive(true);
 					}
@@ -170,22 +173,22 @@ namespace _Project.Scripts.Food
 		
 		public void Stopa()
 		{
-			UIManager._instance.achievment_text.SetActive (false);
+			_uiManager.achievment_text.SetActive (false);
 		}
 		
 		public void ClickedDestination()
 		{
-			Australia_Manager._instance.platesFilledCount--;
+			_australiaManager.platesFilledCount--;
 			myPlate.available = true;
 			if(!otherObject.name.Contains ("dustbin"))
 			{
-				UIManager._instance.n_Burger_served++ ;
+				_uiManager.n_Burger_served++ ;
 				LevelSoundManager._instance.customerEat.Play();
-				PlayerPrefs.SetInt ("BurgerServed",UIManager._instance.n_Burger_served);
+				PlayerPrefs.SetInt ("BurgerServed", _uiManager.n_Burger_served);
 				if(PlayerPrefs.GetInt("BurgerServed") > 9 && PlayerPrefs.GetInt ("BurgerLevel1")==0 )
 				{
 					PlayerPrefs.SetInt ("BurgerLevel1",1);
-					UIManager._instance.achievment_text.SetActive(true);
+					_uiManager.achievment_text.SetActive(true);
 					AchievementChild.check_claim++;
 					PlayerPrefs.SetInt("claimvalue",AchievementChild.check_claim);
 					Invoke(nameof(Stopa),4.0f);
@@ -193,7 +196,7 @@ namespace _Project.Scripts.Food
 				if(PlayerPrefs.GetInt("BurgerServed") > 99 && PlayerPrefs.GetInt ("BurgerLevel2")==1)
 				{
 					PlayerPrefs.SetInt ("BurgerLevel2",1);
-					UIManager._instance.achievment_text.SetActive(true);
+					_uiManager.achievment_text.SetActive(true);
 					AchievementChild.check_claim++;
 					PlayerPrefs.SetInt("claimvalue",AchievementChild.check_claim);
 					Invoke(nameof(Stopa),4.0f);
@@ -201,7 +204,7 @@ namespace _Project.Scripts.Food
 				if(PlayerPrefs.GetInt("BurgerServed") > 999 && PlayerPrefs.GetInt ("BurgerLevel3")==2)
 				{
 					PlayerPrefs.SetInt ("BurgerLevel3",1);
-					UIManager._instance.achievment_text.SetActive(true);
+					_uiManager.achievment_text.SetActive(true);
 					AchievementChild.check_claim++;
 					PlayerPrefs.SetInt("claimvalue",AchievementChild.check_claim);
 					Invoke(nameof(Stopa),4.0f);
@@ -209,8 +212,8 @@ namespace _Project.Scripts.Food
 				if(tutorialOn)
 				{
 					tutorialOn = false;
-					UIManager._instance.tutorialPanelBg.gameObject.SetActive (true);
-					UIManager._instance.tutorialPanelBg.OpenPopupAustralia ("PUT BURNT TIKKI \n INTO THE DUSTBIN!",false,false ,7 , 1);
+					_uiManager.tutorialPanelBg.gameObject.SetActive (true);
+					_uiManager.tutorialPanelBg.OpenPopupAustralia ("PUT BURNT TIKKI \n INTO THE DUSTBIN!",false,false ,7 , 1);
 				}
 				
 				string myTypeToEatSub = "BURGER";
@@ -245,12 +248,12 @@ namespace _Project.Scripts.Food
 
 					if(!wrongOrderGiven)
 					{
-						customer.coinsSpent+=Australia_Manager._instance.perfectBurger;
+						customer.coinsSpent+=_australiaManager.perfectBurger;
 						customer.perfect = true;
 					}
 					else
 					{
-						customer.coinsSpent+=(Australia_Manager._instance.perfectBurger/2);
+						customer.coinsSpent+=(_australiaManager.perfectBurger/2);
 					
 					}
 				
@@ -262,11 +265,11 @@ namespace _Project.Scripts.Food
 				
 					if(!wrongOrderGiven)
 					{
-						customer.coinsSpent+=Australia_Manager._instance.lessBakedBurger;
+						customer.coinsSpent+=_australiaManager.lessBakedBurger;
 					}
 					else
 					{
-						customer.coinsSpent+=(Australia_Manager._instance.lessBakedBurger/2);
+						customer.coinsSpent+=(_australiaManager.lessBakedBurger/2);
 					}
 				}
 			
@@ -295,30 +298,29 @@ namespace _Project.Scripts.Food
 			else
 			{
 				if(perfect){
-					UIManager._instance.totalCoins-=Australia_Manager._instance.perfectBurger;
+					_uiManager.totalCoins-=_australiaManager.perfectBurger;
 					LevelSoundManager._instance.dustbin.Play();
-					if(UIManager._instance.totalCoins > 0){
+					if(_uiManager.totalCoins > 0){
 
-						UIManager._instance.dustbin_textparent.SetActive(true);
-
-						UIManager._instance.dustbin_text.text = "-"+Australia_Manager._instance.perfectBurger.ToString(); 
+						_uiManager.dustbin_textparent.SetActive(true);
+						_uiManager.dustbin_text.text = "-"+_australiaManager.perfectBurger.ToString(); 
 						Invoke(nameof(Deactivedustbin),1.0f);
 					}}
 				else
 				{
-					UIManager._instance.totalCoins-=Australia_Manager._instance.lessBakedBurger;
+					_uiManager.totalCoins-=_australiaManager.lessBakedBurger;
 					LevelSoundManager._instance.dustbin.Play();
-					UIManager._instance.coinsText.text = UIManager._instance.totalCoins.ToString ();
-					if(UIManager._instance.totalCoins > 0){
+					_uiManager.coinsText.text = _uiManager.totalCoins.ToString ();
+					if(_uiManager.totalCoins > 0){
 
-						UIManager._instance.dustbin_textparent.SetActive(true);
-						UIManager._instance.dustbin_text.text = "-"+Australia_Manager._instance.lessBakedBurger.ToString(); 
+						_uiManager.dustbin_textparent.SetActive(true);
+						_uiManager.dustbin_text.text = "-"+_australiaManager.lessBakedBurger.ToString(); 
 						Invoke(nameof(Deactivedustbin),1.0f);
 					}}
-				if(UIManager._instance.totalCoins < 0)
+				if(_uiManager.totalCoins < 0)
 				{
-					UIManager._instance.totalCoins = 0;
-					UIManager._instance.coinsText.text = "0";
+					_uiManager.totalCoins = 0;
+					_uiManager.coinsText.text = "0";
 				}
 			}
 			transform.position = myOriginalPos;
@@ -327,7 +329,7 @@ namespace _Project.Scripts.Food
 
 		public void Deactivedustbin()
 		{
-			UIManager._instance.dustbin_textparent.SetActive (false);
+			_uiManager.dustbin_textparent.SetActive (false);
 		}
 
 		private IEnumerator MoveToPosition()

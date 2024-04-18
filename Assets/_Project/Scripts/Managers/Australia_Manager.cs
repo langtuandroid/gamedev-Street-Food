@@ -5,11 +5,13 @@ using _Project.Scripts.Other;
 using _Project.Scripts.UI_Scripts;
 using _Project.Scripts.UI.Tutorial;
 using UnityEngine;
+using Zenject;
 
 namespace _Project.Scripts.Managers
 {
-	public class Australia_Manager : MonoBehaviour {
-
+	public class Australia_Manager : MonoBehaviour
+	{
+		[Inject] private UIManager _uiManager;
 		public GameObject TheifPanel;
 		public int cokePrice;
 		public int lessBakedBurger;
@@ -40,7 +42,7 @@ namespace _Project.Scripts.Managers
 		public int totalCokesAvailable;
 		public int friesFilled;
 		public int totalFriesAvailable;
-		public static Australia_Manager _instance;
+		
 		public bool clickedBurger;
 		public bool clickedTikki;
 		public bool clickedTomato;
@@ -96,13 +98,7 @@ namespace _Project.Scripts.Managers
 			}
 		
 		}
-
-		private void Awake () 
-		{
-			_instance = this;
-		}
-
-
+		
 		public void TikkiReached()
 		{
 			clickedTikkiDestinationFunction.ClickedDestination ();
@@ -178,16 +174,16 @@ namespace _Project.Scripts.Managers
 			}
 
 			char []coverVal = PlayerPrefs.GetString ("Aus_TableCover").ToCharArray ();
-			UIManager._instance._tabelcover = int.Parse (coverVal[coverVal.Length - 1].ToString ());
+			_uiManager._tabelcover = int.Parse (coverVal[coverVal.Length - 1].ToString ());
 			char []coverVal2 = PlayerPrefs.GetString ("Aus_TableTop").ToCharArray ();
-			UIManager._instance._tabeltop= int.Parse (coverVal[coverVal.Length - 1].ToString ());
+			_uiManager._tabeltop= int.Parse (coverVal[coverVal.Length - 1].ToString ());
 			tableCover.sprite = Resources.Load<Sprite> (PlayerPrefs.GetString ("Aus_TableCover"));
 			tableTop.sprite =  Resources.Load<Sprite> (PlayerPrefs.GetString ("Aus_TableTop"));
 			if(MenuManager.cupcakeNo <= 0)
 			{
 				cupCake.gameObject.SetActive (false);
 			}
-			UIManager._instance.ForCoinAdd ();
+			_uiManager.ForCoinAdd ();
 		}
 
 		public void AddMoreTikki()
@@ -211,8 +207,8 @@ namespace _Project.Scripts.Managers
 				}
 				if(clickFirstTikki)
 				{
-					UIManager._instance.tutorialPanelBg.gameObject.SetActive (true);
-					UIManager._instance.tutorialPanelBg.OpenPopupAustralia ("WAIT FOR THE TIKKI \n TO BAKE",false,false , 2);
+					_uiManager.tutorialPanelBg.gameObject.SetActive (true);
+					_uiManager.tutorialPanelBg.OpenPopupAustralia ("WAIT FOR THE TIKKI \n TO BAKE",false,false , 2);
 					firstTikki.tutorialOn = true;
 				}
 				clickFirstTikki = false;
@@ -254,8 +250,8 @@ namespace _Project.Scripts.Managers
 				if(clickfirstBun)
 				{
 					clickFirstTikki = true;
-					UIManager._instance.tutorialPanelBg.gameObject.SetActive (true);
-					UIManager._instance.tutorialPanelBg.OpenPopup ("TAP TIKKI \n TO PUT ON THE GRILLS",false,false , 1);
+					_uiManager.tutorialPanelBg.gameObject.SetActive (true);
+					_uiManager.tutorialPanelBg.OpenPopup ("TAP TIKKI \n TO PUT ON THE GRILLS",false,false , 1);
 				}
 				clickfirstBun = false;
 			}
@@ -337,8 +333,8 @@ namespace _Project.Scripts.Managers
 
 				if(clickFirstFryer)
 				{
-					UIManager._instance.tutorialPanelBg.gameObject.SetActive (true);
-					UIManager._instance.tutorialPanelBg.OpenPopupAustralia ("TAP OR DRAG FRIES TO \n THE CUSTOMER.",false,false , 9);
+					_uiManager.tutorialPanelBg.gameObject.SetActive (true);
+					_uiManager.tutorialPanelBg.OpenPopupAustralia ("TAP OR DRAG FRIES TO \n THE CUSTOMER.",false,false , 9);
 					firstFries.tutorialOn = true;
 
 				}

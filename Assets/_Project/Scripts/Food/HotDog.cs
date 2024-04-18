@@ -6,11 +6,14 @@ using _Project.Scripts.Other;
 using _Project.Scripts.UI_Scripts;
 using _Project.Scripts.UI.Tutorial;
 using UnityEngine;
+using Zenject;
 
 namespace _Project.Scripts.Food
 {
-	public class HotDog : MonoBehaviour {
-
+	public class HotDog : MonoBehaviour 
+	{
+		[Inject] private US_Manager _usManager;
+		[Inject] private UIManager _uiManager;   
 		bool reachedCustomer;
 		bool scaleUp;
 		Vector3 colliderSize;
@@ -36,7 +39,7 @@ namespace _Project.Scripts.Food
 
 		private void Start()
 		{
-			UIManager._instance.n_Hotdogs_served = PlayerPrefs.GetInt ("hotdogServed");
+			_uiManager.n_Hotdogs_served = PlayerPrefs.GetInt ("hotdogServed");
 			myLocalScale = transform.localScale;
 			myOriginalPos = transform.position;
 			colliderSize = transform.GetComponent<BoxCollider> ().size;
@@ -52,7 +55,7 @@ namespace _Project.Scripts.Food
 			tikki  = false;
 			reachedCustomer = false;
 			transform.GetComponent<Availability>().available = true;
-			US_Manager._instance.hotDogSaucesOnPlates[transform.GetComponent<Availability>().myPositionInArray].gameObject.SetActive (false);
+			_usManager.hotDogSaucesOnPlates[transform.GetComponent<Availability>().myPositionInArray].gameObject.SetActive (false);
 			myType = LevelManager.Orders.NONE; 
 			transform.localScale = myLocalScale;
 			startAnimating = false;
@@ -65,25 +68,25 @@ namespace _Project.Scripts.Food
 		{
 			if(!TutorialPanel.popupPanelActive || US_Manager.tutorialEnd || Australia_Manager.tutorialEnd || tutorialOn)
 			{
-				US_Manager._instance.clickedHotDogDestinationFunction = this;
+				_usManager.clickedHotDogDestinationFunction = this;
 				canMove = true;
 				Vector3 myPos = Camera.main.WorldToScreenPoint (transform.position);
 				myTouchPos =  Camera.main.ScreenToWorldPoint (new Vector3(Input.mousePosition.x, Input.mousePosition.y , myPos.z));
-				if(US_Manager._instance.clickedTikki && myType == LevelManager.Orders.NONE)
+				if(_usManager.clickedTikki && myType == LevelManager.Orders.NONE)
 				{
-					if(!US_Manager._instance.clickedTikkiDestinationFunction.isBurnt)
+					if(!_usManager.clickedTikkiDestinationFunction.isBurnt)
 					{
-						US_Manager._instance.clickedTikkiDestinationFunction.availableHotDog = this.GetComponent<Availability>();
-						US_Manager._instance.TikkiReached ();
+						_usManager.clickedTikkiDestinationFunction.availableHotDog = this.GetComponent<Availability>();
+						_usManager.TikkiReached ();
 
 					}
-					US_Manager._instance.AllClickedBoolsReset ();
+					_usManager.AllClickedBoolsReset ();
 				}
-				else if((US_Manager._instance.clickedYellowSauce || US_Manager._instance.clickedRedSauce) && (myType == LevelManager.Orders.NONE || myType == LevelManager.Orders.HOTDOG))
+				else if((_usManager.clickedYellowSauce || _usManager.clickedRedSauce) && (myType == LevelManager.Orders.NONE || myType == LevelManager.Orders.HOTDOG))
 				{
-					US_Manager._instance.clickedItemDestinationFunction.availableHotDog = this;
-					US_Manager._instance.ObjectReached ();
-					US_Manager._instance.AllClickedBoolsReset ();
+					_usManager.clickedItemDestinationFunction.availableHotDog = this;
+					_usManager.ObjectReached ();
+					_usManager.AllClickedBoolsReset ();
 				}
 				else 
 				{
@@ -91,10 +94,10 @@ namespace _Project.Scripts.Food
 					{
 						if(tutorialOn)
 						{
-							US_Manager._instance.firstCustomer.tutorialOn = true;
+							_usManager.firstCustomer.tutorialOn = true;
 						}
-						US_Manager._instance.AllClickedBoolsReset ();
-						US_Manager._instance.clickedHotDog = true;
+						_usManager.AllClickedBoolsReset ();
+						_usManager.clickedHotDog = true;
 
 						startAnimating = false;
 						scaleUp = true;
@@ -103,7 +106,7 @@ namespace _Project.Scripts.Food
 					}
 					else
 					{
-						US_Manager._instance.clickedHotDogDestinationFunction = null;
+						_usManager.clickedHotDogDestinationFunction = null;
 						canMove = false;
 						errorObject.SetActive(true);
 					}
@@ -147,26 +150,26 @@ namespace _Project.Scripts.Food
 		}
 		public void Stopa()
 		{
-			UIManager._instance.achievment_text.SetActive (false);
+			_uiManager.achievment_text.SetActive (false);
 		}
 
 		public void ClickedDestination()
 		{
-			US_Manager._instance.platesFilledCount--;
+			_usManager.platesFilledCount--;
 			myPlate.available = true;
 			if(!otherObject.name.Contains ("dustbin"))
 			{
 		
-				UIManager._instance.n_Hotdogs_served++;
-				US_Manager._instance.clickedHotDog = false;
+				_uiManager.n_Hotdogs_served++;
+				_usManager.clickedHotDog = false;
 				LevelSoundManager._instance.customerEat.Play();
 
-				PlayerPrefs.SetInt ("hotdogServed",UIManager._instance.n_Hotdogs_served);
+				PlayerPrefs.SetInt ("hotdogServed", _uiManager.n_Hotdogs_served);
 				if(PlayerPrefs.GetInt("hotdogServed") > 9 && PlayerPrefs.GetInt ("hotdogLevel1")==0)
 				{
 
 					PlayerPrefs.SetInt ("hotdogLevel1",1);
-					UIManager._instance.achievment_text.SetActive(true);
+					_uiManager.achievment_text.SetActive(true);
 					AchievementChild.check_claim++;
 					PlayerPrefs.SetInt("claimvalue",AchievementChild.check_claim);
 					Invoke(nameof(Stopa),4.0f);
@@ -174,7 +177,7 @@ namespace _Project.Scripts.Food
 				if(PlayerPrefs.GetInt("hotdogServed") > 99 && PlayerPrefs.GetInt ("hotdogLevel2")==0)
 				{
 					PlayerPrefs.SetInt ("hotdogLevel2",1);
-					UIManager._instance.achievment_text.SetActive(true);
+					_uiManager.achievment_text.SetActive(true);
 					AchievementChild.check_claim++;
 					PlayerPrefs.SetInt("claimvalue",AchievementChild.check_claim);
 					Invoke(nameof(Stopa),4.0f);
@@ -182,7 +185,7 @@ namespace _Project.Scripts.Food
 				if(PlayerPrefs.GetInt("hotdogServed") > 999 && PlayerPrefs.GetInt ("hotdogLevel3")==0)
 				{
 					PlayerPrefs.SetInt ("hotdogLevel3",1);
-					UIManager._instance.achievment_text.SetActive(true);
+					_uiManager.achievment_text.SetActive(true);
 					AchievementChild.check_claim++;
 					PlayerPrefs.SetInt("claimvalue",AchievementChild.check_claim);
 					Invoke(nameof(Stopa),4.0f);
@@ -190,9 +193,9 @@ namespace _Project.Scripts.Food
 				if(tutorialOn)
 				{
 					tutorialOn = false;
-					US_Manager._instance.firstCoins.tutorialOn = true;
-					UIManager._instance.tutorialPanelBg.gameObject.SetActive (true);
-					UIManager._instance.tutorialPanelBg.OpenPopup ("COLLECT THE COINS.",false,false , 4);
+					_usManager.firstCoins.tutorialOn = true;
+					_uiManager.tutorialPanelBg.gameObject.SetActive (true);
+					_uiManager.tutorialPanelBg.OpenPopup ("COLLECT THE COINS.",false,false , 4);
 				}
 				
 				string myTypeToEatSub = "HOTDOG";
@@ -227,12 +230,12 @@ namespace _Project.Scripts.Food
 
 					if(!wrongOrderGiven)
 					{
-						customer.coinsSpent+=US_Manager._instance.perfectHotDog;
+						customer.coinsSpent+=_usManager.perfectHotDog;
 						customer.perfect = true;
 					}
 					else
 					{
-						customer.coinsSpent+=(US_Manager._instance.perfectHotDog/2);
+						customer.coinsSpent+=(_usManager.perfectHotDog/2);
 					}
 				}
 				else
@@ -242,11 +245,11 @@ namespace _Project.Scripts.Food
 				
 					if(!wrongOrderGiven)
 					{
-						customer.coinsSpent+=US_Manager._instance.lessBakedHotdog;
+						customer.coinsSpent+=_usManager.lessBakedHotdog;
 					}
 					else
 					{
-						customer.coinsSpent+=(US_Manager._instance.lessBakedHotdog/2);
+						customer.coinsSpent+=(_usManager.lessBakedHotdog/2);
 					}
 				}
 			
@@ -266,17 +269,17 @@ namespace _Project.Scripts.Food
 			else
 			{
 				LevelSoundManager._instance.dustbin.Play();
-				US_Manager._instance.clickedHotDog = false;
+				_usManager.clickedHotDog = false;
 				if(perfect)
-					UIManager._instance.totalCoins-=US_Manager._instance.perfectHotDog;
+					_uiManager.totalCoins-=_usManager.perfectHotDog;
 				else
-					UIManager._instance.totalCoins-=US_Manager._instance.lessBakedHotdog;
+					_uiManager.totalCoins-=_usManager.lessBakedHotdog;
 			
-				UIManager._instance.coinsText.text = UIManager._instance.totalCoins.ToString ();
-				if(UIManager._instance.totalCoins < 0)
+				_uiManager.coinsText.text = _uiManager.totalCoins.ToString ();
+				if(_uiManager.totalCoins < 0)
 				{
-					UIManager._instance.totalCoins = 0;
-					UIManager._instance.coinsText.text = "0";
+					_uiManager.totalCoins = 0;
+					_uiManager.coinsText.text = "0";
 				}
 			}
 			transform.position = myOriginalPos;

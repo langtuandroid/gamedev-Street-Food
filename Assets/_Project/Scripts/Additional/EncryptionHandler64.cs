@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace _Project.Scripts.Additional
 {
-	public class EncryptionHandler64 : MonoBehaviour 
+	public static class EncryptionHandler64
 	{
 		public static string[] alphabets = new string[26]; 
 		public static string []encryptedStringCorrespondingToInt = {"b","f","h","k","l","r","m","t","x","y"}; 

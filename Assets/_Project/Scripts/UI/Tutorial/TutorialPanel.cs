@@ -3,11 +3,13 @@ using _Project.Scripts.Managers;
 using _Project.Scripts.UI_Scripts;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace _Project.Scripts.UI.Tutorial
 {
 	public class TutorialPanel : MonoBehaviour 
 	{
+		[Inject] private UIManager _uiManager;   
 		public Text popupMessage;
 		public TextMesh popupMessageText , meshBg;
 		public Image childObject;
@@ -87,8 +89,8 @@ namespace _Project.Scripts.UI.Tutorial
 		{
 			string variableOfPopup = "";
 			int popNoOfPopup = 0;
-			UIManager._instance.tutorialPanelBg.gameObject.SetActive (true);
-			UIManager._instance.tutorialPanelCanvas.gameObject.SetActive (false);
+			_uiManager.tutorialPanelBg.gameObject.SetActive (true);
+			_uiManager.tutorialPanelCanvas.gameObject.SetActive (false);
 			if (PlayerPrefs.GetInt ("BellsTut") == 1)
 			{
 				PlayerPrefs.SetInt ("BellsTut",2);
@@ -116,19 +118,19 @@ namespace _Project.Scripts.UI.Tutorial
 
 			if (Application.loadedLevel == 1) 
 			{
-				UIManager._instance.tutorialPanelBg.OpenPopup (variableOfPopup, false, false, popNoOfPopup, 1);
+				_uiManager.tutorialPanelBg.OpenPopup (variableOfPopup, false, false, popNoOfPopup, 1);
 			}
 			else if (Application.loadedLevel == 2) 
 			{
-				UIManager._instance.tutorialPanelBg.OpenPopupChina (variableOfPopup, false, false, popNoOfPopup, 1);
+				_uiManager.tutorialPanelBg.OpenPopupChina (variableOfPopup, false, false, popNoOfPopup, 1);
 			}
 			else if (Application.loadedLevel == 3) 
 			{
-				UIManager._instance.tutorialPanelBg.OpenPopupItaly (variableOfPopup, false, false, popNoOfPopup, 1);
+				_uiManager.tutorialPanelBg.OpenPopupItaly (variableOfPopup, false, false, popNoOfPopup, 1);
 			} 
 			else if (Application.loadedLevel == 4) 
 			{
-				UIManager._instance.tutorialPanelBg.OpenPopupAustralia (variableOfPopup, false, false, popNoOfPopup, 1);
+				_uiManager.tutorialPanelBg.OpenPopupAustralia (variableOfPopup, false, false, popNoOfPopup, 1);
 			}
 			noOfExtraPopup--;
 		}
@@ -148,25 +150,25 @@ namespace _Project.Scripts.UI.Tutorial
 
 						if(tutNo == 1)
 						{
-							UIManager._instance.tutorialPanelCanvas.gameObject.SetActive (true);
-							UIManager._instance.tutorialPanelCanvas.OpenPopup ("GOLD CAN BE PURCHASED OR BY 5 PERFECT SERVES!",true,false , 6 , 1);
+							_uiManager.tutorialPanelCanvas.gameObject.SetActive (true);
+							_uiManager.tutorialPanelCanvas.OpenPopup ("GOLD CAN BE PURCHASED OR BY 5 PERFECT SERVES!",true,false , 6 , 1);
 						}
 						else if(tutNo == 2)
 						{
-							UIManager._instance.tutorialPanelCanvas.gameObject.SetActive (false);
-							UIManager._instance.tutorialPanelBg.gameObject.SetActive (true);
-							UIManager._instance.tutorialPanelBg.OpenPopup ("PUT BURNT SAUSAGE \nIN THE DUSTBIN!",false,false , 9 , 1);
+							_uiManager.tutorialPanelCanvas.gameObject.SetActive (false);
+							_uiManager.tutorialPanelBg.gameObject.SetActive (true);
+							_uiManager.tutorialPanelBg.OpenPopup ("PUT BURNT SAUSAGE \nIN THE DUSTBIN!",false,false , 9 , 1);
 						}
 						else if(tutNo > 2)
 						{
-							if(UIManager._instance.tutorialPanelBg.noOfExtraPopup > 0)
+							if(_uiManager.tutorialPanelBg.noOfExtraPopup > 0)
 							{
-								UIManager._instance.tutorialPanelBg.SpecialTutorials ();
+								_uiManager.tutorialPanelBg.SpecialTutorials ();
 							}
 							else
 							{
-								UIManager._instance.tutorialPanelCanvas.gameObject.SetActive (false);
-								UIManager._instance.tutorialPanelBg.gameObject.SetActive (false);
+								_uiManager.tutorialPanelCanvas.gameObject.SetActive (false);
+								_uiManager.tutorialPanelBg.gameObject.SetActive (false);
 								CustomerHandler._instance.InitializeCustomer ();
 								US_Manager.tutorialEnd = true;
 							}
@@ -174,16 +176,15 @@ namespace _Project.Scripts.UI.Tutorial
 					}
 					else if(LevelManager.levelNo < 4)
 					{
-						if(UIManager._instance.tutorialPanelBg.noOfExtraPopup > 0)
+						if(_uiManager.tutorialPanelBg.noOfExtraPopup > 0)
 						{
-
-							UIManager._instance.tutorialPanelBg.SpecialTutorials ();
+							_uiManager.tutorialPanelBg.SpecialTutorials ();
 						}
 						else
 						{
 							CustomerHandler._instance.InitializeCustomer ();
-							UIManager._instance.tutorialPanelCanvas.gameObject.SetActive (false);
-							UIManager._instance.tutorialPanelBg.gameObject.SetActive (false);
+							_uiManager.tutorialPanelCanvas.gameObject.SetActive (false);
+							_uiManager.tutorialPanelBg.gameObject.SetActive (false);
 							US_Manager.tutorialEnd = true;
 						}
 					}
@@ -191,91 +192,91 @@ namespace _Project.Scripts.UI.Tutorial
 					{
 						if(tutNo == 0)
 						{
-							UIManager._instance.tutorialPanelBg.gameObject.SetActive (false);
-							UIManager._instance.tutorialPanelCanvas.gameObject.SetActive (true);
-							UIManager._instance.tutorialPanelCanvas.OpenPopupChina ("ONE PAN CAN FILL TWO NOODLE PLATES!",true,false , 16 , 1);
+							_uiManager.tutorialPanelBg.gameObject.SetActive (false);
+							_uiManager.tutorialPanelCanvas.gameObject.SetActive (true);
+							_uiManager.tutorialPanelCanvas.OpenPopupChina ("ONE PAN CAN FILL TWO NOODLE PLATES!",true,false , 16 , 1);
 						}
 						else if(tutNo >= 1)
 						{
-							if(UIManager._instance.tutorialPanelBg.noOfExtraPopup > 0)
+							if(_uiManager.tutorialPanelBg.noOfExtraPopup > 0)
 							{
-								UIManager._instance.tutorialPanelBg.SpecialTutorials ();
+								_uiManager.tutorialPanelBg.SpecialTutorials ();
 							}
 							else
 							{
 								CustomerHandler._instance.InitializeCustomer ();
-								UIManager._instance.tutorialPanelCanvas.gameObject.SetActive (false);
-								UIManager._instance.tutorialPanelBg.gameObject.SetActive (false);
+								_uiManager.tutorialPanelCanvas.gameObject.SetActive (false);
+								_uiManager.tutorialPanelBg.gameObject.SetActive (false);
 								China_Manager.tutorialEnd = true;
 							}
 						}
 					}
 					else if(LevelManager.levelNo == 13)
 					{
-						if(UIManager._instance.tutorialPanelBg.noOfExtraPopup > 0)
+						if(_uiManager.tutorialPanelBg.noOfExtraPopup > 0)
 						{
-							UIManager._instance.tutorialPanelBg.SpecialTutorials ();
+							_uiManager.tutorialPanelBg.SpecialTutorials ();
 						}
 						else
 						{
 							China_Manager.tutorialEnd = true;
 							CustomerHandler._instance.InitializeCustomer ();
-							UIManager._instance.tutorialPanelCanvas.gameObject.SetActive (false);
-							UIManager._instance.tutorialPanelBg.gameObject.SetActive (false);
+							_uiManager.tutorialPanelCanvas.gameObject.SetActive (false);
+							_uiManager.tutorialPanelBg.gameObject.SetActive (false);
 						}
 					}
 					else if(LevelManager.levelNo == 21)
 					{
-						if(UIManager._instance.tutorialPanelBg.noOfExtraPopup > 0)
+						if(_uiManager.tutorialPanelBg.noOfExtraPopup > 0)
 						{
-							UIManager._instance.tutorialPanelBg.SpecialTutorials ();
+							_uiManager.tutorialPanelBg.SpecialTutorials ();
 						}
 						else
 						{
 							CustomerHandler._instance.InitializeCustomer ();
-							UIManager._instance.tutorialPanelCanvas.gameObject.SetActive (false);
-							UIManager._instance.tutorialPanelBg.gameObject.SetActive (false);
+							_uiManager.tutorialPanelCanvas.gameObject.SetActive (false);
+							_uiManager.tutorialPanelBg.gameObject.SetActive (false);
 							Italy_Manager.tutorialEnd = true;
 						}
 					}
 					else if(LevelManager.levelNo == 22 || LevelManager.levelNo == 23)
 					{
-						if(UIManager._instance.tutorialPanelBg.noOfExtraPopup > 0)
+						if(_uiManager.tutorialPanelBg.noOfExtraPopup > 0)
 						{
-							UIManager._instance.tutorialPanelBg.SpecialTutorials ();
+							_uiManager.tutorialPanelBg.SpecialTutorials ();
 						}
 						else
 						{
 							Italy_Manager.tutorialEnd = true;
 							CustomerHandler._instance.InitializeCustomer ();
-							UIManager._instance.tutorialPanelCanvas.gameObject.SetActive (false);
-							UIManager._instance.tutorialPanelBg.gameObject.SetActive (false);
+							_uiManager.tutorialPanelCanvas.gameObject.SetActive (false);
+							_uiManager.tutorialPanelBg.gameObject.SetActive (false);
 						}
 					}
 					else if(LevelManager.levelNo == 31 || LevelManager.levelNo == 33 || LevelManager.levelNo == 34)
 					{
-						if(UIManager._instance.tutorialPanelBg.noOfExtraPopup > 0)
+						if(_uiManager.tutorialPanelBg.noOfExtraPopup > 0)
 						{
-							UIManager._instance.tutorialPanelBg.SpecialTutorials ();
+							_uiManager.tutorialPanelBg.SpecialTutorials ();
 						}
 						else
 						{
 							CustomerHandler._instance.InitializeCustomer ();
-							UIManager._instance.tutorialPanelCanvas.gameObject.SetActive (false);
-							UIManager._instance.tutorialPanelBg.gameObject.SetActive (false);
+							_uiManager.tutorialPanelCanvas.gameObject.SetActive (false);
+							_uiManager.tutorialPanelBg.gameObject.SetActive (false);
 							Australia_Manager.tutorialEnd = true;
 						}
 					}
 					else
 					{
-						if(UIManager._instance.tutorialPanelBg.noOfExtraPopup > 0)
+						if(_uiManager.tutorialPanelBg.noOfExtraPopup > 0)
 						{
-							UIManager._instance.tutorialPanelBg.SpecialTutorials ();
+							_uiManager.tutorialPanelBg.SpecialTutorials ();
 						}
 						else
 						{
-							UIManager._instance.tutorialPanelCanvas.gameObject.SetActive (false);
-							UIManager._instance.tutorialPanelBg.gameObject.SetActive (false);
+							_uiManager.tutorialPanelCanvas.gameObject.SetActive (false);
+							_uiManager.tutorialPanelBg.gameObject.SetActive (false);
 							CustomerHandler._instance.InitializeCustomer ();
 							if(LevelManager.levelNo <= 10)
 								US_Manager.tutorialEnd = true;

@@ -9,7 +9,8 @@ using UnityEngine.UI;
 
 namespace _Project.Scripts.UI_Scripts
 {
-	public class UIManager : MonoBehaviour {
+	public class UIManager : MonoBehaviour 
+	{
 		public int totalCoins;
 		public GameObject uiPanel;
 		public GameObject fadePanel;
@@ -23,7 +24,6 @@ namespace _Project.Scripts.UI_Scripts
 		public Image expertStar;
 		public Text totalScore;
 		public GameObject loader ;
-		public static UIManager _instance;
 		public Sprite starSprite;
 		public Sprite unfillSprite;
 		public Image gameStartImage;
@@ -122,7 +122,6 @@ namespace _Project.Scripts.UI_Scripts
 				PlayerPrefs.SetInt ("Aus/top-shed-1",3);
 
 			}
-			_instance = this;
 			PlayerPrefs.SetString("Golds",EncryptionHandler64.Encrypt ("10000")); //TODO Comnet 2 lines
 			PlayerPrefs.SetString ("TotalScore",EncryptionHandler64.Encrypt ("10000")); //TODO
 			goldText.text = EncryptionHandler64.Decrypt (PlayerPrefs.GetString("Golds")).ToString ();
@@ -246,7 +245,7 @@ namespace _Project.Scripts.UI_Scripts
 
 		private void BringRadiopopup()
 		{
-			_instance.Radio();
+			Radio();
 		}
 
 		private IEnumerator EarningsSlider()

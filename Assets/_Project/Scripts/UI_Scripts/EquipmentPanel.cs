@@ -2,11 +2,14 @@
 using _Project.Scripts.UI.Tutorial;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace _Project.Scripts.UI_Scripts
 {
-	public class EquipmentPanel : MonoBehaviour {
-
+	public class EquipmentPanel : MonoBehaviour 
+	{
+		[Inject] private MenuManager _menuManager;  
+		[Inject] private UIManager _uiManager;   
 		public static EquipmentPanel _instance ;
 		public Image upgradeImage;
 		public GameObject coinsObject;
@@ -73,10 +76,10 @@ namespace _Project.Scripts.UI_Scripts
 			upgradePanel.transform.SetParent(transform.parent,false);
 			upgradePanel.transform.localScale = Vector3.one;
 			upgradePanel.transform.localPosition = Vector3.zero;
-			if(MenuManager._instance != null)
-				MenuManager._instance.EnableFadePanel ();
+			if(_menuManager != null)
+				_menuManager.EnableFadePanel ();
 			else
-				UIManager._instance.EnableFadePanel ();
+				_uiManager.EnableFadePanel ();
 			Destroy (gameObject);
 		}
 

@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace _Project.Scripts.UI_Scripts
 {
 	public class PopupPanel : MonoBehaviour 
 	{
+		[Inject] private MenuManager _menuManager;  
 		public Text popupText;
 		public Button popupYes;
 		public Button popupNo;
@@ -14,7 +16,7 @@ namespace _Project.Scripts.UI_Scripts
 	
 		public void Cross()
 		{
-			MenuManager._instance.EnableFadePanel ();
+			_menuManager.EnableFadePanel ();
 			gameObject.SetActive (false);
 		}
 

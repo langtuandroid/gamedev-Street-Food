@@ -1,10 +1,13 @@
 ﻿using _Project.Scripts.UI_Scripts;
 using UnityEngine;
+using Zenject;
 
 namespace _Project.Scripts.Other
 {
 	public class Forshowinfo : MonoBehaviour 
 	{
+		[Inject] private MenuManager _menuManager;  
+		[Inject] private UIManager _uiManager;   
 		public string []itemUsage;
 		private GameObject GeneratePopupPanel()
 		{
@@ -17,38 +20,38 @@ namespace _Project.Scripts.Other
 
 		private void MenuPopup(string messagePopup)
 		{
-			if(MenuManager._instance.popupPanel != null)
+			if(_menuManager.popupPanel != null)
 			{
-				MenuManager._instance.popupPanel.gameObject.SetActive (true);
-				MenuManager._instance.popupPanel.EnablePopup (messagePopup,false);
+				_menuManager.popupPanel.gameObject.SetActive (true);
+				_menuManager.popupPanel.EnablePopup (messagePopup,false);
 			}
 			else
 			{
 				GameObject popupPanel = GeneratePopupPanel();
-				MenuManager._instance.popupPanel = popupPanel.GetComponent<PopupPanel>();
-				MenuManager._instance.popupPanel.EnablePopup (messagePopup,false);
+				_menuManager.popupPanel = popupPanel.GetComponent<PopupPanel>();
+				_menuManager.popupPanel.EnablePopup (messagePopup,false);
 			}
 		}
 
 		private void GamePopup(string messagePopup)
 		{
-			if(UIManager._instance.popupPanel != null)
+			if(_uiManager.popupPanel != null)
 			{
-				UIManager._instance.popupPanel.gameObject.SetActive (true);
-				UIManager._instance.popupPanel.EnablePopup (messagePopup,false);
+				_uiManager.popupPanel.gameObject.SetActive (true);
+				_uiManager.popupPanel.EnablePopup (messagePopup,false);
 			}
 			else
 			{
 				GameObject popupPanel = GeneratePopupPanel();
-				UIManager._instance.popupPanel = popupPanel.GetComponent<PopupPanel>();
-				UIManager._instance.popupPanel.EnablePopup (messagePopup,false);
+				_uiManager.popupPanel = popupPanel.GetComponent<PopupPanel>();
+				_uiManager.popupPanel.EnablePopup (messagePopup,false);
 			}
 		}
 
 		public void ClickedHelp(int itemNo)
 		{
 
-			if(MenuManager._instance != null)
+			if(_menuManager != null)
 			{
 				MenuPopup(itemUsage[itemNo]);
 			}
