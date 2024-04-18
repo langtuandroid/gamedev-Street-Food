@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class claimEffect : MonoBehaviour {
+namespace _Project.Scripts.Effects
+{
+	public class claimEffect : MonoBehaviour {
 
-	public static int claim;
+		public static int claim;
+	}
 }

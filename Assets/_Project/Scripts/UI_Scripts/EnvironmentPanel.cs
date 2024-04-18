@@ -1,4 +1,5 @@
-﻿using _Project.Scripts.UI.Tutorial;
+﻿using _Project.Scripts.Additional;
+using _Project.Scripts.UI.Tutorial;
 using UnityEngine;
 using UnityEngine.UI;
 

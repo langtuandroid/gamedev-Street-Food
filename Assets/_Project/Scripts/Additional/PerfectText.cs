@@ -1,30 +1,34 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using UnityEngine;
 
-public class PerfectText : MonoBehaviour 
+namespace _Project.Scripts.Additional
 {
-	public bool hasTweenScale;
-	void OnEnable()
+	public class PerfectText : MonoBehaviour 
 	{
-		if(hasTweenScale)
-		{
-			transform.GetComponent<TweenScale>().enabled = true;
-			transform.GetComponent<TweenScale>().ResetToBeginning ();
-			transform.GetComponent<TweenScale>().PlayForward ();
+		public bool hasTweenScale;
 
-		}
-		else
+		private void OnEnable()
 		{
-			transform.GetComponent<TweenPosition>().enabled = true;
-			transform.GetComponent<TweenPosition>().ResetToBeginning ();
-			transform.GetComponent<TweenPosition>().PlayForward ();
-		}
-		StartCoroutine (PerfectOff());
-	}
+			if(hasTweenScale)
+			{
+				transform.GetComponent<TweenScale>().enabled = true;
+				transform.GetComponent<TweenScale>().ResetToBeginning ();
+				transform.GetComponent<TweenScale>().PlayForward ();
 
-	IEnumerator PerfectOff()
-	{
-		yield return new WaitForSeconds(2.0f);
-		gameObject.SetActive (false);
+			}
+			else
+			{
+				transform.GetComponent<TweenPosition>().enabled = true;
+				transform.GetComponent<TweenPosition>().ResetToBeginning ();
+				transform.GetComponent<TweenPosition>().PlayForward ();
+			}
+			StartCoroutine (PerfectOff());
+		}
+
+		private IEnumerator PerfectOff()
+		{
+			yield return new WaitForSeconds(2.0f);
+			gameObject.SetActive (false);
+		}
 	}
 }

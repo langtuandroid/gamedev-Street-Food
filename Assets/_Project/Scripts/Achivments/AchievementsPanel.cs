@@ -1,39 +1,29 @@
-﻿using UnityEngine;
-using System.Collections;
-using _Project.Scripts.UI_Scripts;
+﻿using _Project.Scripts.UI_Scripts;
+using UnityEngine;
 using UnityEngine.UI;
 
-public class AchievementsPanel : MonoBehaviour {
-
-
-	public Text totalCoinsText;
-	
-	public Text totalGoldText;
-
-	// Use this for initialization
-	void Start () {
-		totalGoldText.text = MenuManager.golds.ToString ();
-		totalCoinsText.text = MenuManager.totalscore.ToString ();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
-
-	public void Close()
+namespace _Project.Scripts.Achivments
+{
+	public class AchievementsPanel : MonoBehaviour 
 	{
-//		if (GoogleMobileAdsDemoScript.bannerWasLoaded) {
-//			GoogleMobileAdsDemoScript._instance.bannerView.Hide ();
-//		}
-		if(MenuManager._instance != null)
-			MenuManager._instance.EnableFadePanel ();
-		else
-		{
-			UIManager._instance.gameOverPanel.SetActive (true);
-			UIManager._instance.EnableFadePanel ();
+		public Text totalCoinsText;
+		public Text totalGoldText;
+
+		private void Start () {
+			totalGoldText.text = MenuManager.golds.ToString ();
+			totalCoinsText.text = MenuManager.totalscore.ToString ();
 		}
-		Destroy (gameObject);
+	
+		public void Close()
+		{
+			if(MenuManager._instance != null)
+				MenuManager._instance.EnableFadePanel ();
+			else
+			{
+				UIManager._instance.gameOverPanel.SetActive (true);
+				UIManager._instance.EnableFadePanel ();
+			}
+			Destroy (gameObject);
+		}
 	}
 }

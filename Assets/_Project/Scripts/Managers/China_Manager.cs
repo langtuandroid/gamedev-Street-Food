@@ -1,4 +1,6 @@
-﻿using _Project.Scripts.Game;
+﻿using _Project.Scripts.Additional;
+using _Project.Scripts.Entities.Customers;
+using _Project.Scripts.Game;
 using _Project.Scripts.Other;
 using _Project.Scripts.UI_Scripts;
 using _Project.Scripts.UI.Tutorial;

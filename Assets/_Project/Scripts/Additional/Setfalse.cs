@@ -1,14 +1,16 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class Setfalse : MonoBehaviour 
+namespace _Project.Scripts.Additional
 {
-	public void Close()
+	public class Setfalse : MonoBehaviour 
 	{
-		Destroy (gameObject);
-	}
-	public void close2()
-	{
-		gameObject.SetActive (false);
+		public void Close()
+		{
+			Destroy(gameObject);
+		}
+		public void close2()
+		{
+			gameObject.SetActive (false);
+		}
 	}
 }

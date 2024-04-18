@@ -1,4 +1,7 @@
 ﻿using System.Collections;
+using _Project.Scripts.Additional;
+using _Project.Scripts.Audio;
+using _Project.Scripts.Entities.Loader;
 using _Project.Scripts.Managers;
 using _Project.Scripts.UI.Tutorial;
 using UnityEngine;

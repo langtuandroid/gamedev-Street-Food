@@ -1,38 +1,28 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class ShineEffect : MonoBehaviour {
-
-
-
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		//gameObject.GetComponent<Animator> ().enabled = true;
-
-	
-	}
-	void OnEnable()
+namespace _Project.Scripts.Effects
+{
+	public class ShineEffect : MonoBehaviour 
 	{
-		//gameObject.SetActive (false);
-		Invoke ("ViewShine", 0.45f);
+		private void OnEnable()
+		{
+			Invoke (nameof(ViewShine), 0.45f);
 	
-	}
-	void ViewShine()
-	{
-		gameObject.SetActive (false);
-		gameObject.GetComponent<Animator> ().enabled = false;
-		Invoke ("HideShine", 4.0f);
-	}
-	void HideShine()
-	{
-		gameObject.SetActive (true);
-		gameObject.GetComponent<Animator> ().enabled = true;
-		Invoke ("ViewShine", 0.45f);
-	}
+		}
 
+		private void ViewShine()
+		{
+			gameObject.SetActive (false);
+			gameObject.GetComponent<Animator> ().enabled = false;
+			Invoke (nameof(HideShine), 4.0f);
+		}
+
+		private void HideShine()
+		{
+			gameObject.SetActive (true);
+			gameObject.GetComponent<Animator> ().enabled = true;
+			Invoke (nameof(ViewShine), 0.45f);
+		}
+
+	}
 }

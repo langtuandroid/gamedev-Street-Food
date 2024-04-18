@@ -1,4 +1,6 @@
-﻿using _Project.Scripts.Managers;
+﻿using _Project.Scripts.Additional;
+using _Project.Scripts.Entities;
+using _Project.Scripts.Managers;
 using _Project.Scripts.UI_Scripts;
 using UnityEngine;
 using UnityEngine.UI;

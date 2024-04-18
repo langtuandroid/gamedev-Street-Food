@@ -1,4 +1,5 @@
-﻿using _Project.Scripts.Managers;
+﻿using _Project.Scripts.Entities.Customers;
+using _Project.Scripts.Managers;
 using _Project.Scripts.UI_Scripts;
 using UnityEngine;
 using UnityEngine.UI;

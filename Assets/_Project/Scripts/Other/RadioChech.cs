@@ -1,4 +1,5 @@
-﻿using _Project.Scripts.UI_Scripts;
+﻿using _Project.Scripts.Additional;
+using _Project.Scripts.UI_Scripts;
 using UnityEngine;
 
 namespace _Project.Scripts.Other

@@ -1,4 +1,7 @@
 ﻿using System.Collections;
+using _Project.Scripts.Achivments;
+using _Project.Scripts.Additional;
+using _Project.Scripts.Entities.Customers;
 using _Project.Scripts.Food;
 using _Project.Scripts.Game;
 using _Project.Scripts.Managers;

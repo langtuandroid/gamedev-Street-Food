@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using _Project.Scripts.Entities.Customers;
+using UnityEngine;
 
 namespace _Project.Scripts.Other
 {

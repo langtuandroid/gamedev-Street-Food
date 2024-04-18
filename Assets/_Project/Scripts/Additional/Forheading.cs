@@ -1,14 +1,16 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class Forheading : MonoBehaviour {
+namespace _Project.Scripts.Additional
+{
+	public class Forheading : MonoBehaviour {
 	
-	void OnEnable()
-	{
-		Invoke ("deactive", 3.0f);
-	}
-	public void deactive()
-	{
-		gameObject.SetActive (false);
+		void OnEnable()
+		{
+			Invoke (nameof(deactive), 3.0f);
+		}
+		public void deactive()
+		{
+			gameObject.SetActive (false);
+		}
 	}
 }

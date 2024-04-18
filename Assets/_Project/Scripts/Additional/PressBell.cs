@@ -1,12 +1,14 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using _Project.Scripts.Entities.Customers;
+using UnityEngine;
 
-public class PressBell : MonoBehaviour 
+namespace _Project.Scripts.Additional
 {
-	
-	void OnMouseDown()
+	public class PressBell : MonoBehaviour 
 	{
-		CustomerHandler._instance.PressBell ();
-		gameObject.GetComponent<AudioSource> ().Play();
+		private void OnMouseDown()
+		{
+			CustomerHandler._instance.PressBell ();
+			gameObject.GetComponent<AudioSource> ().Play();
+		}
 	}
 }

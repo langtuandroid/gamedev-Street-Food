@@ -1,4 +1,6 @@
 using System.Collections;
+using _Project.Scripts.Achivments;
+using _Project.Scripts.Entities.Customers;
 using _Project.Scripts.Managers;
 using _Project.Scripts.Other;
 using _Project.Scripts.UI_Scripts;
