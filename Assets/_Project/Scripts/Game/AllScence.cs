@@ -1,15 +1,16 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class AllScence : MonoBehaviour {
-
-	public static AllScence _instance ;
-	public GameObject loader ;
-
-	void Awake()
+namespace _Project.Scripts.Game
+{
+	public class AllScence : MonoBehaviour 
 	{
-		_instance = this;
-		DontDestroyOnLoad (loader);
-	}
+		public static AllScence _instance ;
+		public GameObject loader ;
+		private void Awake()
+		{
+			_instance = this;
+			DontDestroyOnLoad (loader);
+		}
 	
+	}
 }

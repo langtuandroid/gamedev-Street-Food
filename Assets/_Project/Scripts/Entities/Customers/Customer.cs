@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using _Project.Scripts.Food;
+using _Project.Scripts.Managers;
+using _Project.Scripts.UI_Scripts;
+using _Project.Scripts.UI.Tutorial;
 
 public class Customer : MonoBehaviour {
 
@@ -237,7 +241,6 @@ public class Customer : MonoBehaviour {
 						{
 							if(iHaveAMultipleTypeOrder != LevelManager.Orders.NONE)
 							{
-								Italy_Manager._instance.clickedPizzaDestinationFunction.myTypeToEat = iHaveAMultipleTypeOrder;
 								Italy_Manager._instance.clickedPizzaDestinationFunction.wrongOrderGiven = true;
 								Italy_Manager._instance.PizzaReached();
 							}

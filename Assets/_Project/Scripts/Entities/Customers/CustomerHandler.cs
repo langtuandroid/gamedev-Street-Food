@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using _Project.Scripts.Managers;
+using _Project.Scripts.Other;
+using _Project.Scripts.UI_Scripts;
+using _Project.Scripts.UI.Tutorial;
 using UnityEngine.UI;
 
 public class CustomerHandler : MonoBehaviour {
@@ -215,8 +219,6 @@ public class CustomerHandler : MonoBehaviour {
 			}
 		}
 		int customerNo = Random.Range (0, customerPool.Count);
-		UIManager._instance.random_Bonus++;
-//			int customerNo = 1;
 		int availablePosForCustomer = Random.Range (0, availablePositions.Count);
 		if ((LevelManager.levelNo == 1 || LevelManager.levelNo == 11 || LevelManager.levelNo == 13 ||LevelManager.levelNo == 21 || LevelManager.levelNo == 31 || LevelManager.levelNo == 32) && noOfCustomers == 0) {
 			availablePosForCustomer = 1;
@@ -236,7 +238,6 @@ public class CustomerHandler : MonoBehaviour {
 			else if(LevelManager.levelNo == 21 || LevelManager.levelNo == 22)
 			{
 				Italy_Manager._instance.firstCustomer = customerPool [customerNo];
-//				Italy_Manager._instance.firstCustomer.tutorialOn = true;
 			}
 			
 		}

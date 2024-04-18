@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using _Project.Scripts.UI_Scripts;
 
 public class ForExit : MonoBehaviour {
 

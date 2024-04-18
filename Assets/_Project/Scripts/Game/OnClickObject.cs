@@ -1,13 +1,15 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
-public class OnClickObject : MonoBehaviour 
+namespace _Project.Scripts.Game
 {
-	public List<EventDelegate> onClick = new List<EventDelegate>();
-	void OnMouseDown()
+	public class OnClickObject : MonoBehaviour 
 	{
-	
-		EventDelegate.Execute(onClick);
+		public List<EventDelegate> onClick = new();
+
+		private void OnMouseDown()
+		{
+			EventDelegate.Execute(onClick);
+		}
 	}
 }

@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class LevelAnimation : MonoBehaviour {
-
-
+public class LevelAnimation : MonoBehaviour 
+{
 	public GameObject level1 ;
 	public GameObject level2 ;
 	public GameObject level3 ;
@@ -14,24 +13,14 @@ public class LevelAnimation : MonoBehaviour {
 	public GameObject level8 ;
 	public GameObject level9 ;
 	public GameObject level10 ;
-	float timervalue = 0.1f ;
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
+	readonly float timervalue = 0.1f ;
 
-	
-	}
-	void OnEnable()
+	private void OnEnable()
 	{
-		StartCoroutine ("level_animation");
-	
+		StartCoroutine(nameof(level_animation));
 	}
 
-	IEnumerator level_animation()
+	private IEnumerator level_animation()
 	{
 	
 		level1.GetComponent<Animator>().enabled = true ;
@@ -63,10 +52,9 @@ public class LevelAnimation : MonoBehaviour {
 
 		level10.GetComponent<Animator>().enabled = true ;
 		yield return new WaitForSeconds(timervalue);
-
-
 	}
-	void OnDisable()
+
+	private void OnDisable()
 	{
 		level1.GetComponent<Animator>().enabled = false ;
 

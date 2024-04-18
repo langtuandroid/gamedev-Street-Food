@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using _Project.Scripts.Managers;
+using _Project.Scripts.Other;
+using _Project.Scripts.UI_Scripts;
 
 public class Thief : MonoBehaviour {
 

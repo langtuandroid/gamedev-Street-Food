@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using _Project.Scripts.UI_Scripts;
 using UnityEngine.UI ;
 
 public class Loader2 : MonoBehaviour {

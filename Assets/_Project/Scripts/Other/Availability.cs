@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class Availability : MonoBehaviour {
-	public bool available;
+namespace _Project.Scripts.Other
+{
+	public class Availability : MonoBehaviour {
+		public bool available;
 
-	public int myPositionInArray;
+		public int myPositionInArray;
+	}
 }

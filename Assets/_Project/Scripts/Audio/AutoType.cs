@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using _Project.Scripts.Managers;
+using _Project.Scripts.UI_Scripts;
+using _Project.Scripts.UI.Tutorial;
 using UnityEngine.UI;
 
 public class AutoType : MonoBehaviour {
