@@ -7,6 +7,7 @@ namespace _Project.Scripts.UI
 {
 	public class GoldPanel : MonoBehaviour 
 	{
+		[Inject] private DiContainer _diContainer;
 		[Inject] private MenuManager _menuManager;  
 		[Inject] private UIManager _uiManager;   
 		public Text totalCoinsText;
@@ -24,9 +25,9 @@ namespace _Project.Scripts.UI
 			if (_uiManager == null) {
 				GameObject upgradePanel = null;
 				if (_menuManager.lastPanelName == "") {
-					upgradePanel = (GameObject)Instantiate (Resources.Load ("UpgradePanel"));
+					upgradePanel = _diContainer.InstantiatePrefab(Resources.Load ("UpgradePanel"));
 				} else {
-					upgradePanel = (GameObject)Instantiate (Resources.Load (_menuManager.lastPanelName));
+					upgradePanel = _diContainer.InstantiatePrefab(Resources.Load (_menuManager.lastPanelName));
 				}
 				upgradePanel.transform.SetParent (transform.parent, false);
 				upgradePanel.transform.localScale = Vector3.one;
@@ -37,7 +38,7 @@ namespace _Project.Scripts.UI
 					_uiManager.EnableFadePanel ();
 				Destroy (gameObject);
 			} else {
-				GameObject upgradePanel = ( GameObject )Instantiate(Resources.Load ("UpgradePanel"));
+				GameObject upgradePanel = _diContainer.InstantiatePrefab(Resources.Load ("UpgradePanel"));
 				upgradePanel.transform.SetParent(transform.parent,false);
 				upgradePanel.transform.localScale = Vector3.one;
 				upgradePanel.transform.localPosition = Vector3.zero;

@@ -11,6 +11,7 @@ namespace _Project.Scripts.Managers
 {
 	public class China_Manager : MonoBehaviour 
 	{
+		[Inject] private LevelSoundManager _levelSoundManager;
 		[Inject] private UIManager _uiManager;   
 		public GameObject TheifPanel;
 		public int soupPrice;
@@ -175,7 +176,7 @@ namespace _Project.Scripts.Managers
 					{
 						if(noodlePlaces[i].available)
 						{
-							LevelSoundManager._instance.bowl_click.Play();
+							_levelSoundManager.bowl_click.Play();
 							noodlePlates[i].gameObject.SetActive (true);
 							noodlePlates[i].color = new Color(1,1,1,1);
 							platesFilledCount++;
@@ -219,7 +220,7 @@ namespace _Project.Scripts.Managers
 					{
 						if(bowlPlaces[i].available)
 						{
-							LevelSoundManager._instance.bowl_click.Play();
+							_levelSoundManager.bowl_click.Play();
 							bowlImages[i].gameObject.SetActive (true);
 							bowlImages[i].color = new Color(1,1,1,1);
 							bowlsFilled++;

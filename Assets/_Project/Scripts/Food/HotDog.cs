@@ -12,6 +12,7 @@ namespace _Project.Scripts.Food
 {
 	public class HotDog : MonoBehaviour 
 	{
+		[Inject] private LevelSoundManager _levelSoundManager;
 		[Inject] private US_Manager _usManager;
 		[Inject] private UIManager _uiManager;   
 		bool reachedCustomer;
@@ -162,7 +163,7 @@ namespace _Project.Scripts.Food
 		
 				_uiManager.n_Hotdogs_served++;
 				_usManager.clickedHotDog = false;
-				LevelSoundManager._instance.customerEat.Play();
+				_levelSoundManager.customerEat.Play();
 
 				PlayerPrefs.SetInt ("hotdogServed", _uiManager.n_Hotdogs_served);
 				if(PlayerPrefs.GetInt("hotdogServed") > 9 && PlayerPrefs.GetInt ("hotdogLevel1")==0)
@@ -268,7 +269,7 @@ namespace _Project.Scripts.Food
 			}
 			else
 			{
-				LevelSoundManager._instance.dustbin.Play();
+				_levelSoundManager.dustbin.Play();
 				_usManager.clickedHotDog = false;
 				if(perfect)
 					_uiManager.totalCoins-=_usManager.perfectHotDog;

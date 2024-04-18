@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
+using Zenject;
 
 namespace _Project.Scripts.UI
 {
 	public class Pause : MonoBehaviour 
 	{
+		[Inject] private DiContainer _diContainer;
 		public void MenuPanel()
 		{
-			GameObject upgradePanel = (GameObject)Instantiate (Resources.Load ("EnvPanel"));
+			GameObject upgradePanel = _diContainer.InstantiatePrefab(Resources.Load ("EnvPanel"));
 			upgradePanel.transform.SetParent (transform, false);
 			upgradePanel.transform.localScale = Vector3.one;
 			upgradePanel.transform.localPosition = Vector3.zero;
@@ -20,7 +22,7 @@ namespace _Project.Scripts.UI
 		public void Resume()
 		{
 			Time.timeScale = 1;
-			Invoke ("ForDestroy", 0.1f);
+			Invoke (nameof(ForDestroy), 0.1f);
 		}
 		public void ForDestroy()
 		{

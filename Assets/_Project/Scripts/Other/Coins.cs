@@ -9,6 +9,7 @@ namespace _Project.Scripts.Other
 {
 	public class Coins : MonoBehaviour 
 	{
+		[Inject] private LevelSoundManager _levelSoundManager;
 		[Inject] private US_Manager _usManager;
 		[Inject] private China_Manager _chinaManager;
 		[Inject] private UIManager _uiManager;   
@@ -101,7 +102,7 @@ namespace _Project.Scripts.Other
 
 		private void OnMouseDown()
 		{
-			LevelSoundManager._instance.coin_click.Play ();
+			_levelSoundManager.coin_click.Play ();
 			if(tutorialOn)
 			{
 				tutorialOn = false;

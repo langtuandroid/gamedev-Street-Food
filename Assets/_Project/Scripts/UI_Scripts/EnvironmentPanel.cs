@@ -8,6 +8,7 @@ namespace _Project.Scripts.UI_Scripts
 {
 	public class EnvironmentPanel : MonoBehaviour 
 	{
+		[Inject] private DiContainer _diContainer;
 		[Inject] private MenuManager _menuManager;  
 		[Inject] private UIManager _uiManager;   
 		int noOfLevelsOpen;
@@ -19,7 +20,7 @@ namespace _Project.Scripts.UI_Scripts
 
 		public void OnUpgradePanel()
 		{
-			GameObject upgradePanel = ( GameObject )Instantiate(Resources.Load ("UpgradePanel"));
+			GameObject upgradePanel = _diContainer.InstantiatePrefab(Resources.Load ("UpgradePanel"));
 			upgradePanel.transform.SetParent(transform.parent,false);
 			upgradePanel.transform.localScale = Vector3.one;
 			upgradePanel.transform.localPosition = Vector3.zero;
@@ -62,7 +63,7 @@ namespace _Project.Scripts.UI_Scripts
 		
 			MenuManager.envNo = "Aus";
 			int noOfItalyLevelsOpen = (int)EncryptionHandler64.Decrypt (PlayerPrefs.GetString("ItalyLevels"));
-			if(noOfItalyLevelsOpen >= 10 || PlayerPrefs.HasKey ("AusOpen"))
+			if(noOfItalyLevelsOpen >= 0 || PlayerPrefs.HasKey ("AusOpen")) //TODO noOfItalyLevelsOpen >= 10
 			{
 				Aus_lock.SetActive (false);
 				Destroy (gameObject);
@@ -87,7 +88,7 @@ namespace _Project.Scripts.UI_Scripts
 
 		private GameObject GeneratePopupPanel()
 		{
-			GameObject popupPanel = ( GameObject )Instantiate(Resources.Load ("PopupPanel"));
+			GameObject popupPanel = _diContainer.InstantiatePrefab(Resources.Load ("PopupPanel"));
 			popupPanel.transform.SetParent(transform.parent,false);
 			popupPanel.transform.localScale = Vector3.one;
 			popupPanel.transform.localPosition = Vector3.zero;
@@ -100,7 +101,7 @@ namespace _Project.Scripts.UI_Scripts
 			MenuManager.envNo = "Italy";
 			int noOfChinaLevelsOpen = (int)EncryptionHandler64.Decrypt(PlayerPrefs.GetString("ChinaLevels"));
 
-			if (noOfChinaLevelsOpen >= 10 || PlayerPrefs.HasKey("ItalyOpen"))
+			if (noOfChinaLevelsOpen >= 0 || PlayerPrefs.HasKey("ItalyOpen")) //TODO noOfChinaLevelsOpen >= 10
 			{
 				Italy_lock.SetActive(false);
 				Destroy(gameObject);
@@ -139,7 +140,7 @@ namespace _Project.Scripts.UI_Scripts
 		{
 			MenuManager.envNo = "China";
 			int noOfUSLevelsOpen = (int)EncryptionHandler64.Decrypt (PlayerPrefs.GetString("USLevels"));
-			if(noOfUSLevelsOpen >= 10 || PlayerPrefs.HasKey ("ChinaOpen"))
+			if(noOfUSLevelsOpen >= 0 || PlayerPrefs.HasKey ("ChinaOpen")) //TODO noOfUSLevelsOpen >= 10
 			{
 				China_lock.SetActive (false);
 				Destroy (gameObject);

@@ -12,7 +12,7 @@ namespace _Project.Scripts.Managers
 	public class Italy_Manager : MonoBehaviour 
 	{
 		[Inject] private UIManager _uiManager;   
-		
+		[Inject] private LevelSoundManager _levelSoundManager;
 		public GameObject TheifPanel;
 		public int cokePrice;
 		public int lessBakedPizza;
@@ -252,7 +252,7 @@ namespace _Project.Scripts.Managers
 					{
 						if(cokePlaces[i].available)
 						{
-							LevelSoundManager._instance.bottle_click.Play();
+							_levelSoundManager.bottle_click.Play();
 							cokeBottles[i].gameObject.SetActive (true);
 							cokeBottles[i].color = new Color(1,1,1,1);
 							cokeBottles[i].sprite = cokeBottlesSprites[1];
@@ -290,7 +290,7 @@ namespace _Project.Scripts.Managers
 					{
 						if(fridePlaces[i])
 						{
-							LevelSoundManager._instance.bottle_click.Play();
+							_levelSoundManager.bottle_click.Play();
 							frideBottles[i].SetActive (true);
 							fridgeFilledCount++;
 							fridePlaces[i] = false;
@@ -305,7 +305,7 @@ namespace _Project.Scripts.Managers
 					{
 						if(cokePlaces[i].available)
 						{
-							LevelSoundManager._instance.bottle_click.Play();
+							_levelSoundManager.bottle_click.Play();
 							cokeBottles[i].gameObject.SetActive (true);
 							cokeBottles[i].color = new Color(1,1,1,1);
 							cokeBottles[i].sprite = cokeBottlesSprites[0];

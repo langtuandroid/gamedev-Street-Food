@@ -19,12 +19,12 @@ namespace _Project.Scripts.UI_Scripts
 	
 		void OnEnable()
 		{
-			myName = MenuManager.envNo+"Stars";
+			myName = MenuManager.envNo + "Stars";
 			int noOfLevelsCompleted = (int)EncryptionHandler64.Decrypt(PlayerPrefs.GetString(MenuManager.envNo+"Levels"));
 	
 			myTick.SetActive (false);
 
-			if(myLevel <= noOfLevelsCompleted)
+			if(myLevel <= 1000) //TODO noOfLevelsCompleted
 			{
 				myTick.SetActive (true);
 				myLock.SetActive (false);
@@ -40,7 +40,7 @@ namespace _Project.Scripts.UI_Scripts
 				myLock.SetActive (false);
 			}
 		
-			if (myLevel > (noOfLevelsCompleted + 1))
+			if (myLevel > 100000)//TODO  (noOfLevelsCompleted + 1)
 			{
 				transform.GetComponent<Button> ().enabled = false;
 			} 

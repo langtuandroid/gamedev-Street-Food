@@ -6,6 +6,7 @@ namespace _Project.Scripts.Other
 {
 	public class InsuffcintCoin : MonoBehaviour 
 	{
+		[Inject] private DiContainer _diContainer;
 		[Inject] private MenuManager _menuManager;  
 		[Inject] private UIManager _uiManager;   
 		private void OnEnable()
@@ -14,7 +15,7 @@ namespace _Project.Scripts.Other
 		}
 		public void Gold()
 		{
-			GameObject specialPanel = ( GameObject )Instantiate(Resources.Load ("GoldPanel"));
+			GameObject specialPanel = _diContainer.InstantiatePrefab(Resources.Load ("GoldPanel"));
 			specialPanel.transform.SetParent(transform.parent,false);
 			specialPanel.transform.localScale = Vector3.one;
 			specialPanel.transform.localPosition = Vector3.zero;

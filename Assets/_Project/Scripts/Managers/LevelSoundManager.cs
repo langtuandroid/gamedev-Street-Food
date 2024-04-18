@@ -3,8 +3,7 @@
 namespace _Project.Scripts.Managers
 {
 	public class LevelSoundManager : MonoBehaviour {
-
-		public static LevelSoundManager _instance ;
+		
 		public AudioSource bell;
 		public AudioSource whistle ;
 		public AudioSource bttn_click ;
@@ -23,9 +22,5 @@ namespace _Project.Scripts.Managers
 		public AudioSource Gameoverpanel;
 		public AudioSource coin_click ;
 		public AudioSource caught;
-		void Awake()
-		{
-			_instance = this;
-		}
 	}
 }

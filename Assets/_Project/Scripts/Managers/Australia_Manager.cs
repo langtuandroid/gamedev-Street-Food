@@ -11,6 +11,7 @@ namespace _Project.Scripts.Managers
 {
 	public class Australia_Manager : MonoBehaviour
 	{
+		[Inject] private LevelSoundManager _levelSoundManager;
 		[Inject] private UIManager _uiManager;
 		public GameObject TheifPanel;
 		public int cokePrice;
@@ -282,7 +283,7 @@ namespace _Project.Scripts.Managers
 					{
 						if(cokePlaces[i].available)
 						{
-							LevelSoundManager._instance.bottle_click.Play();
+							_levelSoundManager.bottle_click.Play();
 							cokeBottles[i].gameObject.SetActive (true);
 							cokeBottles[i].color = new Color(1,1,1,1);
 							cokesFilled++;

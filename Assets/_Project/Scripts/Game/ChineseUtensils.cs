@@ -10,7 +10,7 @@ namespace _Project.Scripts.Game
 {
 	public class ChineseUtensils : MonoBehaviour
 	{
-		
+		[Inject] private LevelSoundManager _levelSoundManager;
 		[Inject] private China_Manager _chinaManager;
 		[Inject] private UIManager _uiManager;   
 		private bool reachedDestination;
@@ -152,7 +152,7 @@ namespace _Project.Scripts.Game
 				}
 
 				tipCollider.enabled = true;
-//			myImage.enabled = true;
+
 				Vector3 myPos = Camera.main.WorldToScreenPoint(transform.position);
 				myTouchPos =
 					Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, myPos.z));
@@ -196,7 +196,7 @@ namespace _Project.Scripts.Game
 			}
 		}
 
-		void OnMouseDrag()
+		private void OnMouseDrag()
 		{
 			if( canMove)
 			{
@@ -211,10 +211,9 @@ namespace _Project.Scripts.Game
 			
 			}
 		}
-	
-	
 
-		void OnMouseUp()
+
+		private void OnMouseUp()
 		{
 			Pan_error.SetActive (false);
 			soup_error.SetActive (false);
@@ -286,7 +285,7 @@ namespace _Project.Scripts.Game
 					_chinaManager.clickedPan = false;
 					_uiManager.totalCoins-=_chinaManager.perfectNoodlesPrice;
 					_uiManager.coinsText.text = _uiManager.totalCoins.ToString ();
-					LevelSoundManager._instance.dustbin.Play();
+					_levelSoundManager.dustbin.Play();
 					if(_uiManager.totalCoins > 0) 
 					{
 						_uiManager.dustbin_textparent.SetActive(true);
@@ -386,8 +385,8 @@ namespace _Project.Scripts.Game
 				}
 			}
 		}
-		
-		IEnumerator MoveToPosition(bool showSelection = true)
+
+		private IEnumerator MoveToPosition(bool showSelection = true)
 		{
 			transform.localEulerAngles = Vector3.zero;
 			reachedDestination = false;
@@ -421,7 +420,7 @@ namespace _Project.Scripts.Game
 					
 						if(!otherObjectMotion.mySoup.activeInHierarchy)
 						{
-							LevelSoundManager._instance.bttn_click.Play();
+							_levelSoundManager.bttn_click.Play();
 							reachedDestination = true;
 						}
 					}
@@ -438,7 +437,7 @@ namespace _Project.Scripts.Game
 						
 							if(!otherObjectMotion.myNoodles.activeInHierarchy)
 							{
-								LevelSoundManager._instance.bttn_click.Play();
+								_levelSoundManager.bttn_click.Play();
 								reachedDestination = true;
 							}
 						}

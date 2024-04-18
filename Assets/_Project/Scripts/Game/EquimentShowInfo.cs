@@ -6,6 +6,7 @@ namespace _Project.Scripts.Game
 {
 	public class EquimentShowInfo : MonoBehaviour 
 	{
+		[Inject] private DiContainer _diContainer;
 		[Inject] private MenuManager _menuManager;  
 		public static EquimentShowInfo _instance ;
 		public string []itemUsage ;
@@ -22,7 +23,7 @@ namespace _Project.Scripts.Game
 
 		private GameObject GeneratePopupPanel()
 		{
-			GameObject popupPanel = ( GameObject )Instantiate(Resources.Load ("EqPopupPanel"));
+			GameObject popupPanel = _diContainer.InstantiatePrefab(Resources.Load ("EqPopupPanel"));
 			popupPanel.transform.SetParent(transform.parent,false);
 			popupPanel.transform.localPosition = Vector3.zero;
 			return popupPanel;

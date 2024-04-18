@@ -13,6 +13,7 @@ namespace _Project.Scripts.Entities.Customers
 {
 	public class Customer : MonoBehaviour
 	{
+		[Inject] private LevelSoundManager _levelSoundManager;
 		[Inject] private US_Manager _usManager;
 		[Inject] private Italy_Manager _italyManager;
 		[Inject] private China_Manager _chinaManager;
@@ -127,7 +128,7 @@ namespace _Project.Scripts.Entities.Customers
 						{
 							if(_usManager.clickedHotDogDestinationFunction.myType == myOrder[i])
 							{
-								LevelSoundManager._instance.customerEat.Play();
+								_levelSoundManager.customerEat.Play();
 								_usManager.HotDogReached();
 								foundOrder = true;
 								break;
@@ -296,7 +297,7 @@ namespace _Project.Scripts.Entities.Customers
 				if(leavingWithoutPaying && CustomerHandler._instance.gameTimer > 0 )
 				{
 
-					LevelSoundManager._instance.caught.Play();
+					_levelSoundManager.caught.Play();
 		
 					_uiManager.totalCoins+=coinsWithoutPaying;
 					_uiManager.CallIncrementCoint ();
@@ -565,7 +566,7 @@ namespace _Project.Scripts.Entities.Customers
 						myCollider.enabled = true;
 						if(PlayerPrefs.HasKey ("Whistle"))
 						{
-							LevelSoundManager._instance.whistle.Play();
+							_levelSoundManager.whistle.Play();
 							_uiManager.whistle.transform.localScale = new Vector3(1.2f,1.2f,0);
 							_uiManager.blow.SetActive(true);
 							_uiManager.Invoke("WhistleInitialpos",1.2f);
@@ -748,7 +749,7 @@ namespace _Project.Scripts.Entities.Customers
 
 			int rand = Random.Range (0, 8);
 			if (rand == 4) {
-				LevelSoundManager._instance.come_random.Play();
+				_levelSoundManager.come_random.Play();
 			}
 			perfect = false;
 		}
@@ -815,7 +816,7 @@ namespace _Project.Scripts.Entities.Customers
 			MenuManager.golds++;
 			PlayerPrefs.SetString("Golds",EncryptionHandler64.Encrypt (MenuManager.golds.ToString ()));
 			_uiManager.goldText.text = MenuManager.golds.ToString ();
-			LevelSoundManager._instance.coinAdd.Play ();
+			_levelSoundManager.coinAdd.Play ();
 		}
 
 		private void ChinaOrders()
@@ -1157,8 +1158,6 @@ namespace _Project.Scripts.Entities.Customers
 				fries.SetActive (true);
 				fries.transform.localScale = scaleOfFries;
 			}
-
-
 		}
 
 		private void SetEatableSprite(int orderNo)

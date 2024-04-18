@@ -6,8 +6,9 @@ using Zenject;
 
 namespace _Project.Scripts.UI_Scripts
 {
-	public class UpgradePanel : MonoBehaviour 
+	public class UpgradePanel : MonoBehaviour
 	{
+		[Inject] private DiContainer _diContainer;
 		[Inject] private MenuManager _menuManager;  
 		[Inject] private UIManager _uiManager;   
 		public Text totalCoinsText;
@@ -32,10 +33,10 @@ namespace _Project.Scripts.UI_Scripts
 
 		public void CallDecrementCoin()
 		{
-			StopCoroutine ("DecrementCoins");
-			StopCoroutine ("DecrementGold");
-			StartCoroutine ("DecrementCoins");
-			StartCoroutine ("DecrementGold");
+			StopCoroutine (nameof(DecrementCoins));
+			StopCoroutine (nameof(DecrementGold));
+			StartCoroutine (nameof(DecrementCoins));
+			StartCoroutine (nameof(DecrementGold));
 		}
 
 		private IEnumerator DecrementCoins()
@@ -65,7 +66,7 @@ namespace _Project.Scripts.UI_Scripts
 		}
 		public void GoldPanel()
 		{
-			GameObject specialPanel = ( GameObject )Instantiate(Resources.Load ("GoldPanel"));
+			GameObject specialPanel = _diContainer.InstantiatePrefab(Resources.Load ("GoldPanel"));
 			specialPanel.transform.SetParent(transform.parent,false);
 			specialPanel.transform.localScale = Vector3.one;
 			specialPanel.transform.localPosition = Vector3.zero;
@@ -79,7 +80,7 @@ namespace _Project.Scripts.UI_Scripts
 
 		public void EquipmentPanel()
 		{
-			GameObject upgradePanel = ( GameObject )Instantiate(Resources.Load ("EquipmentUpdrade"));
+			GameObject upgradePanel = _diContainer.InstantiatePrefab(Resources.Load ("EquipmentUpdrade"));
 			upgradePanel.transform.SetParent(transform.parent,false);
 			upgradePanel.transform.localScale = Vector3.one;
 			upgradePanel.transform.localPosition = Vector3.zero;
@@ -92,7 +93,7 @@ namespace _Project.Scripts.UI_Scripts
 
 		public void SpecialPanel()
 		{
-			GameObject specialPanel = ( GameObject )Instantiate(Resources.Load ("SpecialPanel"));
+			GameObject specialPanel = _diContainer.InstantiatePrefab(Resources.Load ("SpecialPanel"));
 			specialPanel.transform.SetParent(transform.parent,false);
 			specialPanel.transform.localScale = Vector3.one;
 			specialPanel.transform.localPosition = Vector3.zero;
@@ -105,7 +106,7 @@ namespace _Project.Scripts.UI_Scripts
 
 		public void DecorationlPanel()
 		{
-			GameObject decorationPanel = ( GameObject )Instantiate(Resources.Load ("DecorationPanel"));
+			GameObject decorationPanel = _diContainer.InstantiatePrefab(Resources.Load ("DecorationPanel"));
 			decorationPanel.transform.SetParent(transform.parent,false);
 			decorationPanel.transform.localScale = Vector3.one;
 			decorationPanel.transform.localPosition = Vector3.zero;

@@ -8,6 +8,7 @@ namespace _Project.Scripts.UI_Scripts
 {
 	public class DecorationPanel : MonoBehaviour 
 	{
+		[Inject] private DiContainer _diContainer;
 		[Inject] private MenuManager _menuManager;  
 		[Inject] private UIManager _uiManager;   
 		public int noOfPanels;
@@ -60,7 +61,7 @@ namespace _Project.Scripts.UI_Scripts
 
 		public void Close()
 		{
-			GameObject upgradePanel = ( GameObject )Instantiate(Resources.Load ("UpgradePanel"));
+			GameObject upgradePanel = _diContainer.InstantiatePrefab(Resources.Load ("UpgradePanel"));
 			upgradePanel.transform.SetParent(transform.parent,false);
 			upgradePanel.transform.localScale = Vector3.one;
 			upgradePanel.transform.localPosition = Vector3.zero;

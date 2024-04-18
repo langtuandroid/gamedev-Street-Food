@@ -12,6 +12,7 @@ namespace _Project.Scripts.Food
 {
 	public class Pizza : MonoBehaviour
 	{
+		[Inject] private LevelSoundManager _levelSoundManager;
 		[Inject] private Italy_Manager _italyManager;
 		[Inject] private UIManager _uiManager;   
 		private Vector3 colliderSize;
@@ -219,7 +220,7 @@ namespace _Project.Scripts.Food
 			if(otherObject.name.Contains ("customer"))
 			{
 				_uiManager.n_Pizzas_served++;
-				LevelSoundManager._instance.customerEat.Play();
+				_levelSoundManager.customerEat.Play();
 				PlayerPrefs.SetInt ("PizzaServed", _uiManager.n_Pizzas_served);
 			
 			
@@ -349,7 +350,7 @@ namespace _Project.Scripts.Food
 				{
 					_uiManager.totalCoins-= _italyManager.perfectPizza;
 					_uiManager.coinsText.text = _uiManager.totalCoins.ToString ();
-					LevelSoundManager._instance.dustbin.Play();
+					_levelSoundManager.dustbin.Play();
 					if(_uiManager.totalCoins > 0){
 						_uiManager.dustbin_textparent.SetActive(true);
 						_uiManager.dustbin_text.text = "-"+_italyManager.perfectPizza.ToString(); 
@@ -365,7 +366,7 @@ namespace _Project.Scripts.Food
 				{
 					_uiManager.totalCoins-=_italyManager.lessBakedPizza;
 					_uiManager.coinsText.text = _uiManager.totalCoins.ToString ();
-					LevelSoundManager._instance.dustbin.Play();
+					_levelSoundManager.dustbin.Play();
 					if(_uiManager.totalCoins > 0){
 						_uiManager.dustbin_textparent.SetActive(true);
 						_uiManager.dustbin_text.text = "-"+_italyManager.lessBakedPizza.ToString(); 

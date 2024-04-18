@@ -6,12 +6,13 @@ namespace _Project.Scripts.Other
 {
 	public class Forshowinfo : MonoBehaviour 
 	{
+		[Inject] private DiContainer _diContainer;
 		[Inject] private MenuManager _menuManager;  
 		[Inject] private UIManager _uiManager;   
 		public string []itemUsage;
 		private GameObject GeneratePopupPanel()
 		{
-			GameObject popupPanel = ( GameObject )Instantiate(Resources.Load ("PopupPanel"));
+			GameObject popupPanel = _diContainer.InstantiatePrefab(Resources.Load ("PopupPanel"));
 			popupPanel.transform.SetParent(transform.parent,false);
 			popupPanel.transform.localScale = Vector3.one;
 			popupPanel.transform.localPosition = Vector3.zero;

@@ -9,9 +9,9 @@ using Zenject;
 
 namespace _Project.Scripts.UI_Scripts
 {
-	public class MenuManager : MonoBehaviour 
+	public class MenuManager : MonoBehaviour
 	{
-		[Inject] private UIManager _uiManager;   
+		[Inject] private DiContainer _diContainer;
 		public static string envNo = "US";
 		public GameObject levelPanel;
 		public GameObject fadePanel;
@@ -105,7 +105,7 @@ namespace _Project.Scripts.UI_Scripts
 	
 		public void USLevel()
 		{
-			GameObject upgradePanel = ( GameObject )Instantiate(Resources.Load ("EnvPanel"));
+			GameObject upgradePanel = _diContainer.InstantiatePrefab(Resources.Load ("EnvPanel"));
 			upgradePanel.transform.SetParent(transform,false);
 			upgradePanel.transform.localScale = Vector3.one;
 			upgradePanel.transform.localPosition = Vector3.zero;
@@ -115,7 +115,7 @@ namespace _Project.Scripts.UI_Scripts
 		public void Upgrades()
 		{
 		
-			GameObject upgradePanel = ( GameObject )Instantiate(Resources.Load ("UpgradePanel"));
+			GameObject upgradePanel = _diContainer.InstantiatePrefab(Resources.Load ("UpgradePanel"));
 			upgradePanel.transform.SetParent(transform,false);
 			upgradePanel.transform.localScale = Vector3.one;
 			upgradePanel.transform.localPosition = Vector3.zero;
@@ -127,7 +127,7 @@ namespace _Project.Scripts.UI_Scripts
 		}
 		public void Achievments()
 		{
-			GameObject upgradePanel = ( GameObject )Instantiate(Resources.Load ("AchievementsPanel"));
+			GameObject upgradePanel = _diContainer.InstantiatePrefab(Resources.Load("AchievementsPanel"));
 			upgradePanel.transform.SetParent(transform,false);
 			upgradePanel.transform.localScale = Vector3.one;
 			upgradePanel.transform.localPosition = Vector3.zero;
@@ -138,7 +138,7 @@ namespace _Project.Scripts.UI_Scripts
 
 		public void LevelPanelCross()
 		{
-			GameObject upgradePanel = ( GameObject )Instantiate(Resources.Load ("EnvPanel"));
+			GameObject upgradePanel = _diContainer.InstantiatePrefab(Resources.Load ("EnvPanel"));
 			upgradePanel.transform.SetParent(transform,false);
 			upgradePanel.transform.localScale = Vector3.one;
 			upgradePanel.transform.localPosition = Vector3.zero;
@@ -147,7 +147,7 @@ namespace _Project.Scripts.UI_Scripts
 		}
 		public void Exitpanel()
 		{
-			GameObject upgradePanel = ( GameObject )Instantiate(Resources.Load ("ExitPanel"));
+			GameObject upgradePanel = _diContainer.InstantiatePrefab(Resources.Load ("ExitPanel"));
 			upgradePanel.transform.SetParent(transform,false);
 			upgradePanel.transform.localScale = Vector3.one;
 			upgradePanel.transform.localPosition = Vector3.zero;
@@ -181,7 +181,7 @@ namespace _Project.Scripts.UI_Scripts
 		}
 		public void Insufficinetcoin()
 		{
-			GameObject upgradePanel = ( GameObject )Instantiate(Resources.Load ("InsufficinetCoin"));
+			GameObject upgradePanel = _diContainer.InstantiatePrefab(Resources.Load ("InsufficinetCoin"));
 			if(transform)
 				upgradePanel.transform.SetParent(transform,false);
 			upgradePanel.transform.localScale = Vector3.one;
@@ -191,7 +191,7 @@ namespace _Project.Scripts.UI_Scripts
 		}
 		public void Insufficinetgold()
 		{
-			GameObject upgradePanel = ( GameObject )Instantiate(Resources.Load ("InsufficinetGold"));
+			GameObject upgradePanel = _diContainer.InstantiatePrefab(Resources.Load ("InsufficinetGold"));
 			upgradePanel.transform.SetParent(transform,false);
 			upgradePanel.transform.localScale = Vector3.one;
 			upgradePanel.transform.localPosition = Vector3.zero;
@@ -200,7 +200,7 @@ namespace _Project.Scripts.UI_Scripts
 		}
 		public void Alreadypurchase()
 		{
-			GameObject upgradePanel = ( GameObject )Instantiate(Resources.Load ("Already"));
+			GameObject upgradePanel = _diContainer.InstantiatePrefab(Resources.Load ("Already"));
 			upgradePanel.transform.SetParent(transform,false);
 			upgradePanel.transform.localScale = Vector3.one;
 			upgradePanel.transform.localPosition = Vector3.zero;
@@ -210,7 +210,7 @@ namespace _Project.Scripts.UI_Scripts
 
 		public void Radiopurchase()
 		{
-			GameObject upgradePanel = ( GameObject )Instantiate(Resources.Load ("AlreadyRadiol"));
+			GameObject upgradePanel = _diContainer.InstantiatePrefab(Resources.Load ("AlreadyRadiol"));
 			upgradePanel.transform.SetParent(transform,false);
 			upgradePanel.transform.localScale = Vector3.one;
 			upgradePanel.transform.localPosition = Vector3.zero;
@@ -219,7 +219,7 @@ namespace _Project.Scripts.UI_Scripts
 		}
 		public void Bellpurchase()
 		{
-			GameObject upgradePanel = ( GameObject )Instantiate(Resources.Load ("Alreadybell"));
+			GameObject upgradePanel = _diContainer.InstantiatePrefab(Resources.Load ("Alreadybell"));
 			upgradePanel.transform.SetParent(transform,false);
 			upgradePanel.transform.localScale = Vector3.one;
 			upgradePanel.transform.localPosition = Vector3.zero;
@@ -228,7 +228,7 @@ namespace _Project.Scripts.UI_Scripts
 		}
 		public void Whistlepurchase()
 		{
-			GameObject upgradePanel = ( GameObject )Instantiate(Resources.Load ("AlreadyWhistle"));
+			GameObject upgradePanel = _diContainer.InstantiatePrefab(Resources.Load ("AlreadyWhistle"));
 		    
 			upgradePanel.transform.SetParent(transform,false);
 			upgradePanel.transform.localScale = Vector3.one;
@@ -239,7 +239,7 @@ namespace _Project.Scripts.UI_Scripts
 
 		public void GoldPanel()
 		{
-			GameObject specialPanel = ( GameObject )Instantiate(Resources.Load ("GoldPanel"));
+			GameObject specialPanel = _diContainer.InstantiatePrefab(Resources.Load ("GoldPanel"));
 			specialPanel.transform.SetParent(transform.parent,false);
 			specialPanel.transform.localScale = Vector3.one;
 			specialPanel.transform.localPosition = Vector3.zero;
@@ -247,14 +247,14 @@ namespace _Project.Scripts.UI_Scripts
 
 			if (false)
 			{
-				_uiManager.EnableFadePanel ();
+				//_uiManager.EnableFadePanel ();
 			}
 			Destroy (gameObject);
 		}
 		public GameObject GeneratePopupPanel()
 		{
 		
-			GameObject popupPanel2 = ( GameObject )Instantiate(Resources.Load ("EqPopupPanel"));
+			GameObject popupPanel2 = _diContainer.InstantiatePrefab(Resources.Load ("EqPopupPanel"));
 			popupPanel2.transform.SetParent(transform.parent,false);
 			popupPanel2.transform.localPosition = Vector3.zero;
 			return popupPanel2;

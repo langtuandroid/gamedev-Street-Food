@@ -12,7 +12,7 @@ namespace _Project.Scripts.Managers
 	public class US_Manager : MonoBehaviour 
 	{
 		[Inject] private UIManager _uiManager;   
-		
+		[Inject] private LevelSoundManager _levelSoundManager;
 		public GameObject TheifPanel;
 		public int cokePrice;
 		public int lessBakedHotdog;
@@ -255,7 +255,7 @@ namespace _Project.Scripts.Managers
 					{
 						if(cokePlaces[i].available)
 						{
-							LevelSoundManager._instance.bottle_click.Play();
+							_levelSoundManager.bottle_click.Play();
 							cokeBottles[i].gameObject.SetActive (true);
 							cokeBottles[i].color = new Color(1,1,1,1);
 							cokesFilled++;

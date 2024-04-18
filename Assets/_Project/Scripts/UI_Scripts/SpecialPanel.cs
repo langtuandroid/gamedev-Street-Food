@@ -8,6 +8,7 @@ namespace _Project.Scripts.UI_Scripts
 {
 	public class SpecialPanel : MonoBehaviour 
 	{
+		[Inject] private DiContainer _diContainer;
 		[Inject] private MenuManager _menuManager;  
 		[Inject] private UIManager _uiManager;   
 		public int bellValue;
@@ -74,7 +75,7 @@ namespace _Project.Scripts.UI_Scripts
 
 		private GameObject GeneratePopupPanel()
 		{
-			GameObject popupPanel = ( GameObject )Instantiate(Resources.Load ("PopupPanel"));
+			GameObject popupPanel = _diContainer.InstantiatePrefab(Resources.Load ("PopupPanel"));
 			popupPanel.transform.SetParent(transform.parent,false);
 			popupPanel.transform.localScale = Vector3.one;
 			popupPanel.transform.localPosition = Vector3.zero;
@@ -251,7 +252,7 @@ namespace _Project.Scripts.UI_Scripts
 
 		public void Cross()
 		{
-			GameObject upgradePanel = ( GameObject )Instantiate(Resources.Load ("UpgradePanel"));
+			GameObject upgradePanel = _diContainer.InstantiatePrefab(Resources.Load ("UpgradePanel"));
 			upgradePanel.transform.SetParent(transform.parent,false);
 			upgradePanel.transform.localScale = Vector3.one;
 			upgradePanel.transform.localPosition = Vector3.zero;

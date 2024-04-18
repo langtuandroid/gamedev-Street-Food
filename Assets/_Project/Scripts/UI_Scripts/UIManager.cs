@@ -6,11 +6,14 @@ using _Project.Scripts.Managers;
 using _Project.Scripts.UI.Tutorial;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace _Project.Scripts.UI_Scripts
 {
-	public class UIManager : MonoBehaviour 
+	public class UIManager : MonoBehaviour
 	{
+		[Inject] private DiContainer _diContainer;
+		[Inject] private LevelSoundManager _levelSoundManager;
 		public int totalCoins;
 		public GameObject uiPanel;
 		public GameObject fadePanel;
@@ -184,7 +187,7 @@ namespace _Project.Scripts.UI_Scripts
 			{
 				gameover_effect.SetActive(true);
 
-				LevelSoundManager._instance.successful_level.Play();
+				_levelSoundManager.successful_level.Play();
 
 				Invoke("gameoversoundf",1.5f);
 				gameoverHeading.text = "successful day!";
@@ -201,7 +204,7 @@ namespace _Project.Scripts.UI_Scripts
 			{
 			
 				nextButton.interactable = false;
-				LevelSoundManager._instance.unsuccessful_level.Play();
+				_levelSoundManager.unsuccessful_level.Play();
 				gameoverHeading.text = "unsuccessful day!";
 				if(LevelManager.levelNo == 4 && ((!PlayerPrefs.HasKey("Radio") || MenuManager.handcuffNo <= 0)) )
 				{
@@ -240,7 +243,7 @@ namespace _Project.Scripts.UI_Scripts
 		}
 		public void gameoversoundf()
 		{
-			LevelSoundManager._instance.Gameoverpanel.Play ();
+			_levelSoundManager.Gameoverpanel.Play ();
 		}
 
 		private void BringRadiopopup()
@@ -353,7 +356,7 @@ namespace _Project.Scripts.UI_Scripts
 			upback.SetActive (false);
 			upgrade_bttn.GetComponent<Animator> ().enabled = false;
 			gameOverPanel.SetActive (false);
-			GameObject upgradePanel = ( GameObject )Instantiate(Resources.Load ("UpgradePanel"));
+			GameObject upgradePanel = _diContainer.InstantiatePrefab(Resources.Load ("UpgradePanel"));
 			upgradePanel.transform.SetParent(transform,false);
 			upgradePanel.transform.localScale = Vector3.one;
 			upgradePanel.transform.localPosition = Vector3.zero;
@@ -366,7 +369,7 @@ namespace _Project.Scripts.UI_Scripts
 			gameover_effect.SetActive(false);
 			achivment_bttn.GetComponent<Animator> ().enabled = false;
 			gameOverPanel.SetActive (false);
-			GameObject upgradePanel = ( GameObject )Instantiate(Resources.Load ("AchievementsPanel"));
+			GameObject upgradePanel = _diContainer.InstantiatePrefab(Resources.Load ("AchievementsPanel"));
 			upgradePanel.transform.SetParent(transform,false);
 			upgradePanel.transform.localScale = Vector3.one;
 			upgradePanel.transform.localPosition = Vector3.zero;
@@ -376,7 +379,7 @@ namespace _Project.Scripts.UI_Scripts
 		}
 		public void BellPanelTry()
 		{
-			GameObject upgradePanel = ( GameObject )Instantiate(Resources.Load ("BellPopupPanel"));
+			GameObject upgradePanel = _diContainer.InstantiatePrefab(Resources.Load ("BellPopupPanel"));
 			upgradePanel.transform.SetParent(transform,false);
 			upgradePanel.transform.localScale = Vector3.one;
 			upgradePanel.transform.localPosition = Vector3.zero;
@@ -385,7 +388,7 @@ namespace _Project.Scripts.UI_Scripts
 		}
 		public void BellPanelBuy()
 		{
-			GameObject upgradePanel = ( GameObject )Instantiate(Resources.Load ("BellPopupPanel2"));
+			GameObject upgradePanel = _diContainer.InstantiatePrefab(Resources.Load ("BellPopupPanel2"));
 			upgradePanel.transform.SetParent(transform,false);
 			upgradePanel.transform.localScale = Vector3.one;
 			upgradePanel.transform.localPosition = Vector3.zero;
@@ -394,7 +397,7 @@ namespace _Project.Scripts.UI_Scripts
 		public void EarnGold()
 		{
 			Debug.Log ("GOld");
-			GameObject upgradePanel = ( GameObject )Instantiate(Resources.Load ("EarnGold"));
+			GameObject upgradePanel = _diContainer.InstantiatePrefab(Resources.Load ("EarnGold"));
 			upgradePanel.transform.SetParent(transform,false);
 			upgradePanel.transform.localScale = Vector3.one;
 			upgradePanel.transform.localPosition = Vector3.zero;
@@ -404,7 +407,7 @@ namespace _Project.Scripts.UI_Scripts
 		public void EarnCoin()
 		{
 			Debug.Log ("Coin");
-			GameObject upgradePanel = ( GameObject )Instantiate(Resources.Load ("EarnCoin"));
+			GameObject upgradePanel = _diContainer.InstantiatePrefab(Resources.Load ("EarnCoin"));
 			upgradePanel.transform.SetParent(transform,false);
 			upgradePanel.transform.localScale = Vector3.one;
 			upgradePanel.transform.localPosition = Vector3.zero;
@@ -412,7 +415,7 @@ namespace _Project.Scripts.UI_Scripts
 		}
 		public void IAPGold()
 		{
-			GameObject upgradePanel = ( GameObject )Instantiate(Resources.Load ("GoldPanel"));
+			GameObject upgradePanel = _diContainer.InstantiatePrefab(Resources.Load ("GoldPanel"));
 			upgradePanel.transform.SetParent(transform,false);
 			upgradePanel.transform.localScale = Vector3.one;
 			upgradePanel.transform.localPosition = Vector3.zero;
@@ -421,7 +424,7 @@ namespace _Project.Scripts.UI_Scripts
 
 		private void Radio()
 		{
-			GameObject upgradePanel = ( GameObject )Instantiate(Resources.Load ("Radio"));
+			GameObject upgradePanel = _diContainer.InstantiatePrefab(Resources.Load ("Radio"));
 			upgradePanel.transform.SetParent(transform,false);
 			upgradePanel.transform.localScale = Vector3.one;
 			upgradePanel.transform.localPosition = Vector3.zero;
@@ -430,7 +433,7 @@ namespace _Project.Scripts.UI_Scripts
 
 		public void Whistle()
 		{
-			GameObject upgradePanel = ( GameObject )Instantiate(Resources.Load ("Whistle"));
+			GameObject upgradePanel = _diContainer.InstantiatePrefab(Resources.Load ("Whistle"));
 			upgradePanel.transform.SetParent(transform,false);
 			upgradePanel.transform.localScale = Vector3.one;
 			upgradePanel.transform.localPosition = Vector3.zero;
@@ -438,7 +441,7 @@ namespace _Project.Scripts.UI_Scripts
 		}
 		public void Handcuff()
 		{
-			GameObject upgradePanel = ( GameObject )Instantiate(Resources.Load ("Handcuff"));
+			GameObject upgradePanel = _diContainer.InstantiatePrefab(Resources.Load ("Handcuff"));
 			upgradePanel.transform.SetParent(transform,false);
 			upgradePanel.transform.localScale = Vector3.one;
 			upgradePanel.transform.localPosition = Vector3.zero;
@@ -493,7 +496,7 @@ namespace _Project.Scripts.UI_Scripts
 
 		private IEnumerator IncrementCoins()
 		{
-			LevelSoundManager._instance.coinAdd.Play ();
+			_levelSoundManager.coinAdd.Play ();
 			int textCoins = int.Parse(coinsText.text);
 			coinsText.transform.localScale = new Vector3(1.6f , 2.4f,1);
 			while (textCoins < totalCoins)

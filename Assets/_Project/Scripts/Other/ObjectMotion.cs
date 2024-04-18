@@ -14,6 +14,7 @@ namespace _Project.Scripts.Other
 {
 	public class ObjectMotion : MonoBehaviour 
 	{
+		[Inject] private LevelSoundManager _levelSoundManager;
 		[Inject] private US_Manager _usManager;
 		[Inject] private Italy_Manager _italyManager;
 		[Inject] private China_Manager _chinaManager;
@@ -530,7 +531,7 @@ namespace _Project.Scripts.Other
 
 		private void FriesReachedDestination()
 		{
-			LevelSoundManager._instance.customerEat.Play ();
+			_levelSoundManager.customerEat.Play ();
 			_uiManager.n_French_fries_served++;
 			PlayerPrefs.SetInt ("FrenchfriesServed", _uiManager.n_French_fries_served);
 	
@@ -762,7 +763,7 @@ namespace _Project.Scripts.Other
 
 		private void NoodlesPlateReachedDestination()
 		{
-			LevelSoundManager._instance.customerEat.Play ();
+			_levelSoundManager.customerEat.Play ();
 			_uiManager.n_Noodles_served++;
 			PlayerPrefs.SetInt ("NoodlesServed",_uiManager.n_Noodles_served);
 
@@ -835,7 +836,7 @@ namespace _Project.Scripts.Other
 
 		private void SoupBowlReachedDestination()
 		{
-			LevelSoundManager._instance.drink.Play ();
+			_levelSoundManager.drink.Play ();
 			_chinaManager.bowlsFilled--;
 			myParentHolder.available = true;
 			customer.myOrder.Remove (myType);
@@ -909,9 +910,9 @@ namespace _Project.Scripts.Other
 			_uiManager.n_Cokes_served++;
 			int rad = Random.Range (0, 6);
 			if (rad <= 4) {
-				LevelSoundManager._instance.drink.Play ();
+				_levelSoundManager.drink.Play ();
 			} else {
-				LevelSoundManager._instance.drink2.Play ();
+				_levelSoundManager.drink2.Play ();
 			}
 			PlayerPrefs.SetInt ("CokesServed",_uiManager.n_Cokes_served);
 	
@@ -1003,7 +1004,7 @@ namespace _Project.Scripts.Other
 
 		private void CupCakeReachedDestination()
 		{
-			LevelSoundManager._instance.customerEat.Play ();
+			_levelSoundManager.customerEat.Play ();
 			customer.myWaitingTime = 0;
 			customer.myFacialExpression.sprite = customer.expressions[0];
 			customer.waitingSlider.color = Color.green;
