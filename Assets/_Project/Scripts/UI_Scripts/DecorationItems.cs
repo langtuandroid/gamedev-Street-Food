@@ -27,21 +27,11 @@ public class DecorationItems : MonoBehaviour {
 	public GameObject selectButton;
 
 	public string myName;
-
-	public string myCountry;
-
-	int clickedItem = 0;
-
-
-
-	// Use this for initialization
-	void Start () {
 	
-	}
+	int clickedItem = 0;
 	
 	void OnEnable()
 	{
-//		Debug.LogError ("Logic Not done ");
 		if(PlayerPrefs.HasKey (elementsName[0]) && PlayerPrefs.HasKey (elementsName[1]) && PlayerPrefs.HasKey (elementsName[2]) && PlayerPrefs.HasKey (elementsName[3]))
 		{
 			Debug.Log("a");
@@ -154,7 +144,6 @@ public class DecorationItems : MonoBehaviour {
 				MenuManager._instance.lastPanelName = "DecorationPanel";
 				MenuManager._instance.Insufficinetgold() ;
 			}
-			//Debug.Log("insufficient coins");
 		}
 	}
 
@@ -167,8 +156,4 @@ public class DecorationItems : MonoBehaviour {
 		}
 		
 	}
-
-
-
-
 }

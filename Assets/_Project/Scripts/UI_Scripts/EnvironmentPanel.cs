@@ -2,7 +2,8 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class EnvironmentPanel : MonoBehaviour {
+public class EnvironmentPanel : MonoBehaviour 
+{
 	int noOfLevelsOpen;
 
 	public Text totalCoinsText;
@@ -11,21 +12,6 @@ public class EnvironmentPanel : MonoBehaviour {
 	public GameObject Aus_lock ;
 	public GameObject Italy_lock ;
 	public GameObject China_lock ;
-	// Use this for initialization
-	void Start () {
-	
-		//PlayerPrefs.DeleteAll ();
-		
-	}
-	void Awake()
-	{
-		//PlayerPrefs.DeleteAll ();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
 	public void OnUpgradePanel()
 	{
@@ -72,17 +58,9 @@ public class EnvironmentPanel : MonoBehaviour {
 
 	public void AustraliaLevel()
 	{
-		//4
-
-
 		MenuManager._instance.Level_loaded = 4 ;
 		MenuManager.envNo = "Aus";
 		int noOfItalyLevelsOpen = (int)EncryptionHandler64.Decrypt (PlayerPrefs.GetString("ItalyLevels"));
-		//Debug.Log ("NO of opne italy " + noOfItalyLevelsOpen);
-
-
-		//kashif
-
 		if(noOfItalyLevelsOpen >= 10 || PlayerPrefs.HasKey ("AusOpen"))
 		{
 			Aus_lock.SetActive (false);
@@ -90,8 +68,6 @@ public class EnvironmentPanel : MonoBehaviour {
 			MenuManager._instance.EnableFadePanel ();
 			MenuManager._instance.levelPanel.SetActive (true);
 		}
-		
-		
 	}
 
 	void MenuPopup()
@@ -106,8 +82,6 @@ public class EnvironmentPanel : MonoBehaviour {
 			MenuManager._instance.popupPanel = popupPanel.GetComponent<PopupPanel>();
 		}
 		
-		
-
 	}
 
 	GameObject GeneratePopupPanel()
@@ -122,20 +96,16 @@ public class EnvironmentPanel : MonoBehaviour {
 
 	public void ItalyLevel()
 	{
-		//3
-		 {
+		MenuManager._instance.Level_loaded = 3;
+		MenuManager.envNo = "Italy";
+		int noOfChinaLevelsOpen = (int)EncryptionHandler64.Decrypt(PlayerPrefs.GetString("ChinaLevels"));
 
-			MenuManager._instance.Level_loaded = 3;
-			MenuManager.envNo = "Italy";
-			int noOfChinaLevelsOpen = (int)EncryptionHandler64.Decrypt (PlayerPrefs.GetString ("ChinaLevels"));
-			//Debug.Log ("NO of opne china "+noOfChinaLevelsOpen);
-			if (noOfChinaLevelsOpen >= 10 || PlayerPrefs.HasKey ("ItalyOpen")) {
-				Italy_lock.SetActive (false);
-				Destroy (gameObject);
-				MenuManager._instance.EnableFadePanel ();
-				MenuManager._instance.levelPanel.SetActive (true);
-			} 
-
+		if (noOfChinaLevelsOpen >= 10 || PlayerPrefs.HasKey("ItalyOpen"))
+		{
+			Italy_lock.SetActive(false);
+			Destroy(gameObject);
+			MenuManager._instance.EnableFadePanel();
+			MenuManager._instance.levelPanel.SetActive(true);
 		}
 	}
 
@@ -146,33 +116,32 @@ public class EnvironmentPanel : MonoBehaviour {
 		totalGoldText.text = MenuManager.golds.ToString ();
 	
 		PlayerPrefs.SetInt (toSetPlayerPref,1);
-		if(PlayerPrefs.HasKey ("ChinaOpen")) {
+		if(PlayerPrefs.HasKey ("ChinaOpen")) 
+		{
 			China_lock.SetActive (false);
 		}
 
-		 if(PlayerPrefs.HasKey ("ItalyOpen")) {
+		if(PlayerPrefs.HasKey ("ItalyOpen")) 
+		{
 			Italy_lock.SetActive (false);
 		}
-	 if(PlayerPrefs.HasKey ("AusOpen")) {
+		if(PlayerPrefs.HasKey ("AusOpen")) 
+		{
 			Aus_lock.SetActive (false);
 		}
 		MenuManager._instance.EnableFadePanel ();
 		MenuManager._instance.popupPanel.gameObject.SetActive (false);
-		//MenuPopup();
-		//MenuManager._instance.popupPanel.EnablePopup ("Successfully unlocked the environment!",false);
+		
 	}
 
 
 	public void ChinaLevel()
 	{
-		//2
-	
 		MenuManager._instance.Level_loaded = 2 ;
 		MenuManager.envNo = "China";
 		int noOfUSLevelsOpen = (int)EncryptionHandler64.Decrypt (PlayerPrefs.GetString("USLevels"));
-		//Debug.Log ("NO of opne US " +noOfUSLevelsOpen);
 		if(noOfUSLevelsOpen >= 10 || PlayerPrefs.HasKey ("ChinaOpen"))
-			{
+		{
 			China_lock.SetActive (false);
 			Destroy (gameObject);
 			MenuManager._instance.EnableFadePanel ();

@@ -23,10 +23,7 @@ public class DecorationPanel : MonoBehaviour {
 	public GameObject Italy_tablecover_lock ;
 	public GameObject Aus_tabletop_lock ;
 	public GameObject Aus_tablecover_lock ;
-
-	public GameObject insufficinetcoin;
-	public GameObject insufficintgold ;
-	// Use this for initialization
+	
 	void Start () {
 		_instance = this;
 		totalGoldText.text = MenuManager.golds.ToString ();
@@ -39,10 +36,6 @@ public class DecorationPanel : MonoBehaviour {
 		}
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 	void OnEnable()
 	{
 		if(PlayerPrefs.HasKey ("ChinaOpen")) {
@@ -144,7 +137,6 @@ public class DecorationPanel : MonoBehaviour {
 			yield return 0;
 		}
 		totalGoldText.text = MenuManager.golds.ToString ();
-		
 	}
 
 }
