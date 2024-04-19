@@ -16,22 +16,22 @@ namespace _Project.Scripts.Entities.Customers
 		[Inject] private China_Manager _chinaManager;
 		[Inject] private US_Manager _usManager;
 		[Inject] private Italy_Manager _italyManager;
-		bool wait=true;
+		private bool wait=true;
 		public int noOfCustomers;
 		public float gameTimer = 120.0f;
-		public Transform []customerPositions;
+		[SerializeField] private Transform []customerPositions;
 		public Transform customerStartPosition;
 		public Transform customerEndPosition;
 		public List <int> availablePositions = new List<int>();
 		public List<Customer> customerPool;
 		public Coins []coinImages;
-		public TextMesh timerText;
+		[SerializeField] private TextMesh timerText;
 		public bool timerStopped;
 		public bool canBeAnUnPayingCustomer;
 		public int noOfUnpayingCustomers;
 		public int maxNoOfUnpayableCustomers;
 		public static CustomerHandler _instance;
-		public  bool stop;
+		public bool stop;
 
 		private void Start () 
 		{

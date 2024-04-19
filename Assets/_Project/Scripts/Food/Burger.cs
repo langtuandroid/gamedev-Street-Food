@@ -20,29 +20,29 @@ namespace _Project.Scripts.Food
 		private Vector3 colliderSize;
 		private bool canMove;
 		
-		public GameObject otherObject;
-		public bool wrongOrderGiven;
-		public Customer customer;
 		public SpriteRenderer myTikki;
 		public GameObject myTomato;
 		public GameObject myOnion;
 		public GameObject myCabbage;
-		public bool tomato;
-		public bool onion;
-		public bool cabbage;
-		public bool tikki;
-		public Availability myPlate;
-		public Vector3 myOriginalPos;
-		public Vector3 myTouchPos;
-		public LevelManager.Orders myType;
-		public bool perfect;
-		public bool iAmSelected;
-		public Vector3 myLocalScale;
 		public GameObject mySelection;
-		public bool tutorialOn;
-		public bool orderBurger;
-		public GameObject error;
-
+		
+		[SerializeField] private Availability myPlate;
+		[SerializeField] private Vector3 myOriginalPos;
+		[SerializeField] private Vector3 myTouchPos;
+		[SerializeField] private Vector3 myLocalScale;
+		[SerializeField] private bool orderBurger;
+		[SerializeField] private GameObject error;
+		public bool tomato { get; set; }
+		public bool onion { get; set; }
+		public bool cabbage { get; set; }
+		public bool tikki { get; set; }
+		public LevelManager.Orders myType { get; set; }
+		public bool perfect { get; set; }
+		public bool iAmSelected { get; set; }
+		public bool tutorialOn { get; set; }
+		public GameObject otherObject { get; set; }
+		public bool wrongOrderGiven { get; set; }
+		public Customer customer { get; set; }
 		private void Start()
 		{
 			_uiManager.n_Burger_served=PlayerPrefs.GetInt ("BurgerServed");

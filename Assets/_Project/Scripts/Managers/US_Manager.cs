@@ -236,7 +236,6 @@ namespace _Project.Scripts.Managers
 				{
 					HotDog myHotDog = hotdogOnPlates[i].transform.GetComponent<HotDog>();
 					myHotDog.iAmSelected = false;
-					myHotDog.startAnimating = false;
 					myHotDog.mySelection.SetActive (false);
 					hotdogOnPlates[i].transform.localScale = myHotDog.myLocalScale;
 				}

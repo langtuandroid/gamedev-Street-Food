@@ -5,7 +5,8 @@ namespace _Project.Scripts.Additional
 	public class ReScale : MonoBehaviour 
 	{
 		private Transform _myParent;
-		public float myMaxScale , myMinScale;
+		[SerializeField] private float myMaxScale;
+		[SerializeField] private float myMinScale;
 
 		private void Start () 
 		{

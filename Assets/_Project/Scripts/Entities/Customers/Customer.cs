@@ -19,50 +19,50 @@ namespace _Project.Scripts.Entities.Customers
 		[Inject] private China_Manager _chinaManager;
 		[Inject] private Australia_Manager _australiaManager;
 		[Inject] private UIManager _uiManager;
-		Vector3 scaleOfEatableOrder;
-		Vector3 scaleOfDrinkableOrder;
-		Vector3 scaleOfFries;
-		float eyesTimer;
-		bool eyesFull;
-		bool hasWhistle;
-		bool hasbell ;
-		bool hascupcake ;
-		List<int> randomListToDecideNoPay = new(){0,1,2};
-		bool allowClick;
+		private Vector3 scaleOfEatableOrder;
+		private Vector3 scaleOfDrinkableOrder;
+		private Vector3 scaleOfFries;
+		private float eyesTimer;
+		private bool eyesFull;
+		private bool _hasWhistle;
+		private bool hasbell ;
+		private bool hascupcake ;
+		private List<int> randomListToDecideNoPay = new(){0,1,2};
+		private bool allowClick;
 		
 		public static bool radioPurchased;
 		public LevelManager.Orders iHaveAMultipleTypeOrder;
 		public List<LevelManager.Orders> myOrder = new();
-		public float customerWaitingTime;  // it would vary depending on the level 
+		[SerializeField] private float customerWaitingTime;  // it would vary depending on the level 
 		public float myWaitingTime; // how much time I have waited..
 		public int positionTaken;
-		public bool orderPlaced;
-		public GameObject orderPanel;
-		public TweenScale orderPanelTween;
-		public TweenScale drinkableOrderTween;
-		public TweenScale eatableOrderTween;
-		public TweenScale friesTween;
+		[SerializeField] private bool orderPlaced;
+		[SerializeField] private GameObject orderPanel;
+		[SerializeField] private TweenScale orderPanelTween;
+		[SerializeField] private TweenScale drinkableOrderTween;
+		[SerializeField] private TweenScale eatableOrderTween;
+		[SerializeField] private TweenScale friesTween;
 		public SpriteRenderer waitingSlider;
-		public Animation myAnimation;
-		public SpriteRenderer eatableOrder;
-		public SpriteRenderer pizzadot ;
-		public GameObject plateOfEatableOrder;
-		public GameObject fries;
-		public Burger myBurger;
-		public GameObject drinkingOrder;
+		[SerializeField] private Animation myAnimation;
+		[SerializeField] private SpriteRenderer eatableOrder;
+		[SerializeField] private SpriteRenderer pizzadot ;
+		[SerializeField] private GameObject plateOfEatableOrder;
+		[SerializeField] private GameObject fries;
+		[SerializeField] private Burger myBurger;
+		[SerializeField] private GameObject drinkingOrder;
 		public int coinsSpent;
-		public BoxCollider myCollider;
+		[SerializeField] private BoxCollider myCollider;
 		public SpriteRenderer myFacialExpression;
 		public Sprite []expressions;
-		public SpriteRenderer myEyes;
-		public Sprite []myEyesExpressions;
-		public int noOfOrders ;
+		[SerializeField] private SpriteRenderer myEyes;
+		[SerializeField] private Sprite []myEyesExpressions;
+		[SerializeField] private int noOfOrders ;
 		public bool perfect;
 		public bool shouldBePerfectIfServed;
 		public bool tutorialOn;
-		public ParticleSystem angryEffect;
-		public bool leavingWithoutPaying;
-		public int coinsWithoutPaying;
+		[SerializeField] private ParticleSystem angryEffect;
+		[SerializeField] private bool leavingWithoutPaying;
+		[SerializeField] private int coinsWithoutPaying;
 
 		private void Start () 
 		{
@@ -82,7 +82,7 @@ namespace _Project.Scripts.Entities.Customers
 			}
 			if(PlayerPrefs.HasKey ("Whistle"))
 			{
-				hasWhistle = true;
+				_hasWhistle = true;
 			}
 			if (PlayerPrefs.HasKey ("Bell"))
 			{
@@ -138,7 +138,6 @@ namespace _Project.Scripts.Entities.Customers
 						{
 							if(iHaveAMultipleTypeOrder != LevelManager.Orders.NONE)
 							{	
-								_usManager.clickedHotDogDestinationFunction.myTypeToEat = iHaveAMultipleTypeOrder;
 								_usManager.clickedHotDogDestinationFunction.wrongOrderGiven = true;
 								_usManager.HotDogReached();
 							}

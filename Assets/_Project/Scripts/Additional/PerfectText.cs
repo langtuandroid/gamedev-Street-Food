@@ -5,7 +5,7 @@ namespace _Project.Scripts.Additional
 {
 	public class PerfectText : MonoBehaviour 
 	{
-		public bool hasTweenScale;
+		[SerializeField] private bool hasTweenScale;
 
 		private void OnEnable()
 		{

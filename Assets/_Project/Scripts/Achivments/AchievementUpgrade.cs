@@ -9,9 +9,9 @@ namespace _Project.Scripts.Achivments
 	public class AchievementUpgrade : MonoBehaviour 
 	{
 		private bool _once;
-		public AchievementChild []myChild; 
-		public Text totalCoinsText;
-		public Text totalGoldText ;
+		[SerializeField] private  AchievementChild []myChild; 
+		[SerializeField] private  Text totalCoinsText;
+		[SerializeField] private  Text totalGoldText ;
 
 		private void OnEnable()
 		{

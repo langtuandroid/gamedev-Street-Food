@@ -14,29 +14,28 @@ namespace _Project.Scripts.Food
 	{
 		[Inject] private LevelSoundManager _levelSoundManager;
 		[Inject] private US_Manager _usManager;
-		[Inject] private UIManager _uiManager;   
-		bool reachedCustomer;
-		bool scaleUp;
-		Vector3 colliderSize;
-		bool canMove;
-		int a=1;
+		[Inject] private UIManager _uiManager;
+		private bool reachedCustomer;
+		private bool scaleUp;
+		private Vector3 colliderSize;
+		private bool canMove;
+		private int a=1;
 		
 		public GameObject otherObject;
-		public bool wrongOrderGiven;
-		public Customer customer;
-		public bool redSauce;
-		public bool yellowSauce;
+		public bool wrongOrderGiven{ get; set; }
+		public Customer customer{ get; set; }
+		public bool redSauce { get; set; }
+		public bool yellowSauce { get; set; }
 		public bool tikki;
-		public Availability myPlate;
-		public Vector3 myOriginalPos , myTouchPos;
-		public LevelManager.Orders myType;
-		public LevelManager.Orders myTypeToEat;
-		public bool perfect;
-		public bool iAmSelected , startAnimating;
+		[SerializeField] private Availability myPlate;
+		[SerializeField] private Vector3 myOriginalPos , myTouchPos;
+		public LevelManager.Orders myType { get; set; }
+		public bool perfect { get; set; }
+		public bool iAmSelected { get; set; }
 		public Vector3 myLocalScale;
 		public GameObject mySelection;
-		public bool tutorialOn;
-		public GameObject errorObject;
+		public bool tutorialOn { get; set; }
+		[SerializeField] private GameObject errorObject;
 
 		private void Start()
 		{
@@ -59,7 +58,6 @@ namespace _Project.Scripts.Food
 			_usManager.hotDogSaucesOnPlates[transform.GetComponent<Availability>().myPositionInArray].gameObject.SetActive (false);
 			myType = LevelManager.Orders.NONE; 
 			transform.localScale = myLocalScale;
-			startAnimating = false;
 			iAmSelected = false;
 			mySelection.SetActive (false);
 		}
@@ -100,7 +98,6 @@ namespace _Project.Scripts.Food
 						_usManager.AllClickedBoolsReset ();
 						_usManager.clickedHotDog = true;
 
-						startAnimating = false;
 						scaleUp = true;
 						transform.GetComponent<BoxCollider> ().size = new Vector3(colliderSize.x/2f , colliderSize.y/2f , colliderSize.z);
 						iAmSelected = true;
@@ -118,7 +115,6 @@ namespace _Project.Scripts.Food
 
 		private void OnMouseDrag()
 		{
-
 			if( canMove)
 			{
 				Vector3 myPos = Camera.main.WorldToScreenPoint (transform.position);
@@ -135,9 +131,6 @@ namespace _Project.Scripts.Food
 			errorObject.SetActive (false);
 			if(canMove)
 			{
-
-				startAnimating = true;
-
 				if(!reachedCustomer)
 					StartCoroutine(MoveToPosition());
 				else
@@ -327,7 +320,6 @@ namespace _Project.Scripts.Food
 			
 					wrongOrderGiven = true;
 					reachedCustomer = true;
-					myTypeToEat = customer.iHaveAMultipleTypeOrder;
 				}
 			}
 			else if(other.name.Contains ("dustbin") && (US_Manager.tutorialEnd == true || Australia_Manager.tutorialEnd== true))

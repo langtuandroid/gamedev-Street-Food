@@ -21,9 +21,9 @@ namespace _Project.Scripts.Entities
 		int reachedPos = 4;
 		
 		public static Thief _instance ;
-		public Transform []coinsPos;
-		public int coinsStolen;
-		public bool isCaught;
+		[SerializeField] private Transform []coinsPos;
+		public int coinsStolen { get; set; }
+		public bool isCaught  { get; set; }
 
 		private void Awake()
 		{
@@ -32,7 +32,7 @@ namespace _Project.Scripts.Entities
 		private void Start () 
 		{
 			_uiManager.n_Thieves_caught=PlayerPrefs.GetInt ("ThiefCaught");
-			InvokeRepeating("Condition", 1f,1f);
+			InvokeRepeating(nameof(Condition), 1f,1f);
 		}
 
 		private void Condition()

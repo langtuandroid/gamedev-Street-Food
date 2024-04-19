@@ -4,10 +4,10 @@ namespace _Project.Scripts.Additional
 {
 	public class TextOutline : MonoBehaviour 
 	{
-		public float pixelSize = 1;
-		public Color outlineColor = Color.black;
-		public bool resolutionDependant = false;
-		public int doubleResolution = 1024;
+		[SerializeField] private float pixelSize = 1;
+		[SerializeField] private Color outlineColor = Color.black;
+		[SerializeField] private bool resolutionDependant = false;
+		[SerializeField] private int doubleResolution = 1024;
 	
 		private TextMesh textMesh;
 		private MeshRenderer meshRenderer;

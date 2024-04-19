@@ -9,8 +9,8 @@ namespace _Project.Scripts.Achivments
 	{
 		[Inject] private MenuManager _menuManager;  
 		[Inject] private UIManager _uiManager;   
-		public Text totalCoinsText;
-		public Text totalGoldText;
+		[SerializeField] private  Text totalCoinsText;
+		[SerializeField] private  Text totalGoldText;
 
 		private void Start () {
 			totalGoldText.text = MenuManager.golds.ToString ();

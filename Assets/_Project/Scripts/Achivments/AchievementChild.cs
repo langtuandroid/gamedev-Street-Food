@@ -5,13 +5,13 @@ namespace _Project.Scripts.Achivments
 {
 	public class AchievementChild : MonoBehaviour 
 	{
-		public string myPlayerPrefVariableAchReached;
-		public string myPlayerPrefCountVariable;
-		public int myMaxValue;
+		[SerializeField] private string myPlayerPrefVariableAchReached;
+		[SerializeField] private string myPlayerPrefCountVariable;
+		[SerializeField] private  int myMaxValue;
 		public GameObject myTick;
 		public GameObject myClaimButton;
-		public Text myAch;
-		public string myClaimPlayerPref;
+		[SerializeField] private  Text myAch;
+		[SerializeField] private  string myClaimPlayerPref;
 		public static int check_claim ;
 
 		private void Start()

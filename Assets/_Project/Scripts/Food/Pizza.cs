@@ -23,21 +23,21 @@ namespace _Project.Scripts.Food
 		private float perfectTimer = 6f;
 		private float burningTimer = 12f;
 
-		public bool wrongOrderGiven;
-		public float heatingTimer = 0;
-		public Customer customer;
+		public bool wrongOrderGiven { get; set; }
+		public float heatingTimer { get; set; }
+		public Customer customer{ get; set; }
 		public bool cheese;
 		public bool vegetable;
 		public SpriteRenderer myToppings;
 		public GameObject myCheese;
 		public Availability myPlate;
 		public Vector3 myOriginalPos , myTouchPos;
-		public LevelManager.Orders myType;
-		public bool perfect;
-		public bool iAmSelected;
+		public LevelManager.Orders myType { get; set; }
+		public bool perfect{ get; set; }
+		public bool iAmSelected{ get; set; }
 		public Vector3 myLocalScale;
 		public GameObject mySelection;
-		public bool tutorialOn;
+		public bool tutorialOn{ get; set; }
 		public bool isInOven , isBurnt;
 		public ParticleSystem mySmoke , pizzaCompletelyBaked;
 		public SpriteRenderer myRenderer;

@@ -4,8 +4,12 @@ namespace _Project.Scripts.Additional
 {
 	public class ResolutionFixer : MonoBehaviour 
 	{
-		public float myScaleX , myScaleY;
-		public GameObject left,right , up, down;
+		[SerializeField] private float myScaleX;
+		[SerializeField] private float myScaleY;
+		[SerializeField] private GameObject left;
+		[SerializeField] private GameObject right;
+		[SerializeField] private GameObject up;
+		[SerializeField] private GameObject down;
 
 		private void Awake() 
 		{

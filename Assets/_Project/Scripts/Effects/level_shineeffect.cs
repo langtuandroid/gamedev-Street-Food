@@ -6,7 +6,6 @@ namespace _Project.Scripts.Effects
 		private void OnEnable()
 		{
 			Invoke (nameof(ViewShine), 0.553f);
-		
 		}
 
 		private void ViewShine()

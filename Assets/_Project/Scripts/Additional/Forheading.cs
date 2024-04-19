@@ -3,8 +3,7 @@
 namespace _Project.Scripts.Additional
 {
 	public class Forheading : MonoBehaviour {
-	
-		void OnEnable()
+		private void OnEnable()
 		{
 			Invoke (nameof(deactive), 3.0f);
 		}

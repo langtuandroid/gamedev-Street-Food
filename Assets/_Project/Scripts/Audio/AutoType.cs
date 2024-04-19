@@ -18,9 +18,9 @@ namespace _Project.Scripts.Audio
 		private string _message;
 		private int noOfExtraPopup;
 		
-		public bool isGoalAchieved;
-		public float letterPause = 0.03f;
-		public Text myText;
+		[SerializeField] private bool isGoalAchieved;
+		[SerializeField] private float letterPause = 0.03f;
+		[SerializeField] private Text myText;
 		public GameObject imageToDeactivate;
 		
 

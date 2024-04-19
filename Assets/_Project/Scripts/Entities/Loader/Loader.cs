@@ -11,8 +11,8 @@ namespace _Project.Scripts.Entities.Loader
 		private AsyncOperation asyncOp;
 		
 		public static string levelToLoad;
-		public Text loader_text ;
-		public Slider loader;
+		[SerializeField] private Text loader_text ;
+		[SerializeField] private Slider loader;
 
 		private void Awake()
 		{

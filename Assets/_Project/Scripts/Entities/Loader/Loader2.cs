@@ -12,11 +12,9 @@ namespace _Project.Scripts.Entities.Loader
 		private bool started;
 		private int a = 0;
 		private int b = 0;
-	
-		public Text loader_text ;
-		public Slider loader;
-
-
+		[SerializeField] private Text loader_text ;
+		[SerializeField] private Slider loader;
+		
 		private void OnEnable() {
 		
 			started = true;

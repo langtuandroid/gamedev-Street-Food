@@ -1,27 +1,29 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 
-public class AutoTypeHeading : MonoBehaviour {
+namespace _Project.Scripts.Audio
+{
+	public class AutoTypeHeading : MonoBehaviour 
+	{
+		private string _message;
+		[SerializeField] private float letterPause = 0.03f;
+		[SerializeField] private Text myText;
+		private void Start () {
 
-	public	float letterPause = 0.03f;
-	string message;
-	public Text myText;
-	
-	void Start () {
+			_message = myText.text;
+			myText.text = "";
+			StartCoroutine (TypeText());
+		}
 
-		message = myText.text;
-		myText.text = "";
-		StartCoroutine (TypeText());
-	}
-	
-	public IEnumerator TypeText () {
+		private IEnumerator TypeText () {
 
-		foreach (char letter in message.ToCharArray()) {
-			myText.text += letter;
-			yield return 0;
-			yield return new WaitForSeconds (letterPause);
-		}      
+			foreach (char letter in _message.ToCharArray()) {
+				myText.text += letter;
+				yield return 0;
+				yield return new WaitForSeconds (letterPause);
+			}      
 
+		}
 	}
 }
