@@ -107,8 +107,8 @@ namespace _Project.Scripts.UI_Scripts
 				MenuManager.golds-=elementsGoldPrice[clickedItem];
 				MenuManager.totalscore-=elementsCoinPrice[clickedItem];
 
-				PlayerPrefs.SetString("TotalScore",EncryptionHandler64.Encrypt (MenuManager.totalscore.ToString ()));
-				PlayerPrefs.SetString("Golds",EncryptionHandler64.Encrypt (MenuManager.golds.ToString ()));
+				PlayerPrefs.SetString("TotalScore",Encryption.Encrypt (MenuManager.totalscore.ToString ()));
+				PlayerPrefs.SetString("Golds",Encryption.Encrypt (MenuManager.golds.ToString ()));
 
 				selectButton.SetActive (true);
 				PlayerPrefs.SetString (myName ,elementsName[clickedItem]);

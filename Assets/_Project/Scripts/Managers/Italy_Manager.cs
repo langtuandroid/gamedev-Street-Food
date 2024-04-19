@@ -127,16 +127,16 @@ namespace _Project.Scripts.Managers
 				cokeAdd.gameObject.SetActive (false);
 			}
 		
-			int platesUpgradeValue =  (int)EncryptionHandler64.Decrypt (PlayerPrefs.GetString("ItalyPlateUpgrade")); 
+			int platesUpgradeValue =  (int)Encryption.Decrypt (PlayerPrefs.GetString("ItalyPlateUpgrade")); 
 			totalPlatesAvailable = 2+(platesUpgradeValue*2);
 			for(int i = 0; i < totalPlatesAvailable ; i++)
 			{
 				pizzaPlates[i].color = new Color(1,1,1,1);
 			}
 
-			int cokeUpgradeValue =  (int)EncryptionHandler64.Decrypt (PlayerPrefs.GetString("ItalyCokeUpgrade")); 
+			int cokeUpgradeValue =  (int)Encryption.Decrypt (PlayerPrefs.GetString("ItalyCokeUpgrade")); 
 			totalCokesAvailable = 2+(cokeUpgradeValue*2);
-			int ovenToUpgrade =  (int)EncryptionHandler64.Decrypt (PlayerPrefs.GetString("OvenUpgrade")); 
+			int ovenToUpgrade =  (int)Encryption.Decrypt (PlayerPrefs.GetString("OvenUpgrade")); 
 			totalOvensAvailable = 2+(ovenToUpgrade*2);
 	
 			ovenPlaces[0].available = true;

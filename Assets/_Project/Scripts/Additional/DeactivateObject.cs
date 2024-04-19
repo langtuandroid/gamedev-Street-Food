@@ -2,7 +2,7 @@
 
 namespace _Project.Scripts.Additional
 {
-	public class Setfalse : MonoBehaviour 
+	public class DeactivateObject : MonoBehaviour 
 	{
 		public void Close()
 		{

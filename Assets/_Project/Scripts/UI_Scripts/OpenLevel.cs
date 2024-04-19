@@ -20,7 +20,7 @@ namespace _Project.Scripts.UI_Scripts
 		void OnEnable()
 		{
 			myName = MenuManager.envNo + "Stars";
-			int noOfLevelsCompleted = (int)EncryptionHandler64.Decrypt(PlayerPrefs.GetString(MenuManager.envNo+"Levels"));
+			int noOfLevelsCompleted = (int)Encryption.Decrypt(PlayerPrefs.GetString(MenuManager.envNo+"Levels"));
 	
 			myTick.SetActive (false);
 

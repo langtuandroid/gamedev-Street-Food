@@ -156,7 +156,7 @@ namespace _Project.Scripts.Entities
 				_uiManager.CallIncrementCoint ();
 				_uiManager.coincollect.Play();
 
-				PlayerPrefs.SetString ("Handcuff",EncryptionHandler64.Encrypt (MenuManager.handcuffNo.ToString ()));
+				PlayerPrefs.SetString ("Handcuff",Encryption.Encrypt (MenuManager.handcuffNo.ToString ()));
 				if(MenuManager.handcuffNo <=0 )
 				{
 					_usManager.handcuff.SetActive(false);

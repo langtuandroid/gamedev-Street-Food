@@ -1,15 +1,15 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace _Project.Scripts.Additional
 {
-	public class PerfectText : MonoBehaviour 
+	public class TextAnimation : MonoBehaviour 
 	{
-		[SerializeField] private bool hasTweenScale;
-
+		[FormerlySerializedAs("hasTweenScale")] [SerializeField] private bool _isHasScale;
 		private void OnEnable()
 		{
-			if(hasTweenScale)
+			if(_isHasScale)
 			{
 				transform.GetComponent<TweenScale>().enabled = true;
 				transform.GetComponent<TweenScale>().ResetToBeginning ();
@@ -22,10 +22,10 @@ namespace _Project.Scripts.Additional
 				transform.GetComponent<TweenPosition>().ResetToBeginning ();
 				transform.GetComponent<TweenPosition>().PlayForward ();
 			}
-			StartCoroutine (PerfectOff());
+			StartCoroutine (Destroy());
 		}
 
-		private IEnumerator PerfectOff()
+		private IEnumerator Destroy()
 		{
 			yield return new WaitForSeconds(2.0f);
 			gameObject.SetActive (false);

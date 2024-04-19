@@ -39,55 +39,55 @@ namespace _Project.Scripts.UI_Scripts
 
 			if(!PlayerPrefs.HasKey ("PlateUpgrade"))
 			{
-				PlayerPrefs.SetString("Golds",EncryptionHandler64.Encrypt ("1"));
-				PlayerPrefs.SetString ("TotalScore",EncryptionHandler64.Encrypt ("100"));
-				PlayerPrefs.SetString ("Cupcake",EncryptionHandler64.Encrypt ("0"));
-				PlayerPrefs.SetString ("Handcuff",EncryptionHandler64.Encrypt ("0"));
-				PlayerPrefs.SetString ("GrillsUpgrade",EncryptionHandler64.Encrypt ("0"));
-				PlayerPrefs.SetString ("USCokeUpgrade",EncryptionHandler64.Encrypt ("0"));
-				PlayerPrefs.SetString ("PlateUpgrade",EncryptionHandler64.Encrypt ("0"));
-				PlayerPrefs.SetString ("USStars",EncryptionHandler64.Encrypt ("0"));
-				PlayerPrefs.SetString ("USLevels",EncryptionHandler64.Encrypt ("0"));
+				PlayerPrefs.SetString("Golds",Encryption.Encrypt ("1"));
+				PlayerPrefs.SetString ("TotalScore",Encryption.Encrypt ("100"));
+				PlayerPrefs.SetString ("Cupcake",Encryption.Encrypt ("0"));
+				PlayerPrefs.SetString ("Handcuff",Encryption.Encrypt ("0"));
+				PlayerPrefs.SetString ("GrillsUpgrade",Encryption.Encrypt ("0"));
+				PlayerPrefs.SetString ("USCokeUpgrade",Encryption.Encrypt ("0"));
+				PlayerPrefs.SetString ("PlateUpgrade",Encryption.Encrypt ("0"));
+				PlayerPrefs.SetString ("USStars",Encryption.Encrypt ("0"));
+				PlayerPrefs.SetString ("USLevels",Encryption.Encrypt ("0"));
 				PlayerPrefs.SetString ("US_TableCover","US/base-flat-1");
 				PlayerPrefs.SetString ("US_TableTop","US/top-floor-1");
 				PlayerPrefs.SetInt ("US/base-flat-1" , 1);
 				PlayerPrefs.SetInt ("US/top-floor-1" , 1);
-				PlayerPrefs.SetString ("AusLevels",EncryptionHandler64.Encrypt ("0"));
-				PlayerPrefs.SetString ("ItalyLevels",EncryptionHandler64.Encrypt ("0"));
-				PlayerPrefs.SetString ("ChinaLevels",EncryptionHandler64.Encrypt ("0"));
-				PlayerPrefs.SetString ("ItalyStars",EncryptionHandler64.Encrypt ("0"));
+				PlayerPrefs.SetString ("AusLevels",Encryption.Encrypt ("0"));
+				PlayerPrefs.SetString ("ItalyLevels",Encryption.Encrypt ("0"));
+				PlayerPrefs.SetString ("ChinaLevels",Encryption.Encrypt ("0"));
+				PlayerPrefs.SetString ("ItalyStars",Encryption.Encrypt ("0"));
 				PlayerPrefs.SetString ("Italy_TableCover","Italy/1");
 				PlayerPrefs.SetString ("Italy_TableTop","Italy/top-strip-1");
-				PlayerPrefs.SetString ("ItalyPlateUpgrade",EncryptionHandler64.Encrypt ("0"));
-				PlayerPrefs.SetString ("ItalyCokeUpgrade",EncryptionHandler64.Encrypt ("0"));
-				PlayerPrefs.SetString ("OvenUpgrade",EncryptionHandler64.Encrypt ("0"));
+				PlayerPrefs.SetString ("ItalyPlateUpgrade",Encryption.Encrypt ("0"));
+				PlayerPrefs.SetString ("ItalyCokeUpgrade",Encryption.Encrypt ("0"));
+				PlayerPrefs.SetString ("OvenUpgrade",Encryption.Encrypt ("0"));
 				PlayerPrefs.SetInt ("Italy/1" , 1);
 				PlayerPrefs.SetInt ("Italy/top-strip-1" , 1);
-				PlayerPrefs.SetString ("ChinaStars",EncryptionHandler64.Encrypt ("0"));
+				PlayerPrefs.SetString ("ChinaStars",Encryption.Encrypt ("0"));
 				PlayerPrefs.SetString ("China_TableCover","China/1");
 				PlayerPrefs.SetString ("China_TableTop","China/a-1");
-				PlayerPrefs.SetString ("ChinaPlateUpgrade",EncryptionHandler64.Encrypt ("0"));
-				PlayerPrefs.SetString ("ChinaBowlsUpgrade",EncryptionHandler64.Encrypt ("0"));
-				PlayerPrefs.SetString ("ChinaPansUpgrade",EncryptionHandler64.Encrypt ("0"));
-				PlayerPrefs.SetString ("ChinaSoupContainerUpgrade",EncryptionHandler64.Encrypt ("0"));
+				PlayerPrefs.SetString ("ChinaPlateUpgrade",Encryption.Encrypt ("0"));
+				PlayerPrefs.SetString ("ChinaBowlsUpgrade",Encryption.Encrypt ("0"));
+				PlayerPrefs.SetString ("ChinaPansUpgrade",Encryption.Encrypt ("0"));
+				PlayerPrefs.SetString ("ChinaSoupContainerUpgrade",Encryption.Encrypt ("0"));
 				PlayerPrefs.SetInt ("China/1" , 1);
 				PlayerPrefs.SetInt ("China/a-1" , 1);
-				PlayerPrefs.SetString ("AusStars",EncryptionHandler64.Encrypt ("0"));
+				PlayerPrefs.SetString ("AusStars",Encryption.Encrypt ("0"));
 				PlayerPrefs.SetString ("Aus_TableCover","Aus/1");
 				PlayerPrefs.SetString ("Aus_TableTop","Aus/top-shed-1");
-				PlayerPrefs.SetString ("AusPlateUpgrade",EncryptionHandler64.Encrypt ("0"));
-				PlayerPrefs.SetString ("FriesUpgrade",EncryptionHandler64.Encrypt ("0"));
-				PlayerPrefs.SetString ("AusCokeUpgrade",EncryptionHandler64.Encrypt ("0"));
-				PlayerPrefs.SetString ("AusGrillsUpgrade",EncryptionHandler64.Encrypt ("0"));
+				PlayerPrefs.SetString ("AusPlateUpgrade",Encryption.Encrypt ("0"));
+				PlayerPrefs.SetString ("FriesUpgrade",Encryption.Encrypt ("0"));
+				PlayerPrefs.SetString ("AusCokeUpgrade",Encryption.Encrypt ("0"));
+				PlayerPrefs.SetString ("AusGrillsUpgrade",Encryption.Encrypt ("0"));
 				PlayerPrefs.SetInt ("Aus/1" , 1);
 				PlayerPrefs.SetInt ("Aus/top-shed-1" , 3);
 				PlayerPrefs.SetInt ("Upgrade2", 1);
 			}
 		
-			golds = (int)EncryptionHandler64.Decrypt (PlayerPrefs.GetString("Golds"));
-			totalscore = (int)EncryptionHandler64.Decrypt (PlayerPrefs.GetString("TotalScore"));
-			cupcakeNo = (int)EncryptionHandler64.Decrypt (PlayerPrefs.GetString("Cupcake"));
-			handcuffNo = (int)EncryptionHandler64.Decrypt (PlayerPrefs.GetString("Handcuff"));
+			golds = (int)Encryption.Decrypt (PlayerPrefs.GetString("Golds"));
+			totalscore = (int)Encryption.Decrypt (PlayerPrefs.GetString("TotalScore"));
+			cupcakeNo = (int)Encryption.Decrypt (PlayerPrefs.GetString("Cupcake"));
+			handcuffNo = (int)Encryption.Decrypt (PlayerPrefs.GetString("Handcuff"));
 		}
 	
 		void Update () 

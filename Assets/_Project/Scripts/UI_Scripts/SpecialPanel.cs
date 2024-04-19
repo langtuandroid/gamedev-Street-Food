@@ -123,7 +123,7 @@ namespace _Project.Scripts.UI_Scripts
 					}
 
 					MenuManager.golds-=bellValue;
-					PlayerPrefs.SetString("Golds",EncryptionHandler64.Encrypt (MenuManager.golds.ToString ()));
+					PlayerPrefs.SetString("Golds",Encryption.Encrypt (MenuManager.golds.ToString ()));
 					PlayerPrefs.SetInt ("Bell" , 1);
 					CallDecrementCoin();
 					bell_tex.SetActive(false);
@@ -154,7 +154,7 @@ namespace _Project.Scripts.UI_Scripts
 						PlayerPrefs.SetInt ("WhistlesTut",1);
 					}
 					MenuManager.golds-=whistleValue;
-					PlayerPrefs.SetString("Golds",EncryptionHandler64.Encrypt (MenuManager.golds.ToString ()));
+					PlayerPrefs.SetString("Golds",Encryption.Encrypt (MenuManager.golds.ToString ()));
 					PlayerPrefs.SetInt ("Whistle" , 1);
 					CallDecrementCoin();
 					whistle_tex.SetActive(false);
@@ -185,7 +185,7 @@ namespace _Project.Scripts.UI_Scripts
 						PlayerPrefs.SetInt ("radioTut",1);
 					}
 					MenuManager.golds-=radioValue;
-					PlayerPrefs.SetString("Golds",EncryptionHandler64.Encrypt (MenuManager.golds.ToString ()));
+					PlayerPrefs.SetString("Golds",Encryption.Encrypt (MenuManager.golds.ToString ()));
 					PlayerPrefs.SetInt ("Radio" , 1);
 					CallDecrementCoin();
 					radio_tex.SetActive(false);
@@ -214,9 +214,9 @@ namespace _Project.Scripts.UI_Scripts
 					PlayerPrefs.SetInt ("HandCuffTut",1);
 				}
 				MenuManager.totalscore-=handcuffValue;
-				PlayerPrefs.SetString("TotalScore",EncryptionHandler64.Encrypt (MenuManager.totalscore.ToString ()));
+				PlayerPrefs.SetString("TotalScore",Encryption.Encrypt (MenuManager.totalscore.ToString ()));
 				MenuManager.handcuffNo++;
-				PlayerPrefs.SetString ("Handcuff",EncryptionHandler64.Encrypt (MenuManager.handcuffNo.ToString ()));
+				PlayerPrefs.SetString ("Handcuff",Encryption.Encrypt (MenuManager.handcuffNo.ToString ()));
 			
 				CallDecrementCoin();
 			}
@@ -238,9 +238,9 @@ namespace _Project.Scripts.UI_Scripts
 					PlayerPrefs.SetInt ("cupcakeTut",1);
 				}
 				MenuManager.totalscore-=cupcakeValue;
-				PlayerPrefs.SetString("TotalScore",EncryptionHandler64.Encrypt (MenuManager.totalscore.ToString ()));
+				PlayerPrefs.SetString("TotalScore",Encryption.Encrypt (MenuManager.totalscore.ToString ()));
 				MenuManager.cupcakeNo = 3;
-				PlayerPrefs.SetString ("Cupcake",EncryptionHandler64.Encrypt (MenuManager.cupcakeNo.ToString ()));
+				PlayerPrefs.SetString ("Cupcake",Encryption.Encrypt (MenuManager.cupcakeNo.ToString ()));
 			
 				CallDecrementCoin();
 			}

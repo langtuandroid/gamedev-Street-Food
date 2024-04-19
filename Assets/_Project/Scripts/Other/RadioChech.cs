@@ -36,7 +36,7 @@ namespace _Project.Scripts.Other
 			{
 				MenuManager.golds -= 20;
 				_uiManager.goldText.text = MenuManager.golds.ToString ();
-				PlayerPrefs.SetString ("Golds", EncryptionHandler64.Encrypt (MenuManager.golds.ToString ()));
+				PlayerPrefs.SetString ("Golds", Encryption.Encrypt (MenuManager.golds.ToString ()));
 				PlayerPrefs.SetInt ("Radio", 1);
 			} 
 			else
@@ -50,10 +50,10 @@ namespace _Project.Scripts.Other
 			if (MenuManager.totalscore >= 250) 
 			{
 				MenuManager.totalscore -= 250;
-				PlayerPrefs.SetString ("TotalScore", EncryptionHandler64.Encrypt (MenuManager.totalscore.ToString ()));
+				PlayerPrefs.SetString ("TotalScore", Encryption.Encrypt (MenuManager.totalscore.ToString ()));
 
 				MenuManager.cupcakeNo = 3;
-				PlayerPrefs.SetString ("Cupcake", EncryptionHandler64.Encrypt (MenuManager.cupcakeNo.ToString ()));
+				PlayerPrefs.SetString ("Cupcake", Encryption.Encrypt (MenuManager.cupcakeNo.ToString ()));
 			} 
 			else 
 			{

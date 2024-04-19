@@ -109,11 +109,11 @@ namespace _Project.Scripts.Managers
 				bowlAdd.gameObject.SetActive (false);
 			}
 
-			int platesUpgradeValue =  (int)EncryptionHandler64.Decrypt (PlayerPrefs.GetString("ChinaPlateUpgrade")); 
+			int platesUpgradeValue =  (int)Encryption.Decrypt (PlayerPrefs.GetString("ChinaPlateUpgrade")); 
 			totalPlatesAvailable = 2+(platesUpgradeValue*2);
-			int bowlUpgrade =  (int)EncryptionHandler64.Decrypt (PlayerPrefs.GetString("ChinaBowlsUpgrade")); 
+			int bowlUpgrade =  (int)Encryption.Decrypt (PlayerPrefs.GetString("ChinaBowlsUpgrade")); 
 			totalBowlsAvailable = 2+(bowlUpgrade*2);
-			pansUpgrade =  (int)EncryptionHandler64.Decrypt (PlayerPrefs.GetString("ChinaPansUpgrade")); 
+			pansUpgrade =  (int)Encryption.Decrypt (PlayerPrefs.GetString("ChinaPansUpgrade")); 
 			pansUpgrade++;
 
 			for(int i = 0; i < pansUpgrade ; i++)
@@ -121,7 +121,7 @@ namespace _Project.Scripts.Managers
 				pans[i].SetActive (true);
 			}
 
-			soupContainerUpgrade =  (int)EncryptionHandler64.Decrypt (PlayerPrefs.GetString("ChinaSoupContainerUpgrade")); 
+			soupContainerUpgrade =  (int)Encryption.Decrypt (PlayerPrefs.GetString("ChinaSoupContainerUpgrade")); 
 			soupContainerUpgrade++;
 
 			if (LevelManager.levelNo >= 13) {

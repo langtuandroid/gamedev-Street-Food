@@ -62,7 +62,7 @@ namespace _Project.Scripts.UI_Scripts
 		{
 		
 			MenuManager.envNo = "Aus";
-			int noOfItalyLevelsOpen = (int)EncryptionHandler64.Decrypt (PlayerPrefs.GetString("ItalyLevels"));
+			int noOfItalyLevelsOpen = (int)Encryption.Decrypt (PlayerPrefs.GetString("ItalyLevels"));
 			if(noOfItalyLevelsOpen >= 0 || PlayerPrefs.HasKey ("AusOpen")) //TODO noOfItalyLevelsOpen >= 10
 			{
 				Aus_lock.SetActive (false);
@@ -99,7 +99,7 @@ namespace _Project.Scripts.UI_Scripts
 		public void ItalyLevel()
 		{
 			MenuManager.envNo = "Italy";
-			int noOfChinaLevelsOpen = (int)EncryptionHandler64.Decrypt(PlayerPrefs.GetString("ChinaLevels"));
+			int noOfChinaLevelsOpen = (int)Encryption.Decrypt(PlayerPrefs.GetString("ChinaLevels"));
 
 			if (noOfChinaLevelsOpen >= 0 || PlayerPrefs.HasKey("ItalyOpen")) //TODO noOfChinaLevelsOpen >= 10
 			{
@@ -113,7 +113,7 @@ namespace _Project.Scripts.UI_Scripts
 		private void PurchaseLevel(string toSetPlayerPref)
 		{
 			MenuManager.golds-=20;
-			PlayerPrefs.SetString("Golds",EncryptionHandler64.Encrypt (MenuManager.golds.ToString ()));
+			PlayerPrefs.SetString("Golds",Encryption.Encrypt (MenuManager.golds.ToString ()));
 			totalGoldText.text = MenuManager.golds.ToString ();
 	
 			PlayerPrefs.SetInt (toSetPlayerPref,1);
@@ -139,7 +139,7 @@ namespace _Project.Scripts.UI_Scripts
 		public void ChinaLevel()
 		{
 			MenuManager.envNo = "China";
-			int noOfUSLevelsOpen = (int)EncryptionHandler64.Decrypt (PlayerPrefs.GetString("USLevels"));
+			int noOfUSLevelsOpen = (int)Encryption.Decrypt (PlayerPrefs.GetString("USLevels"));
 			if(noOfUSLevelsOpen >= 0 || PlayerPrefs.HasKey ("ChinaOpen")) //TODO noOfUSLevelsOpen >= 10
 			{
 				China_lock.SetActive (false);

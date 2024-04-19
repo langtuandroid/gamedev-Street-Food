@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace _Project.Scripts.Additional
 {
-	public class PressBell : MonoBehaviour 
+	public class BellTouch : MonoBehaviour 
 	{
 		private void OnMouseDown()
 		{

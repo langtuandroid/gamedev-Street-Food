@@ -813,7 +813,7 @@ namespace _Project.Scripts.Entities.Customers
 		public void GoldAdd()
 		{
 			MenuManager.golds++;
-			PlayerPrefs.SetString("Golds",EncryptionHandler64.Encrypt (MenuManager.golds.ToString ()));
+			PlayerPrefs.SetString("Golds",Encryption.Encrypt (MenuManager.golds.ToString ()));
 			_uiManager.goldText.text = MenuManager.golds.ToString ();
 			_levelSoundManager.coinAdd.Play ();
 		}

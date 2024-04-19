@@ -4,7 +4,7 @@ using Zenject;
 
 namespace _Project.Scripts.Additional
 {
-	public class ForExit : MonoBehaviour 
+	public class ExitBitton : MonoBehaviour 
 	{
 		[Inject] private MenuManager _menuManager;  
 		private void Update () {

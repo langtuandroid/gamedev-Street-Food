@@ -28,9 +28,9 @@ namespace _Project.Scripts.Other
 		{
 			if (MenuManager.totalscore >= 1000) {
 				MenuManager.totalscore -= 1000;
-				PlayerPrefs.SetString ("TotalScore", EncryptionHandler64.Encrypt (MenuManager.totalscore.ToString ()));
+				PlayerPrefs.SetString ("TotalScore", Encryption.Encrypt (MenuManager.totalscore.ToString ()));
 				MenuManager.handcuffNo++;
-				PlayerPrefs.SetString ("Handcuff", EncryptionHandler64.Encrypt (MenuManager.handcuffNo.ToString ()));
+				PlayerPrefs.SetString ("Handcuff", Encryption.Encrypt (MenuManager.handcuffNo.ToString ()));
 				if(MenuManager.handcuffNo > 0)
 				{
 					_usManager.handcuff.SetActive(true);

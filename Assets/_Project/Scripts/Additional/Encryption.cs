@@ -3,30 +3,32 @@ using System.Collections.Generic;
 
 namespace _Project.Scripts.Additional
 {
-	public static class EncryptionHandler64
+	public static class Encryption
 	{
-		public static string[] alphabets = new string[26]; 
-		public static string []encryptedStringCorrespondingToInt = {"b","f","h","k","l","r","m","t","x","y"}; 
-		public static Int64 addInt = 143, multiplyInt = 7;
-		public static Dictionary <string , Int64> myDic = new()  
+		private static readonly string[] abc = new string[26];
+		private static readonly string []stringToIntCompression = {"b","f","h","k","l","r","m","t","x","y"};
+		private static readonly Int64 intAdd = 143;
+		private static readonly Int64 intMultyplay = 7;
+
+		private static Dictionary <string, Int64> _dic = new()  
 		{
-			{encryptedStringCorrespondingToInt[0]  , 0},
-			{encryptedStringCorrespondingToInt[1]  , 1},
-			{encryptedStringCorrespondingToInt[2]  , 2},
-			{encryptedStringCorrespondingToInt[3]  , 3},
-			{encryptedStringCorrespondingToInt[4]  , 4},
-			{encryptedStringCorrespondingToInt[5]  , 5},
-			{encryptedStringCorrespondingToInt[6]  , 6},
-			{encryptedStringCorrespondingToInt[7]  , 7},
-			{encryptedStringCorrespondingToInt[8]  , 8},
-			{encryptedStringCorrespondingToInt[9]  , 9},
+			{stringToIntCompression[0]  , 0},
+			{stringToIntCompression[1]  , 1},
+			{stringToIntCompression[2]  , 2},
+			{stringToIntCompression[3]  , 3},
+			{stringToIntCompression[4]  , 4},
+			{stringToIntCompression[5]  , 5},
+			{stringToIntCompression[6]  , 6},
+			{stringToIntCompression[7]  , 7},
+			{stringToIntCompression[8]  , 8},
+			{stringToIntCompression[9]  , 9},
 		};
 	
 		public static string Encrypt(string input)
 		{
 			Int64 inputDataInInt = 0;
 			Int64.TryParse(input , out inputDataInInt);
-			inputDataInInt = inputDataInInt*multiplyInt+addInt;
+			inputDataInInt = inputDataInInt*intMultyplay+intAdd;
 			input = inputDataInInt.ToString();
 			char []arrayChar = input.ToCharArray();
 			string encryptionString  = "";
@@ -35,12 +37,12 @@ namespace _Project.Scripts.Additional
 				string charArrayElementToString = arrayChar[i].ToString();
 				Int64 charArrayElementToInt = 0;
 				Int64.TryParse(charArrayElementToString, out charArrayElementToInt);
-				encryptionString += encryptedStringCorrespondingToInt[charArrayElementToInt];
+				encryptionString += stringToIntCompression[charArrayElementToInt];
 			}
 			int iCount = 0;
 			for(char i = 'a'; i <= 'z' ;i++ )
 			{
-				alphabets[iCount] = i+""; 
+				abc[iCount] = i+""; 
 				iCount++;
 			}
 			string[] extraChar = new string[3];
@@ -48,7 +50,7 @@ namespace _Project.Scripts.Additional
 			{
 				for( int j = 0; j < arrayChar.Length ; j++)
 				{
-					extraChar[i]+= alphabets[UnityEngine.Random.Range(0,26)];
+					extraChar[i]+= abc[UnityEngine.Random.Range(0,26)];
 				}
 			}
 			encryptionString = extraChar[0]+"-"+encryptionString+"-"+extraChar[1]+"-"+extraChar[2];
@@ -64,9 +66,9 @@ namespace _Project.Scripts.Additional
 			for(int i = 0 ; i< arrayChar.Length ; i++)
 			{
 				string charArrayElementToString = arrayChar[i].ToString();
-				if(myDic.ContainsKey(charArrayElementToString))
+				if(_dic.ContainsKey(charArrayElementToString))
 				{
-					Int64 correspondingInt = myDic[charArrayElementToString] ;
+					Int64 correspondingInt = _dic[charArrayElementToString] ;
 					decryptedString+=correspondingInt;
 				}
 				else
@@ -85,7 +87,7 @@ namespace _Project.Scripts.Additional
 				else
 				{
 					Int64.TryParse( decryptedString , out decryptionInt);
-					decryptionInt = (decryptionInt-addInt)/multiplyInt;
+					decryptionInt = (decryptionInt-intAdd)/intMultyplay;
 				}
 			}
 			if(decryptionInt < 0)

@@ -28,9 +28,9 @@ namespace _Project.Scripts.Other
 		{
 			if (MenuManager.totalscore >= 1000) {
 				MenuManager.totalscore -= 1000;
-				PlayerPrefs.SetString ("TotalScore", EncryptionHandler64.Encrypt (MenuManager.totalscore.ToString ()));
+				PlayerPrefs.SetString ("TotalScore", Encryption.Encrypt (MenuManager.totalscore.ToString ()));
 				MenuManager.handcuffNo++;
-				PlayerPrefs.SetString ("Handcuff", EncryptionHandler64.Encrypt (MenuManager.handcuffNo.ToString ()));
+				PlayerPrefs.SetString ("Handcuff", Encryption.Encrypt (MenuManager.handcuffNo.ToString ()));
 				Application.LoadLevel (Application.loadedLevel);
 			} else {
 				_uiManager.EarnCoin();
@@ -42,7 +42,7 @@ namespace _Project.Scripts.Other
 		{
 			if (MenuManager.golds >= 20) {
 				MenuManager.golds -= 20;
-				PlayerPrefs.SetString ("Golds", EncryptionHandler64.Encrypt (MenuManager.golds.ToString ()));
+				PlayerPrefs.SetString ("Golds", Encryption.Encrypt (MenuManager.golds.ToString ()));
 				PlayerPrefs.SetInt ("Whistle", 1);
 				Application.LoadLevel (Application.loadedLevel);
 			} else {
@@ -53,9 +53,9 @@ namespace _Project.Scripts.Other
 		{
 			if (MenuManager.golds >= 30) {
 				MenuManager.golds -= 30;
-				PlayerPrefs.SetString ("Golds", EncryptionHandler64.Encrypt (MenuManager.golds.ToString ()));
+				PlayerPrefs.SetString ("Golds", Encryption.Encrypt (MenuManager.golds.ToString ()));
 				_uiManager.goldText.text = MenuManager.golds.ToString ();
-				PlayerPrefs.SetString ("Golds", EncryptionHandler64.Encrypt (MenuManager.golds.ToString ()));
+				PlayerPrefs.SetString ("Golds", Encryption.Encrypt (MenuManager.golds.ToString ()));
 				PlayerPrefs.SetInt ("Bell", 1);
 				_usManager.Bell.SetActive(true);
 				CustomerHandler._instance.stop = false ;

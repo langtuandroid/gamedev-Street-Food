@@ -23,11 +23,11 @@ namespace _Project.Scripts.UI_Scripts
 		{
 
 			if (!myName.Contains ("ItalyFridge"))
-				upgradeValue = (int)EncryptionHandler64.Decrypt (PlayerPrefs.GetString (myName + "Upgrade"));
+				upgradeValue = (int)Encryption.Decrypt (PlayerPrefs.GetString (myName + "Upgrade"));
 			else {
 				if(PlayerPrefs.HasKey (myName + "Upgrade"))
 				{
-					upgradeValue = (int)EncryptionHandler64.Decrypt (PlayerPrefs.GetString (myName + "Upgrade"));
+					upgradeValue = (int)Encryption.Decrypt (PlayerPrefs.GetString (myName + "Upgrade"));
 				
 				}
 				else
@@ -92,10 +92,10 @@ namespace _Project.Scripts.UI_Scripts
 				MenuManager.golds-=goldToUpgradeLevel[upgradeValue];
 				MenuManager.totalscore-=coinsToUpgradeLevel[upgradeValue];
 				upgradeNoImages[upgradeValue+1].SetActive (true);
-				PlayerPrefs.SetString("TotalScore",EncryptionHandler64.Encrypt (MenuManager.totalscore.ToString ()));
-				PlayerPrefs.SetString("Golds",EncryptionHandler64.Encrypt (MenuManager.golds.ToString ()));
+				PlayerPrefs.SetString("TotalScore",Encryption.Encrypt (MenuManager.totalscore.ToString ()));
+				PlayerPrefs.SetString("Golds",Encryption.Encrypt (MenuManager.golds.ToString ()));
 				upgradeValue++;
-				PlayerPrefs.SetString(myName+"Upgrade",EncryptionHandler64.Encrypt (upgradeValue.ToString ()));
+				PlayerPrefs.SetString(myName+"Upgrade",Encryption.Encrypt (upgradeValue.ToString ()));
 				equipmentPanel.CallDecrementCoin();
 				OnClickToShow();
 				if(equ_number == 10)

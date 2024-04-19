@@ -127,16 +127,16 @@ namespace _Project.Scripts.Managers
 				cokeAdd.color = new Color(1,1,1,0.5f); 
 			}
 		
-			int platesUpgradeValue =  (int)EncryptionHandler64.Decrypt (PlayerPrefs.GetString("PlateUpgrade")); 
+			int platesUpgradeValue =  (int)Encryption.Decrypt (PlayerPrefs.GetString("PlateUpgrade")); 
 			totalPlatesAvailable = 2+(platesUpgradeValue*2);
 			for(int i = 0; i < totalPlatesAvailable ; i++)
 			{
 				hotdogPlates[i].color = new Color(1,1,1,1);
 			}
 
-			int cokeUpgradeValue =  (int)EncryptionHandler64.Decrypt (PlayerPrefs.GetString("USCokeUpgrade")); 
+			int cokeUpgradeValue =  (int)Encryption.Decrypt (PlayerPrefs.GetString("USCokeUpgrade")); 
 			totalCokesAvailable = 3+(cokeUpgradeValue*3);
-			int grillsTpgrade =  (int)EncryptionHandler64.Decrypt (PlayerPrefs.GetString("GrillsUpgrade")); 
+			int grillsTpgrade =  (int)Encryption.Decrypt (PlayerPrefs.GetString("GrillsUpgrade")); 
 			totalGrillsAvailable = 2+(grillsTpgrade*2);
 			int grillVal = (int)totalGrillsAvailable/2;
 			for(int i = 0; i < grillVal ; i++)

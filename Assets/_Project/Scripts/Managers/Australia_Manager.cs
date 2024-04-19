@@ -144,14 +144,14 @@ namespace _Project.Scripts.Managers
 				cabbageAdd.gameObject.SetActive (false);
 			}
 			
-			int platesUpgradeValue =  (int)EncryptionHandler64.Decrypt (PlayerPrefs.GetString("AusPlateUpgrade")); 
+			int platesUpgradeValue =  (int)Encryption.Decrypt (PlayerPrefs.GetString("AusPlateUpgrade")); 
 			totalPlatesAvailable = 2+(platesUpgradeValue*2);
 			for(int i = 0; i < totalPlatesAvailable ; i++)
 			{
 				burgerPlates[i].color = new Color(1,1,1,1);
 			}
 
-			int friesUpgradeValue =  (int)EncryptionHandler64.Decrypt (PlayerPrefs.GetString("FriesUpgrade")); 
+			int friesUpgradeValue =  (int)Encryption.Decrypt (PlayerPrefs.GetString("FriesUpgrade")); 
 			totalFriesAvailable = 2+(friesUpgradeValue*2);
 			fryer.sprite = fryerVariations[friesUpgradeValue];
 			for(int i = 0; i <= friesUpgradeValue ; i++)
@@ -159,9 +159,9 @@ namespace _Project.Scripts.Managers
 				friesCluster[i].SetActive (true);
 			}
 
-			int cokeUpgradeValue =  (int)EncryptionHandler64.Decrypt (PlayerPrefs.GetString("AusCokeUpgrade")); 
+			int cokeUpgradeValue =  (int)Encryption.Decrypt (PlayerPrefs.GetString("AusCokeUpgrade")); 
 			totalCokesAvailable = 3+(cokeUpgradeValue*3);
-			int grillsToUpgrade =  (int)EncryptionHandler64.Decrypt (PlayerPrefs.GetString("AusGrillsUpgrade")); 
+			int grillsToUpgrade =  (int)Encryption.Decrypt (PlayerPrefs.GetString("AusGrillsUpgrade")); 
 			totalGrillsAvailable = 2+(grillsToUpgrade*2);
 			int grillVal = (int)totalGrillsAvailable/2;
 			for(int i = 0; i < grillVal ; i++)

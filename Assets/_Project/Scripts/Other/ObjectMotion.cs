@@ -994,7 +994,7 @@ namespace _Project.Scripts.Other
 			customer.myFacialExpression.sprite = customer.expressions[0];
 			customer.waitingSlider.color = Color.green;
 			MenuManager.cupcakeNo--;
-			PlayerPrefs.SetString ("Cupcake",EncryptionHandler64.Encrypt (MenuManager.cupcakeNo.ToString ()));
+			PlayerPrefs.SetString ("Cupcake",Encryption.Encrypt (MenuManager.cupcakeNo.ToString ()));
 			if(MenuManager.cupcakeNo <= 0)
 			{
 				gameObject.SetActive (false);
