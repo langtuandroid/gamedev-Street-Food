@@ -104,35 +104,35 @@ namespace _Project.Scripts.Entities.Customers
 				}
 
 			}
-			if(!TutorialPanel.popupPanelActive || US_Manager.tutorialEnd || tutorialOn || China_Manager._endTutorial || Italy_Manager._isEndTutorial || _isClick)
+			if(!TutorialPanel.popupPanelActive || US_Manager._isEndTutorial || tutorialOn || China_Manager._endTutorial || Italy_Manager._isEndTutorial || _isClick)
 			{
 				if(LevelManager.levelNo <= 10)
 				{
-					if(_usManager.clickedCoke)
+					if(_usManager.IsClickedCoke)
 					{
-						_usManager.clickedItemDestinationFunction.customer = this;
+						_usManager.objectMotion.customer = this;
 
 						for(int i = 0 ; i< _order.Count ; i++)
 						{
-							if(_usManager.clickedItemDestinationFunction.myType == _order[i])
+							if(_usManager.objectMotion.myType == _order[i])
 							{
-								_usManager.ObjectReached();
+								_usManager.OnObjectReach();
 								break;
 							}
 						}
-						_usManager.AllClickedBoolsReset ();
+						_usManager.ResetBools ();
 					}
-					else if(_usManager.clickedHotDog)
+					else if(_usManager.IsClickedHotDog)
 					{
-						_usManager.clickedHotDogDestinationFunction.wisitor = this;
-						_usManager.clickedHotDogDestinationFunction._otherObject = this.gameObject;
+						_usManager.HotDog.wisitor = this;
+						_usManager.HotDog._otherObject = this.gameObject;
 						bool foundOrder = false;
 						for(int i = 0 ; i< _order.Count ; i++)
 						{
-							if(_usManager.clickedHotDogDestinationFunction.isTape == _order[i])
+							if(_usManager.HotDog.isTape == _order[i])
 							{
 								_levelSoundManager.customerEatSound.Play();
-								_usManager.HotDogReached();
+								_usManager.OnDogDestination();
 								foundOrder = true;
 								break;
 							}
@@ -141,15 +141,15 @@ namespace _Project.Scripts.Entities.Customers
 						{
 							if(iHaveAMultipleTypeOrder != LevelManager.Orders.NONE)
 							{	
-								_usManager.clickedHotDogDestinationFunction.wrongOrder = true;
-								_usManager.HotDogReached();
+								_usManager.HotDog.wrongOrder = true;
+								_usManager.OnDogDestination();
 							}
 						}
-						_usManager.AllClickedBoolsReset ();
+						_usManager.ResetBools ();
 					}
 					else
 					{
-						_usManager.AllClickedBoolsReset ();
+						_usManager.ResetBools ();
 					}
 				}
 				else if(LevelManager.levelNo > 10 && LevelManager.levelNo <= 20)
@@ -321,7 +321,7 @@ namespace _Project.Scripts.Entities.Customers
 				ShowNeededProduct();
 				if(_usManager != null)
 				{
-					if(myWaitingTime >= _waitingTime && US_Manager.tutorialEnd) 
+					if(myWaitingTime >= _waitingTime && US_Manager._isEndTutorial) 
 					{
 						_orderPlaces = false;
 						StartCoroutine (MoveToPositionRoutine (_customerHandler._customerEndPos.position , false));
@@ -521,7 +521,7 @@ namespace _Project.Scripts.Entities.Customers
 				}
 				else
 				{
-					US_Manager.noOfPerfects = 0;
+					US_Manager._perfectNums = 0;
 				}
 
 				if(coinsSpent > 0)
@@ -611,7 +611,7 @@ namespace _Project.Scripts.Entities.Customers
 
 						if(perfect)
 						{
-							US_Manager.noOfPerfects++;
+							US_Manager._perfectNums++;
 							_uiManager.n_Perfect_achieved++;
 							PlayerPrefs.SetInt ("Perfectachieved", _uiManager.n_Perfect_achieved);
 						
@@ -643,7 +643,7 @@ namespace _Project.Scripts.Entities.Customers
 							
 							}
 							
-							if(US_Manager.noOfPerfects >= 5)
+							if(US_Manager._perfectNums >= 5)
 							{
 								_uiManager.gold_Collected.SetActive(false);
 								_uiManager.gold_Collected.SetActive(true);
@@ -651,14 +651,14 @@ namespace _Project.Scripts.Entities.Customers
 								Debug.Log ("added gold");
 								Invoke(nameof(AddGold),1.5f);
 								Invoke("Gold_Deactive ",1.5f);
-								US_Manager.noOfPerfects = 0;
+								US_Manager._perfectNums = 0;
 							
 							}
 						}
 						else
 						{
 							Debug.Log ("perfects made 0");
-							US_Manager.noOfPerfects = 0;
+							US_Manager._perfectNums = 0;
 						}
 						
 						_customerHandler._coins[positionTaken].coinCollected.Play ();
@@ -1166,7 +1166,7 @@ namespace _Project.Scripts.Entities.Customers
 		{ 
 			if(LevelManager.levelNo <= 10)
 			{
-				_orderEat.sprite = _usManager.hotDogOrderVariations[orderNo-1];
+				_orderEat.sprite = _usManager.HotDogOrderVariants[orderNo-1];
 			}
 			else if(LevelManager.levelNo > 20 && LevelManager.levelNo <= 30)
 			{

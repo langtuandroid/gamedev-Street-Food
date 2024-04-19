@@ -33,11 +33,11 @@ namespace _Project.Scripts.Other
 				PlayerPrefs.SetString ("Handcuff", Encryption.Encrypt (MenuManager.handcuffNo.ToString ()));
 				if(MenuManager.handcuffNo > 0)
 				{
-					_usManager.handcuff.SetActive(true);
+					_usManager.HandCuff.SetActive(true);
 				}
 				else
 				{
-					_usManager.handcuff.SetActive(false);
+					_usManager.HandCuff.SetActive(false);
 				}
 			} else {
 				_uiManager.EarnCoin();

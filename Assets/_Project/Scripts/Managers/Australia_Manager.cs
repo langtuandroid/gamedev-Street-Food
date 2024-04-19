@@ -20,7 +20,7 @@ namespace _Project.Scripts.Managers
 		private int totalCokesAvailable;
 		private int totalFriesAvailable;
 		private bool IsClickFirstTikki;
-		[FormerlySerializedAs("TheifPanel")] [SerializeField] private GameObject _thiefPanel;
+		[FormerlySerializedAs("TheifPanel")] [SerializeField] public GameObject _thiefPanel;
 		[FormerlySerializedAs("burgerPlates")] [SerializeField] private SpriteRenderer []_burgerPanel; //6
 		[FormerlySerializedAs("burgerOnPlates")] [SerializeField] private SpriteRenderer []_burgelOnPlate; //6
 		[FormerlySerializedAs("grills")] [SerializeField] private GameObject []_grills; //3
@@ -116,7 +116,7 @@ namespace _Project.Scripts.Managers
 		private void Start()
 		{
 			PlayerPrefs.SetInt("AusOpen",1);
-			US_Manager.tutorialEnd = false;
+			US_Manager._isEndTutorial = false;
 			Italy_Manager._isEndTutorial = false;
 			China_Manager._endTutorial = false;
 			if (LevelManager.levelNo == 31) {

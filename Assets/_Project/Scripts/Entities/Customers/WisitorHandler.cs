@@ -204,7 +204,7 @@ namespace _Project.Scripts.Entities.Customers
 			{
 				availablePosForCustomer = 1;
 				if (LevelManager.levelNo == 1)
-					_usManager.firstCustomer = _wisitorsPool[customerNo];
+					_usManager.firstWisitor = _wisitorsPool[customerNo];
 				else if (LevelManager.levelNo == 31 || LevelManager.levelNo == 32)
 				{
 					_australiaManager.FirstCustomer = _wisitorsPool[customerNo];
@@ -234,7 +234,7 @@ namespace _Project.Scripts.Entities.Customers
 
 		public void BellPress()
 		{
-			if(_availablePositions.Count > 0 && _timeOnGame > 0 && _isWait && (China_Manager._endTutorial || US_Manager.tutorialEnd || Australia_Manager.tutorialEnd || Italy_Manager._isEndTutorial ) )
+			if(_availablePositions.Count > 0 && _timeOnGame > 0 && _isWait && (China_Manager._endTutorial || US_Manager._isEndTutorial || Australia_Manager.tutorialEnd || Italy_Manager._isEndTutorial ) )
 			{
 				_isWait = false ;
 				ConfigureCustomer();

@@ -99,7 +99,7 @@ namespace _Project.Scripts.Other
 
 		private void OnMouseDown()
 		{
-			if(!TutorialPanel.popupPanelActive || US_Manager.tutorialEnd || China_Manager._endTutorial || Italy_Manager._isEndTutorial || tutorialOn || Australia_Manager.tutorialEnd)
+			if(!TutorialPanel.popupPanelActive || US_Manager._isEndTutorial || China_Manager._endTutorial || Italy_Manager._isEndTutorial || tutorialOn || Australia_Manager.tutorialEnd)
 			{
 				if(isCoke)
 				{
@@ -108,9 +108,9 @@ namespace _Project.Scripts.Other
 						scaleUp = true;
 						if(_usManager != null)
 						{
-							_usManager.AllClickedBoolsReset ();
-							_usManager.clickedItemDestinationFunction = this;
-							_usManager.clickedCoke = true;
+							_usManager.ResetBools ();
+							_usManager.objectMotion = this;
+							_usManager.IsClickedCoke = true;
 						}
 						else if(_italyManager != null)
 						{
@@ -136,17 +136,17 @@ namespace _Project.Scripts.Other
 					_canMove = true;
 					if(isRedSauce)
 					{
-						_usManager.AllClickedBoolsReset ();
-						_usManager.clickedItemDestinationFunction = this;
-						_usManager.clickedRedSauce = true;
+						_usManager.ResetBools ();
+						_usManager.objectMotion = this;
+						_usManager.IsClickedRedSauce = true;
 						iAmSelected = true;
 
 					}
 					else if(isYellowSauce)
 					{
-						_usManager.AllClickedBoolsReset ();
-						_usManager.clickedItemDestinationFunction = this;
-						_usManager.clickedYellowSauce = true;
+						_usManager.ResetBools ();
+						_usManager.objectMotion = this;
+						_usManager.IsClickedYellowSauce = true;
 						iAmSelected = true;
 					}
 					else if(isNoodlesToCook)
@@ -867,26 +867,26 @@ namespace _Project.Scripts.Other
 		private void RedSauceReachedDestination()
 		{
 			availableHotDog.isSauce = true;
-			_usManager.hotDogSaucesOnPlates[availableHotDog.GetComponent<Availability>().myPositionInArray].gameObject.SetActive (true);
-			_usManager.hotDogSaucesOnPlates[availableHotDog.GetComponent<Availability>().myPositionInArray].sprite = _usManager.hotDogSauces[0];
+			_usManager.HotDogSaucesOnPlatesSR[availableHotDog.GetComponent<Availability>().myPositionInArray].gameObject.SetActive (true);
+			_usManager.HotDogSaucesOnPlatesSR[availableHotDog.GetComponent<Availability>().myPositionInArray].sprite = _usManager.HotDogSaucesSprites[0];
 			if(availableHotDog.isTikki)
 			{
 				availableHotDog.transform.GetComponent<HotDog>().isTape = LevelManager.Orders.HOTDOG_RED;
 			}
 
-			_usManager.clickedRedSauce = false;
+			_usManager.IsClickedRedSauce = false;
 		}
 
 		private void YellowSauceReachedDestination()
 		{
 			availableHotDog.yellowSauce = true;
-			_usManager.hotDogSaucesOnPlates[availableHotDog.GetComponent<Availability>().myPositionInArray].gameObject.SetActive (true);
-			_usManager.hotDogSaucesOnPlates[availableHotDog.GetComponent<Availability>().myPositionInArray].sprite = _usManager.hotDogSauces[1];
+			_usManager.HotDogSaucesOnPlatesSR[availableHotDog.GetComponent<Availability>().myPositionInArray].gameObject.SetActive (true);
+			_usManager.HotDogSaucesOnPlatesSR[availableHotDog.GetComponent<Availability>().myPositionInArray].sprite = _usManager.HotDogSaucesSprites[1];
 			if(availableHotDog.isTikki)
 			{
 				availableHotDog.transform.GetComponent<HotDog>().isTape = LevelManager.Orders.HOTDOG_YELLOW;
 			}
-			_usManager.clickedYellowSauce = false;
+			_usManager.IsClickedYellowSauce = false;
 		}
 
 		#endregion
@@ -929,7 +929,7 @@ namespace _Project.Scripts.Other
 
 			if(_usManager != null)
 			{
-				_usManager.cokesFilled--;
+				_usManager.CokesFilledNum--;
 			}
 			else if(_italyManager != null)
 			{
@@ -954,8 +954,8 @@ namespace _Project.Scripts.Other
 
 			if(_usManager != null)
 			{
-				customer.coinsSpent+=_usManager.cokePrice;
-				_usManager.clickedCoke = false;
+				customer.coinsSpent+=_usManager.CokePrice;
+				_usManager.IsClickedCoke = false;
 			}
 			else if(_italyManager != null)
 			{

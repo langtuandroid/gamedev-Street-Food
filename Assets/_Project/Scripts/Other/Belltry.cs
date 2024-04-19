@@ -19,7 +19,7 @@ namespace _Project.Scripts.Other
 		}
 		public void ActiveBell()
 		{
-			_usManager.Bell.SetActive (true);
+			_usManager.BellObject.SetActive (true);
 			_customerHandler.stop = false ;
 			gameObject.SetActive (false);
 			PlayerPrefs.SetInt ("try", 2);
@@ -58,7 +58,7 @@ namespace _Project.Scripts.Other
 				_uiManager.goldText.text = MenuManager.golds.ToString ();
 				PlayerPrefs.SetString ("Golds", Encryption.Encrypt (MenuManager.golds.ToString ()));
 				PlayerPrefs.SetInt ("Bell", 1);
-				_usManager.Bell.SetActive(true);
+				_usManager.BellObject.SetActive(true);
 				_customerHandler.stop = false ;
 			} else
 			{

@@ -72,7 +72,7 @@ namespace _Project.Scripts.Audio
 				_deactivateImage.SetActive (false);
 				if(LevelManager.levelNo == 1)
 				{
-					_usManager.clickfirstBun = true;
+					_usManager.ClickBun = true;
 					_uiManager.tutorialPanelBg.gameObject.SetActive (true);
 					_uiManager.tutorialPanelBg.OpenPopup ("TAP BUN \n TO PUT ON THE PLATE.",false,false , 0);
 				}
@@ -148,7 +148,7 @@ namespace _Project.Scripts.Audio
 					{
 						if(LevelManager.levelNo <= 10)
 						{
-							US_Manager.tutorialEnd = true;
+							US_Manager._isEndTutorial = true;
 						}
 						else if(LevelManager.levelNo <= 20)
 						{

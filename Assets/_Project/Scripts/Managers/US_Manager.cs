@@ -5,153 +5,156 @@ using _Project.Scripts.Other;
 using _Project.Scripts.UI_Scripts;
 using _Project.Scripts.UI.Tutorial;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace _Project.Scripts.Managers
 {
 	public class US_Manager : MonoBehaviour 
 	{
+		public static bool _isEndTutorial;
+		public static int _perfectNums;
 		[Inject] private UIManager _uiManager;   
 		[Inject] private SoundsAll _levelSoundManager;
 		
-		public GameObject TheifPanel;
-		public Sprite []hotDogTikkiVariations;  
-		public Sprite []hotDogOrderVariations;  
-		public Sprite []hotDogVariations;  
-		public Sprite []hotDogSauces; 
-		public SpriteRenderer []hotDogSaucesOnPlates; 
-		public SpriteRenderer []hotdogPlates; 
-		public SpriteRenderer []hotdogOnPlates;
-		public GameObject []grills;
-		public SpriteRenderer []grillTikkis;
-		public Availability []grillPlaces;
-		public SpriteRenderer []cokeBottles;
-		public Availability []cokePlaces;
-		public GameObject dustbin;
-		public ObjectMotion redSauce;
-		public ObjectMotion yellowSauce;
-		public ObjectMotion cupCake;
-		public SpriteRenderer cokeAdd;
-		public SpriteRenderer yellowSauceAdd;
-		public SpriteRenderer redSauceAdd;
-		public static int noOfPerfects;
-		public HotDog firstHotDog;
-		public MakeTikki firstTikki;
-		public Coins firstCoins;
-		public SpriteRenderer tableTop, tableCover;
-		public static bool tutorialEnd;
-		public GameObject Radio ;
-		public GameObject whistle ;
-		public GameObject Bell ;
-		public GameObject handcuff ;
-		public GameObject starting_text ;
-
-		public Wisitor firstCustomer { get; set; }
-		public bool clickfirstBun { get; set; }
-		public bool clickFirstTikki { get; set; }
-		public int grillsFilledCount { get; set; }
-		public int totalGrillsAvailable { get; set; } = 2;
-		public int platesFilledCount { get; set; }
-		public int totalPlatesAvailable { get; set; } = 2;
-		public int cokesFilled { get; set; }
-		public int totalCokesAvailable { get; set; } = 3;
-		public bool clickedHotDog { get; set; }
-		public bool clickedTikki { get; set; }
-		public bool clickedRedSauce { get; set; }
-		public bool clickedYellowSauce { get; set; }
-		public bool clickedCoke { get; set; }
-		public MakeTikki clickedTikkiDestinationFunction { get; set; }
-		public ObjectMotion clickedItemDestinationFunction { get; set; }
-		public HotDog clickedHotDogDestinationFunction { get; set; }
-		public int cokePrice => 10;
-		public int lessBakedHotdog => 20;
-		public int perfectHotDog => 40;
+		private int _cokesAwailaable = 3;
+		private bool _clickFirst;
+		private int _girlsAwaiable = 2;
+		private int _platesAwailable = 2;
+		
+		[FormerlySerializedAs("hotdogPlates")] [SerializeField] private SpriteRenderer []_hotdogPlates; 
+		[FormerlySerializedAs("grills")] [SerializeField] private GameObject []_grills;
+		[FormerlySerializedAs("grillTikkis")] [SerializeField] private SpriteRenderer []_grillTikkis;
+		[FormerlySerializedAs("grillPlaces")] [SerializeField] private Availability []_grillPlaces;
+		[FormerlySerializedAs("cokeBottles")] [SerializeField] private SpriteRenderer []_cokeBottles;
+		[FormerlySerializedAs("cokePlaces")] [SerializeField] private Availability []_cokePlaces;
+		[FormerlySerializedAs("dustbin")] [SerializeField] private GameObject _dustbin;
+		[FormerlySerializedAs("redSauce")] [SerializeField] private ObjectMotion _redSauce;
+		[FormerlySerializedAs("yellowSauce")] [SerializeField] private ObjectMotion _yellowSauce;
+		[FormerlySerializedAs("cupCake")] [SerializeField] private ObjectMotion _cupCake;
+		[FormerlySerializedAs("cokeAdd")] [SerializeField] private SpriteRenderer _cokeAdd;
+		[FormerlySerializedAs("yellowSauceAdd")] [SerializeField] private SpriteRenderer _yellowSauceAdd;
+		[FormerlySerializedAs("redSauceAdd")] [SerializeField] private SpriteRenderer _redSauceAdd;
+		[FormerlySerializedAs("firstTikki")] [SerializeField] private MakeTikki _firstTikki;
+		[FormerlySerializedAs("tableTop")] [SerializeField] private SpriteRenderer _tableTop;
+		[FormerlySerializedAs("tableCover")] [SerializeField] private SpriteRenderer _tableCover;
+		[FormerlySerializedAs("Radio")] [SerializeField] private GameObject _RadioObject ;
+		[FormerlySerializedAs("whistle")] [SerializeField] private GameObject _whistleObject ;
+		[FormerlySerializedAs("starting_text")] [SerializeField] private GameObject _textStart;
+		
+		[FormerlySerializedAs("TheifPanel")] public GameObject TheifBoard;
+		[FormerlySerializedAs("hotDogTikkiVariations")] public Sprite []HotDogVariants;  
+		[FormerlySerializedAs("hotDogOrderVariations")] public Sprite []HotDogOrderVariants;  
+		[FormerlySerializedAs("hotDogVariations")] public Sprite []HotDogVariations;  
+		[FormerlySerializedAs("hotDogSauces")] public Sprite []HotDogSaucesSprites; 
+		[FormerlySerializedAs("hotDogSaucesOnPlates")] public SpriteRenderer []HotDogSaucesOnPlatesSR;
+		[FormerlySerializedAs("hotdogOnPlates")] public SpriteRenderer []HotdogOnPlatesSR;
+		[FormerlySerializedAs("firstHotDog")] public HotDog FirstHotDog;
+		[FormerlySerializedAs("firstCoins")] public Coins FirstCoins;
+		[FormerlySerializedAs("Bell")] public GameObject BellObject ;
+		[FormerlySerializedAs("handcuff")] public GameObject HandCuff;
+		public Wisitor firstWisitor { get; set; }
+		public bool ClickBun { get; set; }
+		public int GrillsFilledCount { get; set; }
+		public int PlatesFilledCount { get; set; }
+		public int CokesFilledNum { get; set; }
+		public bool IsClickedHotDog { get; set; }
+		public bool IsClickedTikki { get; set; }
+		public bool IsClickedRedSauce { get; set; }
+		public bool IsClickedYellowSauce { get; set; }
+		public bool IsClickedCoke { get; set; }
+		public MakeTikki MakeTiki { get; set; }
+		public ObjectMotion objectMotion { get; set; }
+		public HotDog HotDog { get; set; }
+		public int CokePrice => 10;
+		public int HotdogBakeTime => 20;
+		public int perfectHotDogTime => 40;
 		private void OnEnable()
 		{
 			if (LevelManager.levelNo == 1) {
-				starting_text.SetActive(true);
+				_textStart.SetActive(true);
 			}
 			if(PlayerPrefs.HasKey ("Radio"))
 			{
-				Radio.SetActive(true);
+				_RadioObject.SetActive(true);
 			}
 			if(PlayerPrefs.HasKey ("Whistle"))
 			{
-				whistle.SetActive(true);
+				_whistleObject.SetActive(true);
 			}
 			if (PlayerPrefs.HasKey ("Bell"))
 			{
-				Bell.SetActive(true);
+				BellObject.SetActive(true);
 			}
 			if(MenuManager.handcuffNo > 0)
 			{
-				handcuff.SetActive(true);
+				HandCuff.SetActive(true);
 			}
 		
 		}
-		public void TikkiReached()
+		public void OnTikkiDestination()
 		{
-			clickedTikkiDestinationFunction.ClickedDestination ();
+			MakeTiki.ClickedDestination ();
 		}
 
-		public void HotDogReached()
+		public void OnDogDestination()
 		{
-			clickedHotDogDestinationFunction.OnDistinationClick ();
+			HotDog.OnDistinationClick ();
 		}
 
-		public void ObjectReached()
+		public void OnObjectReach()
 		{
-			clickedItemDestinationFunction.ClickedDestination ();
+			objectMotion.ClickedDestination ();
 		}
 
 		private void Start()
 		{
-			tutorialEnd = false;
+			_isEndTutorial = false;
 			if(LevelManager.levelNo == 1)
 			{
-				starting_text.SetActive(true);
-				cokeAdd.gameObject.SetActive (false);
-				cokeAdd.color = new Color(1,1,1,0.5f); 
-				cokeAdd.transform.GetComponent<BoxCollider>().enabled = false;
-				yellowSauceAdd.gameObject.SetActive (false);
-				yellowSauceAdd.color = new Color(1,1,1,0.5f); 
-				yellowSauceAdd.transform.GetComponent<BoxCollider>().enabled = false;
-				redSauceAdd.gameObject.SetActive (false);
-				redSauceAdd.color = new Color(1,1,1,0.5f); 
-				redSauceAdd.transform.GetComponent<BoxCollider>().enabled = false;
+				_textStart.SetActive(true);
+				_cokeAdd.gameObject.SetActive (false);
+				_cokeAdd.color = new Color(1,1,1,0.5f); 
+				_cokeAdd.transform.GetComponent<BoxCollider>().enabled = false;
+				_yellowSauceAdd.gameObject.SetActive (false);
+				_yellowSauceAdd.color = new Color(1,1,1,0.5f); 
+				_yellowSauceAdd.transform.GetComponent<BoxCollider>().enabled = false;
+				_redSauceAdd.gameObject.SetActive (false);
+				_redSauceAdd.color = new Color(1,1,1,0.5f); 
+				_redSauceAdd.transform.GetComponent<BoxCollider>().enabled = false;
 
 			}
 			else if(LevelManager.levelNo == 2)
 			{
-				cokeAdd.gameObject.SetActive (false);
-				cokeAdd.transform.GetComponent<BoxCollider>().enabled = false;
-				cokeAdd.color = new Color(1,1,1,0.5f); 
+				_cokeAdd.gameObject.SetActive (false);
+				_cokeAdd.transform.GetComponent<BoxCollider>().enabled = false;
+				_cokeAdd.color = new Color(1,1,1,0.5f); 
 			}
 		
 			int platesUpgradeValue =  (int)Encryption.Decrypt (PlayerPrefs.GetString("PlateUpgrade")); 
-			totalPlatesAvailable = 2+(platesUpgradeValue*2);
-			for(int i = 0; i < totalPlatesAvailable ; i++)
+			_platesAwailable = 2+(platesUpgradeValue*2);
+			for(int i = 0; i < _platesAwailable ; i++)
 			{
-				hotdogPlates[i].color = new Color(1,1,1,1);
+				_hotdogPlates[i].color = new Color(1,1,1,1);
 			}
 
 			int cokeUpgradeValue =  (int)Encryption.Decrypt (PlayerPrefs.GetString("USCokeUpgrade")); 
-			totalCokesAvailable = 3+(cokeUpgradeValue*3);
+			_cokesAwailaable = 3+(cokeUpgradeValue*3);
 			int grillsTpgrade =  (int)Encryption.Decrypt (PlayerPrefs.GetString("GrillsUpgrade")); 
-			totalGrillsAvailable = 2+(grillsTpgrade*2);
-			int grillVal = (int)totalGrillsAvailable/2;
+			_girlsAwaiable = 2+(grillsTpgrade*2);
+			int grillVal = (int)_girlsAwaiable/2;
 			for(int i = 0; i < grillVal ; i++)
 			{
-				grills[i].SetActive (true);
+				_grills[i].SetActive (true);
 			}
 			char []coverVal = PlayerPrefs.GetString ("US_TableCover").ToCharArray ();
 			_uiManager._tabelcover = int.Parse (coverVal[coverVal.Length - 1].ToString ());
 			_uiManager.ForCoinAdd ();
-			tableCover.sprite = Resources.Load<Sprite> (PlayerPrefs.GetString ("US_TableCover"));
-			tableTop.sprite = Resources.Load<Sprite> (PlayerPrefs.GetString ("US_TableTop")) as Sprite;
+			_tableCover.sprite = Resources.Load<Sprite> (PlayerPrefs.GetString ("US_TableCover"));
+			_tableTop.sprite = Resources.Load<Sprite> (PlayerPrefs.GetString ("US_TableTop")) as Sprite;
 			if(MenuManager.cupcakeNo <= 0)
 			{
-				cupCake.gameObject.SetActive (false);
+				_cupCake.gameObject.SetActive (false);
 			}
 
 		}
@@ -159,86 +162,86 @@ namespace _Project.Scripts.Managers
 
 		public void AddMoreTikki()
 		{
-			if(clickFirstTikki || (tutorialEnd && !TutorialPanel.popupPanelActive))
+			if(_clickFirst || (_isEndTutorial && !TutorialPanel.popupPanelActive))
 			{
-				AllClickedBoolsReset();
-				if(grillsFilledCount < totalGrillsAvailable)
+				ResetBools();
+				if(GrillsFilledCount < _girlsAwaiable)
 				{
-					for(int i = 0 ; i < totalGrillsAvailable ; i++)
+					for(int i = 0 ; i < _girlsAwaiable ; i++)
 					{
-						if(grillPlaces[i].available)
+						if(_grillPlaces[i].available)
 						{
-							grillTikkis[i].gameObject.SetActive (true);
-							grillTikkis[i].sprite = hotDogTikkiVariations[0];
-							grillPlaces[i].available = false;
-							grillsFilledCount++;
+							_grillTikkis[i].gameObject.SetActive (true);
+							_grillTikkis[i].sprite = HotDogVariants[0];
+							_grillPlaces[i].available = false;
+							GrillsFilledCount++;
 							break;
 						}
 					}
 				}
-				if(clickFirstTikki)
+				if(_clickFirst)
 				{
 					_uiManager.tutorialPanelBg.gameObject.SetActive (true);
 					_uiManager.tutorialPanelBg.OpenPopup ("WAIT FOR THE SAUSAGE \n TO BAKE",false,false , 2);
-					firstTikki.tutorialOn = true;
+					_firstTikki.tutorialOn = true;
 				}
-				clickFirstTikki = false;
+				_clickFirst = false;
 			}
 		}
 
-		private void DeactivateTikkiSelection()
+		private void DeselectionTikki()
 		{
-			for(int i = 0 ; i < totalGrillsAvailable ; i++)
+			for(int i = 0 ; i < _girlsAwaiable ; i++)
 			{
-				if(!grillPlaces[i].available)
+				if(!_grillPlaces[i].available)
 				{
-					grillTikkis[i].transform.GetComponent<MakeTikki>().iAmSelected = false;
-					grillTikkis[i].transform.GetComponent<MakeTikki>().mySelection.SetActive (false);
-					grillTikkis[i].transform.localScale = Vector3.one;
+					_grillTikkis[i].transform.GetComponent<MakeTikki>().iAmSelected = false;
+					_grillTikkis[i].transform.GetComponent<MakeTikki>().mySelection.SetActive (false);
+					_grillTikkis[i].transform.localScale = Vector3.one;
 				}
 			}
 		}
 	
 		public void AddHotDogBuns()
 		{
-			if(clickfirstBun || (tutorialEnd && !TutorialPanel.popupPanelActive))
+			if(ClickBun || (_isEndTutorial && !TutorialPanel.popupPanelActive))
 			{
-				AllClickedBoolsReset();
-				if(platesFilledCount < totalPlatesAvailable)
+				ResetBools();
+				if(PlatesFilledCount < _platesAwailable)
 				{
-					for(int i = 0 ; i < totalPlatesAvailable ; i++)
+					for(int i = 0 ; i < _platesAwailable ; i++)
 					{
-						if(hotdogPlates[i].gameObject.GetComponent<Availability>().available)
+						if(_hotdogPlates[i].gameObject.GetComponent<Availability>().available)
 						{
-							hotdogOnPlates[i].gameObject.SetActive (true);
-							hotdogOnPlates[i].sprite = hotDogVariations[0];
-							platesFilledCount++;
-							hotdogPlates[i].gameObject.GetComponent<Availability>().available = false;
-							hotdogOnPlates[i].transform.GetComponent<HotDog>().isPerfect = false;
+							HotdogOnPlatesSR[i].gameObject.SetActive (true);
+							HotdogOnPlatesSR[i].sprite = HotDogVariations[0];
+							PlatesFilledCount++;
+							_hotdogPlates[i].gameObject.GetComponent<Availability>().available = false;
+							HotdogOnPlatesSR[i].transform.GetComponent<HotDog>().isPerfect = false;
 							break;
 						}
 					}
 				}
-				if(clickfirstBun)
+				if(ClickBun)
 				{
-					clickFirstTikki = true;
+					_clickFirst = true;
 					_uiManager.tutorialPanelBg.gameObject.SetActive (true);
 					_uiManager.tutorialPanelBg.OpenPopup ("TAP SAUSAGE TO PUT \n ON THE GRILLS",false,false , 1);
 				}
-				clickfirstBun = false;
+				ClickBun = false;
 			}
 		}
 
-		private void DeactivateBunSelection()
+		private void DeselectionBun()
 		{
-			for(int i = 0 ; i < totalPlatesAvailable ; i++)
+			for(int i = 0 ; i < _platesAwailable ; i++)
 			{
-				if(!hotdogPlates[i].gameObject.GetComponent<Availability>().available)
+				if(!_hotdogPlates[i].gameObject.GetComponent<Availability>().available)
 				{
-					HotDog myHotDog = hotdogOnPlates[i].transform.GetComponent<HotDog>();
+					HotDog myHotDog = HotdogOnPlatesSR[i].transform.GetComponent<HotDog>();
 					myHotDog.isSelected = false;
 					myHotDog._selectionObject.SetActive (false);
-					hotdogOnPlates[i].transform.localScale = myHotDog._localScale;
+					HotdogOnPlatesSR[i].transform.localScale = myHotDog._localScale;
 				}
 			}
 		}
@@ -246,20 +249,20 @@ namespace _Project.Scripts.Managers
 
 		public void AddCokeBottles()
 		{
-			if(tutorialEnd && !TutorialPanel.popupPanelActive)
+			if(_isEndTutorial && !TutorialPanel.popupPanelActive)
 			{
-				AllClickedBoolsReset();
-				if(cokesFilled < totalCokesAvailable)
+				ResetBools();
+				if(CokesFilledNum < _cokesAwailaable)
 				{
-					for(int i = 0 ; i < totalCokesAvailable ; i++)
+					for(int i = 0 ; i < _cokesAwailaable ; i++)
 					{
-						if(cokePlaces[i].available)
+						if(_cokePlaces[i].available)
 						{
 							_levelSoundManager.bottleClickSound.Play();
-							cokeBottles[i].gameObject.SetActive (true);
-							cokeBottles[i].color = new Color(1,1,1,1);
-							cokesFilled++;
-							cokePlaces[i].available = false;
+							_cokeBottles[i].gameObject.SetActive (true);
+							_cokeBottles[i].color = new Color(1,1,1,1);
+							CokesFilledNum++;
+							_cokePlaces[i].available = false;
 							break;
 						}
 					}
@@ -267,17 +270,17 @@ namespace _Project.Scripts.Managers
 			}
 		}
 
-		private void DeactivateAllBottlesSelection()
+		private void DeselectionAllBottles()
 		{
-			for(int i = 0 ; i < totalCokesAvailable ; i++)
+			for(int i = 0 ; i < _cokesAwailaable ; i++)
 			{
-				if(cokeBottles[i].gameObject.activeInHierarchy)
+				if(_cokeBottles[i].gameObject.activeInHierarchy)
 				{
-					if(cokeBottles[i].GetComponent<ObjectMotion>().iAmSelected)
+					if(_cokeBottles[i].GetComponent<ObjectMotion>().iAmSelected)
 					{
-						cokeBottles[i].GetComponent<ObjectMotion>().iAmSelected = false;
-						cokeBottles[i].GetComponent<ObjectMotion>().mySelection.SetActive (false);
-						cokeBottles[i].gameObject.transform.localScale = Vector3.one;
+						_cokeBottles[i].GetComponent<ObjectMotion>().iAmSelected = false;
+						_cokeBottles[i].GetComponent<ObjectMotion>().mySelection.SetActive (false);
+						_cokeBottles[i].gameObject.transform.localScale = Vector3.one;
 					}
 				}
 			}
@@ -285,43 +288,43 @@ namespace _Project.Scripts.Managers
 		
 		public void OnClickDustbn()
 		{
-			if(tutorialEnd)
+			if(_isEndTutorial)
 			{
-				if(clickedHotDog)
+				if(IsClickedHotDog)
 				{
-					clickedHotDogDestinationFunction._otherObject = dustbin;
-					HotDogReached();
+					HotDog._otherObject = _dustbin;
+					OnDogDestination();
 				}
-				else if(clickedTikki)
+				else if(IsClickedTikki)
 				{
-					if(clickedTikkiDestinationFunction.isBurnt)
+					if(MakeTiki.isBurnt)
 					{
-						TikkiReached ();
+						OnTikkiDestination ();
 					}
 				}
 
-				AllClickedBoolsReset();
+				ResetBools();
 			}
 		}
 
-		public void AllClickedBoolsReset()
+		public void ResetBools()
 		{
-			DeactivateTikkiSelection();
-			DeactivateAllBottlesSelection();
-			yellowSauce.iAmSelected = false;
-			redSauce.iAmSelected = false;
-			yellowSauce.transform.localScale = yellowSauce.myLocalScale;
-			redSauce.transform.localScale = redSauce.myLocalScale;
-			redSauce.mySelection.SetActive (false);
-			yellowSauce.mySelection.SetActive (false);
-			cupCake.iAmSelected = false;
-			cupCake.mySelection.gameObject.SetActive (false);
-			DeactivateBunSelection();
-			clickedHotDog = false;
-			clickedTikki = false;
-			clickedRedSauce = false;
-			clickedYellowSauce = false;
-			clickedCoke = false;
+			DeselectionTikki();
+			DeselectionAllBottles();
+			_yellowSauce.iAmSelected = false;
+			_redSauce.iAmSelected = false;
+			_yellowSauce.transform.localScale = _yellowSauce.myLocalScale;
+			_redSauce.transform.localScale = _redSauce.myLocalScale;
+			_redSauce.mySelection.SetActive (false);
+			_yellowSauce.mySelection.SetActive (false);
+			_cupCake.iAmSelected = false;
+			_cupCake.mySelection.gameObject.SetActive (false);
+			DeselectionBun();
+			IsClickedHotDog = false;
+			IsClickedTikki = false;
+			IsClickedRedSauce = false;
+			IsClickedYellowSauce = false;
+			IsClickedCoke = false;
 		}
 	}
 }

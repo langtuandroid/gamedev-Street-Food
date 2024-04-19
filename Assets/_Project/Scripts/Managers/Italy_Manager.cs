@@ -21,7 +21,7 @@ namespace _Project.Scripts.Managers
 		private int _fridgeFilled;
 		private bool _hasFridge;
 		
-		[FormerlySerializedAs("TheifPanel")] [SerializeField] private GameObject _theifPanel;
+		[FormerlySerializedAs("TheifPanel")] [SerializeField] public GameObject _theifPanel;
 		[FormerlySerializedAs("pizzaPlates")] [SerializeField] private SpriteRenderer []_platesPizza; //6
 		[FormerlySerializedAs("pizzaOnPlates")] [SerializeField] private SpriteRenderer []_pizzaPlates; //6
 		[FormerlySerializedAs("plateColliders")] [SerializeField] private BoxCollider []_platesCollers; //6
@@ -116,7 +116,7 @@ namespace _Project.Scripts.Managers
 		{
 			PlayerPrefs.SetInt ("ItalyOpen",1);
 			China_Manager._endTutorial = false;
-			US_Manager.tutorialEnd = false;
+			US_Manager._isEndTutorial = false;
 			Australia_Manager.tutorialEnd = false;
 			_isEndTutorial = false;
 			if(LevelManager.levelNo == 21)

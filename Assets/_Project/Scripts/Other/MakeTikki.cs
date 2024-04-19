@@ -62,7 +62,7 @@ namespace _Project.Scripts.Other
 				
 						if(isUS)
 						{
-							_usManager.firstHotDog.isTutorial = true;
+							_usManager.FirstHotDog.isTutorial = true;
 							_uiManager.tutorialPanelBg.OpenPopup ("TAP OR DRAG THIS TO \n THE BUN.",false,false , 2);
 						}
 						else
@@ -74,9 +74,9 @@ namespace _Project.Scripts.Other
 					}
 					if(isUS)
 					{
-						if(myRenderer.sprite == _usManager.hotDogTikkiVariations[1])
+						if(myRenderer.sprite == _usManager.HotDogVariants[1])
 						{
-							myRenderer.sprite = _usManager.hotDogTikkiVariations[2];
+							myRenderer.sprite = _usManager.HotDogVariants[2];
 							tikkiCompletelyBaked.Play ();
 						}
 					}
@@ -95,7 +95,7 @@ namespace _Project.Scripts.Other
 					{
 						if(isUS)
 						{
-							myRenderer.sprite = _usManager.hotDogTikkiVariations[3];
+							myRenderer.sprite = _usManager.HotDogVariants[3];
 						}
 						else
 						{
@@ -140,7 +140,7 @@ namespace _Project.Scripts.Other
 
 			if(isUS)
 			{
-				myRenderer.sprite = _usManager.hotDogTikkiVariations[1];
+				myRenderer.sprite = _usManager.HotDogVariants[1];
 			}
 			else
 			{
@@ -151,13 +151,13 @@ namespace _Project.Scripts.Other
 
 		private void OnMouseDown()
 		{
-			if((readyToPick && (!TutorialPanel.popupPanelActive || (US_Manager.tutorialEnd && Australia_Manager.tutorialEnd))) || (tutorialPick)) 
+			if((readyToPick && (!TutorialPanel.popupPanelActive || (US_Manager._isEndTutorial && Australia_Manager.tutorialEnd))) || (tutorialPick)) 
 			{
 				if(isUS)
 				{
-					_usManager.AllClickedBoolsReset ();
-					_usManager.clickedTikkiDestinationFunction = this;
-					_usManager.clickedTikki = true;
+					_usManager.ResetBools ();
+					_usManager.MakeTiki = this;
+					_usManager.IsClickedTikki = true;
 				}
 				else
 				{
@@ -230,7 +230,7 @@ namespace _Project.Scripts.Other
 					{
 						if(isUS)
 						{
-							_usManager.firstHotDog.isTutorial = true;
+							_usManager.FirstHotDog.isTutorial = true;
 							_uiManager.tutorialPanelBg.OpenPopup ("TAP OR DRAG THIS TO \n THE CUSTOMER.",false,false , 3);
 						}
 						else
@@ -291,7 +291,7 @@ namespace _Project.Scripts.Other
 						if(isUS)
 						{
 							availableHotDog.transform.GetComponent<HotDog>().isPerfect = true;
-							_usManager.hotdogOnPlates[availableHotDog.myPositionInArray].sprite = _usManager.hotDogVariations[2];
+							_usManager.HotdogOnPlatesSR[availableHotDog.myPositionInArray].sprite = _usManager.HotDogVariations[2];
 
 						}
 						else
@@ -304,14 +304,14 @@ namespace _Project.Scripts.Other
 					{
 						_levelSoundManager.buttnClickSound.Play();
 						if(isUS)
-							_usManager.hotdogOnPlates[availableHotDog.myPositionInArray].sprite = _usManager.hotDogVariations[1];
+							_usManager.HotdogOnPlatesSR[availableHotDog.myPositionInArray].sprite = _usManager.HotDogVariations[1];
 						else
 							_australiaManager._tikkiPlates[availableHotDog.myPositionInArray].sprite = _australiaManager._burgerVariations[0];
 					}
 					if(isUS)
 					{
-						_usManager.grillsFilledCount--;
-						_usManager.clickedTikki = false;
+						_usManager.GrillsFilledCount--;
+						_usManager.IsClickedTikki = false;
 					}
 					else
 					{
@@ -331,8 +331,8 @@ namespace _Project.Scripts.Other
 				transform.gameObject.SetActive(false);
 				if(isUS)
 				{
-					_usManager.grillsFilledCount--;
-					_usManager.clickedTikki = false;
+					_usManager.GrillsFilledCount--;
+					_usManager.IsClickedTikki = false;
 				}
 				else
 				{
@@ -394,7 +394,7 @@ namespace _Project.Scripts.Other
 			}
 			else
 			{
-				if(other.name.Contains ("dustbin") && (US_Manager.tutorialEnd == true || Australia_Manager.tutorialEnd== true))
+				if(other.name.Contains ("dustbin") && (US_Manager._isEndTutorial == true || Australia_Manager.tutorialEnd== true))
 				{
 					reachedPlate = true;
 				}

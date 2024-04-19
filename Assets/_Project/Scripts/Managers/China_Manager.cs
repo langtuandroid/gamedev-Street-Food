@@ -27,7 +27,7 @@ namespace _Project.Scripts.Managers
 		[FormerlySerializedAs("soupContainer")] [SerializeField] private GameObject []_containerSoup; //3
 		[FormerlySerializedAs("bowlImages")] [SerializeField] private SpriteRenderer []_bowImage; //6
 		[FormerlySerializedAs("bowlPlaces")] [SerializeField] private Availability []_bowlPlaces;  //6
-		[FormerlySerializedAs("TheifPanel")] [SerializeField] private GameObject _theifPanel;
+		[FormerlySerializedAs("TheifPanel")] [SerializeField] public GameObject _theifPanel;
 		[FormerlySerializedAs("dustbin")] [SerializeField] private GameObject _dustbin;
 		[FormerlySerializedAs("cupCake")] [SerializeField] private ObjectMotion _cupCake;
 		[FormerlySerializedAs("noodles")] [SerializeField] private ObjectMotion _noodles;
@@ -101,7 +101,7 @@ namespace _Project.Scripts.Managers
 
 		private void Start()
 		{
-			US_Manager.tutorialEnd = false;
+			US_Manager._isEndTutorial = false;
 			Italy_Manager._isEndTutorial = false;
 			Australia_Manager.tutorialEnd = false;
 			PlayerPrefs.SetInt ("ChinaOpen",1);

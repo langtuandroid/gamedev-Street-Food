@@ -55,19 +55,19 @@ namespace _Project.Scripts.Entities
 			{
 				if(LevelManager.levelNo > 0 && LevelManager.levelNo <= 10)
 				{
-					_usManager.TheifPanel.SetActive(true);
+					_usManager.TheifBoard.SetActive(true);
 				}
 				if(LevelManager.levelNo > 10 && LevelManager.levelNo <= 20)
 				{
-					_chinaManager.TheifPanel.SetActive(true);
+					_chinaManager._theifPanel.SetActive(true);
 				}
 				if(LevelManager.levelNo > 20 && LevelManager.levelNo <= 30)
 				{
-					_italyManager.TheifPanel.SetActive(true);
+					_italyManager._theifPanel.SetActive(true);
 				}
 				if(LevelManager.levelNo > 30 && LevelManager.levelNo <= 40)
 				{
-					_australiaManager.TheifPanel.SetActive(true);
+					_australiaManager._thiefPanel.SetActive(true);
 				}
 				PlayerPrefs.SetInt ("HandCuffTut",2);
 			}
@@ -160,7 +160,7 @@ namespace _Project.Scripts.Entities
 				PlayerPrefs.SetString ("Handcuff",Encryption.Encrypt (MenuManager.handcuffNo.ToString ()));
 				if(MenuManager.handcuffNo <=0 )
 				{
-					_usManager.handcuff.SetActive(false);
+					_usManager.HandCuff.SetActive(false);
 				}
 			}
 		}

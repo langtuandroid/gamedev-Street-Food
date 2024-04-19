@@ -114,11 +114,11 @@ namespace _Project.Scripts.Other
 
 			if(_usManager != null)
 			{
-				_usManager.clickedCoke = false;
-				_usManager.clickedHotDog = false;
-				_usManager.clickedTikki = false;
-				_usManager.clickedRedSauce = false;
-				_usManager.clickedYellowSauce = false;
+				_usManager.IsClickedCoke = false;
+				_usManager.IsClickedHotDog = false;
+				_usManager.IsClickedTikki = false;
+				_usManager.IsClickedRedSauce = false;
+				_usManager.IsClickedYellowSauce = false;
 			}
 			else if(_chinaManager != null)
 			{
