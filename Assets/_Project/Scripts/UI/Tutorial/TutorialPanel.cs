@@ -207,7 +207,7 @@ namespace _Project.Scripts.UI.Tutorial
 								_customerHandler.ConfigureCustomer ();
 								_uiManager.tutorialPanelCanvas.gameObject.SetActive (false);
 								_uiManager.tutorialPanelBg.gameObject.SetActive (false);
-								China_Manager.tutorialEnd = true;
+								China_Manager._endTutorial = true;
 							}
 						}
 					}
@@ -219,7 +219,7 @@ namespace _Project.Scripts.UI.Tutorial
 						}
 						else
 						{
-							China_Manager.tutorialEnd = true;
+							China_Manager._endTutorial = true;
 							_customerHandler.ConfigureCustomer ();
 							_uiManager.tutorialPanelCanvas.gameObject.SetActive (false);
 							_uiManager.tutorialPanelBg.gameObject.SetActive (false);
@@ -281,7 +281,7 @@ namespace _Project.Scripts.UI.Tutorial
 							if(LevelManager.levelNo <= 10)
 								US_Manager.tutorialEnd = true;
 							else if(LevelManager.levelNo <= 20)
-								China_Manager.tutorialEnd = true;
+								China_Manager._endTutorial = true;
 							if(LevelManager.levelNo <= 30)
 								Italy_Manager.tutorialEnd = true;
 							else

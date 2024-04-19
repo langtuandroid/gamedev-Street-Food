@@ -89,13 +89,13 @@ namespace _Project.Scripts.Audio
 				else if(LevelManager.levelNo == 11)
 				{
 
-					_chinaManager.clickPlateTut = true;
+					_chinaManager.PlateTutClick = true;
 					_uiManager.tutorialPanelBg.gameObject.SetActive (true);
 					_uiManager.tutorialPanelBg.OpenPopupChina ("TAP TO \n PLACE THE PLATE.",false,false , 9);
 				}
 				else if(LevelManager.levelNo == 13)
 				{
-					_chinaManager.clickBowlTut = true;
+					_chinaManager.BowlClock = true;
 					_uiManager.tutorialPanelBg.gameObject.SetActive (true);
 					_uiManager.tutorialPanelBg.OpenPopupChina ("CLICK BOWL TO\n PUT ON TRAY.",false,false , 10);
 				}
@@ -152,7 +152,7 @@ namespace _Project.Scripts.Audio
 						}
 						else if(LevelManager.levelNo <= 20)
 						{
-							China_Manager.tutorialEnd = true;
+							China_Manager._endTutorial = true;
 						}
 						else if(LevelManager.levelNo <= 30)
 						{

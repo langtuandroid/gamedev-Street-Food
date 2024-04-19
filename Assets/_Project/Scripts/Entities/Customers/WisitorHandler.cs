@@ -215,8 +215,8 @@ namespace _Project.Scripts.Entities.Customers
 				}
 				else if (LevelManager.levelNo == 11 || LevelManager.levelNo == 13)
 				{
-					_chinaManager.firstCustomer = _wisitorsPool[customerNo];
-					_chinaManager.firstCustomer.tutorialOn = true;
+					_chinaManager.CustomerFirst = _wisitorsPool[customerNo];
+					_chinaManager.CustomerFirst.tutorialOn = true;
 				}
 				else if (LevelManager.levelNo == 21 || LevelManager.levelNo == 22)
 				{
@@ -234,7 +234,7 @@ namespace _Project.Scripts.Entities.Customers
 
 		public void BellPress()
 		{
-			if(_availablePositions.Count > 0 && _timeOnGame > 0 && _isWait && (China_Manager.tutorialEnd || US_Manager.tutorialEnd || Australia_Manager.tutorialEnd || Italy_Manager.tutorialEnd ) )
+			if(_availablePositions.Count > 0 && _timeOnGame > 0 && _isWait && (China_Manager._endTutorial || US_Manager.tutorialEnd || Australia_Manager.tutorialEnd || Italy_Manager.tutorialEnd ) )
 			{
 				_isWait = false ;
 				ConfigureCustomer();

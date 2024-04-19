@@ -5,92 +5,96 @@ using _Project.Scripts.Other;
 using _Project.Scripts.UI_Scripts;
 using _Project.Scripts.UI.Tutorial;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace _Project.Scripts.Managers
 {
 	public class China_Manager : MonoBehaviour 
 	{
+		public static bool _endTutorial;
 		[Inject] private LevelSoundManager _levelSoundManager;
-		[Inject] private UIManager _uiManager;   
-		public GameObject TheifPanel;
-		public int soupPrice => 40;
-		public int lessBakedNoodlesPrice => 30;
-		public int perfectNoodlesPrice => 60;
-		public Sprite []noodlesInPanVariations;   //4  0- noodles , 1 - noodles with veg ,2 only veg , 3 cooked noodles 4 burnt noodles
-		public Sprite []noodlesInPlateVariations;   //4  0- uncooked , 1 cooked
-		public Sprite []soupContainerVariations;  //2 -- 0 - water , 1 - cooked
-		public SpriteRenderer []noodlePlates; //6
-		public Availability []noodlePlaces; //6
-		public ObjectMotion []noodlesPlatesMotion; //6
-		public ObjectMotion firstSoupBowl;
-		public GameObject []pans; //3
-		public GameObject []soupContainer; //3
-		public SpriteRenderer []bowlImages; //6
-		public Availability []bowlPlaces;  //6
-		public int platesFilledCount { get; set; }
-		private int totalPlatesAvailable;
-		public int bowlsFilled { get; set; }
-		private int totalBowlsAvailable;
-		public bool clickedNoodlesToCook { get; set; }
-		public bool clickedNoodlesVeg { get; set; }
-		public bool clickedSoupVeg { get; set; }
-		public bool clickedPan { get; set; }
-		public bool clickedSoupContainer { get; set; }
-		public bool clickSoupBowl { get; set; }
-		public bool clickedNoodlePlate { get; set; }
+		[Inject] private UIManager _uiManager; 
+		
+		private int _pansUpgradeNum;
+		private int _soupContainer;
+		private int _totalPlatesAvailable;
+		private int _blowsAvailable;
+		
+		[FormerlySerializedAs("noodlePlates")] [SerializeField] private SpriteRenderer []_platesNoodle; //6
+		[FormerlySerializedAs("noodlePlaces")] [SerializeField] private Availability []_placesNoodle; //6
+		[FormerlySerializedAs("pans")] [SerializeField] private GameObject []_pansObjct; //3
+		[FormerlySerializedAs("soupContainer")] [SerializeField] private GameObject []_containerSoup; //3
+		[FormerlySerializedAs("bowlImages")] [SerializeField] private SpriteRenderer []_bowImage; //6
+		[FormerlySerializedAs("bowlPlaces")] [SerializeField] private Availability []_bowlPlaces;  //6
+		[FormerlySerializedAs("TheifPanel")] [SerializeField] private GameObject _theifPanel;
+		[FormerlySerializedAs("dustbin")] [SerializeField] private GameObject _dustbin;
+		[FormerlySerializedAs("cupCake")] [SerializeField] private ObjectMotion _cupCake;
+		[FormerlySerializedAs("noodles")] [SerializeField] private ObjectMotion _noodles;
+		[FormerlySerializedAs("soupVeg")] [SerializeField] private ObjectMotion _vegSoup;
+		[FormerlySerializedAs("bowlAdd")] [SerializeField] private SpriteRenderer _addBowl;
+		[FormerlySerializedAs("Radio")] [SerializeField] private GameObject _radioObject;
+		[FormerlySerializedAs("Whistle")] [SerializeField] private GameObject _whstleObject;
+		[FormerlySerializedAs("bell")] [SerializeField] private GameObject _bellObject;
+		[FormerlySerializedAs("handcuff")] [SerializeField] private GameObject _handCuff;
+		[FormerlySerializedAs("starting_text")] [SerializeField] private GameObject _textStart;
+		[FormerlySerializedAs("tableTop")] [SerializeField] private SpriteRenderer _topTable;
+		[FormerlySerializedAs("tableCover")] [SerializeField] private SpriteRenderer _tableCover;
+		
+		[FormerlySerializedAs("noodlesPlatesMotion")] public ObjectMotion []MotionNoodlesPlates; //6
+		[FormerlySerializedAs("firstSoupBowl")] public ObjectMotion SoupBowlFirst;
+		[FormerlySerializedAs("noodlesInPanVariations")] public Sprite []noodlesPan;   //4  0- noodles , 1 - noodles with veg ,2 only veg , 3 cooked noodles 4 burnt noodles
+		[FormerlySerializedAs("noodlesInPlateVariations")] public Sprite []PlateVariations;   //4  0- uncooked , 1 cooked
+		[FormerlySerializedAs("soupContainerVariations")] public Sprite []SoupContainer;  //2 -- 0 - water , 1 - cooked
+		[FormerlySerializedAs("soupUtensils")] public ChineseUtils []soupUtils;
+		[FormerlySerializedAs("panUtensil")] public ChineseUtils []panUtils;
+		[FormerlySerializedAs("noodlesVeg")] public ObjectMotion vegNoodles;
+		public Wisitor CustomerFirst { get; set; }
+		public bool BowlClock { get; set; }
+		public bool PlateTutClick { get; set; }
+		public int FiledCountClick { get; set; }
+		public int FilledBowls { get; set; }
+		public bool ClikedNoodles { get; set; }
+		public bool NoodlesVeg { get; set; }
+		public bool IsClikedSoupVeg { get; set; }
+		public bool IsPanClick { get; set; }
+		public bool IsClickedSoupContainer { get; set; }
+		public bool IsClickSoupBowl { get; set; }
+		public bool IsClickedNoodlePlate { get; set; }
 		public ChineseUtils clickedUtensilsDestinationFunction { get; set; }
 		public ObjectMotion clickedItemDestinationFunction { get; set; }
-		public ChineseUtils []soupUtensils;
-		public ChineseUtils []panUtensil;
-		public GameObject dustbin;
-		public ObjectMotion cupCake;
-		public ObjectMotion noodles;
-		public ObjectMotion noodlesVeg;
-		public ObjectMotion soupVeg;
-		public SpriteRenderer bowlAdd;
-		public Wisitor firstCustomer { get; set; }
-		public bool clickBowlTut { get; set; }
-		public bool clickPlateTut { get; set; }
-		public SpriteRenderer tableTop;
-		public SpriteRenderer tableCover;
-		public int pansUpgrade { get; set; }
-		public int soupContainerUpgrade { get; set; }
-		public static bool tutorialEnd;
-		public GameObject Radio ;
-		public GameObject Whistle ;
-		public GameObject bell ;
-		public GameObject handcuff ;
-		public GameObject starting_text ;
+		public int SoupPrice => 40;
+		public int lessBakedNoodlesPrice => 30;
+		public int perfectNoodlesPrice => 60;
 		private void OnEnable()
 		{
 			if (LevelManager.levelNo == 11) {
-				starting_text.SetActive(true);
+				_textStart.SetActive(true);
 			}
 			if(PlayerPrefs.HasKey ("Radio"))
 			{
-				Radio.SetActive(true);
+				_radioObject.SetActive(true);
 			}
 			if(PlayerPrefs.HasKey ("Whistle"))
 			{
-				Whistle.SetActive(true);
+				_whstleObject.SetActive(true);
 			}
 			if (PlayerPrefs.HasKey ("Bell"))
 			{
-				bell.SetActive(true);
+				_bellObject.SetActive(true);
 			}
 			if(MenuManager.handcuffNo > 0)
 			{
-				handcuff.SetActive(true);
+				_handCuff.SetActive(true);
 			}
 		
 		}
-		public void UtensilReached()
+		public void UtensilReach()
 		{
 			clickedUtensilsDestinationFunction.OnDestinationClick ();
 		}
 		
-		public void ObjectReached()
+		public void ObjectReach()
 		{
 			clickedItemDestinationFunction.ClickedDestination ();
 		}
@@ -101,32 +105,32 @@ namespace _Project.Scripts.Managers
 			Italy_Manager.tutorialEnd = false;
 			Australia_Manager.tutorialEnd = false;
 			PlayerPrefs.SetInt ("ChinaOpen",1);
-			tutorialEnd = false;
+			_endTutorial = false;
 			
 			if(LevelManager.levelNo <= 12)
 			{
-				soupVeg.gameObject.SetActive (false);
-				bowlAdd.gameObject.SetActive (false);
+				_vegSoup.gameObject.SetActive (false);
+				_addBowl.gameObject.SetActive (false);
 			}
 
 			int platesUpgradeValue =  (int)Encryption.Decrypt (PlayerPrefs.GetString("ChinaPlateUpgrade")); 
-			totalPlatesAvailable = 2+(platesUpgradeValue*2);
+			_totalPlatesAvailable = 2+(platesUpgradeValue*2);
 			int bowlUpgrade =  (int)Encryption.Decrypt (PlayerPrefs.GetString("ChinaBowlsUpgrade")); 
-			totalBowlsAvailable = 2+(bowlUpgrade*2);
-			pansUpgrade =  (int)Encryption.Decrypt (PlayerPrefs.GetString("ChinaPansUpgrade")); 
-			pansUpgrade++;
+			_blowsAvailable = 2+(bowlUpgrade*2);
+			_pansUpgradeNum =  (int)Encryption.Decrypt (PlayerPrefs.GetString("ChinaPansUpgrade")); 
+			_pansUpgradeNum++;
 
-			for(int i = 0; i < pansUpgrade ; i++)
+			for(int i = 0; i < _pansUpgradeNum ; i++)
 			{
-				pans[i].SetActive (true);
+				_pansObjct[i].SetActive (true);
 			}
 
-			soupContainerUpgrade =  (int)Encryption.Decrypt (PlayerPrefs.GetString("ChinaSoupContainerUpgrade")); 
-			soupContainerUpgrade++;
+			_soupContainer =  (int)Encryption.Decrypt (PlayerPrefs.GetString("ChinaSoupContainerUpgrade")); 
+			_soupContainer++;
 
 			if (LevelManager.levelNo >= 13) {
-				for (int i = 0; i < soupContainerUpgrade; i++) {
-					soupContainer [i].SetActive (true);
+				for (int i = 0; i < _soupContainer; i++) {
+					_containerSoup [i].SetActive (true);
 				}
 			}
 
@@ -134,71 +138,71 @@ namespace _Project.Scripts.Managers
 			_uiManager._tabelcover = int.Parse (coverVal[coverVal.Length - 1].ToString ());
 			char []coverVal2 = PlayerPrefs.GetString ("China_TableTop").ToCharArray ();
 			_uiManager._tabeltop = int.Parse (coverVal[coverVal.Length - 1].ToString ());
-			tableCover.sprite = Resources.Load<Sprite> (PlayerPrefs.GetString ("China_TableTop")) as Sprite;
-			tableTop.sprite = Resources.Load<Sprite> (PlayerPrefs.GetString ("China_TableCover")) as Sprite;
+			_tableCover.sprite = Resources.Load<Sprite> (PlayerPrefs.GetString ("China_TableTop")) as Sprite;
+			_topTable.sprite = Resources.Load<Sprite> (PlayerPrefs.GetString ("China_TableCover")) as Sprite;
 			if(MenuManager.cupcakeNo <= 0)
 			{
-				cupCake.gameObject.SetActive (false);
+				_cupCake.gameObject.SetActive (false);
 			}
 			_uiManager.ForCoinAdd ();
 		}
 
-		private void DeactivatePanSelection()
+		private void PanUnSelect()
 		{
-			for(int i = 0 ; i < pansUpgrade ; i++)
+			for(int i = 0 ; i < _pansUpgradeNum ; i++)
 			{
-				panUtensil[i]._isSelected = false;
-				panUtensil[i]._selection.SetActive (false);
+				panUtils[i]._isSelected = false;
+				panUtils[i]._selection.SetActive (false);
 			}
 		}
 
-		private void DeactivateSoupContainerSelection()
+		private void UnselectSoupContainer()
 		{
-			for(int i = 0 ; i < soupContainerUpgrade ; i++)
+			for(int i = 0 ; i < _soupContainer ; i++)
 			{
-				soupUtensils[i]._isSelected = false;
-				soupUtensils[i]._selection.SetActive (false);
+				soupUtils[i]._isSelected = false;
+				soupUtils[i]._selection.SetActive (false);
 			}
 		}
 
 		public void AddMorePlates()
 		{
-			if(clickPlateTut || (tutorialEnd && !TutorialPanel.popupPanelActive))
+			if(PlateTutClick || (_endTutorial && !TutorialPanel.popupPanelActive))
 			{
-				AllClickedBoolsReset();
-				if(platesFilledCount < totalPlatesAvailable)
+				ResetBowlsCliked();
+				if(FiledCountClick < _totalPlatesAvailable)
 				{
-					for(int i = 0 ; i < totalPlatesAvailable ; i++)
+					for(int i = 0 ; i < _totalPlatesAvailable ; i++)
 					{
-						if(noodlePlaces[i].available)
+						if(_placesNoodle[i].available)
 						{
 							_levelSoundManager.bowl_click.Play();
-							noodlePlates[i].gameObject.SetActive (true);
-							noodlePlates[i].color = new Color(1,1,1,1);
-							platesFilledCount++;
-							noodlePlaces[i].available = false;
+							_platesNoodle[i].gameObject.SetActive (true);
+							_platesNoodle[i].color = new Color(1,1,1,1);
+							FiledCountClick++;
+							_placesNoodle[i].available = false;
 							break;
 						}
 					}
 				}
-				if(clickPlateTut)
+				if(PlateTutClick)
 				{
-					noodles.tutorialOn = true;
+					_noodles.tutorialOn = true;
 					_uiManager.tutorialPanelBg.OpenPopupChina ("TAP OR DRAG NOODLES TO\nTHE SKILLET.",false,false , 0);
 				}
-				clickPlateTut = false;
+				PlateTutClick = false;
 			}
 		}
 
-		private void DeactivatePlateSelection()
+		private void UnSelectPlate()
 		{
-			for(int i = 0 ; i < totalPlatesAvailable ; i++)
+			for(int i = 0 ; i < _totalPlatesAvailable ; i++)
 			{
-				if(!noodlePlaces[i].available)
+				if(!_placesNoodle[i].available)
 				{
-					noodlesPlatesMotion[i].iAmSelected = false;
-					noodlesPlatesMotion[i].mySelection.SetActive (false);
-					noodlesPlatesMotion[i].transform.localScale = noodlesPlatesMotion[i].myLocalScale;
+					MotionNoodlesPlates[i].iAmSelected = false;
+					MotionNoodlesPlates[i].mySelection.SetActive (false);
+					MotionNoodlesPlates[i].transform.localScale = MotionNoodlesPlates[i].myLocalScale;
 				}
 			}
 		}
@@ -206,44 +210,44 @@ namespace _Project.Scripts.Managers
 
 		public void AddBowls()
 		{
-			if(clickBowlTut || (tutorialEnd && !TutorialPanel.popupPanelActive))
+			if(BowlClock || (_endTutorial && !TutorialPanel.popupPanelActive))
 			{
-				AllClickedBoolsReset();
-				if(bowlsFilled < totalBowlsAvailable)
+				ResetBowlsCliked();
+				if(FilledBowls < _blowsAvailable)
 				{
-					for(int i = 0 ; i < totalBowlsAvailable ; i++)
+					for(int i = 0 ; i < _blowsAvailable ; i++)
 					{
-						if(bowlPlaces[i].available)
+						if(_bowlPlaces[i].available)
 						{
 							_levelSoundManager.bowl_click.Play();
-							bowlImages[i].gameObject.SetActive (true);
-							bowlImages[i].color = new Color(1,1,1,1);
-							bowlsFilled++;
-							bowlPlaces[i].available = false;
+							_bowImage[i].gameObject.SetActive (true);
+							_bowImage[i].color = new Color(1,1,1,1);
+							FilledBowls++;
+							_bowlPlaces[i].available = false;
 							break;
 						}
 					}
 				}
 
-				if(clickBowlTut)
+				if(BowlClock)
 				{
-					soupVeg.tutorialOn = true;
+					_vegSoup.tutorialOn = true;
 					_uiManager.tutorialPanelBg.OpenPopupChina ("TAP OR DRAG INGREDIENTS\nTO STOCKPOT.",false,false , 4);
 				}
-				clickBowlTut = false;
+				BowlClock = false;
 			}
 		}
 
-		private void DeactivateBowlsSelection()
+		private void UnselectBowls()
 		{
-			for(int i = 0 ; i < totalBowlsAvailable ; i++)
+			for(int i = 0 ; i < _blowsAvailable ; i++)
 			{
-				if(bowlImages[i].gameObject.activeInHierarchy)
+				if(_bowImage[i].gameObject.activeInHierarchy)
 				{
-					if(bowlImages[i].GetComponent<ObjectMotion>().iAmSelected)
+					if(_bowImage[i].GetComponent<ObjectMotion>().iAmSelected)
 					{
-						bowlImages[i].GetComponent<ObjectMotion>().iAmSelected = false;
-						bowlImages[i].GetComponent<ObjectMotion>().mySelection.SetActive (false);
+						_bowImage[i].GetComponent<ObjectMotion>().iAmSelected = false;
+						_bowImage[i].GetComponent<ObjectMotion>().mySelection.SetActive (false);
 					}
 				}
 			}
@@ -252,48 +256,48 @@ namespace _Project.Scripts.Managers
 
 		public void OnClickDustbn()
 		{
-			if(tutorialEnd)
+			if(_endTutorial)
 			{
-				if(clickedSoupContainer)
+				if(IsClickedSoupContainer)
 				{
-					clickedUtensilsDestinationFunction.otherObject = dustbin;
-					UtensilReached();
+					clickedUtensilsDestinationFunction.otherObject = _dustbin;
+					UtensilReach();
 				}
-				else if(clickedPan)
+				else if(IsPanClick)
 				{
-					clickedUtensilsDestinationFunction.otherObject = dustbin;
-					UtensilReached ();
+					clickedUtensilsDestinationFunction.otherObject = _dustbin;
+					UtensilReach ();
 				}
-				AllClickedBoolsReset();
+				ResetBowlsCliked();
 			}
 		}
 
-		public void AllClickedBoolsReset()
+		public void ResetBowlsCliked()
 		{
-			DeactivateBowlsSelection();
-			DeactivatePanSelection();
-			DeactivateSoupContainerSelection ();
-			DeactivatePlateSelection ();
+			UnselectBowls();
+			PanUnSelect();
+			UnselectSoupContainer ();
+			UnSelectPlate ();
 
-			cupCake.iAmSelected = false;
-			cupCake.mySelection.gameObject.SetActive (false);
+			_cupCake.iAmSelected = false;
+			_cupCake.mySelection.gameObject.SetActive (false);
 
-			noodles.iAmSelected = false;
-			noodles.mySelection.gameObject.SetActive (false);
+			_noodles.iAmSelected = false;
+			_noodles.mySelection.gameObject.SetActive (false);
 
-			noodlesVeg.iAmSelected = false;
-			noodlesVeg.mySelection.gameObject.SetActive (false);
+			vegNoodles.iAmSelected = false;
+			vegNoodles.mySelection.gameObject.SetActive (false);
 
-			soupVeg.iAmSelected = false;
-			soupVeg.mySelection.gameObject.SetActive (false);
+			_vegSoup.iAmSelected = false;
+			_vegSoup.mySelection.gameObject.SetActive (false);
 
-			clickedNoodlePlate = false;
-			clickedNoodlesVeg = false;
-			clickedNoodlesToCook = false;
-			clickedSoupVeg = false;
-			clickedPan = false;
-			clickSoupBowl = false;
-			clickedSoupContainer = false;
+			IsClickedNoodlePlate = false;
+			NoodlesVeg = false;
+			ClikedNoodles = false;
+			IsClikedSoupVeg = false;
+			IsPanClick = false;
+			IsClickSoupBowl = false;
+			IsClickedSoupContainer = false;
 		}
 	}
 }

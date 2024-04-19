@@ -122,7 +122,7 @@ namespace _Project.Scripts.Other
 			}
 			else if(_chinaManager != null)
 			{
-				_chinaManager.AllClickedBoolsReset();
+				_chinaManager.ResetBowlsCliked();
 			}
 
 			_uiManager.totalCoins+=_uiManager.Bonus_coin;

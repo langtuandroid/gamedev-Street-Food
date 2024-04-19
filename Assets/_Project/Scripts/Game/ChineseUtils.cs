@@ -72,7 +72,7 @@ namespace _Project.Scripts.Game
 					{
 						_isTutorialPick = true;
 						_uiManager.tutorialPanelBg.gameObject.SetActive (true);
-						_chinaManager.noodlesPlatesMotion[0].tutorialOn = true;
+						_chinaManager.MotionNoodlesPlates[0].tutorialOn = true;
 						if(_isPan)
 							_uiManager.tutorialPanelBg.OpenPopupChina ("TAP OR DRAG NOODLES ON \n THE PLATE.",false,false , 3);
 					}
@@ -81,7 +81,7 @@ namespace _Project.Scripts.Game
 						_alphaTween.ResetToBeginning ();
 						_alphaTween.PlayForward ();
 						_readyFood.gameObject.SetActive (true);
-						_readyFood.GetComponent<SpriteRenderer>().sprite = _chinaManager.noodlesInPanVariations[3];
+						_readyFood.GetComponent<SpriteRenderer>().sprite = _chinaManager.noodlesPan[3];
 					}
 				}
 				else if(_heatingTimer > _burningTimer && !_isBurnt)
@@ -89,7 +89,7 @@ namespace _Project.Scripts.Game
 					if(!TutorialPanel.popupPanelActive)
 					{
 						_isBurnt = true;  // burnt
-						_readyFood.GetComponent<SpriteRenderer>().sprite = _chinaManager.noodlesInPanVariations[4];
+						_readyFood.GetComponent<SpriteRenderer>().sprite = _chinaManager.noodlesPan[4];
 						_smokeParticle.gameObject.SetActive (true);
 						_smokeParticle.Play ();
 					}
@@ -100,25 +100,25 @@ namespace _Project.Scripts.Game
 
 		private void OnMouseDown()
 		{
-			if ((!TutorialPanel.popupPanelActive || China_Manager.tutorialEnd || _isTutorialPick ||
+			if ((!TutorialPanel.popupPanelActive || China_Manager._endTutorial || _isTutorialPick ||
 			     (_isSoup && _isTutorialOn)) && (_servingsAvailable > 0) && (_isNoodlesAdded && _isVegAdded))
 			{
 				_isPicked = true;
 		
 				_isScale = true;
 				_isCanMove = true;
-				_chinaManager.AllClickedBoolsReset();
+				_chinaManager.ResetBowlsCliked();
 				_chinaManager.clickedUtensilsDestinationFunction = this;
 				_isSelected = true;
 				if (_isSoup)
 				{
-					_chinaManager.clickedSoupContainer = true;
+					_chinaManager.IsClickedSoupContainer = true;
 					if (_isTutorialOn)
-						_chinaManager.firstSoupBowl.tutorialOn = true;
+						_chinaManager.SoupBowlFirst.tutorialOn = true;
 				}
 				else
 				{
-					_chinaManager.clickedPan = true;
+					_chinaManager.IsPanClick = true;
 				}
 
 				if (!_isBurnt || _isSoup)
@@ -137,22 +137,22 @@ namespace _Project.Scripts.Game
 					Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, myPos.z));
 
 			}
-			else if ((!TutorialPanel.popupPanelActive || !China_Manager.tutorialEnd) &&
+			else if ((!TutorialPanel.popupPanelActive || !China_Manager._endTutorial) &&
 			         _servingsAvailable <= 0) 
 			{
 				if (_isPan)
 				{
-					if (_chinaManager.clickedNoodlesVeg && !_isVegAdded)
+					if (_chinaManager.NoodlesVeg && !_isVegAdded)
 					{
 						_chinaManager.clickedItemDestinationFunction.utensil = this;
-						_chinaManager.ObjectReached();
-						_chinaManager.AllClickedBoolsReset();
+						_chinaManager.ObjectReach();
+						_chinaManager.ResetBowlsCliked();
 					}
-					else if (_chinaManager.clickedNoodlesToCook && !_isNoodlesAdded)
+					else if (_chinaManager.ClikedNoodles && !_isNoodlesAdded)
 					{
 						_chinaManager.clickedItemDestinationFunction.utensil = this;
-						_chinaManager.ObjectReached();
-						_chinaManager.AllClickedBoolsReset();
+						_chinaManager.ObjectReach();
+						_chinaManager.ResetBowlsCliked();
 					}
 					else
 					{
@@ -161,11 +161,11 @@ namespace _Project.Scripts.Game
 				}
 				else if (_isSoup)
 				{
-					if (_chinaManager.clickedSoupVeg && !_isVegAdded)
+					if (_chinaManager.IsClikedSoupVeg && !_isVegAdded)
 					{
 						_chinaManager.clickedItemDestinationFunction.utensil = this;
-						_chinaManager.ObjectReached();
-						_chinaManager.AllClickedBoolsReset();
+						_chinaManager.ObjectReach();
+						_chinaManager.ResetBowlsCliked();
 					}
 					else
 					{
@@ -241,11 +241,11 @@ namespace _Project.Scripts.Game
 					_servingsAvailable= 0;
 					_alphaTween.gameObject.SetActive (false);
 					_foodSpriteRenderer.gameObject.SetActive (false);
-					_readyFood.GetComponent<SpriteRenderer>().sprite = _chinaManager.soupContainerVariations[0];
+					_readyFood.GetComponent<SpriteRenderer>().sprite = _chinaManager.SoupContainer[0];
 					_imageSpriteRenderer.sprite = _laddlesSprites[0];
 					_isVegAdded = false;
-					_chinaManager.clickedSoupContainer = false;
-					_uiManager.totalCoins -= _chinaManager.soupPrice;
+					_chinaManager.IsClickedSoupContainer = false;
+					_uiManager.totalCoins -= _chinaManager.SoupPrice;
 					_uiManager.coinsText.text = _uiManager.totalCoins.ToString ();
 			
 				}
@@ -261,7 +261,7 @@ namespace _Project.Scripts.Game
 					_imageSpriteRenderer.sprite = _laddlesSprites[0];
 					_isNoodlesAdded = false;
 					_isVegAdded = false;
-					_chinaManager.clickedPan = false;
+					_chinaManager.IsPanClick = false;
 					_uiManager.totalCoins-=_chinaManager.perfectNoodlesPrice;
 					_uiManager.coinsText.text = _uiManager.totalCoins.ToString ();
 					_levelSoundManager.dustbin.Play();
@@ -299,20 +299,20 @@ namespace _Project.Scripts.Game
 								_heatingTimer = 0;
 								_alphaTween.gameObject.SetActive (false);
 								_foodSpriteRenderer.gameObject.SetActive (false);
-								_readyFood.GetComponent<SpriteRenderer>().sprite = _chinaManager.soupContainerVariations[0];
+								_readyFood.GetComponent<SpriteRenderer>().sprite = _chinaManager.SoupContainer[0];
 								_imageSpriteRenderer.sprite = _laddlesSprites[0];
 								_isVegAdded = false;
 							}
 							if(_isTutorialOn)
 							{
 								_isTutorialPick = false;
-								_chinaManager.firstSoupBowl.tutorialOn = true;
+								_chinaManager.SoupBowlFirst.tutorialOn = true;
 								_uiManager.tutorialPanelBg.OpenPopupChina ("DRAG TO THE \n CUSTOMER.",false,false , 6);
 								_isTutorialOn = false;
 							}
 							_isSelected = false;
 					
-							_chinaManager.clickedSoupContainer = false;
+							_chinaManager.IsClickedSoupContainer = false;
 						}
 					}
 				}
@@ -327,8 +327,8 @@ namespace _Project.Scripts.Game
 							if(_isTutorialOn)
 							{
 								_isTutorialPick = false;
-								_chinaManager.firstCustomer.tutorialOn = true;
-								_chinaManager.noodlesPlatesMotion[0].tutorialOn = true;
+								_chinaManager.CustomerFirst.tutorialOn = true;
+								_chinaManager.MotionNoodlesPlates[0].tutorialOn = true;
 								_uiManager.tutorialPanelBg.OpenPopupChina ("DRAG TO THE \n CUSTOMER.",false,false , 6);
 								_isTutorialOn = false;
 							}
@@ -337,12 +337,12 @@ namespace _Project.Scripts.Game
 							if(_heatingTimer >= _perfectTimer && !_isBurnt)
 							{
 								otherObjectMotion.perfect = true;
-								otherObjectMotion.myNoodles.GetComponent<SpriteRenderer>().sprite = _chinaManager.noodlesInPlateVariations[1];
+								otherObjectMotion.myNoodles.GetComponent<SpriteRenderer>().sprite = _chinaManager.PlateVariations[1];
 							
 							}
 							else if(!_isBurnt)
 							{
-								otherObjectMotion.myNoodles.GetComponent<SpriteRenderer>().sprite = _chinaManager.noodlesInPlateVariations[0];
+								otherObjectMotion.myNoodles.GetComponent<SpriteRenderer>().sprite = _chinaManager.PlateVariations[0];
 							}
 							_servingsAvailable--;
 							if(_servingsAvailable <= 0)
@@ -357,7 +357,7 @@ namespace _Project.Scripts.Game
 								_isNoodlesAdded = false;
 								_isVegAdded = false;
 							}
-							_chinaManager.clickedPan = false;
+							_chinaManager.IsPanClick = false;
 							_isSelected = false;
 						}
 					}
@@ -422,7 +422,7 @@ namespace _Project.Scripts.Game
 						}
 					}
 				}
-				if(China_Manager.tutorialEnd)
+				if(China_Manager._endTutorial)
 				{
 					if(other.name.Contains("dustbin"))
 					{
@@ -477,7 +477,7 @@ namespace _Project.Scripts.Game
 					}
 				}
 			}
-			if(China_Manager.tutorialEnd)
+			if(China_Manager._endTutorial)
 			{
 				if(other.name.Contains("dustbin"))
 				{

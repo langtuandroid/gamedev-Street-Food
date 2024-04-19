@@ -111,7 +111,7 @@ namespace _Project.Scripts.Managers
 		private void Start()
 		{
 			PlayerPrefs.SetInt ("ItalyOpen",1);
-			China_Manager.tutorialEnd = false;
+			China_Manager._endTutorial = false;
 			US_Manager.tutorialEnd = false;
 			Australia_Manager.tutorialEnd = false;
 			tutorialEnd = false;

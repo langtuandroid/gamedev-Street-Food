@@ -104,7 +104,7 @@ namespace _Project.Scripts.Entities.Customers
 				}
 
 			}
-			if(!TutorialPanel.popupPanelActive || US_Manager.tutorialEnd || tutorialOn || China_Manager.tutorialEnd || Italy_Manager.tutorialEnd || _isClick)
+			if(!TutorialPanel.popupPanelActive || US_Manager.tutorialEnd || tutorialOn || China_Manager._endTutorial || Italy_Manager.tutorialEnd || _isClick)
 			{
 				if(LevelManager.levelNo <= 10)
 				{
@@ -154,7 +154,7 @@ namespace _Project.Scripts.Entities.Customers
 				}
 				else if(LevelManager.levelNo > 10 && LevelManager.levelNo <= 20)
 				{
-					if(_chinaManager.clickedNoodlePlate)
+					if(_chinaManager.IsClickedNoodlePlate)
 					{
 						_chinaManager.clickedItemDestinationFunction.customer = this;
 
@@ -162,13 +162,13 @@ namespace _Project.Scripts.Entities.Customers
 						{
 							if(_chinaManager.clickedItemDestinationFunction.myType == _order[i])
 							{
-								_chinaManager.ObjectReached();
+								_chinaManager.ObjectReach();
 								break;
 							}
 						}
-						_chinaManager.AllClickedBoolsReset ();
+						_chinaManager.ResetBowlsCliked ();
 					}
-					else if(_chinaManager.clickSoupBowl)
+					else if(_chinaManager.IsClickSoupBowl)
 					{
 						Debug.Log("here....");
 						_chinaManager.clickedItemDestinationFunction.customer = this;
@@ -176,15 +176,15 @@ namespace _Project.Scripts.Entities.Customers
 						{
 							if(_chinaManager.clickedItemDestinationFunction.myType == _order[i])
 							{
-								_chinaManager.ObjectReached();
+								_chinaManager.ObjectReach();
 								break;
 							}
 						}
-						_chinaManager.AllClickedBoolsReset ();
+						_chinaManager.ResetBowlsCliked ();
 					}
 					else
 					{
-						_chinaManager.AllClickedBoolsReset ();
+						_chinaManager.ResetBowlsCliked ();
 					}
 				}
 				else if(LevelManager.levelNo > 20 && LevelManager.levelNo <= 30)
@@ -330,7 +330,7 @@ namespace _Project.Scripts.Entities.Customers
 				}
 				else if(_chinaManager != null)
 				{
-					if(myWaitingTime >= _waitingTime && China_Manager.tutorialEnd) 
+					if(myWaitingTime >= _waitingTime && China_Manager._endTutorial) 
 					{
 						_orderPlaces = false;
 						StartCoroutine (MoveToPositionRoutine (_customerHandler._customerEndPos.position , false));

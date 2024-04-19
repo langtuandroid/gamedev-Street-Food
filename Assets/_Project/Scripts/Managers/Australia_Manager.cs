@@ -118,7 +118,7 @@ namespace _Project.Scripts.Managers
 			PlayerPrefs.SetInt("AusOpen",1);
 			US_Manager.tutorialEnd = false;
 			Italy_Manager.tutorialEnd = false;
-			China_Manager.tutorialEnd = false;
+			China_Manager._endTutorial = false;
 			if (LevelManager.levelNo == 31) {
 				_startingTextPrefab.SetActive(true);
 			}
