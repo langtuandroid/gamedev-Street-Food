@@ -100,7 +100,7 @@ namespace _Project.Scripts.Managers
 
 		public void PizzaReached()
 		{
-			clickedPizzaDestinationFunction.ClickedDestination ();
+			clickedPizzaDestinationFunction.DestinationClick ();
 		}
 
 		public void ObjectReached()
@@ -219,7 +219,7 @@ namespace _Project.Scripts.Managers
 				{
 					Pizza myPizza = pizzaOnPlates[i].transform.GetComponent<Pizza>();
 					myPizza.iAmSelected = false;
-					myPizza.mySelection.SetActive (false);
+					myPizza._selectionObject.SetActive (false);
 				}
 			}
 		}
@@ -231,7 +231,7 @@ namespace _Project.Scripts.Managers
 				if(!ovenPlaces[i].available)
 				{
 					ovenPizzas[i].iAmSelected = false;
-					ovenPizzas[i].mySelection.SetActive (false);
+					ovenPizzas[i]._selectionObject.SetActive (false);
 				}
 			}
 		}

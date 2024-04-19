@@ -95,7 +95,7 @@ namespace _Project.Scripts.Managers
 
 		public void HotDogReached()
 		{
-			clickedHotDogDestinationFunction.ClickedDestination ();
+			clickedHotDogDestinationFunction.OnDistinationClick ();
 		}
 
 		public void ObjectReached()
@@ -213,7 +213,7 @@ namespace _Project.Scripts.Managers
 							hotdogOnPlates[i].sprite = hotDogVariations[0];
 							platesFilledCount++;
 							hotdogPlates[i].gameObject.GetComponent<Availability>().available = false;
-							hotdogOnPlates[i].transform.GetComponent<HotDog>().perfect = false;
+							hotdogOnPlates[i].transform.GetComponent<HotDog>().isPerfect = false;
 							break;
 						}
 					}
@@ -235,9 +235,9 @@ namespace _Project.Scripts.Managers
 				if(!hotdogPlates[i].gameObject.GetComponent<Availability>().available)
 				{
 					HotDog myHotDog = hotdogOnPlates[i].transform.GetComponent<HotDog>();
-					myHotDog.iAmSelected = false;
-					myHotDog.mySelection.SetActive (false);
-					hotdogOnPlates[i].transform.localScale = myHotDog.myLocalScale;
+					myHotDog.isSelected = false;
+					myHotDog._selectionObject.SetActive (false);
+					hotdogOnPlates[i].transform.localScale = myHotDog._localScale;
 				}
 			}
 		}
@@ -288,7 +288,7 @@ namespace _Project.Scripts.Managers
 			{
 				if(clickedHotDog)
 				{
-					clickedHotDogDestinationFunction.otherObject = dustbin;
+					clickedHotDogDestinationFunction._otherObject = dustbin;
 					HotDogReached();
 				}
 				else if(clickedTikki)

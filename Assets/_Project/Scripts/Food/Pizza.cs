@@ -6,6 +6,7 @@ using _Project.Scripts.Other;
 using _Project.Scripts.UI_Scripts;
 using _Project.Scripts.UI.Tutorial;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace _Project.Scripts.Food
@@ -15,116 +16,117 @@ namespace _Project.Scripts.Food
 		[Inject] private LevelSoundManager _levelSoundManager;
 		[Inject] private Italy_Manager _italyManager;
 		[Inject] private UIManager _uiManager;   
-		private Vector3 colliderSize;
-		private bool canMove;
-		private bool reachedDestination;
-		private bool tutorialPick;
-		private bool isPicked;
-		private float perfectTimer = 6f;
-		private float burningTimer = 12f;
-
+		private Vector3 _colliderSize;
+		private bool _isCanMove;
+		private bool _isOnCustomer;
+		private bool _tutorialPick;
+		private bool _isPick;
+		private float _isPerfect = 6f;
+		private float _burningTimer = 12f;
+		
+		[FormerlySerializedAs("cheese")] public bool _isCheese;
+		[FormerlySerializedAs("vegetable")] public bool _isVegetable;
+		[FormerlySerializedAs("myToppings")] public SpriteRenderer _topping;
+		[FormerlySerializedAs("myCheese")] public GameObject _cheesePrefav;
+		[FormerlySerializedAs("myPlate")] public Availability _plate;
+		[FormerlySerializedAs("myOriginalPos")] public Vector3 _originalPos;
+		[FormerlySerializedAs("myTouchPos")] public Vector3 _touchPos;
+		[FormerlySerializedAs("myLocalScale")] public Vector3 _localScale;
+		[FormerlySerializedAs("mySelection")] public GameObject _selectionObject;
+		[FormerlySerializedAs("isInOven")] public bool _isOnOven;
+		[FormerlySerializedAs("mySmoke")] public ParticleSystem _smokeParticle;
+		[FormerlySerializedAs("pizzaCompletelyBaked")] public ParticleSystem _pizzaBakedParticle;
+		[FormerlySerializedAs("myRenderer")] public SpriteRenderer _renderer;
+		[FormerlySerializedAs("myContainerCollider")] public BoxCollider _colliderConteiner;
+		[FormerlySerializedAs("error")] public GameObject _error;
+		public bool isBurnt { get; private set; }
 		public bool wrongOrderGiven { get; set; }
 		public float heatingTimer { get; set; }
 		public Wisitor customer{ get; set; }
-		public bool cheese;
-		public bool vegetable;
-		public SpriteRenderer myToppings;
-		public GameObject myCheese;
-		public Availability myPlate;
-		public Vector3 myOriginalPos , myTouchPos;
+		public bool tutorialOn{ get; set; }
 		public LevelManager.Orders myType { get; set; }
 		public bool perfect{ get; set; }
 		public bool iAmSelected{ get; set; }
-		public Vector3 myLocalScale;
-		public GameObject mySelection;
-		public bool tutorialOn{ get; set; }
-		public bool isInOven , isBurnt;
-		public ParticleSystem mySmoke , pizzaCompletelyBaked;
-		public SpriteRenderer myRenderer;
-		public BoxCollider myContainerCollider;
-		public SpriteRenderer pizzadot;
-		public GameObject error;
-	
 		private void Start()
 		{
 			_uiManager.n_Pizzas_served = PlayerPrefs.GetInt ("PizzaServed");
-			myLocalScale = transform.localScale;
-			myOriginalPos = transform.position;
-			colliderSize = transform.GetComponent<BoxCollider> ().size;
+			_localScale = transform.localScale;
+			_originalPos = transform.position;
+			_colliderSize = transform.GetComponent<BoxCollider> ().size;
 		}
 
 		private void OnDisable()
 		{
 			perfect =false;
 			wrongOrderGiven = false;
-			if(!isInOven)
+			if(!_isOnOven)
 			{
-				cheese = false;
-				vegetable  = false;
+				_isCheese = false;
+				_isVegetable  = false;
 			}
-			reachedDestination = false;
-			myToppings.gameObject.SetActive (false);
-			myCheese.gameObject.SetActive (false);
+			_isOnCustomer = false;
+			_topping.gameObject.SetActive (false);
+			_cheesePrefav.gameObject.SetActive (false);
 			transform.GetComponent<SpriteRenderer>().sprite = _italyManager.pizzaBakedVariations[0];
 			myType = LevelManager.Orders.NONE; 
-			transform.localScale = myLocalScale;
+			transform.localScale = _localScale;
 			iAmSelected = false;
-			mySelection.SetActive (false);
+			_selectionObject.SetActive (false);
 			heatingTimer = 0;
-			isPicked = false;
-			if(mySmoke != null)
+			_isPick = false;
+			if(_smokeParticle != null)
 			{
-				mySmoke.gameObject.SetActive (false);
-				mySmoke.Stop ();
+				_smokeParticle.gameObject.SetActive (false);
+				_smokeParticle.Stop ();
 			}
 			isBurnt = false;
 		}
 
 		private void Update () 
 		{
-			if(!isBurnt && !isPicked && isInOven)
+			if(!isBurnt && !_isPick && _isOnOven)
 			{
 				heatingTimer+=Time.deltaTime;
-				if(heatingTimer > perfectTimer && heatingTimer <= burningTimer)
+				if(heatingTimer > _isPerfect && heatingTimer <= _burningTimer)
 				{
 					if(tutorialOn)
 					{
-						tutorialPick = true;
+						_tutorialPick = true;
 						_uiManager.tutorialPanelBg.gameObject.SetActive (true);
 						_uiManager.tutorialPanelBg.OpenPopupItaly ("TAP OR DRAG THIS TO \n THE CUSTOMER.",false,false , 4);
 						tutorialOn = false;
 					}
-					if(myRenderer.sprite == _italyManager.pizzaBakedVariations[0])
+					if(_renderer.sprite == _italyManager.pizzaBakedVariations[0])
 					{
 						perfect = true;
-						pizzaCompletelyBaked.gameObject.SetActive(true);
-						pizzaCompletelyBaked.Play ();
-						myCheese.gameObject.SetActive (false);
-						myToppings.gameObject.SetActive (false);
+						_pizzaBakedParticle.gameObject.SetActive(true);
+						_pizzaBakedParticle.Play ();
+						_cheesePrefav.gameObject.SetActive (false);
+						_topping.gameObject.SetActive (false);
 						if(myType == LevelManager.Orders.VEG_PIZZA)
 						{
-							myRenderer.sprite = _italyManager.pizzaBakedVariations[1];
+							_renderer.sprite = _italyManager.pizzaBakedVariations[1];
 				
 						}
 						else
 						{
-							myRenderer.sprite = _italyManager.pizzaBakedVariations[2];
+							_renderer.sprite = _italyManager.pizzaBakedVariations[2];
 
 						}
 					}
 				}
-				else if(heatingTimer > burningTimer && !isBurnt)
+				else if(heatingTimer > _burningTimer && !isBurnt)
 				{
 
 					if(!TutorialPanel.popupPanelActive)
 					{
 						perfect =false;
-						myRenderer.sprite = _italyManager.pizzaBakedVariations[3];
+						_renderer.sprite = _italyManager.pizzaBakedVariations[3];
 						isBurnt = true;  // burnt
-						pizzaCompletelyBaked.Stop();
-						pizzaCompletelyBaked.gameObject.SetActive(false);
-						mySmoke.gameObject.SetActive (true);
-						mySmoke.Play ();
+						_pizzaBakedParticle.Stop();
+						_pizzaBakedParticle.gameObject.SetActive(false);
+						_smokeParticle.gameObject.SetActive (true);
+						_smokeParticle.Play ();
 					}
 				}
 			}
@@ -132,38 +134,38 @@ namespace _Project.Scripts.Food
 
 		private void OnMouseDown()
 		{
-			if((!TutorialPanel.popupPanelActive || Italy_Manager.tutorialEnd || tutorialPick || (tutorialOn && !isInOven)) && (vegetable && cheese) )
+			if((!TutorialPanel.popupPanelActive || Italy_Manager.tutorialEnd || _tutorialPick || (tutorialOn && !_isOnOven)) && (_isVegetable && _isCheese) )
 			{
-				isPicked = true;
-				canMove = true;
+				_isPick = true;
+				_isCanMove = true;
 				_italyManager.AllClickedBoolsReset ();
 				_italyManager.clickedPizzaDestinationFunction = this;
 				iAmSelected = true;
-				if(isInOven)
+				if(_isOnOven)
 				{
-					transform.GetComponent<BoxCollider> ().size = new Vector3(colliderSize.x/2f , colliderSize.y/2f , colliderSize.z);
+					transform.GetComponent<BoxCollider> ().size = new Vector3(_colliderSize.x/2f , _colliderSize.y/2f , _colliderSize.z);
 					_italyManager.clickedOvenPizza = true;
 				}
 				else
 					_italyManager.clickedPlatePizza = true;
 				
-				if(tutorialPick)
+				if(_tutorialPick)
 				{
 					_italyManager.firstCustomer.tutorialOn = true;
 				}
 				Vector3 myPos = Camera.main.WorldToScreenPoint (transform.position);
-				myTouchPos =  Camera.main.ScreenToWorldPoint (new Vector3(Input.mousePosition.x, Input.mousePosition.y , myPos.z));
+				_touchPos =  Camera.main.ScreenToWorldPoint (new Vector3(Input.mousePosition.x, Input.mousePosition.y , myPos.z));
 			}
-			else if((!TutorialPanel.popupPanelActive || !Italy_Manager.tutorialEnd) && (!vegetable || !cheese)) // Click on it to place ingredients
+			else if((!TutorialPanel.popupPanelActive || !Italy_Manager.tutorialEnd) && (!_isVegetable || !_isCheese)) // Click on it to place ingredients
 			{
 
-				if(_italyManager.clickedVeg || _italyManager.clickedNonVeg && !vegetable)
+				if(_italyManager.clickedVeg || _italyManager.clickedNonVeg && !_isVegetable)
 				{
 					_italyManager.clickedItemDestinationFunction.availablePizza = this;
 					_italyManager.ObjectReached ();
 					_italyManager.AllClickedBoolsReset ();
 				}
-				else if(_italyManager.clickedCheese && !cheese)
+				else if(_italyManager.clickedCheese && !_isCheese)
 				{
 					_italyManager.clickedItemDestinationFunction.availablePizza = this;
 					_italyManager.ObjectReached ();
@@ -171,7 +173,7 @@ namespace _Project.Scripts.Food
 				}
 				else
 				{
-					error.SetActive(true);
+					_error.SetActive(true);
 				}
 			}
 
@@ -179,12 +181,12 @@ namespace _Project.Scripts.Food
 
 		private void OnMouseDrag()
 		{
-			if( canMove)
+			if( _isCanMove)
 			{
-				error.SetActive(false);
+				_error.SetActive(false);
 				Vector3 myPos = Camera.main.WorldToScreenPoint (transform.position);
 				Vector3 newPos = Camera.main.ScreenToWorldPoint (new Vector3(Input.mousePosition.x, Input.mousePosition.y , myPos.z));
-				if(Vector3.Distance (newPos,myTouchPos) > 0.2f)
+				if(Vector3.Distance (newPos,_touchPos) > 0.2f)
 				{
 					transform.position =  Camera.main.ScreenToWorldPoint (new Vector3(Input.mousePosition.x, Input.mousePosition.y , myPos.z));
 				}
@@ -193,30 +195,30 @@ namespace _Project.Scripts.Food
 
 		private void OnMouseUp()
 		{
-			error.SetActive(false);
-			if(canMove)
+			_error.SetActive(false);
+			if(_isCanMove)
 			{
-				if(!reachedDestination)
-					StartCoroutine(MoveToPosition());
+				if(!_isOnCustomer)
+					StartCoroutine(MoveRoutine());
 				else
 				{
 
-					ClickedDestination ();
-					transform.position = myOriginalPos;
+					DestinationClick ();
+					transform.position = _originalPos;
 					transform.gameObject.SetActive(false);
 				}
-				canMove = false;
+				_isCanMove = false;
 			}
-			transform.GetComponent<BoxCollider> ().size = colliderSize;
+			transform.GetComponent<BoxCollider> ().size = _colliderSize;
 		}
-		public void Stopa()
+		public void Deactivate()
 		{
 			_uiManager.achievment_text.SetActive (false);
 		}
-		public void ClickedDestination()
+		public void DestinationClick()
 		{
-			myContainerCollider.enabled = true;
-			myPlate.available = true;
+			_colliderConteiner.enabled = true;
+			_plate.available = true;
 			if(otherObject.name.Contains ("customer"))
 			{
 				_uiManager.n_Pizzas_served++;
@@ -230,7 +232,7 @@ namespace _Project.Scripts.Food
 					_uiManager.achievment_text.SetActive(true);
 					AchievementBlock._claimCheck++;
 					PlayerPrefs.SetInt("claimvalue",AchievementBlock._claimCheck);
-					Invoke(nameof(Stopa),4.0f);
+					Invoke(nameof(Deactivate),4.0f);
 				}
 				if(PlayerPrefs.GetInt("PizzaServed") > 99 && PlayerPrefs.GetInt ("PizzaLevel2")==0)
 				{
@@ -239,7 +241,7 @@ namespace _Project.Scripts.Food
 					AchievementBlock._claimCheck++;
 					PlayerPrefs.SetInt("claimvalue",AchievementBlock._claimCheck);
 					_uiManager.achievment_text.SetActive(true);
-					Invoke(nameof(Stopa),4.0f);
+					Invoke(nameof(Deactivate),4.0f);
 				}
 				if(PlayerPrefs.GetInt("PizzaServed") > 999 && PlayerPrefs.GetInt ("PizzaLevel3")==0)
 				{
@@ -247,7 +249,7 @@ namespace _Project.Scripts.Food
 					_uiManager.achievment_text.SetActive(true);
 					AchievementBlock._claimCheck++;
 					PlayerPrefs.SetInt("claimvalue",AchievementBlock._claimCheck);
-					Invoke(nameof(Stopa),4.0f);
+					Invoke(nameof(Deactivate),4.0f);
 				}
 				_italyManager.platesFilledCount--;
 				string myTypeToEatSub = "PIZZA";
@@ -271,10 +273,10 @@ namespace _Project.Scripts.Food
 				}
 				customer.RemoveOrderFromBoard (myType);
 
-				if(tutorialPick)
+				if(_tutorialPick)
 				{
 					_uiManager.tutorialPanelBg.OpenPopupItaly ("PUT BURNT PIZZA \n IN THE DUSTBIN!",false,false , 7 , 1);
-					tutorialPick = false;
+					_tutorialPick = false;
 				}
 			
 				customer.iHaveAMultipleTypeOrder = LevelManager.Orders.NONE;
@@ -332,19 +334,19 @@ namespace _Project.Scripts.Food
 
 
 				_italyManager.ovenPizzas[pizzaDestinationAvailable.myPositionInArray].myType = myType;
-				_italyManager.ovenPizzas[pizzaDestinationAvailable.myPositionInArray].myCheese.SetActive (true);
-				_italyManager.ovenPizzas[pizzaDestinationAvailable.myPositionInArray].myToppings.gameObject.SetActive (true);
+				_italyManager.ovenPizzas[pizzaDestinationAvailable.myPositionInArray]._cheesePrefav.SetActive (true);
+				_italyManager.ovenPizzas[pizzaDestinationAvailable.myPositionInArray]._topping.gameObject.SetActive (true);
 				if(myType == LevelManager.Orders.VEG_PIZZA)
-					_italyManager.ovenPizzas[pizzaDestinationAvailable.myPositionInArray].myToppings.sprite = _italyManager.pizzaToppings[0];
+					_italyManager.ovenPizzas[pizzaDestinationAvailable.myPositionInArray]._topping.sprite = _italyManager.pizzaToppings[0];
 				else
-					_italyManager.ovenPizzas[pizzaDestinationAvailable.myPositionInArray].myToppings.sprite = _italyManager.pizzaToppings[1];
+					_italyManager.ovenPizzas[pizzaDestinationAvailable.myPositionInArray]._topping.sprite = _italyManager.pizzaToppings[1];
 				
 				_italyManager.ovenColliders[pizzaDestinationAvailable.myPositionInArray].enabled = false;
 
 			}
 			else  
 			{
-				if(!isInOven)
+				if(!_isOnOven)
 					_italyManager.platesFilledCount--;
 				if(perfect)
 				{
@@ -354,7 +356,7 @@ namespace _Project.Scripts.Food
 					if(_uiManager.totalCoins > 0){
 						_uiManager.dustbin_textparent.SetActive(true);
 						_uiManager.dustbin_text.text = "-"+_italyManager.perfectPizza.ToString(); 
-						Invoke(nameof(Deactivedustbin),1.0f);
+						Invoke(nameof(DeactivateDubin),1.0f);
 					}
 					if(_uiManager.totalCoins < 0)
 					{
@@ -370,7 +372,7 @@ namespace _Project.Scripts.Food
 					if(_uiManager.totalCoins > 0){
 						_uiManager.dustbin_textparent.SetActive(true);
 						_uiManager.dustbin_text.text = "-"+_italyManager.lessBakedPizza.ToString(); 
-						Invoke(nameof(Deactivedustbin),1.0f);
+						Invoke(nameof(DeactivateDubin),1.0f);
 					}
 					if(_uiManager.totalCoins < 0)
 					{
@@ -380,30 +382,30 @@ namespace _Project.Scripts.Food
 				}
 			
 			}
-			transform.position = myOriginalPos;
+			transform.position = _originalPos;
 			transform.gameObject.SetActive(false);
 		}
-		public void Deactivedustbin()
+		public void DeactivateDubin()
 		{
 			_uiManager.dustbin_textparent.SetActive (false);
 			_uiManager.dustbin_textparent.transform.position = _uiManager.dustbintextintialposition;
 		}
 
-		private IEnumerator MoveToPosition()
+		private IEnumerator MoveRoutine()
 		{
-			float distance = Vector3.Distance (transform.position , myOriginalPos);
+			float distance = Vector3.Distance (transform.position , _originalPos);
 			float speed = 15;
 			while(distance > 0.1f)
 			{
 				float step = speed * 0.02f;
-				transform.position = Vector3.MoveTowards(transform.position, myOriginalPos, step);
-				distance = Vector3.Distance (transform.position , myOriginalPos);
+				transform.position = Vector3.MoveTowards(transform.position, _originalPos, step);
+				distance = Vector3.Distance (transform.position , _originalPos);
 				yield return 0;
 			}
-			isPicked = false;
+			_isPick = false;
 			if(iAmSelected)
-				mySelection.SetActive (true);
-			transform.position = myOriginalPos;
+				_selectionObject.SetActive (true);
+			transform.position = _originalPos;
 		}
 	
 	
@@ -412,7 +414,7 @@ namespace _Project.Scripts.Food
 
 		private void OnTriggerStay(Collider other)
 		{
-			if(!isInOven)
+			if(!_isOnOven)
 			{
 				if(other.name.Contains ("ovenPlace"))
 				{
@@ -420,7 +422,7 @@ namespace _Project.Scripts.Food
 					pizzaDestinationAvailable = other.GetComponent<Availability>();
 					if(pizzaDestinationAvailable.available)
 					{
-						reachedDestination = true;
+						_isOnCustomer = true;
 					}
 				}
 			}
@@ -435,21 +437,21 @@ namespace _Project.Scripts.Food
 						if(myType == customer._order[i])
 						{
 							wrongOrderGiven = false;
-							reachedDestination = true;
+							_isOnCustomer = true;
 							break;
 						}
 					}
-					if(!reachedDestination && customer.iHaveAMultipleTypeOrder != LevelManager.Orders.NONE)
+					if(!_isOnCustomer && customer.iHaveAMultipleTypeOrder != LevelManager.Orders.NONE)
 					{
 						wrongOrderGiven = true;
-						reachedDestination = true;
+						_isOnCustomer = true;
 					}
 				}
 			}
 			if(other.name.Contains ("dustbin") && Italy_Manager.tutorialEnd == true)
 			{
 				otherObject = other.gameObject;
-				reachedDestination = true;
+				_isOnCustomer = true;
 			}
 		
 		}
@@ -460,7 +462,7 @@ namespace _Project.Scripts.Food
 			{
 				otherObject = null;
 				wrongOrderGiven = false;
-				reachedDestination = false;
+				_isOnCustomer = false;
 			}
 			else if(other.name.Contains ("ovenPlace") )
 			{
@@ -470,13 +472,13 @@ namespace _Project.Scripts.Food
 					{
 						otherObject = null;
 						wrongOrderGiven = false;
-						reachedDestination = false;
+						_isOnCustomer = false;
 					}
 				}
 				else
 				{
 					wrongOrderGiven = false;
-					reachedDestination = false;
+					_isOnCustomer = false;
 				}
 			}
 		

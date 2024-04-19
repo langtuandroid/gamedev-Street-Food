@@ -1,18 +1,19 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace _Project.Scripts.Entities.Loader
 {
-	public class Loader : MonoBehaviour 
+	public class Loader : MonoBehaviour
 	{
-		private int rand ;
-		private bool a;
-		private bool started=true ;
-		private AsyncOperation asyncOp;
+		private int _randNum;
+		private bool _isA;
+		private bool _started = true;
+		private AsyncOperation _async;
 		
 		public static string levelToLoad;
-		[SerializeField] private Text loader_text ;
-		[SerializeField] private Slider loader;
+		[FormerlySerializedAs("loader_text")] [SerializeField] private Text _textLoader ;
+		[FormerlySerializedAs("loader")] [SerializeField] private Slider _loaderSlider;
 
 		private void Awake()
 		{
@@ -21,40 +22,40 @@ namespace _Project.Scripts.Entities.Loader
 		
 		private void OnEnable()
 		{
-			started = true;
-			loader.value = 0.01f;
-			rand = Random.Range (0, 8);
-			if (rand == 0) {
-				loader_text.text = "Use handcuffs to catch thieves";
+			_started = true;
+			_loaderSlider.value = 0.01f;
+			_randNum = Random.Range (0, 8);
+			if (_randNum == 0) {
+				_textLoader.text = "Use handcuffs to catch thieves";
 			}
-			else if (rand == 1) {
-				loader_text.text = "Use the bell to call more customers.";
+			else if (_randNum == 1) {
+				_textLoader.text = "Use the bell to call more customers.";
 			}
-			else if (rand == 2) {
-				loader_text.text = "The customer waits longer when radio is switched on";
+			else if (_randNum == 2) {
+				_textLoader.text = "The customer waits longer when radio is switched on";
 			}
-			else if (rand == 3) {
-				loader_text.text = "The whistle blows when the customer leaves without paying.";
+			else if (_randNum == 3) {
+				_textLoader.text = "The whistle blows when the customer leaves without paying.";
 			}
-			else if (rand == 4) {
-				loader_text.text = "Buy upgrades to increase the equipments capacity.";
+			else if (_randNum == 4) {
+				_textLoader.text = "Buy upgrades to increase the equipments capacity.";
 			}
-			else if (rand == 5) {
-				loader_text.text = "The cupcake refills the customer waiting bar.";
+			else if (_randNum == 5) {
+				_textLoader.text = "The cupcake refills the customer waiting bar.";
 			}
-			else if (rand == 6) {
-				loader_text.text = "Purchase gold to buy more upgrades.";
+			else if (_randNum == 6) {
+				_textLoader.text = "Purchase gold to buy more upgrades.";
 			}
-			else if (rand == 7) {
-				loader_text.text = "Better decorated stall fetches higher bonus.";
+			else if (_randNum == 7) {
+				_textLoader.text = "Better decorated stall fetches higher bonus.";
 			}
 		}
 
 		private void Update () 
 		{
-			loader.value += 0.009f ;
-			if (loader.value >= 0.9f) {
-				a= true;
+			_loaderSlider.value += 0.009f ;
+			if (_loaderSlider.value >= 0.9f) {
+				_isA= true;
 				Application.LoadLevel(levelToLoad);
 			}
 		}

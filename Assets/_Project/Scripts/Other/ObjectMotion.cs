@@ -46,7 +46,7 @@ namespace _Project.Scripts.Other
 		public bool isPizzaNonVeg;
 		public bool isCheese;
 		public Pizza availablePizza { get; set; }
-		public Burger availableBurger { get; set; }
+		public BurgerFood availableBurger { get; set; }
 		public bool isTomato;
 		public bool isOnion;
 		public bool isCabbage;
@@ -484,33 +484,33 @@ namespace _Project.Scripts.Other
 
 		private void TomatoReachedDestination()
 		{
-			if(!availableBurger.tomato)
+			if(!availableBurger.IsTomato)
 			{
-				availableBurger.tomato = true;
-				availableBurger.myType = DefineBurgerType(availableBurger);
-				availableBurger.myTomato.gameObject.SetActive (true);
+				availableBurger.IsTomato = true;
+				availableBurger.type = DefineBurgerType(availableBurger);
+				availableBurger._tomatoPrefab.gameObject.SetActive (true);
 
 			}
 		}
 
 		private void OnionReachedDestination()
 		{
-			if(!availableBurger.onion)
+			if(!availableBurger.IsOnion)
 			{
-				availableBurger.onion = true;
-				availableBurger.myType = DefineBurgerType(availableBurger);
-				availableBurger.myOnion.gameObject.SetActive (true);
+				availableBurger.IsOnion = true;
+				availableBurger.type = DefineBurgerType(availableBurger);
+				availableBurger._onionPrefab.gameObject.SetActive (true);
 
 			}
 		}
 
 		private void CabbageReachedDestination()
 		{
-			if(!availableBurger.cabbage)
+			if(!availableBurger.IsCabbage)
 			{
-				availableBurger.cabbage = true;
-				availableBurger.myType = DefineBurgerType(availableBurger);
-				availableBurger.myCabbage.gameObject.SetActive (true);
+				availableBurger.IsCabbage = true;
+				availableBurger.type = DefineBurgerType(availableBurger);
+				availableBurger._cabbagePrefab.gameObject.SetActive (true);
 
 			}
 		}
@@ -587,26 +587,26 @@ namespace _Project.Scripts.Other
 			}
 		}
 
-		LevelManager.Orders DefineBurgerType(Burger myBurger)
+		LevelManager.Orders DefineBurgerType(BurgerFood myBurger)
 		{
-			if(myBurger.tomato && myBurger.onion && myBurger.cabbage)
-				myBurger.myType = LevelManager.Orders.BURGER_COMPLETE;
-			else if(myBurger.tomato && myBurger.onion)
-				myBurger.myType = LevelManager.Orders.BURGER_TOMATO_ONION;
-			else if(myBurger.cabbage && myBurger.onion)
-				myBurger.myType = LevelManager.Orders.BURGER_ONION_CABBAGE;
-			else if(myBurger.tomato && myBurger.cabbage)
-				myBurger.myType = LevelManager.Orders.BURGER_TOMATO_CABBAGE;
-			else if(myBurger.tomato)
-				myBurger.myType = LevelManager.Orders.BURGER_TOMATO;
-			else if(myBurger.onion)
-				myBurger.myType = LevelManager.Orders.BURGER_ONION;
-			else if(myBurger.cabbage)
-				myBurger.myType = LevelManager.Orders.BURGER_CABBAGE;
+			if(myBurger.IsTomato && myBurger.IsOnion && myBurger.IsCabbage)
+				myBurger.type = LevelManager.Orders.BURGER_COMPLETE;
+			else if(myBurger.IsTomato && myBurger.IsOnion)
+				myBurger.type = LevelManager.Orders.BURGER_TOMATO_ONION;
+			else if(myBurger.IsCabbage && myBurger.IsOnion)
+				myBurger.type = LevelManager.Orders.BURGER_ONION_CABBAGE;
+			else if(myBurger.IsTomato && myBurger.IsCabbage)
+				myBurger.type = LevelManager.Orders.BURGER_TOMATO_CABBAGE;
+			else if(myBurger.IsTomato)
+				myBurger.type = LevelManager.Orders.BURGER_TOMATO;
+			else if(myBurger.IsOnion)
+				myBurger.type = LevelManager.Orders.BURGER_ONION;
+			else if(myBurger.IsCabbage)
+				myBurger.type = LevelManager.Orders.BURGER_CABBAGE;
 			else
-				myBurger.myType = LevelManager.Orders.BURGER;
+				myBurger.type = LevelManager.Orders.BURGER;
 
-			return myBurger.myType;
+			return myBurger.type;
 		}
 
 		#endregion
@@ -615,12 +615,12 @@ namespace _Project.Scripts.Other
 
 		void PizzaVegReachedDestination()
 		{
-			if(!availablePizza.vegetable)
+			if(!availablePizza._isVegetable)
 			{
 				availablePizza.myType = LevelManager.Orders.VEG_PIZZA;
-				availablePizza.myToppings.gameObject.SetActive (true);
-				availablePizza.myToppings.sprite = _italyManager.pizzaToppings[0];
-				availablePizza.vegetable = true;
+				availablePizza._topping.gameObject.SetActive (true);
+				availablePizza._topping.sprite = _italyManager.pizzaToppings[0];
+				availablePizza._isVegetable = true;
 				_italyManager.clickedVeg = false;
 				if(tutorialOn)
 				{
@@ -634,24 +634,24 @@ namespace _Project.Scripts.Other
 
 		void PizzaNonVegReachedDestination()
 		{
-			if(!availablePizza.vegetable)
+			if(!availablePizza._isVegetable)
 			{
 				_italyManager.clickedNonVeg = false;
 			
 				availablePizza.myType = LevelManager.Orders.NON_VEG_PIZZA;
-				availablePizza.myToppings.gameObject.SetActive (true);
-				availablePizza.myToppings.sprite = _italyManager.pizzaToppings[1];
-				availablePizza.vegetable = true;
+				availablePizza._topping.gameObject.SetActive (true);
+				availablePizza._topping.sprite = _italyManager.pizzaToppings[1];
+				availablePizza._isVegetable = true;
 			}
 		}
 
 		void PizzaCheeseReachedDestination()
 		{
-			if(!availablePizza.cheese)
+			if(!availablePizza._isCheese)
 			{
 				_italyManager.clickedCheese = false;
-				availablePizza.myCheese.SetActive (true);
-				availablePizza.cheese = true;
+				availablePizza._cheesePrefav.SetActive (true);
+				availablePizza._isCheese = true;
 				if(tutorialOn)
 				{
 					tutorialOn = false;
@@ -866,12 +866,12 @@ namespace _Project.Scripts.Other
 
 		private void RedSauceReachedDestination()
 		{
-			availableHotDog.redSauce = true;
+			availableHotDog.isSauce = true;
 			_usManager.hotDogSaucesOnPlates[availableHotDog.GetComponent<Availability>().myPositionInArray].gameObject.SetActive (true);
 			_usManager.hotDogSaucesOnPlates[availableHotDog.GetComponent<Availability>().myPositionInArray].sprite = _usManager.hotDogSauces[0];
-			if(availableHotDog.tikki)
+			if(availableHotDog.isTikki)
 			{
-				availableHotDog.transform.GetComponent<HotDog>().myType = LevelManager.Orders.HOTDOG_RED;
+				availableHotDog.transform.GetComponent<HotDog>().isTape = LevelManager.Orders.HOTDOG_RED;
 			}
 
 			_usManager.clickedRedSauce = false;
@@ -882,9 +882,9 @@ namespace _Project.Scripts.Other
 			availableHotDog.yellowSauce = true;
 			_usManager.hotDogSaucesOnPlates[availableHotDog.GetComponent<Availability>().myPositionInArray].gameObject.SetActive (true);
 			_usManager.hotDogSaucesOnPlates[availableHotDog.GetComponent<Availability>().myPositionInArray].sprite = _usManager.hotDogSauces[1];
-			if(availableHotDog.tikki)
+			if(availableHotDog.isTikki)
 			{
-				availableHotDog.transform.GetComponent<HotDog>().myType = LevelManager.Orders.HOTDOG_YELLOW;
+				availableHotDog.transform.GetComponent<HotDog>().isTape = LevelManager.Orders.HOTDOG_YELLOW;
 			}
 			_usManager.clickedYellowSauce = false;
 		}
@@ -1020,7 +1020,7 @@ namespace _Project.Scripts.Other
 				{
 					otherObject = other.gameObject;
 					availableHotDog = other.GetComponent<HotDog>();
-					if(!availableHotDog.redSauce && !availableHotDog.yellowSauce)
+					if(!availableHotDog.isSauce && !availableHotDog.yellowSauce)
 					{
 						reachedDestination = true;
 					}
@@ -1158,14 +1158,14 @@ namespace _Project.Scripts.Other
 					availablePizza = other.GetComponent<Pizza>();
 					if(isPizzaNonVeg || isPizzaVeg)
 					{
-						if(!availablePizza.vegetable)
+						if(!availablePizza._isVegetable)
 						{
 							reachedDestination = true;
 						}
 					}
 					else if(isCheese)
 					{
-						if(!availablePizza.cheese)
+						if(!availablePizza._isCheese)
 						{
 							reachedDestination = true;
 						}
@@ -1177,24 +1177,24 @@ namespace _Project.Scripts.Other
 				if(other.name.Contains ("burger"))
 				{
 					otherObject = other.gameObject;
-					availableBurger = other.GetComponent<Burger>();
+					availableBurger = other.GetComponent<BurgerFood>();
 					if(isTomato)
 					{
-						if(!availableBurger.tomato)
+						if(!availableBurger.IsTomato)
 						{
 							reachedDestination = true;
 						}
 					}
 					else if(isOnion)
 					{
-						if(!availableBurger.onion)
+						if(!availableBurger.IsOnion)
 						{
 							reachedDestination = true;
 						}
 					}
 					else if(isCabbage)
 					{
-						if(!availableBurger.cabbage)
+						if(!availableBurger.IsCabbage)
 						{
 							reachedDestination = true;
 						}

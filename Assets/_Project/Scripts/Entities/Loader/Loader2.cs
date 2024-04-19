@@ -1,5 +1,6 @@
 ﻿using _Project.Scripts.UI_Scripts;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Zenject;
 
@@ -8,49 +9,49 @@ namespace _Project.Scripts.Entities.Loader
 	public class Loader2 : MonoBehaviour 
 	{
 		[Inject] private MenuManager _menuManager;   
-		private int rand;
-		private bool started;
-		private int a = 0;
-		private int b = 0;
-		[SerializeField] private Text loader_text ;
-		[SerializeField] private Slider loader;
+		private int _rand;
+		private bool _isStarted;
+		private int _a = 0;
+		private int _b = 0;
+		[FormerlySerializedAs("loader_text")] [SerializeField] private Text _loaderText ;
+		[FormerlySerializedAs("loader")] [SerializeField] private Slider loaderSlider;
 		
 		private void OnEnable() {
 		
-			started = true;
-			loader.value = 0.01f;
-			rand = Random.Range (0, 8);
-			if (rand == 0) {
-				loader_text.text = "Use handcuffs to catch thieves";
+			_isStarted = true;
+			loaderSlider.value = 0.01f;
+			_rand = Random.Range (0, 8);
+			if (_rand == 0) {
+				_loaderText.text = "Use handcuffs to catch thieves";
 			}
-			else if (rand == 1) {
-				loader_text.text = "Use the bell to call more customers.";
+			else if (_rand == 1) {
+				_loaderText.text = "Use the bell to call more customers.";
 			}
-			else if (rand == 2) {
-				loader_text.text = "The customer waits longer when radio is switched on";
+			else if (_rand == 2) {
+				_loaderText.text = "The customer waits longer when radio is switched on";
 			}
-			else if (rand == 3) {
-				loader_text.text = "The whistle blows when the customer leaves without paying.";
+			else if (_rand == 3) {
+				_loaderText.text = "The whistle blows when the customer leaves without paying.";
 			}
-			else if (rand == 4) {
-				loader_text.text = "Buy upgrades to increase the equipments capacity.";
+			else if (_rand == 4) {
+				_loaderText.text = "Buy upgrades to increase the equipments capacity.";
 			}
-			else if (rand == 5) {
-				loader_text.text = "The cupcake refills the customer waiting bar.";
+			else if (_rand == 5) {
+				_loaderText.text = "The cupcake refills the customer waiting bar.";
 			}
-			else if (rand == 6) {
-				loader_text.text = "Purchase gold to buy more upgrades.";
+			else if (_rand == 6) {
+				_loaderText.text = "Purchase gold to buy more upgrades.";
 			}
-			else if (rand == 7) {
-				loader_text.text = "Better decorated stall fetches higher bonus.";
+			else if (_rand == 7) {
+				_loaderText.text = "Better decorated stall fetches higher bonus.";
 			}
 		}
 
 
 		private void Update () {
 
-			loader.value += 0.015f ;
-			if (loader.value >= 0.9f) 
+			loaderSlider.value += 0.015f ;
+			if (loaderSlider.value >= 0.9f) 
 			{
 				_menuManager.Achievments();
 			}

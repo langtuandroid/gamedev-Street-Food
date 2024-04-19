@@ -48,7 +48,7 @@ namespace _Project.Scripts.Managers
 		public bool clickedCoke{ get; set; }
 		public MakeTikki clickedTikkiDestinationFunction { get; set; }
 		public ObjectMotion clickedItemDestinationFunction { get; set; }
-		public Burger clickedHotDogDestinationFunction { get; set; }
+		public BurgerFood clickedHotDogDestinationFunction { get; set; }
 		public GameObject dustbin;
 		public ObjectMotion tomato;
 		public ObjectMotion onion;
@@ -58,7 +58,7 @@ namespace _Project.Scripts.Managers
 		public GameObject onionAdd;
 		public GameObject cabbageAdd;
 		public GameObject friesAdd;
-		public Burger firstBurger;
+		public BurgerFood firstBurger;
 		public MakeTikki firstTikki;
 		public ObjectMotion firstFries;
 		public Wisitor firstCustomer { get; set; }
@@ -102,7 +102,7 @@ namespace _Project.Scripts.Managers
 
 		public void HotDogReached()
 		{
-			clickedHotDogDestinationFunction.ClickedDestination ();
+			clickedHotDogDestinationFunction.OnDestinationClick ();
 		}
 
 		public void ObjectReached()
@@ -238,7 +238,7 @@ namespace _Project.Scripts.Managers
 							burgerOnPlates[i].gameObject.SetActive (true);
 							platesFilledCount++;
 							burgerPlates[i].gameObject.GetComponent<Availability>().available = false;
-							burgerOnPlates[i].transform.GetComponent<Burger>().perfect = false;
+							burgerOnPlates[i].transform.GetComponent<BurgerFood>().isPrefavet = false;
 							break;
 						}
 					}
@@ -259,9 +259,9 @@ namespace _Project.Scripts.Managers
 			{
 				if(!burgerPlates[i].gameObject.GetComponent<Availability>().available)
 				{
-					Burger myBurger = burgerOnPlates[i].transform.GetComponent<Burger>();
-					myBurger.iAmSelected = false;
-					myBurger.mySelection.SetActive (false);
+					BurgerFood myBurger = burgerOnPlates[i].transform.GetComponent<BurgerFood>();
+					myBurger.isSelected = false;
+					myBurger._selectionObject.SetActive (false);
 				}
 			}
 		}

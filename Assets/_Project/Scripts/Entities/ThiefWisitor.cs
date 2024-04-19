@@ -10,21 +10,21 @@ using Zenject;
 
 namespace _Project.Scripts.Entities
 {
-	public class Thief : MonoBehaviour
+	public class ThiefWisitor : MonoBehaviour
 	{
+		public static ThiefWisitor _instance ;
 		[Inject] private WisitorHandler _customerHandler;
 		[Inject] private US_Manager _usManager;
 		[Inject] private Italy_Manager _italyManager;
 		[Inject] private China_Manager _chinaManager;
 		[Inject] private Australia_Manager _australiaManager;
-		[Inject] private UIManager _uiManager;   
-		float speed = 1.5f;
-		int reachedPos = 4;
-		
-		public static Thief _instance ;
+		[Inject] private UIManager _uiManager;
+		private float _speed = 1.5f;
+		private int _posReack = 4;
+		private bool _isCaught;
 		[SerializeField] private Transform []coinsPos;
-		public int coinsStolen { get; set; }
-		public bool isCaught  { get; set; }
+		public int coinsStolen { get; private set; }
+	
 
 		private void Awake()
 		{
@@ -33,10 +33,10 @@ namespace _Project.Scripts.Entities
 		private void Start () 
 		{
 			_uiManager.n_Thieves_caught=PlayerPrefs.GetInt ("ThiefCaught");
-			InvokeRepeating(nameof(Condition), 1f,1f);
+			InvokeRepeating(nameof(CheckConditions), 1f,1f);
 		}
 
-		private void Condition()
+		private void CheckConditions()
 		{
 			if ((LevelManager.levelNo == 8 || LevelManager.levelNo == 9 || LevelManager.levelNo == 10 ||
 			     LevelManager.levelNo == 17 || LevelManager.levelNo == 18 || LevelManager.levelNo == 19 ||
@@ -45,11 +45,11 @@ namespace _Project.Scripts.Entities
 			     LevelManager.levelNo == 38 || LevelManager.levelNo == 39 || LevelManager.levelNo == 40) &&
 			    Coins.visible > 3)
 			{
-				bringThiefIn();
+				ThiefCome();
 			}
 		}
 
-		private void bringThiefIn()
+		private void ThiefCome()
 		{
 			if(PlayerPrefs.GetInt ("HandCuffTut") == 1)
 			{
@@ -71,48 +71,48 @@ namespace _Project.Scripts.Entities
 				}
 				PlayerPrefs.SetInt ("HandCuffTut",2);
 			}
-			reachedPos = 4;
-			isCaught = false;
+			_posReack = 4;
+			_isCaught = false;
 
-			StartCoroutine (MoveToPosition(_customerHandler._customerEndPos.position ));
+			StartCoroutine (MoveToRoutine(_customerHandler._customerEndPos.position ));
 			if ((MenuManager.handcuffNo <= 0) && PlayerPrefs.GetInt("handcuffPanel")!=2 && coinsStolen > 0 && (LevelManager.levelNo == 8 || LevelManager.levelNo==9 ||LevelManager.levelNo == 10) ) {
 		
-				Invoke (nameof(bringThiefAgain), 9.0f);
+				Invoke (nameof(ThiefAgain), 9.0f);
 				PlayerPrefs.SetInt("handcuffPanel",2);
 			}
 		}
 
-		private void bringThiefAgain()
+		private void ThiefAgain()
 		{
 			_uiManager.Handcuff ();
 		}
 
-		private IEnumerator MoveToPosition(Vector3 finalPos )
+		private IEnumerator MoveToRoutine(Vector3 finalPos )
 		{
 			float distance = Vector3.Distance (transform.position , finalPos);
-			speed = 2f;
+			_speed = 2f;
 			while(distance > 0.1f)
 			{
-				if(reachedPos >= 0 && !isCaught)
+				if(_posReack >= 0 && !_isCaught)
 				{
-					if(transform.position.x < coinsPos[reachedPos].position.x )
+					if(transform.position.x < coinsPos[_posReack].position.x )
 					{
-						if(_customerHandler._coins[reachedPos].gameObject.activeInHierarchy)
+						if(_customerHandler._coins[_posReack].gameObject.activeInHierarchy)
 						{
-							coinsStolen+=_customerHandler._coins[reachedPos].myAmount;
-							_customerHandler._coins[reachedPos].CoinsStolen ();
+							coinsStolen+=_customerHandler._coins[_posReack].myAmount;
+							_customerHandler._coins[_posReack].CoinsStolen ();
 						}
-						reachedPos--;
+						_posReack--;
 					}
 				}
-				float step = speed * Time.deltaTime;
+				float step = _speed * Time.deltaTime;
 				transform.position = Vector3.MoveTowards(transform.position, finalPos, step);
 				distance = Vector3.Distance (transform.position , finalPos);
 				yield return 0;
 			}
 		}
 
-		public void Stopa()
+		public void StopThief()
 		{
 			_uiManager.achievment_text.SetActive (false);
 		}
@@ -131,7 +131,7 @@ namespace _Project.Scripts.Entities
 					_uiManager.achievment_text.SetActive(true);
 					AchievementBlock._claimCheck++;
 					PlayerPrefs.SetInt("claimvalue",AchievementBlock._claimCheck);
-					Invoke(nameof(Stopa),4.0f);
+					Invoke(nameof(StopThief),4.0f);
 				}
 				if(PlayerPrefs.GetInt("ThiefCaught") > 99 && PlayerPrefs.GetInt ("ThiefLevel2") == 0)
 				{
@@ -139,7 +139,7 @@ namespace _Project.Scripts.Entities
 					_uiManager.achievment_text.SetActive(true);
 					AchievementBlock._claimCheck++;
 					PlayerPrefs.SetInt("claimvalue",AchievementBlock._claimCheck);
-					Invoke(nameof(Stopa),4.0f);
+					Invoke(nameof(StopThief),4.0f);
 				}
 				if(PlayerPrefs.GetInt("ThiefCaught") > 999 && PlayerPrefs.GetInt ("ThiefLevel3") == 0)
 				{
@@ -147,12 +147,12 @@ namespace _Project.Scripts.Entities
 					_uiManager.achievment_text.SetActive(true);
 					AchievementBlock._claimCheck++;
 					PlayerPrefs.SetInt("claimvalue",AchievementBlock._claimCheck);
-					Invoke(nameof(Stopa),4.0f);
+					Invoke(nameof(StopThief),4.0f);
 				}
 
 				transform.position = _customerHandler._customerEndPos.position;
-				speed = 35;
-				isCaught = true;
+				_speed = 35;
+				_isCaught = true;
 				_uiManager.totalCoins+=coinsStolen;
 				_uiManager.CallIncrementCoint ();
 				_uiManager.coincollect.Play();

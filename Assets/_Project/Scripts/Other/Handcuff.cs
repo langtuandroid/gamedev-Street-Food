@@ -16,7 +16,7 @@ namespace _Project.Scripts.Other
 		private void OnEnable()
 		{
 			Invoke (nameof(Timestop), 0.9f);
-			stolentext.text = Thief._instance.coinsStolen.ToString();
+			stolentext.text = ThiefWisitor._instance.coinsStolen.ToString();
 		}
 	
 		public void Timestop()

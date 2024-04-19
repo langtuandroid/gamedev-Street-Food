@@ -6,89 +6,90 @@ using _Project.Scripts.Other;
 using _Project.Scripts.UI_Scripts;
 using _Project.Scripts.UI.Tutorial;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace _Project.Scripts.Food
 {
-	public class Burger : MonoBehaviour 
+	public class BurgerFood : MonoBehaviour 
 	{
 		[Inject] private LevelSoundManager _levelSoundManager;
 		[Inject] private Australia_Manager _australiaManager;
 		[Inject] private UIManager _uiManager;   
-		private bool scaleUp;
-		private bool reachedCustomer;
-		private Vector3 colliderSize;
-		private bool canMove;
+		private bool _isScale;
+		private bool _isOnCustomer;
+		private Vector3 _collisionSize;
+		private bool _isCanMove;
 		
-		public SpriteRenderer myTikki;
-		public GameObject myTomato;
-		public GameObject myOnion;
-		public GameObject myCabbage;
-		public GameObject mySelection;
+		[FormerlySerializedAs("myTikki")] public SpriteRenderer _tikkiSpriteRenderer;
+		[FormerlySerializedAs("myTomato")] public GameObject _tomatoPrefab;
+		[FormerlySerializedAs("myOnion")] public GameObject _onionPrefab;
+		[FormerlySerializedAs("myCabbage")] public GameObject _cabbagePrefab;
+		[FormerlySerializedAs("mySelection")] public GameObject _selectionObject;
 		
-		[SerializeField] private Availability myPlate;
-		[SerializeField] private Vector3 myOriginalPos;
-		[SerializeField] private Vector3 myTouchPos;
-		[SerializeField] private Vector3 myLocalScale;
-		[SerializeField] private bool orderBurger;
-		[SerializeField] private GameObject error;
-		public bool tomato { get; set; }
-		public bool onion { get; set; }
-		public bool cabbage { get; set; }
-		public bool tikki { get; set; }
-		public LevelManager.Orders myType { get; set; }
-		public bool perfect { get; set; }
-		public bool iAmSelected { get; set; }
-		public bool tutorialOn { get; set; }
+		[FormerlySerializedAs("myPlate")] [SerializeField] private Availability _plate;
+		[FormerlySerializedAs("myOriginalPos")] [SerializeField] private Vector3 _originalPos;
+		[FormerlySerializedAs("myTouchPos")] [SerializeField] private Vector3 _touchPos;
+		[FormerlySerializedAs("myLocalScale")] [SerializeField] private Vector3 _scale;
+		[FormerlySerializedAs("orderBurger")] [SerializeField] private bool _isOrder;
+		[FormerlySerializedAs("error")] [SerializeField] private GameObject _errorObject;
+		public bool IsTomato { get; set; }
+		public bool IsOnion { get; set; }
+		public bool IsCabbage { get; set; }
+		public bool isTikki { get; set; }
+		public LevelManager.Orders type { get; set; }
+		public bool isPrefavet { get; set; }
+		public bool isSelected { get; set; }
+		public bool isTutorialOn { get; set; }
 		public GameObject otherObject { get; set; }
-		public bool wrongOrderGiven { get; set; }
-		public Wisitor customer { get; set; }
+		public bool wrongOrders { get; set; }
+		public Wisitor wisitior { get; set; }
 		private void Start()
 		{
 			_uiManager.n_Burger_served=PlayerPrefs.GetInt ("BurgerServed");
-			myLocalScale = transform.localScale;
-			myOriginalPos = transform.position;
-			if(!orderBurger)
-				colliderSize = transform.GetComponent<BoxCollider> ().size;
+			_scale = transform.localScale;
+			_originalPos = transform.position;
+			if(!_isOrder)
+				_collisionSize = transform.GetComponent<BoxCollider> ().size;
 		}
 
 		private void OnDisable()
 		{
-			wrongOrderGiven = false;
-			tomato = false;
-			onion  = false;
-			cabbage  = false;
-			tikki  = false;
-			reachedCustomer = false;
+			wrongOrders = false;
+			IsTomato = false;
+			IsOnion  = false;
+			IsCabbage  = false;
+			isTikki  = false;
+			_isOnCustomer = false;
 
 
-			myTomato.SetActive (false);
-			myCabbage.SetActive (false);
-			myOnion.SetActive (false);
+			_tomatoPrefab.SetActive (false);
+			_cabbagePrefab.SetActive (false);
+			_onionPrefab.SetActive (false);
 
 			if(transform.GetComponent<Availability>())
 			{
-				myTikki.gameObject.SetActive (false);
+				_tikkiSpriteRenderer.gameObject.SetActive (false);
 				transform.GetComponent<Availability>().available = true;
 			}
-			myType = LevelManager.Orders.NONE; 
-			transform.localScale = myLocalScale;
+			type = LevelManager.Orders.NONE; 
+			transform.localScale = _scale;
 
-			iAmSelected = false;
-			if(mySelection != null)
-				mySelection.SetActive (false);
+			isSelected = false;
+			if(_selectionObject != null)
+				_selectionObject.SetActive (false);
 			
 		}
 		
 		private void OnMouseDown()
 		{
-			if(!TutorialPanel.popupPanelActive || Australia_Manager.tutorialEnd || Australia_Manager.tutorialEnd || tutorialOn)
+			if(!TutorialPanel.popupPanelActive || Australia_Manager.tutorialEnd || Australia_Manager.tutorialEnd || isTutorialOn)
 			{
 				_australiaManager.clickedHotDogDestinationFunction = this;
-				canMove = true;
+				_isCanMove = true;
 				Vector3 myPos = Camera.main.WorldToScreenPoint (transform.position);
-				myTouchPos =  Camera.main.ScreenToWorldPoint (new Vector3(Input.mousePosition.x, Input.mousePosition.y , myPos.z));
-				if(_australiaManager.clickedTikki && !tikki)
+				_touchPos =  Camera.main.ScreenToWorldPoint (new Vector3(Input.mousePosition.x, Input.mousePosition.y , myPos.z));
+				if(_australiaManager.clickedTikki && !isTikki)
 				{
 					if(!_australiaManager.clickedTikkiDestinationFunction.isBurnt)
 					{
@@ -98,19 +99,19 @@ namespace _Project.Scripts.Food
 					}
 					_australiaManager.AllClickedBoolsReset ();
 				}
-				else if(_australiaManager.clickedTomato && !tomato)
+				else if(_australiaManager.clickedTomato && !IsTomato)
 				{
 					_australiaManager.clickedItemDestinationFunction.availableBurger = this;
 					_australiaManager.ObjectReached ();
 					_australiaManager.AllClickedBoolsReset ();
 				}
-				else if(_australiaManager.clickedOnion && !onion)
+				else if(_australiaManager.clickedOnion && !IsOnion)
 				{
 					_australiaManager.clickedItemDestinationFunction.availableBurger = this;
 					_australiaManager.ObjectReached ();
 					_australiaManager.AllClickedBoolsReset ();
 				}
-				else if(_australiaManager.clickedCabbage && !cabbage)
+				else if(_australiaManager.clickedCabbage && !IsCabbage)
 				{
 					_australiaManager.clickedItemDestinationFunction.availableBurger = this;
 					_australiaManager.ObjectReached ();
@@ -118,25 +119,25 @@ namespace _Project.Scripts.Food
 				}
 				else 
 				{
-					if(tikki)
+					if(isTikki)
 					{
-						if(tutorialOn)
+						if(isTutorialOn)
 						{
 							_australiaManager.firstCustomer.tutorialOn = true;
 						}
 						_australiaManager.AllClickedBoolsReset ();
 						_australiaManager.clickedBurger = true;
 						
-						scaleUp = true;
-						if(!orderBurger)
-							transform.GetComponent<BoxCollider> ().size = new Vector3(colliderSize.x/2f , colliderSize.y/2f , colliderSize.z);
-						iAmSelected = true;
+						_isScale = true;
+						if(!_isOrder)
+							transform.GetComponent<BoxCollider> ().size = new Vector3(_collisionSize.x/2f , _collisionSize.y/2f , _collisionSize.z);
+						isSelected = true;
 					}
 					else
 					{
 						_australiaManager.clickedHotDogDestinationFunction = null;
-						canMove = false;
-						error.SetActive(true);
+						_isCanMove = false;
+						_errorObject.SetActive(true);
 					}
 				}
 			}
@@ -144,11 +145,11 @@ namespace _Project.Scripts.Food
 
 		private void OnMouseDrag()
 		{
-			if( canMove)
+			if( _isCanMove)
 			{
 				Vector3 myPos = Camera.main.WorldToScreenPoint (transform.position);
 				Vector3 newPos = Camera.main.ScreenToWorldPoint (new Vector3(Input.mousePosition.x, Input.mousePosition.y , myPos.z));
-				if(Vector3.Distance (newPos,myTouchPos) > 0.2f)
+				if(Vector3.Distance (newPos,_touchPos) > 0.2f)
 				{
 					transform.position =  Camera.main.ScreenToWorldPoint (new Vector3(Input.mousePosition.x, Input.mousePosition.y , myPos.z));
 				}
@@ -157,30 +158,30 @@ namespace _Project.Scripts.Food
 
 		private void OnMouseUp()
 		{
-			error.SetActive (false);
-			if(canMove)
+			_errorObject.SetActive (false);
+			if(_isCanMove)
 			{
-				if(!reachedCustomer)
-					StartCoroutine(MoveToPosition());
+				if(!_isOnCustomer)
+					StartCoroutine(MoveToPositionRoutine());
 				else
 				{
-					ClickedDestination ();
+					OnDestinationClick ();
 				}
-				canMove = false;
+				_isCanMove = false;
 			}
-			if(!orderBurger)
-				transform.GetComponent<BoxCollider> ().size = colliderSize;
+			if(!_isOrder)
+				transform.GetComponent<BoxCollider> ().size = _collisionSize;
 		}
 		
-		public void Stopa()
+		public void Deactivate()
 		{
 			_uiManager.achievment_text.SetActive (false);
 		}
 		
-		public void ClickedDestination()
+		public void OnDestinationClick()
 		{
 			_australiaManager.platesFilledCount--;
-			myPlate.available = true;
+			_plate.available = true;
 			if(!otherObject.name.Contains ("dustbin"))
 			{
 				_uiManager.n_Burger_served++ ;
@@ -192,7 +193,7 @@ namespace _Project.Scripts.Food
 					_uiManager.achievment_text.SetActive(true);
 					AchievementBlock._claimCheck++;
 					PlayerPrefs.SetInt("claimvalue",AchievementBlock._claimCheck);
-					Invoke(nameof(Stopa),4.0f);
+					Invoke(nameof(Deactivate),4.0f);
 				}
 				if(PlayerPrefs.GetInt("BurgerServed") > 99 && PlayerPrefs.GetInt ("BurgerLevel2")==1)
 				{
@@ -200,7 +201,7 @@ namespace _Project.Scripts.Food
 					_uiManager.achievment_text.SetActive(true);
 					AchievementBlock._claimCheck++;
 					PlayerPrefs.SetInt("claimvalue",AchievementBlock._claimCheck);
-					Invoke(nameof(Stopa),4.0f);
+					Invoke(nameof(Deactivate),4.0f);
 				}
 				if(PlayerPrefs.GetInt("BurgerServed") > 999 && PlayerPrefs.GetInt ("BurgerLevel3")==2)
 				{
@@ -208,104 +209,104 @@ namespace _Project.Scripts.Food
 					_uiManager.achievment_text.SetActive(true);
 					AchievementBlock._claimCheck++;
 					PlayerPrefs.SetInt("claimvalue",AchievementBlock._claimCheck);
-					Invoke(nameof(Stopa),4.0f);
+					Invoke(nameof(Deactivate),4.0f);
 				}
-				if(tutorialOn)
+				if(isTutorialOn)
 				{
-					tutorialOn = false;
+					isTutorialOn = false;
 					_uiManager.tutorialPanelBg.gameObject.SetActive (true);
 					_uiManager.tutorialPanelBg.OpenPopupAustralia ("PUT BURNT TIKKI \n INTO THE DUSTBIN!",false,false ,7 , 1);
 				}
 				
 				string myTypeToEatSub = "BURGER";
 				
-				for(int count = 0; count < customer._order.Count; count++)
+				for(int count = 0; count < wisitior._order.Count; count++)
 				{
-					if(customer._order[count].ToString().Contains(myTypeToEatSub.ToString()))
+					if(wisitior._order[count].ToString().Contains(myTypeToEatSub.ToString()))
 					{
-						if(customer._order[count] == myType)
+						if(wisitior._order[count] == type)
 						{
-							wrongOrderGiven = false;
+							wrongOrders = false;
 						
 						}
 						else
 						{
-							wrongOrderGiven = true;
+							wrongOrders = true;
 						
 						}
-						customer._order.RemoveAt(count);
+						wisitior._order.RemoveAt(count);
 					}
 				
 				}
-				customer.RemoveOrderFromBoard (myType);
+				wisitior.RemoveOrderFromBoard (type);
 
 
-				customer.iHaveAMultipleTypeOrder = LevelManager.Orders.NONE;
+				wisitior.iHaveAMultipleTypeOrder = LevelManager.Orders.NONE;
 			
-				if(perfect)
+				if(isPrefavet)
 				{
-					if(customer._order.Count > 0)
-						customer.myWaitingTime-= 30;
+					if(wisitior._order.Count > 0)
+						wisitior.myWaitingTime-= 30;
 
-					if(!wrongOrderGiven)
+					if(!wrongOrders)
 					{
-						customer.coinsSpent+=_australiaManager.perfectBurger;
-						customer.perfect = true;
+						wisitior.coinsSpent+=_australiaManager.perfectBurger;
+						wisitior.perfect = true;
 					}
 					else
 					{
-						customer.coinsSpent+=(_australiaManager.perfectBurger/2);
+						wisitior.coinsSpent+=(_australiaManager.perfectBurger/2);
 					
 					}
 				
 				}
 				else
 				{
-					if(customer._order.Count > 0)
-						customer.myWaitingTime-= 20;
+					if(wisitior._order.Count > 0)
+						wisitior.myWaitingTime-= 20;
 				
-					if(!wrongOrderGiven)
+					if(!wrongOrders)
 					{
-						customer.coinsSpent+=_australiaManager.lessBakedBurger;
+						wisitior.coinsSpent+=_australiaManager.lessBakedBurger;
 					}
 					else
 					{
-						customer.coinsSpent+=(_australiaManager.lessBakedBurger/2);
+						wisitior.coinsSpent+=(_australiaManager.lessBakedBurger/2);
 					}
 				}
 			
-				if(cabbage)
+				if(IsCabbage)
 				{
-					customer.coinsSpent+=10;
+					wisitior.coinsSpent+=10;
 				}
-				if(tomato)
+				if(IsTomato)
 				{
-					customer.coinsSpent+=10;
+					wisitior.coinsSpent+=10;
 				}
-				if(onion)
+				if(IsOnion)
 				{
-					customer.coinsSpent+=10;
+					wisitior.coinsSpent+=10;
 				}
 				
-				if(customer.myWaitingTime < 0)
+				if(wisitior.myWaitingTime < 0)
 				{
-					customer.myWaitingTime = 0;
+					wisitior.myWaitingTime = 0;
 				}
 			
-				if(customer._order.Count <= 0)
-					customer.MoveToEnd();
+				if(wisitior._order.Count <= 0)
+					wisitior.MoveToEnd();
 			
 			}
 			else
 			{
-				if(perfect){
+				if(isPrefavet){
 					_uiManager.totalCoins-=_australiaManager.perfectBurger;
 					_levelSoundManager.dustbin.Play();
 					if(_uiManager.totalCoins > 0){
 
 						_uiManager.dustbin_textparent.SetActive(true);
 						_uiManager.dustbin_text.text = "-"+_australiaManager.perfectBurger.ToString(); 
-						Invoke(nameof(Deactivedustbin),1.0f);
+						Invoke(nameof(DeactivateDustbin),1.0f);
 					}}
 				else
 				{
@@ -316,7 +317,7 @@ namespace _Project.Scripts.Food
 
 						_uiManager.dustbin_textparent.SetActive(true);
 						_uiManager.dustbin_text.text = "-"+_australiaManager.lessBakedBurger.ToString(); 
-						Invoke(nameof(Deactivedustbin),1.0f);
+						Invoke(nameof(DeactivateDustbin),1.0f);
 					}}
 				if(_uiManager.totalCoins < 0)
 				{
@@ -324,29 +325,29 @@ namespace _Project.Scripts.Food
 					_uiManager.coinsText.text = "0";
 				}
 			}
-			transform.position = myOriginalPos;
+			transform.position = _originalPos;
 			transform.gameObject.SetActive(false);
 		}
 
-		public void Deactivedustbin()
+		public void DeactivateDustbin()
 		{
 			_uiManager.dustbin_textparent.SetActive (false);
 		}
 
-		private IEnumerator MoveToPosition()
+		private IEnumerator MoveToPositionRoutine()
 		{
-			float distance = Vector3.Distance (transform.position , myOriginalPos);
+			float distance = Vector3.Distance (transform.position , _originalPos);
 			float speed = 15;
 			while(distance > 0.1f)
 			{
 				float step = speed * 0.02f;
-				transform.position = Vector3.MoveTowards(transform.position, myOriginalPos, step);
-				distance = Vector3.Distance (transform.position , myOriginalPos);
+				transform.position = Vector3.MoveTowards(transform.position, _originalPos, step);
+				distance = Vector3.Distance (transform.position , _originalPos);
 				yield return 0;
 			}
-			if(iAmSelected)
-				mySelection.SetActive (true);
-			transform.position = myOriginalPos;
+			if(isSelected)
+				_selectionObject.SetActive (true);
+			transform.position = _originalPos;
 		}
 
 
@@ -358,28 +359,28 @@ namespace _Project.Scripts.Food
 			{
 
 				otherObject = other.gameObject;
-				customer = other.GetComponent<Wisitor>();
-				for(int i = 0 ; i< customer._order.Count ; i++)
+				wisitior = other.GetComponent<Wisitor>();
+				for(int i = 0 ; i< wisitior._order.Count ; i++)
 				{
-					if(myType == customer._order[i])
+					if(type == wisitior._order[i])
 					{
-						wrongOrderGiven = false;
-						reachedCustomer = true;
-						wrongOrderGiven = false;
+						wrongOrders = false;
+						_isOnCustomer = true;
+						wrongOrders = false;
 						break;
 					}
 				}
-				if(!reachedCustomer && customer.iHaveAMultipleTypeOrder != LevelManager.Orders.NONE)
+				if(!_isOnCustomer && wisitior.iHaveAMultipleTypeOrder != LevelManager.Orders.NONE)
 				{
-					wrongOrderGiven = true;
-					reachedCustomer = true;
+					wrongOrders = true;
+					_isOnCustomer = true;
 				}
 			}
 			else if(other.name.Contains ("dustbin") && Australia_Manager.tutorialEnd== true )
 			{
-				wrongOrderGiven = false;
+				wrongOrders = false;
 				otherObject = other.gameObject;
-				reachedCustomer = true;
+				_isOnCustomer = true;
 			}
 
 		}
@@ -388,8 +389,8 @@ namespace _Project.Scripts.Food
 		{
 			if(other.name.Contains ("customer") || other.name.Contains ("dustbin"))
 			{
-				wrongOrderGiven = false;
-				reachedCustomer = false;
+				wrongOrders = false;
+				_isOnCustomer = false;
 			}
 		}
 	}

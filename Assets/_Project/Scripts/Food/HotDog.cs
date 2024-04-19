@@ -6,6 +6,7 @@ using _Project.Scripts.Other;
 using _Project.Scripts.UI_Scripts;
 using _Project.Scripts.UI.Tutorial;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace _Project.Scripts.Food
@@ -15,62 +16,63 @@ namespace _Project.Scripts.Food
 		[Inject] private LevelSoundManager _levelSoundManager;
 		[Inject] private US_Manager _usManager;
 		[Inject] private UIManager _uiManager;
-		private bool reachedCustomer;
-		private bool scaleUp;
-		private Vector3 colliderSize;
-		private bool canMove;
-		private int a=1;
-		[SerializeField] private GameObject errorObject;
-		[SerializeField] private Availability myPlate;
-		[SerializeField] private Vector3 myOriginalPos , myTouchPos;
+		private bool _isOnCustomer;
+		private bool _isScale;
+		private Vector3 _sizeCollider;
+		private bool _isCanMove;
+		private int _a = 1;
+		[FormerlySerializedAs("errorObject")] [SerializeField] private GameObject _errorPrefab;
+		[FormerlySerializedAs("myPlate")] [SerializeField] private Availability _plate;
+		[FormerlySerializedAs("myOriginalPos")] [SerializeField] private Vector3 _originalPos;
+		[FormerlySerializedAs("myTouchPos")] [SerializeField] private Vector3 _touchPos;
 		
-		public Vector3 myLocalScale;
-		public GameObject mySelection;
-		public GameObject otherObject;
-		public bool tikki;
-		public bool tutorialOn { get; set; }
-		public LevelManager.Orders myType { get; set; }
-		public bool perfect { get; set; }
-		public bool iAmSelected { get; set; }
-		public bool wrongOrderGiven{ get; set; }
-		public Wisitor customer{ get; set; }
-		public bool redSauce { get; set; }
+		[FormerlySerializedAs("myLocalScale")] public Vector3 _localScale;
+		[FormerlySerializedAs("mySelection")] public GameObject _selectionObject;
+		[FormerlySerializedAs("otherObject")] public GameObject _otherObject;
+		public bool isTikki { get; set; }
+		public bool isTutorial { get; set; }
+		public LevelManager.Orders isTape { get; set; }
+		public bool isPerfect { get; set; }
+		public bool isSelected { get; set; }
+		public bool wrongOrder{ get; set; }
+		public Wisitor wisitor { get; set; }
+		public bool isSauce { get; set; }
 		public bool yellowSauce { get; set; }
 		private void Start()
 		{
 			_uiManager.n_Hotdogs_served = PlayerPrefs.GetInt ("hotdogServed");
-			myLocalScale = transform.localScale;
-			myOriginalPos = transform.position;
-			colliderSize = transform.GetComponent<BoxCollider> ().size;
+			_localScale = transform.localScale;
+			_originalPos = transform.position;
+			_sizeCollider = transform.GetComponent<BoxCollider> ().size;
 		}
 
 
 		private void OnDisable()
 		{
-			wrongOrderGiven = false;
-			redSauce = false;
+			wrongOrder = false;
+			isSauce = false;
 	
 			yellowSauce  = false;
-			tikki  = false;
-			reachedCustomer = false;
+			isTikki  = false;
+			_isOnCustomer = false;
 			transform.GetComponent<Availability>().available = true;
 			_usManager.hotDogSaucesOnPlates[transform.GetComponent<Availability>().myPositionInArray].gameObject.SetActive (false);
-			myType = LevelManager.Orders.NONE; 
-			transform.localScale = myLocalScale;
-			iAmSelected = false;
-			mySelection.SetActive (false);
+			isTape = LevelManager.Orders.NONE; 
+			transform.localScale = _localScale;
+			isSelected = false;
+			_selectionObject.SetActive (false);
 		}
 
 
 		private void OnMouseDown()
 		{
-			if(!TutorialPanel.popupPanelActive || US_Manager.tutorialEnd || Australia_Manager.tutorialEnd || tutorialOn)
+			if(!TutorialPanel.popupPanelActive || US_Manager.tutorialEnd || Australia_Manager.tutorialEnd || isTutorial)
 			{
 				_usManager.clickedHotDogDestinationFunction = this;
-				canMove = true;
+				_isCanMove = true;
 				Vector3 myPos = Camera.main.WorldToScreenPoint (transform.position);
-				myTouchPos =  Camera.main.ScreenToWorldPoint (new Vector3(Input.mousePosition.x, Input.mousePosition.y , myPos.z));
-				if(_usManager.clickedTikki && myType == LevelManager.Orders.NONE)
+				_touchPos =  Camera.main.ScreenToWorldPoint (new Vector3(Input.mousePosition.x, Input.mousePosition.y , myPos.z));
+				if(_usManager.clickedTikki && isTape == LevelManager.Orders.NONE)
 				{
 					if(!_usManager.clickedTikkiDestinationFunction.isBurnt)
 					{
@@ -80,7 +82,7 @@ namespace _Project.Scripts.Food
 					}
 					_usManager.AllClickedBoolsReset ();
 				}
-				else if((_usManager.clickedYellowSauce || _usManager.clickedRedSauce) && (myType == LevelManager.Orders.NONE || myType == LevelManager.Orders.HOTDOG))
+				else if((_usManager.clickedYellowSauce || _usManager.clickedRedSauce) && (isTape == LevelManager.Orders.NONE || isTape == LevelManager.Orders.HOTDOG))
 				{
 					_usManager.clickedItemDestinationFunction.availableHotDog = this;
 					_usManager.ObjectReached ();
@@ -88,24 +90,24 @@ namespace _Project.Scripts.Food
 				}
 				else 
 				{
-					if(tikki)
+					if(isTikki)
 					{
-						if(tutorialOn)
+						if(isTutorial)
 						{
 							_usManager.firstCustomer.tutorialOn = true;
 						}
 						_usManager.AllClickedBoolsReset ();
 						_usManager.clickedHotDog = true;
 
-						scaleUp = true;
-						transform.GetComponent<BoxCollider> ().size = new Vector3(colliderSize.x/2f , colliderSize.y/2f , colliderSize.z);
-						iAmSelected = true;
+						_isScale = true;
+						transform.GetComponent<BoxCollider> ().size = new Vector3(_sizeCollider.x/2f , _sizeCollider.y/2f , _sizeCollider.z);
+						isSelected = true;
 					}
 					else
 					{
 						_usManager.clickedHotDogDestinationFunction = null;
-						canMove = false;
-						errorObject.SetActive(true);
+						_isCanMove = false;
+						_errorPrefab.SetActive(true);
 					}
 				}
 
@@ -114,11 +116,11 @@ namespace _Project.Scripts.Food
 
 		private void OnMouseDrag()
 		{
-			if( canMove)
+			if( _isCanMove)
 			{
 				Vector3 myPos = Camera.main.WorldToScreenPoint (transform.position);
 				Vector3 newPos = Camera.main.ScreenToWorldPoint (new Vector3(Input.mousePosition.x, Input.mousePosition.y , myPos.z));
-				if(Vector3.Distance (newPos,myTouchPos) > 0.2f)
+				if(Vector3.Distance (newPos,_touchPos) > 0.2f)
 				{
 					transform.position =  Camera.main.ScreenToWorldPoint (new Vector3(Input.mousePosition.x, Input.mousePosition.y , myPos.z));
 				}
@@ -127,30 +129,30 @@ namespace _Project.Scripts.Food
 
 		private void OnMouseUp()
 		{
-			errorObject.SetActive (false);
-			if(canMove)
+			_errorPrefab.SetActive (false);
+			if(_isCanMove)
 			{
-				if(!reachedCustomer)
-					StartCoroutine(MoveToPosition());
+				if(!_isOnCustomer)
+					StartCoroutine(MoveRoutine());
 				else
 				{
-					ClickedDestination ();
+					OnDistinationClick ();
 
 				}
-				canMove = false;
+				_isCanMove = false;
 			}
-			transform.GetComponent<BoxCollider> ().size = colliderSize;
+			transform.GetComponent<BoxCollider> ().size = _sizeCollider;
 		}
-		public void Stopa()
+		public void Deactivate()
 		{
 			_uiManager.achievment_text.SetActive (false);
 		}
 
-		public void ClickedDestination()
+		public void OnDistinationClick()
 		{
 			_usManager.platesFilledCount--;
-			myPlate.available = true;
-			if(!otherObject.name.Contains ("dustbin"))
+			_plate.available = true;
+			if(!_otherObject.name.Contains ("dustbin"))
 			{
 		
 				_uiManager.n_Hotdogs_served++;
@@ -165,7 +167,7 @@ namespace _Project.Scripts.Food
 					_uiManager.achievment_text.SetActive(true);
 					AchievementBlock._claimCheck++;
 					PlayerPrefs.SetInt("claimvalue",AchievementBlock._claimCheck);
-					Invoke(nameof(Stopa),4.0f);
+					Invoke(nameof(Deactivate),4.0f);
 				}
 				if(PlayerPrefs.GetInt("hotdogServed") > 99 && PlayerPrefs.GetInt ("hotdogLevel2")==0)
 				{
@@ -173,7 +175,7 @@ namespace _Project.Scripts.Food
 					_uiManager.achievment_text.SetActive(true);
 					AchievementBlock._claimCheck++;
 					PlayerPrefs.SetInt("claimvalue",AchievementBlock._claimCheck);
-					Invoke(nameof(Stopa),4.0f);
+					Invoke(nameof(Deactivate),4.0f);
 				}
 				if(PlayerPrefs.GetInt("hotdogServed") > 999 && PlayerPrefs.GetInt ("hotdogLevel3")==0)
 				{
@@ -181,89 +183,89 @@ namespace _Project.Scripts.Food
 					_uiManager.achievment_text.SetActive(true);
 					AchievementBlock._claimCheck++;
 					PlayerPrefs.SetInt("claimvalue",AchievementBlock._claimCheck);
-					Invoke(nameof(Stopa),4.0f);
+					Invoke(nameof(Deactivate),4.0f);
 				}
-				if(tutorialOn)
+				if(isTutorial)
 				{
-					tutorialOn = false;
+					isTutorial = false;
 					_usManager.firstCoins.tutorialOn = true;
 					_uiManager.tutorialPanelBg.gameObject.SetActive (true);
 					_uiManager.tutorialPanelBg.OpenPopup ("COLLECT THE COINS.",false,false , 4);
 				}
 				
 				string myTypeToEatSub = "HOTDOG";
-				for(int count = 0; count < customer._order.Count; count++)
+				for(int count = 0; count < wisitor._order.Count; count++)
 				{
-					if(customer._order[count].ToString().Contains(myTypeToEatSub.ToString()))
+					if(wisitor._order[count].ToString().Contains(myTypeToEatSub.ToString()))
 					{
-						if(customer._order[count] == myType)
+						if(wisitor._order[count] == isTape)
 						{
-							wrongOrderGiven = false;
+							wrongOrder = false;
 
 						}
 						else
 						{
-							wrongOrderGiven = true;
+							wrongOrder = true;
 
 						}
-						customer._order.RemoveAt(count);
+						wisitor._order.RemoveAt(count);
 					}
 				
 				}
-				customer.RemoveOrderFromBoard (myType);
+				wisitor.RemoveOrderFromBoard (isTape);
 
 
 
-				customer.iHaveAMultipleTypeOrder = LevelManager.Orders.NONE;
+				wisitor.iHaveAMultipleTypeOrder = LevelManager.Orders.NONE;
 			
-				if(perfect)
+				if(isPerfect)
 				{
-					if(customer._order.Count > 0)
-						customer.myWaitingTime-= 30;
+					if(wisitor._order.Count > 0)
+						wisitor.myWaitingTime-= 30;
 
-					if(!wrongOrderGiven)
+					if(!wrongOrder)
 					{
-						customer.coinsSpent+=_usManager.perfectHotDog;
-						customer.perfect = true;
+						wisitor.coinsSpent+=_usManager.perfectHotDog;
+						wisitor.perfect = true;
 					}
 					else
 					{
-						customer.coinsSpent+=(_usManager.perfectHotDog/2);
+						wisitor.coinsSpent+=(_usManager.perfectHotDog/2);
 					}
 				}
 				else
 				{
-					if(customer._order.Count > 0)
-						customer.myWaitingTime-= 20;
+					if(wisitor._order.Count > 0)
+						wisitor.myWaitingTime-= 20;
 				
-					if(!wrongOrderGiven)
+					if(!wrongOrder)
 					{
-						customer.coinsSpent+=_usManager.lessBakedHotdog;
+						wisitor.coinsSpent+=_usManager.lessBakedHotdog;
 					}
 					else
 					{
-						customer.coinsSpent+=(_usManager.lessBakedHotdog/2);
+						wisitor.coinsSpent+=(_usManager.lessBakedHotdog/2);
 					}
 				}
 			
-				if(yellowSauce || redSauce)
+				if(yellowSauce || isSauce)
 				{
-					customer.coinsSpent+=10;
+					wisitor.coinsSpent+=10;
 				}
-				if(customer.myWaitingTime < 0)
+				if(wisitor.myWaitingTime < 0)
 				{
-					customer.myWaitingTime = 0;
+					wisitor.myWaitingTime = 0;
 				}
 			
-				if(customer._order.Count <= 0)
-					customer.MoveToEnd();
+				if(wisitor._order.Count <= 0)
+					wisitor.MoveToEnd();
 			
 			}
 			else
 			{
 				_levelSoundManager.dustbin.Play();
 				_usManager.clickedHotDog = false;
-				if(perfect)
+				if(isPerfect)
 					_uiManager.totalCoins-=_usManager.perfectHotDog;
 				else
 					_uiManager.totalCoins-=_usManager.lessBakedHotdog;
@@ -275,56 +277,54 @@ namespace _Project.Scripts.Food
 					_uiManager.coinsText.text = "0";
 				}
 			}
-			transform.position = myOriginalPos;
+			transform.position = _originalPos;
 			transform.gameObject.SetActive(false);
 		}
 
-		private IEnumerator MoveToPosition()
+		private IEnumerator MoveRoutine()
 		{
-
-			float distance = Vector3.Distance (transform.position , myOriginalPos);
+			float distance = Vector3.Distance (transform.position , _originalPos);
 			float speed = 15;
 			while(distance > 0.1f)
 			{
 				float step = speed * 0.02f;
-				transform.position = Vector3.MoveTowards(transform.position, myOriginalPos, step);
-				distance = Vector3.Distance (transform.position , myOriginalPos);
+				transform.position = Vector3.MoveTowards(transform.position, _originalPos, step);
+				distance = Vector3.Distance (transform.position , _originalPos);
 				yield return 0;
 			}
-			if(iAmSelected)
-				mySelection.SetActive (true);
-			transform.position = myOriginalPos;
+			if(isSelected)
+				_selectionObject.SetActive (true);
+			transform.position = _originalPos;
 		}
 
 
 		private void OnTriggerStay(Collider other)
 		{
-
 			if(other.name.Contains ("customer") )
 			{
-				otherObject = other.gameObject;
-				customer = other.GetComponent<Wisitor>();
-				for(int i = 0 ; i< customer._order.Count ; i++)
+				_otherObject = other.gameObject;
+				wisitor = other.GetComponent<Wisitor>();
+				for(int i = 0 ; i< wisitor._order.Count ; i++)
 				{
-					if(myType == customer._order[i])
+					if(isTape == wisitor._order[i])
 					{
-						wrongOrderGiven = false;
-						reachedCustomer = true;
+						wrongOrder = false;
+						_isOnCustomer = true;
 
 						break;
 					}
 				}
-				if(!reachedCustomer && customer.iHaveAMultipleTypeOrder != LevelManager.Orders.NONE)
+				if(!_isOnCustomer && wisitor.iHaveAMultipleTypeOrder != LevelManager.Orders.NONE)
 				{
 			
-					wrongOrderGiven = true;
-					reachedCustomer = true;
+					wrongOrder = true;
+					_isOnCustomer = true;
 				}
 			}
 			else if(other.name.Contains ("dustbin") && (US_Manager.tutorialEnd == true || Australia_Manager.tutorialEnd== true))
 			{
-				otherObject = other.gameObject;
-				reachedCustomer = true;
+				_otherObject = other.gameObject;
+				_isOnCustomer = true;
 			}
 		}
 
@@ -332,8 +332,8 @@ namespace _Project.Scripts.Food
 		{
 			if(other.name.Contains ("customer") || other.name.Contains ("dustbin"))
 			{
-				wrongOrderGiven = false;
-				reachedCustomer = false;
+				wrongOrder = false;
+				_isOnCustomer = false;
 			}
 		}
 	}

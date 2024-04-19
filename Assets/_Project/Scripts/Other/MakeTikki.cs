@@ -62,12 +62,12 @@ namespace _Project.Scripts.Other
 				
 						if(isUS)
 						{
-							_usManager.firstHotDog.tutorialOn = true;
+							_usManager.firstHotDog.isTutorial = true;
 							_uiManager.tutorialPanelBg.OpenPopup ("TAP OR DRAG THIS TO \n THE BUN.",false,false , 2);
 						}
 						else
 						{
-							_australiaManager.firstBurger.tutorialOn = true;
+							_australiaManager.firstBurger.isTutorialOn = true;
 							_uiManager.tutorialPanelBg.OpenPopupAustralia ("TAP OR DRAG TIKKI TO \n THE BUN.",false,false , 2);
 						}
 						tutorialOn = false;
@@ -230,12 +230,12 @@ namespace _Project.Scripts.Other
 					{
 						if(isUS)
 						{
-							_usManager.firstHotDog.tutorialOn = true;
+							_usManager.firstHotDog.isTutorial = true;
 							_uiManager.tutorialPanelBg.OpenPopup ("TAP OR DRAG THIS TO \n THE CUSTOMER.",false,false , 3);
 						}
 						else
 						{
-							_australiaManager.firstBurger.tutorialOn = true;
+							_australiaManager.firstBurger.isTutorialOn = true;
 							_uiManager.tutorialPanelBg.OpenPopupAustralia ("TAP OR DRAG BURGER TO \n THE CUSTOMER.",false,false , 3);
 						}
 						tutorialPick = false;
@@ -252,37 +252,37 @@ namespace _Project.Scripts.Other
 					if(isUS)
 					{
 						HotDog myHotDog = availableHotDog.transform.GetComponent<HotDog>();
-						myHotDog.tikki = true;
+						myHotDog.isTikki = true;
 						if(myHotDog.yellowSauce)
-							myHotDog.myType = LevelManager.Orders.HOTDOG_YELLOW;
-						else if(myHotDog.redSauce)
-							myHotDog.myType = LevelManager.Orders.HOTDOG_RED;
+							myHotDog.isTape = LevelManager.Orders.HOTDOG_YELLOW;
+						else if(myHotDog.isSauce)
+							myHotDog.isTape = LevelManager.Orders.HOTDOG_RED;
 						else
-							myHotDog.myType = LevelManager.Orders.HOTDOG;
+							myHotDog.isTape = LevelManager.Orders.HOTDOG;
 					}
 					else
 					{
-						Burger myBurger = availableHotDog.transform.GetComponent<Burger>();
-						myBurger.myTikki.gameObject.SetActive (true);
-						myBurger.myTikki.sprite = myRenderer.sprite;
+						BurgerFood myBurger = availableHotDog.transform.GetComponent<BurgerFood>();
+						myBurger._tikkiSpriteRenderer.gameObject.SetActive (true);
+						myBurger._tikkiSpriteRenderer.sprite = myRenderer.sprite;
 					
-						myBurger.tikki = true;
-						if(myBurger.tomato && myBurger.onion && myBurger.cabbage)
-							myBurger.myType = LevelManager.Orders.BURGER_COMPLETE;
-						else if(myBurger.tomato && myBurger.onion)
-							myBurger.myType = LevelManager.Orders.BURGER_TOMATO_ONION;
-						else if(myBurger.cabbage && myBurger.onion)
-							myBurger.myType = LevelManager.Orders.BURGER_ONION_CABBAGE;
-						else if(myBurger.tomato && myBurger.cabbage)
-							myBurger.myType = LevelManager.Orders.BURGER_TOMATO_CABBAGE;
-						else if(myBurger.tomato)
-							myBurger.myType = LevelManager.Orders.BURGER_TOMATO;
-						else if(myBurger.onion)
-							myBurger.myType = LevelManager.Orders.BURGER_ONION;
-						else if(myBurger.cabbage)
-							myBurger.myType = LevelManager.Orders.BURGER_CABBAGE;
+						myBurger.isTikki = true;
+						if(myBurger.IsTomato && myBurger.IsOnion && myBurger.IsCabbage)
+							myBurger.type = LevelManager.Orders.BURGER_COMPLETE;
+						else if(myBurger.IsTomato && myBurger.IsOnion)
+							myBurger.type = LevelManager.Orders.BURGER_TOMATO_ONION;
+						else if(myBurger.IsCabbage && myBurger.IsOnion)
+							myBurger.type = LevelManager.Orders.BURGER_ONION_CABBAGE;
+						else if(myBurger.IsTomato && myBurger.IsCabbage)
+							myBurger.type = LevelManager.Orders.BURGER_TOMATO_CABBAGE;
+						else if(myBurger.IsTomato)
+							myBurger.type = LevelManager.Orders.BURGER_TOMATO;
+						else if(myBurger.IsOnion)
+							myBurger.type = LevelManager.Orders.BURGER_ONION;
+						else if(myBurger.IsCabbage)
+							myBurger.type = LevelManager.Orders.BURGER_CABBAGE;
 						else
-							myBurger.myType = LevelManager.Orders.BURGER;
+							myBurger.type = LevelManager.Orders.BURGER;
 
 					}
 					if(heatingTimer > perfectTimer)
@@ -290,13 +290,13 @@ namespace _Project.Scripts.Other
 						_levelSoundManager.bttn_click.Play();
 						if(isUS)
 						{
-							availableHotDog.transform.GetComponent<HotDog>().perfect = true;
+							availableHotDog.transform.GetComponent<HotDog>().isPerfect = true;
 							_usManager.hotdogOnPlates[availableHotDog.myPositionInArray].sprite = _usManager.hotDogVariations[2];
 
 						}
 						else
 						{
-							availableHotDog.transform.GetComponent<Burger>().perfect = true;
+							availableHotDog.transform.GetComponent<BurgerFood>().isPrefavet = true;
 							_australiaManager.burgerTikkiOnPlates[availableHotDog.myPositionInArray].sprite = _australiaManager.burgerTikkiVariations[1];
 						}
 					}

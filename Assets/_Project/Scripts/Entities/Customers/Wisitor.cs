@@ -51,7 +51,7 @@ namespace _Project.Scripts.Entities.Customers
 		[FormerlySerializedAs("pizzadot")] [SerializeField] private SpriteRenderer _pizzaDOt;
 		[FormerlySerializedAs("plateOfEatableOrder")] [SerializeField] private GameObject _orderPlate;
 		[FormerlySerializedAs("fries")] [SerializeField] private GameObject _fricesPrefav;
-		[FormerlySerializedAs("myBurger")] [SerializeField] private Burger _burger;
+		[FormerlySerializedAs("myBurger")] [SerializeField] private BurgerFood _burger;
 		[FormerlySerializedAs("drinkingOrder")] [SerializeField] private GameObject _drinkableOrder;
 		
 		[FormerlySerializedAs("myOrder")] public List<LevelManager.Orders> _order = new();
@@ -124,12 +124,12 @@ namespace _Project.Scripts.Entities.Customers
 					}
 					else if(_usManager.clickedHotDog)
 					{
-						_usManager.clickedHotDogDestinationFunction.customer = this;
-						_usManager.clickedHotDogDestinationFunction.otherObject = this.gameObject;
+						_usManager.clickedHotDogDestinationFunction.wisitor = this;
+						_usManager.clickedHotDogDestinationFunction._otherObject = this.gameObject;
 						bool foundOrder = false;
 						for(int i = 0 ; i< _order.Count ; i++)
 						{
-							if(_usManager.clickedHotDogDestinationFunction.myType == _order[i])
+							if(_usManager.clickedHotDogDestinationFunction.isTape == _order[i])
 							{
 								_levelSoundManager.customerEat.Play();
 								_usManager.HotDogReached();
@@ -141,7 +141,7 @@ namespace _Project.Scripts.Entities.Customers
 						{
 							if(iHaveAMultipleTypeOrder != LevelManager.Orders.NONE)
 							{	
-								_usManager.clickedHotDogDestinationFunction.wrongOrderGiven = true;
+								_usManager.clickedHotDogDestinationFunction.wrongOrder = true;
 								_usManager.HotDogReached();
 							}
 						}
@@ -240,13 +240,13 @@ namespace _Project.Scripts.Entities.Customers
 				{
 					if(_australiaManager.clickedBurger ) 
 					{
-						_australiaManager.clickedHotDogDestinationFunction.customer = this;
+						_australiaManager.clickedHotDogDestinationFunction.wisitior = this;
 						_australiaManager.clickedHotDogDestinationFunction.otherObject = this.gameObject;
 					
 						bool foundOrder = false;
 						for(int i = 0 ; i< _order.Count ; i++)
 						{
-							if(_australiaManager.clickedHotDogDestinationFunction.myType == _order[i])
+							if(_australiaManager.clickedHotDogDestinationFunction.type == _order[i])
 							{
 								_australiaManager.HotDogReached();
 								foundOrder = true;
@@ -257,7 +257,7 @@ namespace _Project.Scripts.Entities.Customers
 						{
 							if(iHaveAMultipleTypeOrder != LevelManager.Orders.NONE)
 							{
-								_australiaManager.clickedHotDogDestinationFunction.wrongOrderGiven = true;
+								_australiaManager.clickedHotDogDestinationFunction.wrongOrders = true;
 								_australiaManager.HotDogReached();
 							}
 						}
@@ -1180,44 +1180,44 @@ namespace _Project.Scripts.Entities.Customers
 				switch(orderNo)
 				{
 					case 10:
-						_burger.myTomato.gameObject.SetActive (false);
-						_burger.myOnion.gameObject.SetActive (false);
-						_burger.myCabbage.gameObject.SetActive (false);
+						_burger._tomatoPrefab.gameObject.SetActive (false);
+						_burger._onionPrefab.gameObject.SetActive (false);
+						_burger._cabbagePrefab.gameObject.SetActive (false);
 						break;
 					case 13:
-						_burger.myTomato.gameObject.SetActive (true);
-						_burger.myOnion.gameObject.SetActive (false);
-						_burger.myCabbage.gameObject.SetActive (false);
+						_burger._tomatoPrefab.gameObject.SetActive (true);
+						_burger._onionPrefab.gameObject.SetActive (false);
+						_burger._cabbagePrefab.gameObject.SetActive (false);
 						break;
 					case 14:
-						_burger.myTomato.gameObject.SetActive (false);
-						_burger.myOnion.gameObject.SetActive (true);
-						_burger.myCabbage.gameObject.SetActive (false);
+						_burger._tomatoPrefab.gameObject.SetActive (false);
+						_burger._onionPrefab.gameObject.SetActive (true);
+						_burger._cabbagePrefab.gameObject.SetActive (false);
 						break;
 					case 15:
-						_burger.myTomato.gameObject.SetActive (false);
-						_burger.myOnion.gameObject.SetActive (false);
-						_burger.myCabbage.gameObject.SetActive (true);
+						_burger._tomatoPrefab.gameObject.SetActive (false);
+						_burger._onionPrefab.gameObject.SetActive (false);
+						_burger._cabbagePrefab.gameObject.SetActive (true);
 						break;
 					case 16:
-						_burger.myTomato.gameObject.SetActive (true);
-						_burger.myOnion.gameObject.SetActive (true);
-						_burger.myCabbage.gameObject.SetActive (false);
+						_burger._tomatoPrefab.gameObject.SetActive (true);
+						_burger._onionPrefab.gameObject.SetActive (true);
+						_burger._cabbagePrefab.gameObject.SetActive (false);
 						break;
 					case 17:
-						_burger.myTomato.gameObject.SetActive (true);
-						_burger.myOnion.gameObject.SetActive (false);
-						_burger.myCabbage.gameObject.SetActive (true);
+						_burger._tomatoPrefab.gameObject.SetActive (true);
+						_burger._onionPrefab.gameObject.SetActive (false);
+						_burger._cabbagePrefab.gameObject.SetActive (true);
 						break;
 					case 18:
-						_burger.myTomato.gameObject.SetActive (false);
-						_burger.myOnion.gameObject.SetActive (true);
-						_burger.myCabbage.gameObject.SetActive (true);
+						_burger._tomatoPrefab.gameObject.SetActive (false);
+						_burger._onionPrefab.gameObject.SetActive (true);
+						_burger._cabbagePrefab.gameObject.SetActive (true);
 						break;
 					case 19:
-						_burger.myTomato.gameObject.SetActive (true);
-						_burger.myOnion.gameObject.SetActive (true);
-						_burger.myCabbage.gameObject.SetActive (true);
+						_burger._tomatoPrefab.gameObject.SetActive (true);
+						_burger._onionPrefab.gameObject.SetActive (true);
+						_burger._cabbagePrefab.gameObject.SetActive (true);
 						break;
 				}
 
