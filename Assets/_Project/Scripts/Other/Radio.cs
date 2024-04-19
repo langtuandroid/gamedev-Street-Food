@@ -13,7 +13,7 @@ namespace _Project.Scripts.Other
 
 		private void Start () 
 		{
-			Customer.radioPurchased = false;
+			Wisitor._isRadioBought = false;
 		}
 
 		private void Nodef1()
@@ -60,7 +60,7 @@ namespace _Project.Scripts.Other
 		private void OnMouseDown()
 		{
 			if (!gameObject.GetComponent<AudioSource> ().isPlaying) {
-				Customer.radioPurchased = true ;
+				Wisitor._isRadioBought = true ;
 				radiofront.GetComponent<Animator>().enabled = true ;
 
 				gameObject.GetComponent<AudioSource> ().Play ();
@@ -71,7 +71,7 @@ namespace _Project.Scripts.Other
 				Invoke (nameof(Restart), 2.5f);
 
 			} else {
-				Customer.radioPurchased = false ;
+				Wisitor._isRadioBought = false ;
 				gameObject.GetComponent<AudioSource> ().Stop();
 				radiofront.GetComponent<Animator>().enabled = false ;
 				node1.SetActive(false);

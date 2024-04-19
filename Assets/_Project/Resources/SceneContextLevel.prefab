@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: 69712995496286230, guid: 4742809753fa3e5438f3daac5a4d228e,
         type: 3}
       propertyPath: _monoInstallers.Array.size
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 69712995496286230, guid: 4742809753fa3e5438f3daac5a4d228e,
         type: 3}
@@ -53,6 +53,11 @@ PrefabInstance:
       propertyPath: _monoInstallers.Array.data[7]
       value: 
       objectReference: {fileID: 2556061080176470006}
+    - target: {fileID: 69712995496286230, guid: 4742809753fa3e5438f3daac5a4d228e,
+        type: 3}
+      propertyPath: _monoInstallers.Array.data[8]
+      value: 
+      objectReference: {fileID: 1055705643116046472}
     - target: {fileID: 3435563918987221057, guid: 4742809753fa3e5438f3daac5a4d228e,
         type: 3}
       propertyPath: m_Name
@@ -140,6 +145,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2556061080176470006}
+    - targetCorrespondingSourceObject: {fileID: 3435563918987221057, guid: 4742809753fa3e5438f3daac5a4d228e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1055705643116046472}
   m_SourcePrefab: {fileID: 100100000, guid: 4742809753fa3e5438f3daac5a4d228e, type: 3}
 --- !u!114 &3370963012577099790 stripped
 MonoBehaviour:
@@ -250,3 +259,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _menuManager: {fileID: 0}
+--- !u!114 &1055705643116046472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8408097581475808021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 378c796d94c648c9804c15e61b01c875, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _customerHandler: {fileID: 0}

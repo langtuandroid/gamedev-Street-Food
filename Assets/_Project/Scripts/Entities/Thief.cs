@@ -12,6 +12,7 @@ namespace _Project.Scripts.Entities
 {
 	public class Thief : MonoBehaviour
 	{
+		[Inject] private WisitorHandler _customerHandler;
 		[Inject] private US_Manager _usManager;
 		[Inject] private Italy_Manager _italyManager;
 		[Inject] private China_Manager _chinaManager;
@@ -73,7 +74,7 @@ namespace _Project.Scripts.Entities
 			reachedPos = 4;
 			isCaught = false;
 
-			StartCoroutine (MoveToPosition(CustomerHandler._instance.customerEndPosition.position ));
+			StartCoroutine (MoveToPosition(_customerHandler._customerEndPos.position ));
 			if ((MenuManager.handcuffNo <= 0) && PlayerPrefs.GetInt("handcuffPanel")!=2 && coinsStolen > 0 && (LevelManager.levelNo == 8 || LevelManager.levelNo==9 ||LevelManager.levelNo == 10) ) {
 		
 				Invoke (nameof(bringThiefAgain), 9.0f);
@@ -96,10 +97,10 @@ namespace _Project.Scripts.Entities
 				{
 					if(transform.position.x < coinsPos[reachedPos].position.x )
 					{
-						if(CustomerHandler._instance.coinImages[reachedPos].gameObject.activeInHierarchy)
+						if(_customerHandler._coins[reachedPos].gameObject.activeInHierarchy)
 						{
-							coinsStolen+=CustomerHandler._instance.coinImages[reachedPos].myAmount;
-							CustomerHandler._instance.coinImages[reachedPos].CoinsStolen ();
+							coinsStolen+=_customerHandler._coins[reachedPos].myAmount;
+							_customerHandler._coins[reachedPos].CoinsStolen ();
 						}
 						reachedPos--;
 					}
@@ -149,7 +150,7 @@ namespace _Project.Scripts.Entities
 					Invoke(nameof(Stopa),4.0f);
 				}
 
-				transform.position = CustomerHandler._instance.customerEndPosition.position;
+				transform.position = _customerHandler._customerEndPos.position;
 				speed = 35;
 				isCaught = true;
 				_uiManager.totalCoins+=coinsStolen;

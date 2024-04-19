@@ -3,6 +3,7 @@ using _Project.Scripts.Managers;
 using _Project.Scripts.UI_Scripts;
 using _Project.Scripts.UI.Tutorial;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Zenject;
 
@@ -16,43 +17,43 @@ namespace _Project.Scripts.Audio
 		[Inject] private Australia_Manager _australiaManager;
 		[Inject] private UIManager _uiManager;
 		[Inject] private Italy_Manager _italyManager;
+		[FormerlySerializedAs("myText")] [SerializeField] private Text _text;
+		[FormerlySerializedAs("isGoalAchieved")] [SerializeField] private bool _isGoalAchived;
+		private float _pauseLetter = 0.1f;
 		private string _message;
-		private int noOfExtraPopup;
-		
-		[SerializeField] private bool isGoalAchieved;
-		[SerializeField] private float letterPause = 0.03f;
-		[SerializeField] private Text myText;
-		public GameObject imageToDeactivate;
+		private int _extraPopUp;
+		public GameObject _deactivateImage { get; set; }
 		
 
 		private void Start () 
 		{
-			if(!isGoalAchieved)
+			if(!_isGoalAchived)
 			{
 				_message = "level goal: $"+_levelManager.targetScore[LevelManager.levelNo];
-				myText.text = "";
+				_text.text = "";
 				if (PlayerPrefs.GetInt ("BellsTut") == 1)
 				{
-					noOfExtraPopup++;
+					_extraPopUp++;
 				}
 				if(PlayerPrefs.GetInt ("WhistlesTut") == 1)
 				{
-					noOfExtraPopup++;
+					_extraPopUp++;
 				}
 				if(PlayerPrefs.GetInt ("cupcakeTut") == 1)
 				{
-					noOfExtraPopup++;
+					_extraPopUp++;
 				}
 				if(PlayerPrefs.GetInt ("radioTut") == 1)
 				{
-					noOfExtraPopup++;
+					_extraPopUp++;
 				}
 
 			}
 		}
 	
-		public IEnumerator TypeText () {
-			if(isGoalAchieved)
+		public IEnumerator PrintAnimation () 
+		{
+			if(_isGoalAchived)
 			{
 				_message = "goal met!";
 			}
@@ -61,14 +62,14 @@ namespace _Project.Scripts.Audio
 				TutorialPanel.popupPanelActive = true;
 			}
 			foreach (char letter in _message.ToCharArray()) {
-				myText.text += letter;
+				_text.text += letter;
 				yield return 0;
-				yield return new WaitForSeconds (letterPause);
+				yield return new WaitForSeconds (_pauseLetter);
 			}      
 			yield return new WaitForSeconds(1.0f);
-			if(!isGoalAchieved)
+			if(!_isGoalAchived)
 			{
-				imageToDeactivate.SetActive (false);
+				_deactivateImage.SetActive (false);
 				if(LevelManager.levelNo == 1)
 				{
 					_usManager.clickfirstBun = true;
@@ -138,7 +139,7 @@ namespace _Project.Scripts.Audio
 				}
 				else
 				{
-					if(noOfExtraPopup > 0)
+					if(_extraPopUp > 0)
 					{
 						_uiManager.tutorialPanelBg.gameObject.SetActive (true);
 						_uiManager.tutorialPanelBg.SpecialTutorials ();

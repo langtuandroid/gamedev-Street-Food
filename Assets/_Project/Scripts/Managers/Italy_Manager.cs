@@ -57,7 +57,7 @@ namespace _Project.Scripts.Managers
 		public Pizza firstPizza ;
 		public Availability firstOvenAvailabe;
 		public Pizza firstOvenPizza;
-		public Customer firstCustomer { get; set; }
+		public Wisitor firstCustomer { get; set; }
 		public bool clickfirstBase { get; set; }
 		public SpriteRenderer tableTop;
 		public SpriteRenderer tableCover;

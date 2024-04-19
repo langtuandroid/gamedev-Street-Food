@@ -7,86 +7,89 @@ using _Project.Scripts.Managers;
 using _Project.Scripts.UI_Scripts;
 using _Project.Scripts.UI.Tutorial;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace _Project.Scripts.Entities.Customers
 {
-	public class Customer : MonoBehaviour
+	public class Wisitor : MonoBehaviour
 	{
+		public static bool _isRadioBought;
+		[Inject] private WisitorHandler _customerHandler;
 		[Inject] private LevelSoundManager _levelSoundManager;
 		[Inject] private US_Manager _usManager;
 		[Inject] private Italy_Manager _italyManager;
 		[Inject] private China_Manager _chinaManager;
 		[Inject] private Australia_Manager _australiaManager;
 		[Inject] private UIManager _uiManager;
-		private Vector3 scaleOfEatableOrder;
-		private Vector3 scaleOfDrinkableOrder;
-		private Vector3 scaleOfFries;
-		private float eyesTimer;
-		private bool eyesFull;
-		private bool _hasWhistle;
-		private bool hasbell ;
-		private bool hascupcake ;
-		private List<int> randomListToDecideNoPay = new(){0,1,2};
-		private bool allowClick;
+		private Vector3 _orderScale;
+		private Vector3 _drinkScale;
+		private Vector3 _friesScale;
+		private float _timer;
+		private bool _full;
+		private bool _isWistle;
+		private bool _isBell ;
+		private bool _isCupCake ;
+		private List<int> _noPay = new(){0,1,2};
+		private bool _isClick;
+		private float _waitingTime = 60;
+		private bool _isLeavingNoPay;
+		private int _coinsNoPay;
+		private bool _orderPlaces;
 		
-		public static bool radioPurchased;
-		public LevelManager.Orders iHaveAMultipleTypeOrder;
-		public List<LevelManager.Orders> myOrder = new();
-		[SerializeField] private float customerWaitingTime;  // it would vary depending on the level 
-		public float myWaitingTime; // how much time I have waited..
-		public int positionTaken;
-		[SerializeField] private bool orderPlaced;
-		[SerializeField] private GameObject orderPanel;
-		[SerializeField] private TweenScale orderPanelTween;
-		[SerializeField] private TweenScale drinkableOrderTween;
-		[SerializeField] private TweenScale eatableOrderTween;
-		[SerializeField] private TweenScale friesTween;
-		public SpriteRenderer waitingSlider;
-		[SerializeField] private Animation myAnimation;
-		[SerializeField] private SpriteRenderer eatableOrder;
-		[SerializeField] private SpriteRenderer pizzadot ;
-		[SerializeField] private GameObject plateOfEatableOrder;
-		[SerializeField] private GameObject fries;
-		[SerializeField] private Burger myBurger;
-		[SerializeField] private GameObject drinkingOrder;
-		public int coinsSpent;
-		[SerializeField] private BoxCollider myCollider;
-		public SpriteRenderer myFacialExpression;
-		public Sprite []expressions;
-		[SerializeField] private SpriteRenderer myEyes;
-		[SerializeField] private Sprite []myEyesExpressions;
-		[SerializeField] private int noOfOrders ;
-		public bool perfect;
-		public bool shouldBePerfectIfServed;
-		public bool tutorialOn;
-		[SerializeField] private ParticleSystem angryEffect;
-		[SerializeField] private bool leavingWithoutPaying;
-		[SerializeField] private int coinsWithoutPaying;
+		[FormerlySerializedAs("orderPanel")] [SerializeField] private GameObject _orderPanel;
+		[FormerlySerializedAs("orderPanelTween")] [SerializeField] private TweenScale _orderTween;
+		[FormerlySerializedAs("drinkableOrderTween")] [SerializeField] private TweenScale _drinkableOrderTween;
+		[FormerlySerializedAs("eatableOrderTween")] [SerializeField] private TweenScale _eatableOrderTween;
+		[FormerlySerializedAs("friesTween")] [SerializeField] private TweenScale _friesTween;
+		[FormerlySerializedAs("angryEffect")] [SerializeField] private ParticleSystem _angryEffect;
+		[FormerlySerializedAs("myEyes")] [SerializeField] private SpriteRenderer _eyes;
+		[FormerlySerializedAs("myEyesExpressions")] [SerializeField] private Sprite []_eyesExpressions;
+		[FormerlySerializedAs("myCollider")] [SerializeField] private BoxCollider _collider;
+		[FormerlySerializedAs("myAnimation")] [SerializeField] private Animation _animation;
+		[FormerlySerializedAs("eatableOrder")] [SerializeField] private SpriteRenderer _orderEat;
+		[FormerlySerializedAs("pizzadot")] [SerializeField] private SpriteRenderer _pizzaDOt;
+		[FormerlySerializedAs("plateOfEatableOrder")] [SerializeField] private GameObject _orderPlate;
+		[FormerlySerializedAs("fries")] [SerializeField] private GameObject _fricesPrefav;
+		[FormerlySerializedAs("myBurger")] [SerializeField] private Burger _burger;
+		[FormerlySerializedAs("drinkingOrder")] [SerializeField] private GameObject _drinkableOrder;
+		
+		[FormerlySerializedAs("myOrder")] public List<LevelManager.Orders> _order = new();
+		[FormerlySerializedAs("myFacialExpression")] public SpriteRenderer _facialExpression;
+		[FormerlySerializedAs("expressions")] public Sprite []_expressions;
+		[FormerlySerializedAs("waitingSlider")] public SpriteRenderer _sliderWait;
+		public LevelManager.Orders iHaveAMultipleTypeOrder { get; set; } = LevelManager.Orders.NONE;
+		public int coinsSpent { get; set; }
+		private int noOfOrders { get; set; }
+		public bool perfect { get; set; }
+		public bool shouldBePerfectIfServed { get; set; }
+		public bool tutorialOn { get; set; }
+		public float myWaitingTime { get; set; }
+		public int positionTaken { get; set; }
 
 		private void Start () 
 		{
 			_uiManager.n_Customer_served = PlayerPrefs.GetInt ("CustomerServed");
 			_uiManager.n_Perfect_achieved = PlayerPrefs.GetInt ("Perfectachieved");
 
-			scaleOfEatableOrder = plateOfEatableOrder.transform.localScale;
-			scaleOfDrinkableOrder = drinkingOrder.transform.localScale;
+			_orderScale = _orderPlate.transform.localScale;
+			_drinkScale = _drinkableOrder.transform.localScale;
 			if(_australiaManager != null)
 			{
-				scaleOfFries = fries.transform.localScale;
+				_friesScale = _fricesPrefav.transform.localScale;
 			}
 
 			if(PlayerPrefs.HasKey ("Radio"))
 			{
-				radioPurchased = true;
+				_isRadioBought = true;
 			}
 			if(PlayerPrefs.HasKey ("Whistle"))
 			{
-				_hasWhistle = true;
+				_isWistle = true;
 			}
 			if (PlayerPrefs.HasKey ("Bell"))
 			{
-				hasbell = true ;
+				_isBell = true ;
 			}
 
 		}
@@ -97,11 +100,11 @@ namespace _Project.Scripts.Entities.Customers
 			{
 				if(_italyManager.firstOvenPizza.tutorialOn)
 				{
-					allowClick = true;
+					_isClick = true;
 				}
 
 			}
-			if(!TutorialPanel.popupPanelActive || US_Manager.tutorialEnd || tutorialOn || China_Manager.tutorialEnd || Italy_Manager.tutorialEnd || allowClick)
+			if(!TutorialPanel.popupPanelActive || US_Manager.tutorialEnd || tutorialOn || China_Manager.tutorialEnd || Italy_Manager.tutorialEnd || _isClick)
 			{
 				if(LevelManager.levelNo <= 10)
 				{
@@ -109,9 +112,9 @@ namespace _Project.Scripts.Entities.Customers
 					{
 						_usManager.clickedItemDestinationFunction.customer = this;
 
-						for(int i = 0 ; i< myOrder.Count ; i++)
+						for(int i = 0 ; i< _order.Count ; i++)
 						{
-							if(_usManager.clickedItemDestinationFunction.myType == myOrder[i])
+							if(_usManager.clickedItemDestinationFunction.myType == _order[i])
 							{
 								_usManager.ObjectReached();
 								break;
@@ -124,9 +127,9 @@ namespace _Project.Scripts.Entities.Customers
 						_usManager.clickedHotDogDestinationFunction.customer = this;
 						_usManager.clickedHotDogDestinationFunction.otherObject = this.gameObject;
 						bool foundOrder = false;
-						for(int i = 0 ; i< myOrder.Count ; i++)
+						for(int i = 0 ; i< _order.Count ; i++)
 						{
-							if(_usManager.clickedHotDogDestinationFunction.myType == myOrder[i])
+							if(_usManager.clickedHotDogDestinationFunction.myType == _order[i])
 							{
 								_levelSoundManager.customerEat.Play();
 								_usManager.HotDogReached();
@@ -155,9 +158,9 @@ namespace _Project.Scripts.Entities.Customers
 					{
 						_chinaManager.clickedItemDestinationFunction.customer = this;
 
-						for(int i = 0 ; i< myOrder.Count ; i++)
+						for(int i = 0 ; i< _order.Count ; i++)
 						{
-							if(_chinaManager.clickedItemDestinationFunction.myType == myOrder[i])
+							if(_chinaManager.clickedItemDestinationFunction.myType == _order[i])
 							{
 								_chinaManager.ObjectReached();
 								break;
@@ -169,9 +172,9 @@ namespace _Project.Scripts.Entities.Customers
 					{
 						Debug.Log("here....");
 						_chinaManager.clickedItemDestinationFunction.customer = this;
-						for(int i = 0 ; i< myOrder.Count ; i++)
+						for(int i = 0 ; i< _order.Count ; i++)
 						{
-							if(_chinaManager.clickedItemDestinationFunction.myType == myOrder[i])
+							if(_chinaManager.clickedItemDestinationFunction.myType == _order[i])
 							{
 								_chinaManager.ObjectReached();
 								break;
@@ -194,9 +197,9 @@ namespace _Project.Scripts.Entities.Customers
 							_italyManager.clickedPizzaDestinationFunction.otherObject = this.gameObject;
 						
 							bool foundOrder = false;
-							for(int i = 0 ; i< myOrder.Count ; i++)
+							for(int i = 0 ; i< _order.Count ; i++)
 							{
-								if(_italyManager.clickedPizzaDestinationFunction.myType == myOrder[i])
+								if(_italyManager.clickedPizzaDestinationFunction.myType == _order[i])
 								{
 									_italyManager.PizzaReached();
 									foundOrder = true;
@@ -218,9 +221,9 @@ namespace _Project.Scripts.Entities.Customers
 					{
 						_italyManager.clickedItemDestinationFunction.customer = this;
 					
-						for(int i = 0 ; i< myOrder.Count ; i++)
+						for(int i = 0 ; i< _order.Count ; i++)
 						{
-							if(_italyManager.clickedItemDestinationFunction.myType == myOrder[i])
+							if(_italyManager.clickedItemDestinationFunction.myType == _order[i])
 							{
 								_italyManager.ObjectReached();
 								break;
@@ -241,9 +244,9 @@ namespace _Project.Scripts.Entities.Customers
 						_australiaManager.clickedHotDogDestinationFunction.otherObject = this.gameObject;
 					
 						bool foundOrder = false;
-						for(int i = 0 ; i< myOrder.Count ; i++)
+						for(int i = 0 ; i< _order.Count ; i++)
 						{
-							if(_australiaManager.clickedHotDogDestinationFunction.myType == myOrder[i])
+							if(_australiaManager.clickedHotDogDestinationFunction.myType == _order[i])
 							{
 								_australiaManager.HotDogReached();
 								foundOrder = true;
@@ -264,9 +267,9 @@ namespace _Project.Scripts.Entities.Customers
 					{
 						_australiaManager.clickedItemDestinationFunction.customer = this;
 					
-						for(int i = 0 ; i< myOrder.Count ; i++)
+						for(int i = 0 ; i< _order.Count ; i++)
 						{
-							if(_australiaManager.clickedItemDestinationFunction.myType == myOrder[i])
+							if(_australiaManager.clickedItemDestinationFunction.myType == _order[i])
 							{
 								_australiaManager.ObjectReached();
 								break;
@@ -277,9 +280,9 @@ namespace _Project.Scripts.Entities.Customers
 					else if(_australiaManager.cickedFries)
 					{
 						_australiaManager.clickedItemDestinationFunction.customer = this;
-						for(int i = 0 ; i< myOrder.Count ; i++)
+						for(int i = 0 ; i< _order.Count ; i++)
 						{
-							if(_australiaManager.clickedItemDestinationFunction.myType == myOrder[i])
+							if(_australiaManager.clickedItemDestinationFunction.myType == _order[i])
 							{
 								_australiaManager.ObjectReached();
 								break;
@@ -293,100 +296,100 @@ namespace _Project.Scripts.Entities.Customers
 					}
 				}
 
-				if(leavingWithoutPaying && CustomerHandler._instance.gameTimer > 0 )
+				if(_isLeavingNoPay && _customerHandler._timeOnGame > 0 )
 				{
 
 					_levelSoundManager.caught.Play();
 		
-					_uiManager.totalCoins+=coinsWithoutPaying;
+					_uiManager.totalCoins+=_coinsNoPay;
 					_uiManager.CallIncrementCoint ();
-					leavingWithoutPaying = false;
+					_isLeavingNoPay = false;
 				}
 			}
 		}
 		
 		private void Update () 
 		{
-			if(orderPlaced)
+			if(_orderPlaces)
 			{
-				if(radioPurchased)
+				if(_isRadioBought)
 					myWaitingTime+=Time.deltaTime/2f;
 
 				else
 					myWaitingTime+=Time.deltaTime;
 
-				Expressions();
+				ShowNeededProduct();
 				if(_usManager != null)
 				{
-					if(myWaitingTime >= customerWaitingTime && US_Manager.tutorialEnd) 
+					if(myWaitingTime >= _waitingTime && US_Manager.tutorialEnd) 
 					{
-						orderPlaced = false;
-						StartCoroutine (MoveToPosition (CustomerHandler._instance.customerEndPosition.position , false));
+						_orderPlaces = false;
+						StartCoroutine (MoveToPositionRoutine (_customerHandler._customerEndPos.position , false));
 					
 					}
 				}
 				else if(_chinaManager != null)
 				{
-					if(myWaitingTime >= customerWaitingTime && China_Manager.tutorialEnd) 
+					if(myWaitingTime >= _waitingTime && China_Manager.tutorialEnd) 
 					{
-						orderPlaced = false;
-						StartCoroutine (MoveToPosition (CustomerHandler._instance.customerEndPosition.position , false));
+						_orderPlaces = false;
+						StartCoroutine (MoveToPositionRoutine (_customerHandler._customerEndPos.position , false));
 					
 					}
 				}
 				else if(_italyManager != null)
 				{
-					if(myWaitingTime >= customerWaitingTime && Italy_Manager.tutorialEnd)
+					if(myWaitingTime >= _waitingTime && Italy_Manager.tutorialEnd)
 					{
-						orderPlaced = false;
-						StartCoroutine (MoveToPosition (CustomerHandler._instance.customerEndPosition.position , false));
+						_orderPlaces = false;
+						StartCoroutine (MoveToPositionRoutine (_customerHandler._customerEndPos.position , false));
 					
 					}
 				}
 				else if(_australiaManager != null)
 				{
-					if(myWaitingTime >= customerWaitingTime && Australia_Manager.tutorialEnd) 
+					if(myWaitingTime >= _waitingTime && Australia_Manager.tutorialEnd) 
 					{
-						orderPlaced = false;
-						StartCoroutine (MoveToPosition (CustomerHandler._instance.customerEndPosition.position , false));
+						_orderPlaces = false;
+						StartCoroutine (MoveToPositionRoutine (_customerHandler._customerEndPos.position , false));
 					
 					}
 				}
 			}
-			if(myEyes != null && orderPlaced)
+			if(_eyes != null && _orderPlaces)
 			{
-				eyesTimer+=Time.deltaTime;
-				if(eyesFull)
+				_timer+=Time.deltaTime;
+				if(_full)
 				{
-					if(eyesTimer > 2.0f)
+					if(_timer > 2.0f)
 					{	
-						myEyes.gameObject.SetActive (true);
-						if(myWaitingTime < customerWaitingTime/2f)
-							myEyes.sprite = myEyesExpressions[0];
+						_eyes.gameObject.SetActive (true);
+						if(myWaitingTime < _waitingTime/2f)
+							_eyes.sprite = _eyesExpressions[0];
 						else
-							myEyes.sprite = myEyesExpressions[1];
-						eyesTimer = 0;
-						eyesFull = false;
+							_eyes.sprite = _eyesExpressions[1];
+						_timer = 0;
+						_full = false;
 					}
 				}
 				else
 				{
-					if(eyesTimer > 0.5f)
+					if(_timer > 0.5f)
 					{
-						myEyes.gameObject.SetActive (false);
-						eyesTimer = 0;
-						eyesFull = true;
+						_eyes.gameObject.SetActive (false);
+						_timer = 0;
+						_full = true;
 					}
 				}
 			}
-			else if(myEyes != null && myEyes.sprite != myEyesExpressions[0])
+			else if(_eyes != null && _eyes.sprite != _eyesExpressions[0])
 			{
-				myEyes.sprite = myEyesExpressions[0];
+				_eyes.sprite = _eyesExpressions[0];
 			}
 		}
 
 
-		public IEnumerator Angry_effect()
+		public IEnumerator AngryRoutine()
 		{
 			float sliderValue = 0.49f;
 			bool right = false;
@@ -395,90 +398,90 @@ namespace _Project.Scripts.Entities.Customers
 
 				if(right)
 				{
-					myAnimation.transform.localPosition = new Vector3(myAnimation.transform.localPosition.x+ Time.deltaTime , myAnimation.transform.localPosition.y , myAnimation.transform.localPosition.z) ;
-					if(myAnimation.transform.localPosition.x > 0.04f)
+					_animation.transform.localPosition = new Vector3(_animation.transform.localPosition.x+ Time.deltaTime , _animation.transform.localPosition.y , _animation.transform.localPosition.z) ;
+					if(_animation.transform.localPosition.x > 0.04f)
 					{
 						right = false;
 					}
 				}
 				else
 				{
-					myAnimation.transform.localPosition = new Vector3(myAnimation.transform.localPosition.x - Time.deltaTime , myAnimation.transform.localPosition.y , myAnimation.transform.localPosition.z) ;
-					if(myAnimation.transform.localPosition.x < -0.04f)
+					_animation.transform.localPosition = new Vector3(_animation.transform.localPosition.x - Time.deltaTime , _animation.transform.localPosition.y , _animation.transform.localPosition.z) ;
+					if(_animation.transform.localPosition.x < -0.04f)
 					{
 						right = true;
 					}
 				}
-				sliderValue = myWaitingTime/customerWaitingTime;
+				sliderValue = myWaitingTime/_waitingTime;
 				sliderValue = 1f - sliderValue;
 				yield return null;
 			}
-			myAnimation.transform.localPosition = Vector3.zero;
+			_animation.transform.localPosition = Vector3.zero;
 
 		}
 
-		private void Expressions()
+		private void ShowNeededProduct()
 		{
-			if(myWaitingTime > customerWaitingTime)
-				myWaitingTime = customerWaitingTime;
-			float sliderValue = myWaitingTime/customerWaitingTime;
+			if(myWaitingTime > _waitingTime)
+				myWaitingTime = _waitingTime;
+			float sliderValue = myWaitingTime/_waitingTime;
 			sliderValue = 1f - sliderValue;
-			if(sliderValue < 0.5f && waitingSlider.color == Color.green)
+			if(sliderValue < 0.5f && _sliderWait.color == Color.green)
 			{
-				waitingSlider.color = Color.red;
-				angryEffect.Play ();
+				_sliderWait.color = Color.red;
+				_angryEffect.Play ();
 				gameObject.GetComponent<AudioSource>().Play();
 
-				StartCoroutine ("Angry_effect");
-				if(myFacialExpression != null)
-					myFacialExpression.sprite = expressions[1];
+				StartCoroutine (nameof(AngryRoutine));
+				if(_facialExpression != null)
+					_facialExpression.sprite = _expressions[1];
 			}
-			else if(sliderValue >= 0.5f && waitingSlider.color == Color.red)
+			else if(sliderValue >= 0.5f && _sliderWait.color == Color.red)
 			{
-				StopCoroutine ("Angry_effect");
+				StopCoroutine (nameof(AngryRoutine));
 
-				angryEffect.Stop ();
-				waitingSlider.color = Color.green;
-				if(myFacialExpression != null)
-					myFacialExpression.sprite = expressions[0];
+				_angryEffect.Stop ();
+				_sliderWait.color = Color.green;
+				if(_facialExpression != null)
+					_facialExpression.sprite = _expressions[0];
 			}
-			waitingSlider.transform.localScale = new Vector3( waitingSlider.transform.localScale.x , sliderValue , waitingSlider.transform.localScale.z);
+			_sliderWait.transform.localScale = new Vector3( _sliderWait.transform.localScale.x , sliderValue , _sliderWait.transform.localScale.z);
 		}
 
-		public void MoveToEndPosition()
+		public void MoveToEnd()
 		{
-			StartCoroutine (MoveToPosition (CustomerHandler._instance.customerEndPosition.position , false));
+			StartCoroutine (MoveToPositionRoutine (_customerHandler._customerEndPos.position , false));
 		}
 		
 		public void Gold_Deactive()
 		{
 			_uiManager.gold_Collected.SetActive(false);
 		}
-		public	void Stopa()
+		public	void Stop()
 		{
 			_uiManager.achievment_text.SetActive (false);
 		}
-		public IEnumerator MoveToPosition(Vector3 finalPos , bool toOrder)
+		public IEnumerator MoveToPositionRoutine(Vector3 finalPos , bool toOrder)
 		{
-			angryEffect.Stop();
-			myAnimation.GetComponent<SpriteRenderer>().sortingOrder = -2;
-			myCollider.enabled = false;
-			if(myEyes != null)
+			_angryEffect.Stop();
+			_animation.GetComponent<SpriteRenderer>().sortingOrder = -2;
+			_collider.enabled = false;
+			if(_eyes != null)
 			{
-				myEyes.sortingOrder = -1;
+				_eyes.sortingOrder = -1;
 			}
-			if(myFacialExpression!= null)
+			if(_facialExpression!= null)
 			{
-				myFacialExpression.sortingOrder = -1;
+				_facialExpression.sortingOrder = -1;
 			}
-			myAnimation.Play ();
+			_animation.Play ();
 			finalPos = new Vector3(finalPos.x , transform.position.y , finalPos.z);
 			float distance = Vector3.Distance (transform.position , finalPos);
 			float speed = 5;
 			if(!toOrder)
 			{
-				orderPlaced = false;
-				if(myOrder.Count == 0)
+				_orderPlaces = false;
+				if(_order.Count == 0)
 				{
 					_uiManager.n_Customer_served++;
 
@@ -489,7 +492,7 @@ namespace _Project.Scripts.Entities.Customers
 						_uiManager.achievment_text.SetActive(true);
 						AchievementBlock._claimCheck++;
 						PlayerPrefs.SetInt("claimvalue",AchievementBlock._claimCheck);
-						Invoke(nameof(Stopa),4.0f);
+						Invoke(nameof(Stop),4.0f);
 
 					}
 					if(PlayerPrefs.GetInt("CustomerServed") > 99 && PlayerPrefs.GetInt ("CustomerLevel2") == 0  )
@@ -498,7 +501,7 @@ namespace _Project.Scripts.Entities.Customers
 						_uiManager.achievment_text.SetActive(true);
 						AchievementBlock._claimCheck++;
 						PlayerPrefs.SetInt("claimvalue",AchievementBlock._claimCheck);
-						Invoke(nameof(Stopa),4.0f);
+						Invoke(nameof(Stop),4.0f);
 						
 					}
 					if(PlayerPrefs.GetInt("CustomerServed") > 999 && PlayerPrefs.GetInt ("CustomerLevel3") == 0 )
@@ -508,12 +511,12 @@ namespace _Project.Scripts.Entities.Customers
 						PlayerPrefs.SetInt ("CustomerLevel3",1);
 						AchievementBlock._claimCheck++;
 						PlayerPrefs.SetInt("claimvalue",AchievementBlock._claimCheck);
-						Invoke(nameof(Stopa),4.0f);
+						Invoke(nameof(Stop),4.0f);
 					}
 					
-					if(myFacialExpression!= null)
+					if(_facialExpression!= null)
 					{
-						myFacialExpression.sprite = expressions[0];
+						_facialExpression.sprite = _expressions[0];
 					}
 				}
 				else
@@ -523,7 +526,7 @@ namespace _Project.Scripts.Entities.Customers
 
 				if(coinsSpent > 0)
 				{
-					if(myWaitingTime > customerWaitingTime/2f)
+					if(myWaitingTime > _waitingTime/2f)
 					{
 						if(!perfect)
 						{
@@ -540,17 +543,17 @@ namespace _Project.Scripts.Entities.Customers
 						perfect = false;
 					}
 					bool shouldNotPay = false;
-					if(CustomerHandler._instance.canBeAnUnPayingCustomer && CustomerHandler._instance.noOfCustomers >= 4 && CustomerHandler._instance.noOfCustomers <= 16 )
+					if(_customerHandler.canBeAnUnPayingCustomer && _customerHandler.noOfCustomers >= 4 && _customerHandler.noOfCustomers <= 16 )
 					{
-						if(CustomerHandler._instance.gameTimer > 0)
+						if(_customerHandler._timeOnGame > 0)
 						{
-							if(CustomerHandler._instance.noOfCustomers > 14 )
+							if(_customerHandler.noOfCustomers > 14 )
 							{
 								shouldNotPay = true;
 							}
 							else
 							{
-								int randomDecider = Random.Range (0,randomListToDecideNoPay.Count);
+								int randomDecider = Random.Range (0,_noPay.Count);
 								if(randomDecider == 0)
 								{
 									shouldNotPay = true;
@@ -562,7 +565,7 @@ namespace _Project.Scripts.Entities.Customers
 
 					if(shouldNotPay)
 					{
-						myCollider.enabled = true;
+						_collider.enabled = true;
 						if(PlayerPrefs.HasKey ("Whistle"))
 						{
 							_levelSoundManager.whistle.Play();
@@ -570,14 +573,14 @@ namespace _Project.Scripts.Entities.Customers
 							_uiManager.blow.SetActive(true);
 							_uiManager.Invoke("WhistleInitialpos",1.2f);
 						}
-						CustomerHandler._instance.noOfUnpayingCustomers++;
-						if(CustomerHandler._instance.noOfUnpayingCustomers >= CustomerHandler._instance.maxNoOfUnpayableCustomers)
+						_customerHandler.noOfUnpayingCustomers++;
+						if(_customerHandler.noOfUnpayingCustomers >= _customerHandler.maxNoOfUnpayableCustomers)
 						{
-							CustomerHandler._instance.canBeAnUnPayingCustomer = false;
+							_customerHandler.canBeAnUnPayingCustomer = false;
 						}
-						leavingWithoutPaying = true;
-						coinsWithoutPaying = coinsSpent;
-						CustomerHandler._instance.availablePositions.Add (positionTaken);
+						_isLeavingNoPay = true;
+						_coinsNoPay = coinsSpent;
+						_customerHandler._availablePositions.Add (positionTaken);
 					}
 					else
 					{
@@ -590,21 +593,21 @@ namespace _Project.Scripts.Entities.Customers
 								bonusVal = Mathf.CeilToInt (bonusVal/2f);
 							}
 							Debug.Log("bonus Val = "+bonusVal);
-							CustomerHandler._instance.coinImages[positionTaken].bonusVal = bonusVal;
-							CustomerHandler._instance.coinImages[positionTaken].myAmount = coinsSpent +bonusVal;
+							_customerHandler._coins[positionTaken].bonusVal = bonusVal;
+							_customerHandler._coins[positionTaken].myAmount = coinsSpent +bonusVal;
 						}
 						else
 						{
-							CustomerHandler._instance.coinImages[positionTaken].myAmount = coinsSpent;
+							_customerHandler._coins[positionTaken].myAmount = coinsSpent;
 						}
 
-						CustomerHandler._instance.coinImages[positionTaken].gameObject.SetActive (true);
+						_customerHandler._coins[positionTaken].gameObject.SetActive (true);
 						if(perfect)
 						{
-							CustomerHandler._instance.coinImages[positionTaken].perfectText.SetActive (true);
+							_customerHandler._coins[positionTaken].perfectText.SetActive (true);
 						}
 						else
-							CustomerHandler._instance.coinImages[positionTaken].perfectText.SetActive (false);
+							_customerHandler._coins[positionTaken].perfectText.SetActive (false);
 
 						if(perfect)
 						{
@@ -618,7 +621,7 @@ namespace _Project.Scripts.Entities.Customers
 								_uiManager.achievment_text.SetActive(true);
 								AchievementBlock._claimCheck++;
 								PlayerPrefs.SetInt("claimvalue",AchievementBlock._claimCheck);
-								Invoke(nameof(Stopa),4.0f);
+								Invoke(nameof(Stop),4.0f);
 							
 							}
 							if(PlayerPrefs.GetInt("Perfectachieved") > 99 && PlayerPrefs.GetInt ("PerfectLevel2")== 0 )
@@ -627,7 +630,7 @@ namespace _Project.Scripts.Entities.Customers
 								_uiManager.achievment_text.SetActive(true);
 								AchievementBlock._claimCheck++;
 								PlayerPrefs.SetInt("claimvalue",AchievementBlock._claimCheck);
-								Invoke(nameof(Stopa),4.0f);
+								Invoke(nameof(Stop),4.0f);
 							
 							}
 							if(PlayerPrefs.GetInt("Perfectachieved") > 999 && PlayerPrefs.GetInt ("PerfectLevel3")== 0 )
@@ -636,7 +639,7 @@ namespace _Project.Scripts.Entities.Customers
 								_uiManager.achievment_text.SetActive(true);
 								AchievementBlock._claimCheck++;
 								PlayerPrefs.SetInt("claimvalue",AchievementBlock._claimCheck);
-								Invoke(nameof(Stopa),4.0f);
+								Invoke(nameof(Stop),4.0f);
 							
 							}
 							
@@ -646,7 +649,7 @@ namespace _Project.Scripts.Entities.Customers
 								_uiManager.gold_Collected.SetActive(true);
 							
 								Debug.Log ("added gold");
-								Invoke(nameof(GoldAdd),1.5f);
+								Invoke(nameof(AddGold),1.5f);
 								Invoke("Gold_Deactive ",1.5f);
 								US_Manager.noOfPerfects = 0;
 							
@@ -658,17 +661,17 @@ namespace _Project.Scripts.Entities.Customers
 							US_Manager.noOfPerfects = 0;
 						}
 						
-						CustomerHandler._instance.coinImages[positionTaken].coinCollected.Play ();
-						CustomerHandler._instance.coinImages[positionTaken].positionTaken = positionTaken;
-						CustomerHandler._instance.coinImages[positionTaken].addValue.text = "+"+coinsSpent;
+						_customerHandler._coins[positionTaken].coinCollected.Play ();
+						_customerHandler._coins[positionTaken].positionTaken = positionTaken;
+						_customerHandler._coins[positionTaken].addValue.text = "+"+coinsSpent;
 					}
 				}
 				else
 				{
-					CustomerHandler._instance.availablePositions.Add (positionTaken);
-					if(CustomerHandler._instance.timerStopped)
+					_customerHandler._availablePositions.Add (positionTaken);
+					if(_customerHandler.timerStopped)
 					{
-						if(CustomerHandler._instance.availablePositions.Count == 5)
+						if(_customerHandler._availablePositions.Count == 5)
 						{
 							_uiManager.OnGameOver ();
 						}
@@ -676,13 +679,13 @@ namespace _Project.Scripts.Entities.Customers
 				}
 
 
-				if(myEyes != null)
-					myEyes.gameObject.SetActive (false);
+				if(_eyes != null)
+					_eyes.gameObject.SetActive (false);
 				positionTaken = -1;
-				myOrder.Clear ();
-				orderPanelTween.duration = 0.15f;
-				orderPanelTween.PlayReverse ();
-				if(!leavingWithoutPaying)
+				_order.Clear ();
+				_orderTween.duration = 0.15f;
+				_orderTween.PlayReverse ();
+				if(!_isLeavingNoPay)
 					speed = 7;
 				else
 					speed = 4;
@@ -693,10 +696,10 @@ namespace _Project.Scripts.Entities.Customers
 				iHaveAMultipleTypeOrder = LevelManager.Orders.NONE;
 				shouldBePerfectIfServed = false;
 		
-				angryEffect.Stop ();
-				if(myFacialExpression!= null)
+				_angryEffect.Stop ();
+				if(_facialExpression!= null)
 				{
-					myFacialExpression.sprite = expressions[0];
+					_facialExpression.sprite = _expressions[0];
 				}
 			}
 			coinsSpent = 0;
@@ -711,38 +714,38 @@ namespace _Project.Scripts.Entities.Customers
 
 			if(toOrder)
 			{
-				myCollider.enabled = true;
+				_collider.enabled = true;
 				transform.position = finalPos;
-				waitingSlider.color = Color.green;
-				orderPanel.SetActive (true);
-				orderPanelTween.duration = 0.5f;
-				orderPanelTween.PlayForward ();
-				orderPlaced = true;
-				GetOrder ();
+				_sliderWait.color = Color.green;
+				_orderPanel.SetActive (true);
+				_orderTween.duration = 0.5f;
+				_orderTween.PlayForward ();
+				_orderPlaces = true;
+				OrderTake ();
 
 			}
 			else
 			{
 				if(_australiaManager != null)
 				{
-					friesTween.enabled = false;
+					_friesTween.enabled = false;
 				}
-				leavingWithoutPaying = false;
-				eatableOrderTween.enabled = false;
-				drinkableOrderTween.enabled = false;
-				orderPanel.SetActive (false);
-				transform.position = new Vector3(CustomerHandler._instance.customerStartPosition.position.x , transform.position.y , CustomerHandler._instance.customerStartPosition.position.z);
-				CustomerHandler._instance.customerPool.Add (this);
+				_isLeavingNoPay = false;
+				_eatableOrderTween.enabled = false;
+				_drinkableOrderTween.enabled = false;
+				_orderPanel.SetActive (false);
+				transform.position = new Vector3(_customerHandler._customerStartPos.position.x , transform.position.y , _customerHandler._customerStartPos.position.z);
+				_customerHandler._wisitorsPool.Add (this);
 			}
-			myAnimation.Stop ();
-			myAnimation.GetComponent<SpriteRenderer>().sortingOrder = 0;
-			if(myEyes != null)
+			_animation.Stop ();
+			_animation.GetComponent<SpriteRenderer>().sortingOrder = 0;
+			if(_eyes != null)
 			{
-				myEyes.sortingOrder = 1;
+				_eyes.sortingOrder = 1;
 			}
-			if(myFacialExpression != null)
+			if(_facialExpression != null)
 			{
-				myFacialExpression.sortingOrder = 1;
+				_facialExpression.sortingOrder = 1;
 			}
 			coinsSpent = 0;
 
@@ -753,42 +756,42 @@ namespace _Project.Scripts.Entities.Customers
 			perfect = false;
 		}
 
-		private void GetOrder()
+		private void OrderTake()
 		{
-			plateOfEatableOrder.SetActive (false);
-			drinkingOrder.SetActive (false);
+			_orderPlate.SetActive (false);
+			_drinkableOrder.SetActive (false);
 			if(LevelManager.levelNo <= 10)
 			{
-				USOrders ();
+				OrdersUS ();
 			}
 			else if(LevelManager.levelNo > 10 && LevelManager.levelNo <= 20)
 			{
-				ChinaOrders ();
+				OrderChina ();
 			}
 			else if(LevelManager.levelNo > 20 && LevelManager.levelNo <= 30)
 			{
-				ItalyOrders ();
+				OrderItaly ();
 			}
 			else
 			{
-				AustraliaOrder();
+				OrderAustralia();
 			}
 		}
 
 
-		private void USOrders()
+		private void OrdersUS()
 		{
 			if(LevelManager.levelNo == 1 ){
 				noOfOrders = 1;
-				myOrder.Add ((LevelManager.Orders)1);
-				CheckForOrder(1);
+				_order.Add ((LevelManager.Orders)1);
+				OrderCheck(1);
 			}
 			else if(LevelManager.levelNo == 2)
 			{
 				noOfOrders = 1;
 				int valueToadd = Random.Range (1,4);  // find any one out of 3
-				myOrder.Add ((LevelManager.Orders)valueToadd);
-				CheckForOrder(valueToadd);
+				_order.Add ((LevelManager.Orders)valueToadd);
+				OrderCheck(valueToadd);
 			}
 			else
 			{
@@ -796,21 +799,21 @@ namespace _Project.Scripts.Entities.Customers
 				if(noOfOrders == 1)
 				{
 					int valueToadd = Random.Range (1,5);  // find any one out of 4
-					myOrder.Add ((LevelManager.Orders)valueToadd);
-					CheckForOrder(valueToadd);
+					_order.Add ((LevelManager.Orders)valueToadd);
+					OrderCheck(valueToadd);
 				
 				}
 				else
 				{
-					myOrder.Add ((LevelManager.Orders)4);  // one would de coke for sure
-					CheckForOrder(4);
+					_order.Add ((LevelManager.Orders)4);  // one would de coke for sure
+					OrderCheck(4);
 					int valueToadd = Random.Range (1,4);
-					myOrder.Add ((LevelManager.Orders)valueToadd);
-					CheckForOrder(valueToadd);
+					_order.Add ((LevelManager.Orders)valueToadd);
+					OrderCheck(valueToadd);
 				}
 			}
 		}
-		public void GoldAdd()
+		public void AddGold()
 		{
 			MenuManager.golds++;
 			PlayerPrefs.SetString("Golds",Encryption.Encrypt (MenuManager.golds.ToString ()));
@@ -818,18 +821,18 @@ namespace _Project.Scripts.Entities.Customers
 			_levelSoundManager.coinAdd.Play ();
 		}
 
-		private void ChinaOrders()
+		private void OrderChina()
 		{
 			if(LevelManager.levelNo == 11 || LevelManager.levelNo == 12){
 				noOfOrders = 1;
-				myOrder.Add ((LevelManager.Orders)5);
-				CheckForOrder(5);
+				_order.Add ((LevelManager.Orders)5);
+				OrderCheck(5);
 			}
 			else if(LevelManager.levelNo == 13)
 			{
 				noOfOrders = 1;
 				int valueToadd = 0;
-				if(CustomerHandler._instance.noOfCustomers == 1)
+				if(_customerHandler.noOfCustomers == 1)
 				{
 					valueToadd = 6;
 				}
@@ -837,8 +840,8 @@ namespace _Project.Scripts.Entities.Customers
 				{
 					valueToadd = Random.Range (5,7);  
 				}
-				myOrder.Add ((LevelManager.Orders)valueToadd);
-				CheckForOrder(valueToadd);
+				_order.Add ((LevelManager.Orders)valueToadd);
+				OrderCheck(valueToadd);
 			}
 			else
 			{
@@ -846,33 +849,33 @@ namespace _Project.Scripts.Entities.Customers
 				if(noOfOrders == 1)
 				{
 					int valueToadd = Random.Range (5,7);  
-					myOrder.Add ((LevelManager.Orders)valueToadd);
-					CheckForOrder(valueToadd);
+					_order.Add ((LevelManager.Orders)valueToadd);
+					OrderCheck(valueToadd);
 				
 				}
 				else
 				{
-					myOrder.Add ((LevelManager.Orders)5);  
-					CheckForOrder(5);
-					myOrder.Add ((LevelManager.Orders)6); 
-					CheckForOrder(6);
+					_order.Add ((LevelManager.Orders)5);  
+					OrderCheck(5);
+					_order.Add ((LevelManager.Orders)6); 
+					OrderCheck(6);
 				}
 			}
 		}
 
 
-		private void ItalyOrders()
+		private void OrderItaly()
 		{
 			if(LevelManager.levelNo == 21 ){
 				noOfOrders = 1;
-				myOrder.Add ((LevelManager.Orders)7);
-				CheckForOrder(7);
+				_order.Add ((LevelManager.Orders)7);
+				OrderCheck(7);
 			}
 			else if(LevelManager.levelNo == 22)
 			{
 				noOfOrders = 1;
 				int valueToadd = 0;
-				if(CustomerHandler._instance.noOfCustomers == 1)
+				if(_customerHandler.noOfCustomers == 1)
 				{
 					valueToadd = 8;
 				}
@@ -880,8 +883,8 @@ namespace _Project.Scripts.Entities.Customers
 				{
 					valueToadd = Random.Range (7,9);  
 				}
-				myOrder.Add ((LevelManager.Orders)valueToadd);
-				CheckForOrder(valueToadd);
+				_order.Add ((LevelManager.Orders)valueToadd);
+				OrderCheck(valueToadd);
 			}
 			else
 			{
@@ -889,49 +892,49 @@ namespace _Project.Scripts.Entities.Customers
 				if(noOfOrders == 1)
 				{
 					int valueToadd = Random.Range (7,10);  
-					myOrder.Add ((LevelManager.Orders)valueToadd);
-					CheckForOrder(valueToadd);
+					_order.Add ((LevelManager.Orders)valueToadd);
+					OrderCheck(valueToadd);
 				
 				}
 				else
 				{
-					myOrder.Add ((LevelManager.Orders)9); 
-					CheckForOrder(9);
+					_order.Add ((LevelManager.Orders)9); 
+					OrderCheck(9);
 					int valueToadd = Random.Range (7,9);
-					myOrder.Add ((LevelManager.Orders)valueToadd);
-					CheckForOrder(valueToadd);
+					_order.Add ((LevelManager.Orders)valueToadd);
+					OrderCheck(valueToadd);
 				}
 			}
 		}
 
-		private void AustraliaOrder()
+		private void OrderAustralia()
 		{
 			if(LevelManager.levelNo == 31 ){
 
-				if(CustomerHandler._instance.noOfCustomers == 1)
+				if(_customerHandler.noOfCustomers == 1)
 				{
 					noOfOrders = 1;
-					myOrder.Add ((LevelManager.Orders)10);
-					CheckForOrder(10);
+					_order.Add ((LevelManager.Orders)10);
+					OrderCheck(10);
 				}
 				else
 				{
 					noOfOrders = 2;
-					myOrder.Add ((LevelManager.Orders)11); 
-					CheckForOrder(11);
-					myOrder.Add ((LevelManager.Orders)10);
-					CheckForOrder(10);
+					_order.Add ((LevelManager.Orders)11); 
+					OrderCheck(11);
+					_order.Add ((LevelManager.Orders)10);
+					OrderCheck(10);
 				}
 			}
 			else if(LevelManager.levelNo == 32)
 			{
 				int valueToadd = 0;
-				if(CustomerHandler._instance.noOfCustomers == 1)
+				if(_customerHandler.noOfCustomers == 1)
 				{
 					noOfOrders = 1;
 					valueToadd = 12;
-					myOrder.Add ((LevelManager.Orders)valueToadd);
-					CheckForOrder(valueToadd);
+					_order.Add ((LevelManager.Orders)valueToadd);
+					OrderCheck(valueToadd);
 					shouldBePerfectIfServed = true;
 				}
 				else
@@ -939,12 +942,12 @@ namespace _Project.Scripts.Entities.Customers
 					noOfOrders = 2;
 					List <int>order = new List<int>(){10,11,12};
 					valueToadd = order[Random.Range (0,order.Count)];
-					myOrder.Add ((LevelManager.Orders)valueToadd);
-					CheckForOrder(valueToadd);
+					_order.Add ((LevelManager.Orders)valueToadd);
+					OrderCheck(valueToadd);
 					order.Remove (valueToadd);
 					valueToadd = order[Random.Range (0,order.Count)];
-					myOrder.Add ((LevelManager.Orders)valueToadd);
-					CheckForOrder(valueToadd);
+					_order.Add ((LevelManager.Orders)valueToadd);
+					OrderCheck(valueToadd);
 					order.Remove (valueToadd);
 					if(order[0] == 10)
 					{
@@ -965,8 +968,8 @@ namespace _Project.Scripts.Entities.Customers
 					List <int>burgerOrder = new List<int>(){10,13,14};
 					valueToadd = burgerOrder[Random.Range (0,burgerOrder.Count)];
 				}
-				myOrder.Add ((LevelManager.Orders)valueToadd);
-				CheckForOrder(valueToadd);
+				_order.Add ((LevelManager.Orders)valueToadd);
+				OrderCheck(valueToadd);
 
 				valueToadd = order[Random.Range (0,order.Count)];
 				order.Remove (valueToadd);
@@ -975,8 +978,8 @@ namespace _Project.Scripts.Entities.Customers
 					List <int>burgerOrder = new List<int>(){10,13,14};
 					valueToadd = burgerOrder[Random.Range (0,burgerOrder.Count)];
 				}
-				myOrder.Add ((LevelManager.Orders)valueToadd);
-				CheckForOrder(valueToadd);
+				_order.Add ((LevelManager.Orders)valueToadd);
+				OrderCheck(valueToadd);
 
 				if(order[0] == 10)
 				{
@@ -995,8 +998,8 @@ namespace _Project.Scripts.Entities.Customers
 					List <int>burgerOrder = new List<int>(){10,13,14,15};
 					valueToadd = burgerOrder[Random.Range (0,order.Count)];
 				}
-				myOrder.Add ((LevelManager.Orders)valueToadd);
-				CheckForOrder(valueToadd);
+				_order.Add ((LevelManager.Orders)valueToadd);
+				OrderCheck(valueToadd);
 
 				valueToadd = order[Random.Range (0,order.Count)];
 				order.Remove (valueToadd);
@@ -1005,8 +1008,8 @@ namespace _Project.Scripts.Entities.Customers
 					List <int>burgerOrder = new List<int>(){10,13,14,15};
 					valueToadd = burgerOrder[Random.Range (0,order.Count)];
 				}
-				myOrder.Add ((LevelManager.Orders)valueToadd);
-				CheckForOrder(valueToadd);
+				_order.Add ((LevelManager.Orders)valueToadd);
+				OrderCheck(valueToadd);
 
 				if(order[0] == 10)
 				{
@@ -1025,8 +1028,8 @@ namespace _Project.Scripts.Entities.Customers
 					List <int>burgerOrder = new List<int>(){10,13,14,15,16,17,18};
 					valueToadd = burgerOrder[Random.Range (0,burgerOrder.Count)];
 				}
-				myOrder.Add ((LevelManager.Orders)valueToadd);
-				CheckForOrder(valueToadd);
+				_order.Add ((LevelManager.Orders)valueToadd);
+				OrderCheck(valueToadd);
 			
 				valueToadd = order[Random.Range (0,order.Count)];
 				order.Remove (valueToadd);
@@ -1035,8 +1038,8 @@ namespace _Project.Scripts.Entities.Customers
 					List <int>burgerOrder = new List<int>(){10,13,14,15,16,17,18};
 					valueToadd = burgerOrder[Random.Range (0,burgerOrder.Count)];
 				}
-				myOrder.Add ((LevelManager.Orders)valueToadd);
-				CheckForOrder(valueToadd);
+				_order.Add ((LevelManager.Orders)valueToadd);
+				OrderCheck(valueToadd);
 
 				if(noOfOrders == 3)
 				{
@@ -1046,8 +1049,8 @@ namespace _Project.Scripts.Entities.Customers
 						List <int>burgerOrder = new List<int>(){10,13,14,15,16,17,18};
 						valueToadd = burgerOrder[Random.Range (0,burgerOrder.Count)];
 					}
-					myOrder.Add ((LevelManager.Orders)valueToadd);
-					CheckForOrder(valueToadd);
+					_order.Add ((LevelManager.Orders)valueToadd);
+					OrderCheck(valueToadd);
 				}
 				else if(order[0] == 10)
 				{
@@ -1066,8 +1069,8 @@ namespace _Project.Scripts.Entities.Customers
 					List <int>burgerOrder = new List<int>(){10,13,14,15,16,17,18,19};
 					valueToadd = burgerOrder[Random.Range (0,burgerOrder.Count)];
 				}
-				myOrder.Add ((LevelManager.Orders)valueToadd);
-				CheckForOrder(valueToadd);
+				_order.Add ((LevelManager.Orders)valueToadd);
+				OrderCheck(valueToadd);
 			
 				valueToadd = order[Random.Range (0,order.Count)];
 				order.Remove (valueToadd);
@@ -1076,8 +1079,8 @@ namespace _Project.Scripts.Entities.Customers
 					List <int>burgerOrder = new List<int>(){10,13,14,15,16,17,18,19};
 					valueToadd = burgerOrder[Random.Range (0,burgerOrder.Count)];
 				}
-				myOrder.Add ((LevelManager.Orders)valueToadd);
-				CheckForOrder(valueToadd);
+				_order.Add ((LevelManager.Orders)valueToadd);
+				OrderCheck(valueToadd);
 			
 				if(noOfOrders == 3)
 				{
@@ -1087,8 +1090,8 @@ namespace _Project.Scripts.Entities.Customers
 						List <int>burgerOrder = new List<int>(){10,13,14,15,16,17,18,19};
 						valueToadd = burgerOrder[Random.Range (0,burgerOrder.Count)];
 					}
-					myOrder.Add ((LevelManager.Orders)valueToadd);
-					CheckForOrder(valueToadd);
+					_order.Add ((LevelManager.Orders)valueToadd);
+					OrderCheck(valueToadd);
 				}
 				else if(order[0] == 10)
 				{
@@ -1102,32 +1105,32 @@ namespace _Project.Scripts.Entities.Customers
 
 				List <int>burgerOrder = new List<int>(){16,17,18,19};
 				valueToadd = burgerOrder[Random.Range (0,burgerOrder.Count)];
-				myOrder.Add ((LevelManager.Orders)valueToadd);
-				CheckForOrder(valueToadd);
+				_order.Add ((LevelManager.Orders)valueToadd);
+				OrderCheck(valueToadd);
 			
 
-				myOrder.Add ((LevelManager.Orders)11);
-				CheckForOrder(11);
+				_order.Add ((LevelManager.Orders)11);
+				OrderCheck(11);
 	
-				myOrder.Add ((LevelManager.Orders)12);
-				CheckForOrder(12);
+				_order.Add ((LevelManager.Orders)12);
+				OrderCheck(12);
 			}
 			else
 			{
 				noOfOrders = 3;
 
-				myOrder.Add ((LevelManager.Orders)19);
-				CheckForOrder(19);
+				_order.Add ((LevelManager.Orders)19);
+				OrderCheck(19);
 
-				myOrder.Add ((LevelManager.Orders)11);
-				CheckForOrder(11);
+				_order.Add ((LevelManager.Orders)11);
+				OrderCheck(11);
 			
-				myOrder.Add ((LevelManager.Orders)12);
-				CheckForOrder(12);
+				_order.Add ((LevelManager.Orders)12);
+				OrderCheck(12);
 			}
 		}
 
-		private void CheckForOrder(int orderNo)
+		private void OrderCheck(int orderNo)
 		{
 			if(orderNo == 4 || orderNo == 6 || orderNo == 9 || orderNo == 11)  //drinkable Orders
 			{
@@ -1135,27 +1138,27 @@ namespace _Project.Scripts.Entities.Customers
 				{
 					shouldBePerfectIfServed = true;
 				}
-				drinkableOrderTween.enabled = false;
+				_drinkableOrderTween.enabled = false;
 			
-				drinkingOrder.SetActive (true);
-				drinkingOrder.transform.localScale = scaleOfDrinkableOrder;
+				_drinkableOrder.SetActive (true);
+				_drinkableOrder.transform.localScale = _drinkScale;
 			}
 			else if(orderNo != 12)
 			{
 				if(orderNo != 5)
 					iHaveAMultipleTypeOrder = (LevelManager.Orders)orderNo;
 
-				eatableOrderTween.enabled = false;
-				plateOfEatableOrder.SetActive (true);
-				plateOfEatableOrder.transform.localScale = scaleOfEatableOrder;
+				_eatableOrderTween.enabled = false;
+				_orderPlate.SetActive (true);
+				_orderPlate.transform.localScale = _orderScale;
 				SetEatableSprite(orderNo);
 			
 			}
 			else
 			{
-				friesTween.enabled = false;
-				fries.SetActive (true);
-				fries.transform.localScale = scaleOfFries;
+				_friesTween.enabled = false;
+				_fricesPrefav.SetActive (true);
+				_fricesPrefav.transform.localScale = _friesScale;
 			}
 		}
 
@@ -1163,12 +1166,12 @@ namespace _Project.Scripts.Entities.Customers
 		{ 
 			if(LevelManager.levelNo <= 10)
 			{
-				eatableOrder.sprite = _usManager.hotDogOrderVariations[orderNo-1];
+				_orderEat.sprite = _usManager.hotDogOrderVariations[orderNo-1];
 			}
 			else if(LevelManager.levelNo > 20 && LevelManager.levelNo <= 30)
 			{
-				eatableOrder.sprite = _italyManager.pizzaBakedVariations[orderNo-6];
-				pizzadot.sprite = _italyManager.pizzaDot[orderNo-6];
+				_orderEat.sprite = _italyManager.pizzaBakedVariations[orderNo-6];
+				_pizzaDOt.sprite = _italyManager.pizzaDot[orderNo-6];
 
 
 			}
@@ -1177,44 +1180,44 @@ namespace _Project.Scripts.Entities.Customers
 				switch(orderNo)
 				{
 					case 10:
-						myBurger.myTomato.gameObject.SetActive (false);
-						myBurger.myOnion.gameObject.SetActive (false);
-						myBurger.myCabbage.gameObject.SetActive (false);
+						_burger.myTomato.gameObject.SetActive (false);
+						_burger.myOnion.gameObject.SetActive (false);
+						_burger.myCabbage.gameObject.SetActive (false);
 						break;
 					case 13:
-						myBurger.myTomato.gameObject.SetActive (true);
-						myBurger.myOnion.gameObject.SetActive (false);
-						myBurger.myCabbage.gameObject.SetActive (false);
+						_burger.myTomato.gameObject.SetActive (true);
+						_burger.myOnion.gameObject.SetActive (false);
+						_burger.myCabbage.gameObject.SetActive (false);
 						break;
 					case 14:
-						myBurger.myTomato.gameObject.SetActive (false);
-						myBurger.myOnion.gameObject.SetActive (true);
-						myBurger.myCabbage.gameObject.SetActive (false);
+						_burger.myTomato.gameObject.SetActive (false);
+						_burger.myOnion.gameObject.SetActive (true);
+						_burger.myCabbage.gameObject.SetActive (false);
 						break;
 					case 15:
-						myBurger.myTomato.gameObject.SetActive (false);
-						myBurger.myOnion.gameObject.SetActive (false);
-						myBurger.myCabbage.gameObject.SetActive (true);
+						_burger.myTomato.gameObject.SetActive (false);
+						_burger.myOnion.gameObject.SetActive (false);
+						_burger.myCabbage.gameObject.SetActive (true);
 						break;
 					case 16:
-						myBurger.myTomato.gameObject.SetActive (true);
-						myBurger.myOnion.gameObject.SetActive (true);
-						myBurger.myCabbage.gameObject.SetActive (false);
+						_burger.myTomato.gameObject.SetActive (true);
+						_burger.myOnion.gameObject.SetActive (true);
+						_burger.myCabbage.gameObject.SetActive (false);
 						break;
 					case 17:
-						myBurger.myTomato.gameObject.SetActive (true);
-						myBurger.myOnion.gameObject.SetActive (false);
-						myBurger.myCabbage.gameObject.SetActive (true);
+						_burger.myTomato.gameObject.SetActive (true);
+						_burger.myOnion.gameObject.SetActive (false);
+						_burger.myCabbage.gameObject.SetActive (true);
 						break;
 					case 18:
-						myBurger.myTomato.gameObject.SetActive (false);
-						myBurger.myOnion.gameObject.SetActive (true);
-						myBurger.myCabbage.gameObject.SetActive (true);
+						_burger.myTomato.gameObject.SetActive (false);
+						_burger.myOnion.gameObject.SetActive (true);
+						_burger.myCabbage.gameObject.SetActive (true);
 						break;
 					case 19:
-						myBurger.myTomato.gameObject.SetActive (true);
-						myBurger.myOnion.gameObject.SetActive (true);
-						myBurger.myCabbage.gameObject.SetActive (true);
+						_burger.myTomato.gameObject.SetActive (true);
+						_burger.myOnion.gameObject.SetActive (true);
+						_burger.myCabbage.gameObject.SetActive (true);
 						break;
 				}
 
@@ -1226,18 +1229,18 @@ namespace _Project.Scripts.Entities.Customers
 
 			if((int)orderNo == 4 || (int)orderNo == 6 || (int)orderNo == 9 || (int)orderNo == 11)  //drinkable Orders
 			{
-				drinkableOrderTween.ResetToBeginning ();
-				drinkableOrderTween.PlayForward ();
+				_drinkableOrderTween.ResetToBeginning ();
+				_drinkableOrderTween.PlayForward ();
 			}
 			else if((int)orderNo != 12)
 			{
-				eatableOrderTween.ResetToBeginning ();
-				eatableOrderTween.PlayForward ();
+				_eatableOrderTween.ResetToBeginning ();
+				_eatableOrderTween.PlayForward ();
 			}
 			else
 			{
-				friesTween.ResetToBeginning ();
-				friesTween.PlayForward ();
+				_friesTween.ResetToBeginning ();
+				_friesTween.PlayForward ();
 			}
 		}
 	}

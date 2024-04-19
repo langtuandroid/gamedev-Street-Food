@@ -54,7 +54,7 @@ namespace _Project.Scripts.Managers
 		public HotDog firstHotDog;
 		public MakeTikki firstTikki;
 		public Coins firstCoins;
-		public Customer firstCustomer { get; set; }
+		public Wisitor firstCustomer { get; set; }
 		public bool clickfirstBun { get; set; }
 		public bool clickFirstTikki { get; set; }
 		public SpriteRenderer tableTop, tableCover;

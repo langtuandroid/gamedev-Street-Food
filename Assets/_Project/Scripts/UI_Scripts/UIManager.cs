@@ -158,8 +158,8 @@ namespace _Project.Scripts.UI_Scripts
 				gameStartImage.rectTransform.sizeDelta = new Vector2(gameStartImage.rectTransform.sizeDelta.x+50,gameStartImage.rectTransform.sizeDelta.y);
 				yield return 0;
 			}
-			targetText.imageToDeactivate = gameStartImage.gameObject;
-			StartCoroutine (targetText.TypeText());
+			targetText._deactivateImage = gameStartImage.gameObject;
+			StartCoroutine (targetText.PrintAnimation());
 		}
 	
 	
@@ -510,7 +510,7 @@ namespace _Project.Scripts.UI_Scripts
 			if(totalCoins > _levelManager.targetScore[LevelManager.levelNo] && !_once)
 			{
 				goalMet.SetActive(true);
-				StartCoroutine (goalMet.GetComponent<AutoType>().TypeText());
+				StartCoroutine (goalMet.GetComponent<AutoType>().PrintAnimation());
 				_once = true;
 			}
 

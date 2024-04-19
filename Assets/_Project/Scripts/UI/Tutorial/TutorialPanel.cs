@@ -9,6 +9,7 @@ namespace _Project.Scripts.UI.Tutorial
 {
 	public class TutorialPanel : MonoBehaviour 
 	{
+		[Inject] private WisitorHandler _customerHandler;
 		[Inject] private UIManager _uiManager;   
 		public Text popupMessage;
 		public TextMesh popupMessageText;
@@ -168,7 +169,7 @@ namespace _Project.Scripts.UI.Tutorial
 							{
 								_uiManager.tutorialPanelCanvas.gameObject.SetActive (false);
 								_uiManager.tutorialPanelBg.gameObject.SetActive (false);
-								CustomerHandler._instance.InitializeCustomer ();
+								_customerHandler.ConfigureCustomer ();
 								US_Manager.tutorialEnd = true;
 							}
 						}
@@ -181,7 +182,7 @@ namespace _Project.Scripts.UI.Tutorial
 						}
 						else
 						{
-							CustomerHandler._instance.InitializeCustomer ();
+							_customerHandler.ConfigureCustomer ();
 							_uiManager.tutorialPanelCanvas.gameObject.SetActive (false);
 							_uiManager.tutorialPanelBg.gameObject.SetActive (false);
 							US_Manager.tutorialEnd = true;
@@ -203,7 +204,7 @@ namespace _Project.Scripts.UI.Tutorial
 							}
 							else
 							{
-								CustomerHandler._instance.InitializeCustomer ();
+								_customerHandler.ConfigureCustomer ();
 								_uiManager.tutorialPanelCanvas.gameObject.SetActive (false);
 								_uiManager.tutorialPanelBg.gameObject.SetActive (false);
 								China_Manager.tutorialEnd = true;
@@ -219,7 +220,7 @@ namespace _Project.Scripts.UI.Tutorial
 						else
 						{
 							China_Manager.tutorialEnd = true;
-							CustomerHandler._instance.InitializeCustomer ();
+							_customerHandler.ConfigureCustomer ();
 							_uiManager.tutorialPanelCanvas.gameObject.SetActive (false);
 							_uiManager.tutorialPanelBg.gameObject.SetActive (false);
 						}
@@ -232,7 +233,7 @@ namespace _Project.Scripts.UI.Tutorial
 						}
 						else
 						{
-							CustomerHandler._instance.InitializeCustomer ();
+							_customerHandler.ConfigureCustomer ();
 							_uiManager.tutorialPanelCanvas.gameObject.SetActive (false);
 							_uiManager.tutorialPanelBg.gameObject.SetActive (false);
 							Italy_Manager.tutorialEnd = true;
@@ -247,7 +248,7 @@ namespace _Project.Scripts.UI.Tutorial
 						else
 						{
 							Italy_Manager.tutorialEnd = true;
-							CustomerHandler._instance.InitializeCustomer ();
+							_customerHandler.ConfigureCustomer ();
 							_uiManager.tutorialPanelCanvas.gameObject.SetActive (false);
 							_uiManager.tutorialPanelBg.gameObject.SetActive (false);
 						}
@@ -260,7 +261,7 @@ namespace _Project.Scripts.UI.Tutorial
 						}
 						else
 						{
-							CustomerHandler._instance.InitializeCustomer ();
+							_customerHandler.ConfigureCustomer ();
 							_uiManager.tutorialPanelCanvas.gameObject.SetActive (false);
 							_uiManager.tutorialPanelBg.gameObject.SetActive (false);
 							Australia_Manager.tutorialEnd = true;
@@ -276,7 +277,7 @@ namespace _Project.Scripts.UI.Tutorial
 						{
 							_uiManager.tutorialPanelCanvas.gameObject.SetActive (false);
 							_uiManager.tutorialPanelBg.gameObject.SetActive (false);
-							CustomerHandler._instance.InitializeCustomer ();
+							_customerHandler.ConfigureCustomer ();
 							if(LevelManager.levelNo <= 10)
 								US_Manager.tutorialEnd = true;
 							else if(LevelManager.levelNo <= 20)

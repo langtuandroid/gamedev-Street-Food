@@ -2,26 +2,25 @@
 
 namespace _Project.Scripts.Effects
 {
-	public class ShineEffect : MonoBehaviour 
+	public class ShineParticle : MonoBehaviour 
 	{
 		private void OnEnable()
 		{
-			Invoke (nameof(ViewShine), 0.45f);
-	
+			Invoke (nameof(Activate), 0.45f);
 		}
 
-		private void ViewShine()
+		private void Activate()
 		{
 			gameObject.SetActive (false);
 			gameObject.GetComponent<Animator> ().enabled = false;
-			Invoke (nameof(HideShine), 4.0f);
+			Invoke (nameof(Deactivate), 4.0f);
 		}
 
-		private void HideShine()
+		private void Deactivate()
 		{
 			gameObject.SetActive (true);
 			gameObject.GetComponent<Animator> ().enabled = true;
-			Invoke (nameof(ViewShine), 0.45f);
+			Invoke (nameof(Activate), 0.45f);
 		}
 
 	}

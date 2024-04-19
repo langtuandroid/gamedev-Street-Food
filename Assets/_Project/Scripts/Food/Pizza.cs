@@ -25,7 +25,7 @@ namespace _Project.Scripts.Food
 
 		public bool wrongOrderGiven { get; set; }
 		public float heatingTimer { get; set; }
-		public Customer customer{ get; set; }
+		public Wisitor customer{ get; set; }
 		public bool cheese;
 		public bool vegetable;
 		public SpriteRenderer myToppings;
@@ -251,11 +251,11 @@ namespace _Project.Scripts.Food
 				}
 				_italyManager.platesFilledCount--;
 				string myTypeToEatSub = "PIZZA";
-				for(int count = 0; count < customer.myOrder.Count; count++)
+				for(int count = 0; count < customer._order.Count; count++)
 				{
-					if(customer.myOrder[count].ToString().Contains(myTypeToEatSub.ToString()))
+					if(customer._order[count].ToString().Contains(myTypeToEatSub.ToString()))
 					{
-						if(customer.myOrder[count] == myType)
+						if(customer._order[count] == myType)
 						{
 							wrongOrderGiven = false;
 							
@@ -265,7 +265,7 @@ namespace _Project.Scripts.Food
 							wrongOrderGiven = true;
 							
 						}
-						customer.myOrder.RemoveAt(count);
+						customer._order.RemoveAt(count);
 					}
 					
 				}
@@ -280,7 +280,7 @@ namespace _Project.Scripts.Food
 				customer.iHaveAMultipleTypeOrder = LevelManager.Orders.NONE;
 				if(perfect)
 				{
-					if(customer.myOrder.Count > 0)
+					if(customer._order.Count > 0)
 						customer.myWaitingTime-= 30;
 				
 					if(!wrongOrderGiven)
@@ -295,7 +295,7 @@ namespace _Project.Scripts.Food
 				}
 				else
 				{
-					if(customer.myOrder.Count > 0)
+					if(customer._order.Count > 0)
 						customer.myWaitingTime-= 20;
 					if(!wrongOrderGiven)
 					{
@@ -312,8 +312,8 @@ namespace _Project.Scripts.Food
 					customer.myWaitingTime = 0;
 				}
 			
-				if(customer.myOrder.Count <= 0)
-					customer.MoveToEndPosition();
+				if(customer._order.Count <= 0)
+					customer.MoveToEnd();
 			
 			}
 			else if(otherObject.name.Contains ("ovenPlace"))
@@ -429,10 +429,10 @@ namespace _Project.Scripts.Food
 				if(other.name.Contains ("customer") && !isBurnt)
 				{
 					otherObject = other.gameObject;
-					customer = other.GetComponent<Customer>();
-					for(int i = 0 ; i< customer.myOrder.Count ; i++)
+					customer = other.GetComponent<Wisitor>();
+					for(int i = 0 ; i< customer._order.Count ; i++)
 					{
-						if(myType == customer.myOrder[i])
+						if(myType == customer._order[i])
 						{
 							wrongOrderGiven = false;
 							reachedDestination = true;

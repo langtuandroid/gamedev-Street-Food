@@ -442,8 +442,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1db31f0fa9a7c41dabc3c0ea2cc95f0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  letterPause: 0.1
-  myText: {fileID: 14501382}
+  _delayPause: 0.1
+  _text: {fileID: 14501382}
 --- !u!114 &14501382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1360,40 +1360,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37d1a79482cfa40d2a8a4479d3261096, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iHaveAMultipleTypeOrder: 0
-  myOrder: 
-  customerWaitingTime: 60
-  myWaitingTime: 0
-  positionTaken: 0
-  orderPlaced: 0
-  orderPanel: {fileID: 1739466425}
-  orderPanelTween: {fileID: 1739466427}
-  drinkableOrderTween: {fileID: 1221339554}
-  eatableOrderTween: {fileID: 1472529657}
-  friesTween: {fileID: 0}
-  waitingSlider: {fileID: 485217779}
-  myAnimation: {fileID: 1496727697}
-  eatableOrder: {fileID: 0}
-  pizzadot: {fileID: 0}
-  plateOfEatableOrder: {fileID: 1472529655}
-  fries: {fileID: 0}
-  myBurger: {fileID: 0}
-  drinkingOrder: {fileID: 1221339552}
-  coinsSpent: 0
-  myCollider: {fileID: 39013991}
-  myFacialExpression: {fileID: 1344746108}
-  expressions:
+  _orderPanel: {fileID: 1739466425}
+  _orderTween: {fileID: 1739466427}
+  _drinkableOrderTween: {fileID: 1221339554}
+  _eatableOrderTween: {fileID: 1472529657}
+  _friesTween: {fileID: 0}
+  _angryEffect: {fileID: 1527137734}
+  _eyes: {fileID: 0}
+  _eyesExpressions: []
+  _collider: {fileID: 39013991}
+  _animation: {fileID: 1496727697}
+  _orderEat: {fileID: 0}
+  _pizzaDOt: {fileID: 0}
+  _orderPlate: {fileID: 1472529655}
+  _fricesPrefav: {fileID: 0}
+  _burger: {fileID: 0}
+  _drinkableOrder: {fileID: 1221339552}
+  _order: 
+  _facialExpression: {fileID: 1344746108}
+  _expressions:
   - {fileID: 21300000, guid: b67cab7cff567437e81f64039cec2b6f, type: 3}
   - {fileID: 21300000, guid: 369072a6bfde74bc0bd609d95c0da9e4, type: 3}
-  myEyes: {fileID: 0}
-  myEyesExpressions: []
-  noOfOrders: 0
-  perfect: 0
-  shouldBePerfectIfServed: 0
-  tutorialOn: 0
-  angryEffect: {fileID: 1527137734}
-  leavingWithoutPaying: 0
-  coinsWithoutPaying: 0
+  _sliderWait: {fileID: 485217779}
 --- !u!65 &39013991
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1427,8 +1415,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56d9714b4868042e18b7d8c56d041ba7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myMaxScale: 0.4
-  myMinScale: 0.3
+  _maxScale: 0.4
+  _minScale: 0.3
 --- !u!82 &39013993
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1645,7 +1633,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acb95e60738964a70a2ec4adf3b3fb62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasTweenScale: 0
+  _isHasScale: 0
 --- !u!114 &53570671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1712,10 +1700,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e809982f037c46938ab7d33c95b08bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pixelSize: 0.5
-  outlineColor: {r: 0.9921569, g: 0.86666673, b: 0, a: 1}
-  resolutionDependant: 0
-  doubleResolution: 1024
+  _pixelsSize: 0.5
+  _colorOutline: {r: 0.9921569, g: 0.86666673, b: 0, a: 1}
 --- !u!1 &54184782
 GameObject:
   m_ObjectHideFlags: 0
@@ -4083,8 +4069,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56d9714b4868042e18b7d8c56d041ba7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myMaxScale: 0.8
-  myMinScale: 0.5
+  _maxScale: 0.8
+  _minScale: 0.5
 --- !u!54 &150050278
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4939,8 +4925,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56d9714b4868042e18b7d8c56d041ba7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myMaxScale: 0.8
-  myMinScale: 0.5
+  _maxScale: 0.8
+  _minScale: 0.5
 --- !u!65 &203314683
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5305,7 +5291,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acb95e60738964a70a2ec4adf3b3fb62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasTweenScale: 0
+  _isHasScale: 0
 --- !u!114 &228321765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5372,10 +5358,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e809982f037c46938ab7d33c95b08bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pixelSize: 0.5
-  outlineColor: {r: 0.9921569, g: 0.86666673, b: 0, a: 1}
-  resolutionDependant: 0
-  doubleResolution: 1024
+  _pixelsSize: 0.5
+  _colorOutline: {r: 0.9921569, g: 0.86666673, b: 0, a: 1}
 --- !u!1 &232734673
 GameObject:
   m_ObjectHideFlags: 0
@@ -6235,7 +6219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acb95e60738964a70a2ec4adf3b3fb62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasTweenScale: 1
+  _isHasScale: 1
 --- !u!114 &252823292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12004,8 +11988,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56d9714b4868042e18b7d8c56d041ba7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myMaxScale: 0.9
-  myMinScale: 0.54
+  _maxScale: 0.9
+  _minScale: 0.54
 --- !u!212 &335904377
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -12500,8 +12484,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56d9714b4868042e18b7d8c56d041ba7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myMaxScale: 0.8
-  myMinScale: 0.6
+  _maxScale: 0.8
+  _minScale: 0.6
 --- !u!54 &364953903
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -13090,7 +13074,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acb95e60738964a70a2ec4adf3b3fb62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasTweenScale: 0
+  _isHasScale: 0
 --- !u!114 &379050197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14363,10 +14347,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e809982f037c46938ab7d33c95b08bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pixelSize: 1
-  outlineColor: {r: 0, g: 0, b: 0, a: 1}
-  resolutionDependant: 0
-  doubleResolution: 1024
+  _pixelsSize: 1
+  _colorOutline: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1001 &425073424
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14718,40 +14700,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37d1a79482cfa40d2a8a4479d3261096, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iHaveAMultipleTypeOrder: 0
-  myOrder: 
-  customerWaitingTime: 60
-  myWaitingTime: 0
-  positionTaken: 0
-  orderPlaced: 0
-  orderPanel: {fileID: 975113000}
-  orderPanelTween: {fileID: 975113002}
-  drinkableOrderTween: {fileID: 2017617380}
-  eatableOrderTween: {fileID: 972700251}
-  friesTween: {fileID: 0}
-  waitingSlider: {fileID: 851966694}
-  myAnimation: {fileID: 1458959388}
-  eatableOrder: {fileID: 0}
-  pizzadot: {fileID: 0}
-  plateOfEatableOrder: {fileID: 972700249}
-  fries: {fileID: 0}
-  myBurger: {fileID: 0}
-  drinkingOrder: {fileID: 2017617378}
-  coinsSpent: 0
-  myCollider: {fileID: 450242022}
-  myFacialExpression: {fileID: 1424836293}
-  expressions:
+  _orderPanel: {fileID: 975113000}
+  _orderTween: {fileID: 975113002}
+  _drinkableOrderTween: {fileID: 2017617380}
+  _eatableOrderTween: {fileID: 972700251}
+  _friesTween: {fileID: 0}
+  _angryEffect: {fileID: 894893194}
+  _eyes: {fileID: 0}
+  _eyesExpressions: []
+  _collider: {fileID: 450242022}
+  _animation: {fileID: 1458959388}
+  _orderEat: {fileID: 0}
+  _pizzaDOt: {fileID: 0}
+  _orderPlate: {fileID: 972700249}
+  _fricesPrefav: {fileID: 0}
+  _burger: {fileID: 0}
+  _drinkableOrder: {fileID: 2017617378}
+  _order: 
+  _facialExpression: {fileID: 1424836293}
+  _expressions:
   - {fileID: 21300000, guid: f0b2cfa9f03a4430998eb69ca144feb8, type: 3}
   - {fileID: 21300000, guid: 23b54d72b0b4a44af99c4e9e0c483078, type: 3}
-  myEyes: {fileID: 0}
-  myEyesExpressions: []
-  noOfOrders: 0
-  perfect: 0
-  shouldBePerfectIfServed: 0
-  tutorialOn: 0
-  angryEffect: {fileID: 894893194}
-  leavingWithoutPaying: 0
-  coinsWithoutPaying: 0
+  _sliderWait: {fileID: 851966694}
 --- !u!65 &450242022
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14785,8 +14755,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56d9714b4868042e18b7d8c56d041ba7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myMaxScale: 0.4
-  myMinScale: 0.3
+  _maxScale: 0.4
+  _minScale: 0.3
 --- !u!82 &450242024
 AudioSource:
   m_ObjectHideFlags: 0
@@ -15497,7 +15467,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acb95e60738964a70a2ec4adf3b3fb62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasTweenScale: 1
+  _isHasScale: 1
 --- !u!114 &494797150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16129,8 +16099,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56d9714b4868042e18b7d8c56d041ba7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myMaxScale: 0.9
-  myMinScale: 0.5
+  _maxScale: 0.9
+  _minScale: 0.5
 --- !u!82 &524093248
 AudioSource:
   m_ObjectHideFlags: 0
@@ -16415,8 +16385,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56d9714b4868042e18b7d8c56d041ba7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myMaxScale: 0.4
-  myMinScale: 0.3
+  _maxScale: 0.4
+  _minScale: 0.3
 --- !u!114 &535844281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16429,40 +16399,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37d1a79482cfa40d2a8a4479d3261096, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iHaveAMultipleTypeOrder: 0
-  myOrder: 
-  customerWaitingTime: 60
-  myWaitingTime: 0
-  positionTaken: 0
-  orderPlaced: 0
-  orderPanel: {fileID: 1108244146}
-  orderPanelTween: {fileID: 1108244148}
-  drinkableOrderTween: {fileID: 1523909279}
-  eatableOrderTween: {fileID: 497769213}
-  friesTween: {fileID: 0}
-  waitingSlider: {fileID: 124788128}
-  myAnimation: {fileID: 1205716192}
-  eatableOrder: {fileID: 0}
-  pizzadot: {fileID: 0}
-  plateOfEatableOrder: {fileID: 497769211}
-  fries: {fileID: 0}
-  myBurger: {fileID: 0}
-  drinkingOrder: {fileID: 1523909277}
-  coinsSpent: 0
-  myCollider: {fileID: 535844282}
-  myFacialExpression: {fileID: 195827688}
-  expressions:
+  _orderPanel: {fileID: 1108244146}
+  _orderTween: {fileID: 1108244148}
+  _drinkableOrderTween: {fileID: 1523909279}
+  _eatableOrderTween: {fileID: 497769213}
+  _friesTween: {fileID: 0}
+  _angryEffect: {fileID: 1419856334}
+  _eyes: {fileID: 0}
+  _eyesExpressions: []
+  _collider: {fileID: 535844282}
+  _animation: {fileID: 1205716192}
+  _orderEat: {fileID: 0}
+  _pizzaDOt: {fileID: 0}
+  _orderPlate: {fileID: 497769211}
+  _fricesPrefav: {fileID: 0}
+  _burger: {fileID: 0}
+  _drinkableOrder: {fileID: 1523909277}
+  _order: 
+  _facialExpression: {fileID: 195827688}
+  _expressions:
   - {fileID: 21300000, guid: f0b2cfa9f03a4430998eb69ca144feb8, type: 3}
   - {fileID: 21300000, guid: 23b54d72b0b4a44af99c4e9e0c483078, type: 3}
-  myEyes: {fileID: 0}
-  myEyesExpressions: []
-  noOfOrders: 0
-  perfect: 0
-  shouldBePerfectIfServed: 0
-  tutorialOn: 0
-  angryEffect: {fileID: 1419856334}
-  leavingWithoutPaying: 0
-  coinsWithoutPaying: 0
+  _sliderWait: {fileID: 124788128}
 --- !u!65 &535844282
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19531,6 +19489,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1055705643116046472, guid: ef98d143b4d84434394d21accb6ad543,
+        type: 3}
+      propertyPath: _customerHandler
+      value: 
+      objectReference: {fileID: 1830592661}
     - target: {fileID: 2210330289981495959, guid: ef98d143b4d84434394d21accb6ad543,
         type: 3}
       propertyPath: _uiManager
@@ -19932,7 +19895,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acb95e60738964a70a2ec4adf3b3fb62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasTweenScale: 1
+  _isHasScale: 1
 --- !u!114 &719717145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20821,7 +20784,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acb95e60738964a70a2ec4adf3b3fb62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasTweenScale: 1
+  _isHasScale: 1
 --- !u!114 &740681959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23954,7 +23917,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acb95e60738964a70a2ec4adf3b3fb62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasTweenScale: 1
+  _isHasScale: 1
 --- !u!114 &885757751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29788,40 +29751,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37d1a79482cfa40d2a8a4479d3261096, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iHaveAMultipleTypeOrder: 0
-  myOrder: 
-  customerWaitingTime: 60
-  myWaitingTime: 0
-  positionTaken: 0
-  orderPlaced: 0
-  orderPanel: {fileID: 96674566}
-  orderPanelTween: {fileID: 96674568}
-  drinkableOrderTween: {fileID: 969737754}
-  eatableOrderTween: {fileID: 1607390882}
-  friesTween: {fileID: 0}
-  waitingSlider: {fileID: 7209810}
-  myAnimation: {fileID: 374366298}
-  eatableOrder: {fileID: 0}
-  pizzadot: {fileID: 0}
-  plateOfEatableOrder: {fileID: 1607390880}
-  fries: {fileID: 0}
-  myBurger: {fileID: 0}
-  drinkingOrder: {fileID: 969737752}
-  coinsSpent: 0
-  myCollider: {fileID: 968508948}
-  myFacialExpression: {fileID: 1016182025}
-  expressions:
+  _orderPanel: {fileID: 96674566}
+  _orderTween: {fileID: 96674568}
+  _drinkableOrderTween: {fileID: 969737754}
+  _eatableOrderTween: {fileID: 1607390882}
+  _friesTween: {fileID: 0}
+  _angryEffect: {fileID: 8488824}
+  _eyes: {fileID: 0}
+  _eyesExpressions: []
+  _collider: {fileID: 968508948}
+  _animation: {fileID: 374366298}
+  _orderEat: {fileID: 0}
+  _pizzaDOt: {fileID: 0}
+  _orderPlate: {fileID: 1607390880}
+  _fricesPrefav: {fileID: 0}
+  _burger: {fileID: 0}
+  _drinkableOrder: {fileID: 969737752}
+  _order: 
+  _facialExpression: {fileID: 1016182025}
+  _expressions:
   - {fileID: 21300000, guid: 83ed2977a70b541b9999c19285b953b7, type: 3}
   - {fileID: 21300000, guid: aef4ca1bc07104498848734656f10107, type: 3}
-  myEyes: {fileID: 0}
-  myEyesExpressions: []
-  noOfOrders: 0
-  perfect: 0
-  shouldBePerfectIfServed: 0
-  tutorialOn: 0
-  angryEffect: {fileID: 8488824}
-  leavingWithoutPaying: 0
-  coinsWithoutPaying: 0
+  _sliderWait: {fileID: 7209810}
 --- !u!65 &968508948
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -29855,8 +29806,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56d9714b4868042e18b7d8c56d041ba7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myMaxScale: 0.4
-  myMinScale: 0.3
+  _maxScale: 0.4
+  _minScale: 0.3
 --- !u!212 &968508950
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -30844,7 +30795,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acb95e60738964a70a2ec4adf3b3fb62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasTweenScale: 0
+  _isHasScale: 0
 --- !u!114 &985700468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30933,10 +30884,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e809982f037c46938ab7d33c95b08bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pixelSize: 0.5
-  outlineColor: {r: 0.9921569, g: 0.86666673, b: 0, a: 1}
-  resolutionDependant: 0
-  doubleResolution: 1024
+  _pixelsSize: 0.5
+  _colorOutline: {r: 0.9921569, g: 0.86666673, b: 0, a: 1}
 --- !u!1 &992381933
 GameObject:
   m_ObjectHideFlags: 0
@@ -31261,7 +31210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acb95e60738964a70a2ec4adf3b3fb62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasTweenScale: 0
+  _isHasScale: 0
 --- !u!114 &1005267177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31328,10 +31277,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e809982f037c46938ab7d33c95b08bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pixelSize: 0.5
-  outlineColor: {r: 0.9921569, g: 0.86666673, b: 0, a: 1}
-  resolutionDependant: 0
-  doubleResolution: 1024
+  _pixelsSize: 0.5
+  _colorOutline: {r: 0.9921569, g: 0.86666673, b: 0, a: 1}
 --- !u!1001 &1005982776
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37533,40 +37480,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37d1a79482cfa40d2a8a4479d3261096, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iHaveAMultipleTypeOrder: 0
-  myOrder: 
-  customerWaitingTime: 60
-  myWaitingTime: 0
-  positionTaken: 0
-  orderPlaced: 0
-  orderPanel: {fileID: 1879471295}
-  orderPanelTween: {fileID: 1879471297}
-  drinkableOrderTween: {fileID: 1068807015}
-  eatableOrderTween: {fileID: 1750083009}
-  friesTween: {fileID: 0}
-  waitingSlider: {fileID: 1189573423}
-  myAnimation: {fileID: 1772486867}
-  eatableOrder: {fileID: 0}
-  pizzadot: {fileID: 0}
-  plateOfEatableOrder: {fileID: 1750083007}
-  fries: {fileID: 0}
-  myBurger: {fileID: 0}
-  drinkingOrder: {fileID: 1068807013}
-  coinsSpent: 0
-  myCollider: {fileID: 1054631447}
-  myFacialExpression: {fileID: 1357719312}
-  expressions:
+  _orderPanel: {fileID: 1879471295}
+  _orderTween: {fileID: 1879471297}
+  _drinkableOrderTween: {fileID: 1068807015}
+  _eatableOrderTween: {fileID: 1750083009}
+  _friesTween: {fileID: 0}
+  _angryEffect: {fileID: 1493914410}
+  _eyes: {fileID: 0}
+  _eyesExpressions: []
+  _collider: {fileID: 1054631447}
+  _animation: {fileID: 1772486867}
+  _orderEat: {fileID: 0}
+  _pizzaDOt: {fileID: 0}
+  _orderPlate: {fileID: 1750083007}
+  _fricesPrefav: {fileID: 0}
+  _burger: {fileID: 0}
+  _drinkableOrder: {fileID: 1068807013}
+  _order: 
+  _facialExpression: {fileID: 1357719312}
+  _expressions:
   - {fileID: 21300000, guid: 83ed2977a70b541b9999c19285b953b7, type: 3}
   - {fileID: 21300000, guid: aef4ca1bc07104498848734656f10107, type: 3}
-  myEyes: {fileID: 0}
-  myEyesExpressions: []
-  noOfOrders: 0
-  perfect: 0
-  shouldBePerfectIfServed: 0
-  tutorialOn: 0
-  angryEffect: {fileID: 1493914410}
-  leavingWithoutPaying: 0
-  coinsWithoutPaying: 0
+  _sliderWait: {fileID: 1189573423}
 --- !u!65 &1054631447
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -37600,8 +37535,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56d9714b4868042e18b7d8c56d041ba7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myMaxScale: 0.4
-  myMinScale: 0.3
+  _maxScale: 0.4
+  _minScale: 0.3
 --- !u!212 &1054631449
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -39019,12 +38954,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e0eb3ffac00d49ae831023af487d56a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myScaleX: 1.330215
-  myScaleY: 1.330215
-  left: {fileID: 870268782}
-  right: {fileID: 1511623015}
-  up: {fileID: 585802554}
-  down: {fileID: 1150720138}
+  _leftSide: {fileID: 870268782}
+  _rightSide: {fileID: 1511623015}
+  _topSide: {fileID: 585802554}
+  _downSide: {fileID: 1150720138}
 --- !u!95 &1140699994
 Animator:
   serializedVersion: 5
@@ -46855,7 +46788,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acb95e60738964a70a2ec4adf3b3fb62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasTweenScale: 0
+  _isHasScale: 0
 --- !u!114 &1354046649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46922,10 +46855,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e809982f037c46938ab7d33c95b08bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pixelSize: 0.5
-  outlineColor: {r: 0.9921569, g: 0.86666673, b: 0, a: 1}
-  resolutionDependant: 0
-  doubleResolution: 1024
+  _pixelsSize: 0.5
+  _colorOutline: {r: 0.9921569, g: 0.86666673, b: 0, a: 1}
 --- !u!1 &1357719310
 GameObject:
   m_ObjectHideFlags: 0
@@ -50153,10 +50084,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 911d3615588cc42adbe518c5b6182ca1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGoalAchieved: 1
-  letterPause: 0.1
-  myText: {fileID: 1495897864}
-  imageToDeactivate: {fileID: 0}
+  _text: {fileID: 1495897864}
+  _isGoalAchived: 1
 --- !u!114 &1495897864
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67850,40 +67779,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37d1a79482cfa40d2a8a4479d3261096, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iHaveAMultipleTypeOrder: 0
-  myOrder: 
-  customerWaitingTime: 60
-  myWaitingTime: 0
-  positionTaken: 0
-  orderPlaced: 0
-  orderPanel: {fileID: 1246001403}
-  orderPanelTween: {fileID: 1246001405}
-  drinkableOrderTween: {fileID: 1525871991}
-  eatableOrderTween: {fileID: 1791473575}
-  friesTween: {fileID: 0}
-  waitingSlider: {fileID: 1866179594}
-  myAnimation: {fileID: 2076024157}
-  eatableOrder: {fileID: 0}
-  pizzadot: {fileID: 0}
-  plateOfEatableOrder: {fileID: 1791473573}
-  fries: {fileID: 0}
-  myBurger: {fileID: 0}
-  drinkingOrder: {fileID: 1525871989}
-  coinsSpent: 0
-  myCollider: {fileID: 1623419266}
-  myFacialExpression: {fileID: 117939541}
-  expressions:
+  _orderPanel: {fileID: 1246001403}
+  _orderTween: {fileID: 1246001405}
+  _drinkableOrderTween: {fileID: 1525871991}
+  _eatableOrderTween: {fileID: 1791473575}
+  _friesTween: {fileID: 0}
+  _angryEffect: {fileID: 1462817381}
+  _eyes: {fileID: 0}
+  _eyesExpressions: []
+  _collider: {fileID: 1623419266}
+  _animation: {fileID: 2076024157}
+  _orderEat: {fileID: 0}
+  _pizzaDOt: {fileID: 0}
+  _orderPlate: {fileID: 1791473573}
+  _fricesPrefav: {fileID: 0}
+  _burger: {fileID: 0}
+  _drinkableOrder: {fileID: 1525871989}
+  _order: 
+  _facialExpression: {fileID: 117939541}
+  _expressions:
   - {fileID: 21300000, guid: b67cab7cff567437e81f64039cec2b6f, type: 3}
   - {fileID: 21300000, guid: 369072a6bfde74bc0bd609d95c0da9e4, type: 3}
-  myEyes: {fileID: 0}
-  myEyesExpressions: []
-  noOfOrders: 0
-  perfect: 0
-  shouldBePerfectIfServed: 0
-  tutorialOn: 0
-  angryEffect: {fileID: 1462817381}
-  leavingWithoutPaying: 0
-  coinsWithoutPaying: 0
+  _sliderWait: {fileID: 1866179594}
 --- !u!65 &1623419266
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -67917,8 +67834,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56d9714b4868042e18b7d8c56d041ba7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myMaxScale: 0.4
-  myMinScale: 0.3
+  _maxScale: 0.4
+  _minScale: 0.3
 --- !u!82 &1623419268
 AudioSource:
   m_ObjectHideFlags: 0
@@ -68779,10 +68696,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 911d3615588cc42adbe518c5b6182ca1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGoalAchieved: 0
-  letterPause: 0.1
-  myText: {fileID: 1720977153}
-  imageToDeactivate: {fileID: 0}
+  _text: {fileID: 1720977153}
+  _isGoalAchived: 0
 --- !u!114 &1720977153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75854,7 +75769,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6794059f2978744988c232fd4c2e0025, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  noOfCustomers: 0
   gameTimer: 120
   customerPositions:
   - {fileID: 790089427}
@@ -75879,11 +75793,6 @@ MonoBehaviour:
   - {fileID: 93144555}
   - {fileID: 1569456378}
   timerText: {fileID: 592521118}
-  timerStopped: 0
-  canBeAnUnPayingCustomer: 0
-  noOfUnpayingCustomers: 0
-  maxNoOfUnpayableCustomers: 0
-  stop: 0
 --- !u!114 &1830592662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -88434,10 +88343,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e809982f037c46938ab7d33c95b08bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pixelSize: 1
-  outlineColor: {r: 1, g: 0, b: 0, a: 1}
-  resolutionDependant: 0
-  doubleResolution: 1024
+  _pixelsSize: 1
+  _colorOutline: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &2005547825
 GameObject:
   m_ObjectHideFlags: 0
@@ -99973,8 +99880,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56d9714b4868042e18b7d8c56d041ba7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myMaxScale: 0.9
-  myMinScale: 0.54
+  _maxScale: 0.9
+  _minScale: 0.54
 --- !u!111 &2083064936
 Animation:
   m_ObjectHideFlags: 0
@@ -105346,8 +105253,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1db31f0fa9a7c41dabc3c0ea2cc95f0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  letterPause: 0.03
-  myText: {fileID: 2147309195}
+  _delayPause: 0.03
+  _text: {fileID: 2147309195}
 --- !u!222 &2147309197
 CanvasRenderer:
   m_ObjectHideFlags: 0

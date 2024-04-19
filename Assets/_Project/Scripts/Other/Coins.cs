@@ -9,6 +9,7 @@ namespace _Project.Scripts.Other
 {
 	public class Coins : MonoBehaviour 
 	{
+		[Inject] private WisitorHandler _customerHandler;
 		[Inject] private LevelSoundManager _levelSoundManager;
 		[Inject] private US_Manager _usManager;
 		[Inject] private China_Manager _chinaManager;
@@ -36,7 +37,7 @@ namespace _Project.Scripts.Other
 		private void OnEnable()
 		{
 			visible++;
-			if (CustomerHandler._instance.gameTimer <= 15 ) {
+			if (_customerHandler._timeOnGame <= 15 ) {
 
 				{
 					highlight.Play();
@@ -128,11 +129,11 @@ namespace _Project.Scripts.Other
 			_uiManager.totalCoins+=myAmount;
 
 			StartCoroutine (MoveCoins());
-			CustomerHandler._instance.availablePositions.Add (positionTaken);
+			_customerHandler._availablePositions.Add (positionTaken);
 
-			if(CustomerHandler._instance.timerStopped ||  CustomerHandler._instance.gameTimer <= 0)
+			if(_customerHandler.timerStopped ||  _customerHandler._timeOnGame <= 0)
 			{
-				if(CustomerHandler._instance.availablePositions.Count == 5)
+				if(_customerHandler._availablePositions.Count == 5)
 				{
 					_uiManager.OnGameOver ();
 				}
@@ -141,11 +142,11 @@ namespace _Project.Scripts.Other
 
 		public void CoinsStolen()
 		{
-			CustomerHandler._instance.availablePositions.Add (positionTaken);
+			_customerHandler._availablePositions.Add (positionTaken);
 		
-			if(CustomerHandler._instance.timerStopped ||  CustomerHandler._instance.gameTimer <= 0)
+			if(_customerHandler.timerStopped || _customerHandler._timeOnGame <= 0)
 			{
-				if(CustomerHandler._instance.availablePositions.Count == 5)
+				if(_customerHandler._availablePositions.Count == 5)
 				{
 					_uiManager.OnGameOver ();
 				}

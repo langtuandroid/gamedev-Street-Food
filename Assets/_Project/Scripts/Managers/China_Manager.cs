@@ -49,7 +49,7 @@ namespace _Project.Scripts.Managers
 		public ObjectMotion noodlesVeg;
 		public ObjectMotion soupVeg;
 		public SpriteRenderer bowlAdd;
-		public Customer firstCustomer { get; set; }
+		public Wisitor firstCustomer { get; set; }
 		public bool clickBowlTut { get; set; }
 		public bool clickPlateTut { get; set; }
 		public SpriteRenderer tableTop;

@@ -9,6 +9,7 @@ namespace _Project.Scripts.Other
 {
 	public class Belltry : MonoBehaviour 
 	{
+		[Inject] private WisitorHandler _customerHandler;
 		[Inject] private US_Manager _usManager;
 		[Inject] private UIManager _uiManager;   
 		private void OnEnable()
@@ -19,7 +20,7 @@ namespace _Project.Scripts.Other
 		public void ActiveBell()
 		{
 			_usManager.Bell.SetActive (true);
-			CustomerHandler._instance.stop = false ;
+			_customerHandler.stop = false ;
 			gameObject.SetActive (false);
 			PlayerPrefs.SetInt ("try", 2);
 		}
@@ -58,7 +59,7 @@ namespace _Project.Scripts.Other
 				PlayerPrefs.SetString ("Golds", Encryption.Encrypt (MenuManager.golds.ToString ()));
 				PlayerPrefs.SetInt ("Bell", 1);
 				_usManager.Bell.SetActive(true);
-				CustomerHandler._instance.stop = false ;
+				_customerHandler.stop = false ;
 			} else
 			{
 				_uiManager.EarnGold();

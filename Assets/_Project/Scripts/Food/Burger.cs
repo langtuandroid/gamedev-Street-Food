@@ -42,7 +42,7 @@ namespace _Project.Scripts.Food
 		public bool tutorialOn { get; set; }
 		public GameObject otherObject { get; set; }
 		public bool wrongOrderGiven { get; set; }
-		public Customer customer { get; set; }
+		public Wisitor customer { get; set; }
 		private void Start()
 		{
 			_uiManager.n_Burger_served=PlayerPrefs.GetInt ("BurgerServed");
@@ -219,11 +219,11 @@ namespace _Project.Scripts.Food
 				
 				string myTypeToEatSub = "BURGER";
 				
-				for(int count = 0; count < customer.myOrder.Count; count++)
+				for(int count = 0; count < customer._order.Count; count++)
 				{
-					if(customer.myOrder[count].ToString().Contains(myTypeToEatSub.ToString()))
+					if(customer._order[count].ToString().Contains(myTypeToEatSub.ToString()))
 					{
-						if(customer.myOrder[count] == myType)
+						if(customer._order[count] == myType)
 						{
 							wrongOrderGiven = false;
 						
@@ -233,7 +233,7 @@ namespace _Project.Scripts.Food
 							wrongOrderGiven = true;
 						
 						}
-						customer.myOrder.RemoveAt(count);
+						customer._order.RemoveAt(count);
 					}
 				
 				}
@@ -244,7 +244,7 @@ namespace _Project.Scripts.Food
 			
 				if(perfect)
 				{
-					if(customer.myOrder.Count > 0)
+					if(customer._order.Count > 0)
 						customer.myWaitingTime-= 30;
 
 					if(!wrongOrderGiven)
@@ -261,7 +261,7 @@ namespace _Project.Scripts.Food
 				}
 				else
 				{
-					if(customer.myOrder.Count > 0)
+					if(customer._order.Count > 0)
 						customer.myWaitingTime-= 20;
 				
 					if(!wrongOrderGiven)
@@ -292,8 +292,8 @@ namespace _Project.Scripts.Food
 					customer.myWaitingTime = 0;
 				}
 			
-				if(customer.myOrder.Count <= 0)
-					customer.MoveToEndPosition();
+				if(customer._order.Count <= 0)
+					customer.MoveToEnd();
 			
 			}
 			else
@@ -358,10 +358,10 @@ namespace _Project.Scripts.Food
 			{
 
 				otherObject = other.gameObject;
-				customer = other.GetComponent<Customer>();
-				for(int i = 0 ; i< customer.myOrder.Count ; i++)
+				customer = other.GetComponent<Wisitor>();
+				for(int i = 0 ; i< customer._order.Count ; i++)
 				{
-					if(myType == customer.myOrder[i])
+					if(myType == customer._order[i])
 					{
 						wrongOrderGiven = false;
 						reachedCustomer = true;

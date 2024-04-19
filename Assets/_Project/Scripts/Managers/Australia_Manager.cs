@@ -61,7 +61,7 @@ namespace _Project.Scripts.Managers
 		public Burger firstBurger;
 		public MakeTikki firstTikki;
 		public ObjectMotion firstFries;
-		public Customer firstCustomer { get; set; }
+		public Wisitor firstCustomer { get; set; }
 		public bool clickfirstBun { get; set; }
 		public bool clickFirstTikki { get; set; }
 		public bool clickFirstFryer { get; set; }

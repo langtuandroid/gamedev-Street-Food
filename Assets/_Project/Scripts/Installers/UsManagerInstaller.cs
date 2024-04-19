@@ -1,5 +1,6 @@
 using _Project.Scripts.Managers;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace _Project.Scripts.Installers

@@ -14,6 +14,7 @@ namespace _Project.Scripts.Other
 {
 	public class ObjectMotion : MonoBehaviour 
 	{
+		[Inject] private WisitorHandler _customerHandler;
 		[Inject] private LevelSoundManager _levelSoundManager;
 		[Inject] private US_Manager _usManager;
 		[Inject] private Italy_Manager _italyManager;
@@ -50,7 +51,7 @@ namespace _Project.Scripts.Other
 		public bool isOnion;
 		public bool isCabbage;
 		public bool isFries;
-		public Customer customer { get; set; }
+		public Wisitor customer { get; set; }
 		public bool isCupCake;
 		public ParticleSystem newCupcakeCame;
 		public Vector3 myOriginalPos , myTouchPos;
@@ -551,9 +552,9 @@ namespace _Project.Scripts.Other
 			}
 
 			myParentHolder.available = true;
-			customer.myOrder.Remove (myType);
+			customer._order.Remove (myType);
 			customer.RemoveOrderFromBoard (myType);
-			if(customer.myOrder.Count > 0)
+			if(customer._order.Count > 0)
 			{
 				customer.myWaitingTime-= 15;
 				if(customer.myWaitingTime < 0)
@@ -569,9 +570,9 @@ namespace _Project.Scripts.Other
 			{
 				customer.perfect = true;
 			}
-			if(customer.myOrder.Count <= 0)
+			if(customer._order.Count <= 0)
 			{
-				customer.MoveToEndPosition();
+				customer.MoveToEnd();
 			}
 		
 			transform.position = myOriginalPos;
@@ -579,7 +580,7 @@ namespace _Project.Scripts.Other
 			if(tutorialOn)
 			{
 				tutorialOn = false;
-				CustomerHandler._instance.InitializeCustomer ();
+				_customerHandler.ConfigureCustomer ();
 				Destroy(_uiManager.tutorialPanelCanvas.gameObject); 
 				Destroy(_uiManager.tutorialPanelBg.gameObject);
 				Australia_Manager.tutorialEnd = true;
@@ -780,7 +781,7 @@ namespace _Project.Scripts.Other
 			}
 			_chinaManager.platesFilledCount--;
 			myParentHolder.available = true;
-			customer.myOrder.Remove (myType);
+			customer._order.Remove (myType);
 			customer.RemoveOrderFromBoard (myType);
 
 			if(tutorialOn)
@@ -792,7 +793,7 @@ namespace _Project.Scripts.Other
 				_uiManager.tutorialPanelBg.OpenPopupChina ("PUT BURNT NOODLES\nIN THE DUSTBIN!",false,false , 11 , 1);
 			}
 			customer.iHaveAMultipleTypeOrder = LevelManager.Orders.NONE;
-			if(customer.myOrder.Count > 0)
+			if(customer._order.Count > 0)
 			{
 				customer.myWaitingTime-= 35;
 				if(customer.myWaitingTime < 0)
@@ -810,8 +811,8 @@ namespace _Project.Scripts.Other
 				customer.coinsSpent+=_chinaManager.lessBakedNoodlesPrice;
 			}
 
-			if(customer.myOrder.Count <= 0)
-				customer.MoveToEndPosition();
+			if(customer._order.Count <= 0)
+				customer.MoveToEnd();
 		
 			transform.position = myOriginalPos;
 			myNoodles.SetActive (false);
@@ -824,7 +825,7 @@ namespace _Project.Scripts.Other
 			_levelSoundManager.drink.Play ();
 			_chinaManager.bowlsFilled--;
 			myParentHolder.available = true;
-			customer.myOrder.Remove (myType);
+			customer._order.Remove (myType);
 			customer.RemoveOrderFromBoard (myType);
 		
 			if(tutorialOn)
@@ -836,7 +837,7 @@ namespace _Project.Scripts.Other
 				_uiManager.tutorialPanelCanvas.OpenPopupChina ("ONE SOUP CONTAINER CAN FILL TWO SOUP BOWLS!",true,false , 16 , 1);
 			
 			}
-			if(customer.myOrder.Count > 0)
+			if(customer._order.Count > 0)
 			{
 				customer.myWaitingTime-= 35;
 				if(customer.myWaitingTime < 0)
@@ -849,8 +850,8 @@ namespace _Project.Scripts.Other
 			{
 				customer.perfect = true;
 			}
-			if(customer.myOrder.Count <= 0)
-				customer.MoveToEndPosition();
+			if(customer._order.Count <= 0)
+				customer.MoveToEnd();
 
 			mySoup.SetActive (false);
 			transform.position = myOriginalPos;
@@ -939,10 +940,10 @@ namespace _Project.Scripts.Other
 				_australiaManager.cokesFilled--;
 			}
 			myParentHolder.available = true;
-			customer.myOrder.Remove (myType);
+			customer._order.Remove (myType);
 			customer.RemoveOrderFromBoard (myType);
 			
-			if(customer.myOrder.Count > 0)
+			if(customer._order.Count > 0)
 			{
 				customer.myWaitingTime-= 15;
 				if(customer.myWaitingTime < 0)
@@ -976,9 +977,9 @@ namespace _Project.Scripts.Other
 			{
 				customer.perfect = true;
 			}
-			if(customer.myOrder.Count <= 0)
+			if(customer._order.Count <= 0)
 			{
-				customer.MoveToEndPosition();
+				customer.MoveToEnd();
 			}
 		
 			transform.position = myOriginalPos;
@@ -991,8 +992,8 @@ namespace _Project.Scripts.Other
 		{
 			_levelSoundManager.customerEat.Play ();
 			customer.myWaitingTime = 0;
-			customer.myFacialExpression.sprite = customer.expressions[0];
-			customer.waitingSlider.color = Color.green;
+			customer._facialExpression.sprite = customer._expressions[0];
+			customer._sliderWait.color = Color.green;
 			MenuManager.cupcakeNo--;
 			PlayerPrefs.SetString ("Cupcake",Encryption.Encrypt (MenuManager.cupcakeNo.ToString ()));
 			if(MenuManager.cupcakeNo <= 0)
@@ -1029,7 +1030,7 @@ namespace _Project.Scripts.Other
 			{
 				if(other.name.Contains ("customer"))
 				{
-					customer = other.GetComponent<Customer>();
+					customer = other.GetComponent<Wisitor>();
 					reachedDestination = true;
 				}
 			}
@@ -1039,10 +1040,10 @@ namespace _Project.Scripts.Other
 				{
 
 					otherObject = other.gameObject;
-					customer = other.GetComponent<Customer>();
-					for(int i = 0 ; i< customer.myOrder.Count ; i++)
+					customer = other.GetComponent<Wisitor>();
+					for(int i = 0 ; i< customer._order.Count ; i++)
 					{
-						if(myType == customer.myOrder[i])
+						if(myType == customer._order[i])
 						{
 							reachedDestination = true;
 							break;
@@ -1098,10 +1099,10 @@ namespace _Project.Scripts.Other
 					if(other.name.Contains ("customer"))
 					{
 						otherObject = other.gameObject;
-						customer = other.GetComponent<Customer>();
-						for(int i = 0 ; i< customer.myOrder.Count ; i++)
+						customer = other.GetComponent<Wisitor>();
+						for(int i = 0 ; i< customer._order.Count ; i++)
 						{
-							if(myType == customer.myOrder[i])
+							if(myType == customer._order[i])
 							{
 								reachedDestination = true;
 								break;
@@ -1127,10 +1128,10 @@ namespace _Project.Scripts.Other
 					if(other.name.Contains ("customer"))
 					{
 						otherObject = other.gameObject;
-						customer = other.GetComponent<Customer>();
-						for(int i = 0 ; i< customer.myOrder.Count ; i++)
+						customer = other.GetComponent<Wisitor>();
+						for(int i = 0 ; i< customer._order.Count ; i++)
 						{
-							if(myType == customer.myOrder[i])
+							if(myType == customer._order[i])
 							{
 								reachedDestination = true;
 								break;
