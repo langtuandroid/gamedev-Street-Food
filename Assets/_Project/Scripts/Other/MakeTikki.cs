@@ -67,7 +67,7 @@ namespace _Project.Scripts.Other
 						}
 						else
 						{
-							_australiaManager.firstBurger.isTutorialOn = true;
+							_australiaManager._firstBurger.isTutorialOn = true;
 							_uiManager.tutorialPanelBg.OpenPopupAustralia ("TAP OR DRAG TIKKI TO \n THE BUN.",false,false , 2);
 						}
 						tutorialOn = false;
@@ -82,9 +82,9 @@ namespace _Project.Scripts.Other
 					}
 					else
 					{
-						if(myRenderer.sprite == _australiaManager.burgerTikkiVariations[0])
+						if(myRenderer.sprite == _australiaManager._burgerVariations[0])
 						{
-							myRenderer.sprite = _australiaManager.burgerTikkiVariations[1];
+							myRenderer.sprite = _australiaManager._burgerVariations[1];
 							tikkiCompletelyBaked.Play ();
 						}
 					}
@@ -99,7 +99,7 @@ namespace _Project.Scripts.Other
 						}
 						else
 						{
-							myRenderer.sprite = _australiaManager.burgerTikkiVariations[2];
+							myRenderer.sprite = _australiaManager._burgerVariations[2];
 						}
 						isBurnt = true; 
 						mySmoke.gameObject.SetActive (true);
@@ -144,7 +144,7 @@ namespace _Project.Scripts.Other
 			}
 			else
 			{
-				myRenderer.sprite = _australiaManager.burgerTikkiVariations[0];
+				myRenderer.sprite = _australiaManager._burgerVariations[0];
 			}
 		}
 
@@ -162,8 +162,8 @@ namespace _Project.Scripts.Other
 				else
 				{
 					_australiaManager.AllClickedBoolsReset ();
-					_australiaManager.clickedTikkiDestinationFunction = this;
-					_australiaManager.clickedTikki = true;
+					_australiaManager.ClickedFunktion = this;
+					_australiaManager.IsClickedTikki = true;
 				}
 				iAmSelected = true;
 
@@ -235,7 +235,7 @@ namespace _Project.Scripts.Other
 						}
 						else
 						{
-							_australiaManager.firstBurger.isTutorialOn = true;
+							_australiaManager._firstBurger.isTutorialOn = true;
 							_uiManager.tutorialPanelBg.OpenPopupAustralia ("TAP OR DRAG BURGER TO \n THE CUSTOMER.",false,false , 3);
 						}
 						tutorialPick = false;
@@ -297,7 +297,7 @@ namespace _Project.Scripts.Other
 						else
 						{
 							availableHotDog.transform.GetComponent<BurgerFood>().isPrefavet = true;
-							_australiaManager.burgerTikkiOnPlates[availableHotDog.myPositionInArray].sprite = _australiaManager.burgerTikkiVariations[1];
+							_australiaManager._tikkiPlates[availableHotDog.myPositionInArray].sprite = _australiaManager._burgerVariations[1];
 						}
 					}
 					else
@@ -306,7 +306,7 @@ namespace _Project.Scripts.Other
 						if(isUS)
 							_usManager.hotdogOnPlates[availableHotDog.myPositionInArray].sprite = _usManager.hotDogVariations[1];
 						else
-							_australiaManager.burgerTikkiOnPlates[availableHotDog.myPositionInArray].sprite = _australiaManager.burgerTikkiVariations[0];
+							_australiaManager._tikkiPlates[availableHotDog.myPositionInArray].sprite = _australiaManager._burgerVariations[0];
 					}
 					if(isUS)
 					{
@@ -315,8 +315,8 @@ namespace _Project.Scripts.Other
 					}
 					else
 					{
-						_australiaManager.grillsFilledCount--;
-						_australiaManager.clickedTikki = false;
+						_australiaManager.GrillsFilled--;
+						_australiaManager.IsClickedTikki = false;
 					}
 				}
 				else
@@ -336,8 +336,8 @@ namespace _Project.Scripts.Other
 				}
 				else
 				{
-					_australiaManager.grillsFilledCount--;
-					_australiaManager.clickedTikki = false;
+					_australiaManager.GrillsFilled--;
+					_australiaManager.IsClickedTikki = false;
 				}
 				_uiManager.totalCoins-=10;
 				_levelSoundManager.dustbin.Play();

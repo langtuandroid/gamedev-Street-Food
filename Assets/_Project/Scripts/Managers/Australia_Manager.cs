@@ -5,109 +5,112 @@ using _Project.Scripts.Other;
 using _Project.Scripts.UI_Scripts;
 using _Project.Scripts.UI.Tutorial;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace _Project.Scripts.Managers
 {
 	public class Australia_Manager : MonoBehaviour
 	{
+		public static bool tutorialEnd;
 		[Inject] private LevelSoundManager _levelSoundManager;
 		[Inject] private UIManager _uiManager;
-		public GameObject TheifPanel;
-		public int cokePrice => 10;
-		public int lessBakedBurger => 20;
-		public int perfectBurger => 50;
-		public Sprite []burgerTikkiVariations;   //3	
-		public SpriteRenderer []burgerTikkiOnPlates; //6
-		public SpriteRenderer []burgerPlates; //6
-		public SpriteRenderer []burgerOnPlates; //6
-		public GameObject []grills; //3
-		public SpriteRenderer []grillTikkis;  //6
-		public Availability []grillPlaces; //6
-		public SpriteRenderer []cokeBottles; //9
-		public Availability []cokePlaces;  //9
-		public SpriteRenderer fryer;
-		public Sprite []fryerVariations;   //3
-		public GameObject []friesCluster;   //3
-		public ObjectMotion []friesPack; //9
-		public Availability []friesPlaces;  //9
-		public int grillsFilledCount{ get; set; }
-		public int totalGrillsAvailable{ get; set; }
-		public int platesFilledCount{ get; set; }
-		public int totalPlatesAvailable{ get; set; }
-		public int cokesFilled{ get; set; }
-		public int totalCokesAvailable{ get; set; }
-		public int friesFilled{ get; set; }
-		public int totalFriesAvailable{ get; set; }
-		public bool clickedBurger{ get; set; }
-		public bool clickedTikki{ get; set; }
-		public bool clickedTomato{ get; set; }
-		public bool clickedOnion{ get; set; }
-		public bool clickedCabbage{ get; set; }
-		public bool cickedFries{ get; set; }
-		public bool clickedCoke{ get; set; }
-		public MakeTikki clickedTikkiDestinationFunction { get; set; }
-		public ObjectMotion clickedItemDestinationFunction { get; set; }
-		public BurgerFood clickedHotDogDestinationFunction { get; set; }
-		public GameObject dustbin;
-		public ObjectMotion tomato;
-		public ObjectMotion onion;
-		public ObjectMotion cabbage;
-		public ObjectMotion cupCake;
-		public GameObject tomatoAdd;
-		public GameObject onionAdd;
-		public GameObject cabbageAdd;
-		public GameObject friesAdd;
-		public BurgerFood firstBurger;
-		public MakeTikki firstTikki;
-		public ObjectMotion firstFries;
-		public Wisitor firstCustomer { get; set; }
-		public bool clickfirstBun { get; set; }
-		public bool clickFirstTikki { get; set; }
-		public bool clickFirstFryer { get; set; }
-		public SpriteRenderer tableCover;
-		public SpriteRenderer tableTop;
-		public GameObject Radio ;
-		public GameObject Whistle ;
-		public GameObject bell ;
-		public GameObject handcuff ;
-		public GameObject starting_text ;
-		public static bool tutorialEnd;
+		private int totalGrillsAvailable;
+		private int totalPlatesAvailable;
+		private int totalCokesAvailable;
+		private int totalFriesAvailable;
+		private bool IsClickFirstTikki;
+		[FormerlySerializedAs("TheifPanel")] [SerializeField] private GameObject _thiefPanel;
+		[FormerlySerializedAs("burgerPlates")] [SerializeField] private SpriteRenderer []_burgerPanel; //6
+		[FormerlySerializedAs("burgerOnPlates")] [SerializeField] private SpriteRenderer []_burgelOnPlate; //6
+		[FormerlySerializedAs("grills")] [SerializeField] private GameObject []_grills; //3
+		[FormerlySerializedAs("grillTikkis")] [SerializeField] private SpriteRenderer []_grillsTikkis;  //6
+		[FormerlySerializedAs("grillPlaces")] [SerializeField] private Availability []grillPlaves; //6
+		[FormerlySerializedAs("cokeBottles")] [SerializeField] private SpriteRenderer []_bottles; //9
+		[FormerlySerializedAs("cokePlaces")] [SerializeField] private Availability []_cokePlaces;  //9
+		[FormerlySerializedAs("fryer")] [SerializeField] private SpriteRenderer _fryer;
+		[FormerlySerializedAs("fryerVariations")] [SerializeField] private Sprite []_fryerVariations;   //3
+		[FormerlySerializedAs("friesCluster")] [SerializeField] private GameObject []_friesCluster;   //3
+		[FormerlySerializedAs("friesPack")] [SerializeField] private ObjectMotion []_friesPack; //9
+		[FormerlySerializedAs("friesPlaces")] [SerializeField] private Availability []_friesPositions;  //9
+		[FormerlySerializedAs("dustbin")] [SerializeField] private GameObject _dustbin;
+		[FormerlySerializedAs("tomato")] [SerializeField] private ObjectMotion _tomato;
+		[FormerlySerializedAs("onion")] [SerializeField] private ObjectMotion _onionPrefab;
+		[FormerlySerializedAs("cabbage")] [SerializeField] private ObjectMotion _cabbagePrefab;
+		[FormerlySerializedAs("cupCake")] [SerializeField] private ObjectMotion _cupCakePrefab;
+		[FormerlySerializedAs("tomatoAdd")] [SerializeField] private GameObject _tomatoAddPrefab;
+		[FormerlySerializedAs("onionAdd")] [SerializeField] private GameObject _onionAddPrefab;
+		[FormerlySerializedAs("cabbageAdd")] [SerializeField] private GameObject _cabbageAddPrefab;
+		[FormerlySerializedAs("friesAdd")] [SerializeField] private GameObject _friesAddPrefab;
+		[FormerlySerializedAs("firstTikki")] [SerializeField] private MakeTikki _firstTikkiPrefab;
+		[FormerlySerializedAs("firstFries")] [SerializeField] private ObjectMotion _firstFriesObjects;
+		[FormerlySerializedAs("tableCover")] [SerializeField] private SpriteRenderer _tableCover;
+		[FormerlySerializedAs("tableTop")] [SerializeField] private SpriteRenderer _tableTop;
+		[FormerlySerializedAs("Radio")] [SerializeField] private GameObject _radioPrefab ;
+		[FormerlySerializedAs("Whistle")] [SerializeField] private GameObject _whistlePrefab ;
+		[FormerlySerializedAs("bell")] [SerializeField] private GameObject _bellPrefab ;
+		[FormerlySerializedAs("handcuff")] [SerializeField] private GameObject _handCuff ;
+		[FormerlySerializedAs("starting_text")] [SerializeField] private GameObject _startingTextPrefab ;
+		[FormerlySerializedAs("burgerTikkiVariations")] public Sprite []_burgerVariations;   //3	
+		[FormerlySerializedAs("burgerTikkiOnPlates")] public SpriteRenderer []_tikkiPlates; //6
+		[FormerlySerializedAs("firstBurger")] public BurgerFood _firstBurger;
+		public bool FryerClick { get; set; }
+		public int GrillsFilled{ get; set; }
+		public int PlatesFilled{ get; set; }
+		public int CokesFilled{ get; set; }
+		public int FriesFilled{ get; set; }
+		public bool IsBurgerClick{ get; set; }
+		public bool IsClickedTikki{ get; set; }
+		public bool IsClickedTomato{ get; set; }
+		public bool IsClickedOnion{ get; set; }
+		public bool IsClickedCabbage{ get; set; }
+		public bool IsCickedFries{ get; set; }
+		public bool IsClickedCoke{ get; set; }
+		public MakeTikki ClickedFunktion { get; set; }
+		public ObjectMotion _objectMotion { get; set; }
+		public BurgerFood _burgerFood { get; set; }
+		public int CokePrice => 10;
+		public int LessBaked => 20;
+		public int PerfectBurger => 50;
+		public Wisitor FirstCustomer { get; set; }
+		public bool ClickFirstBun { get; set; }
+		
+
 
 		private void OnEnable()
 		{
 			if(PlayerPrefs.HasKey ("Radio"))
 			{
-				Radio.SetActive(true);
+				_radioPrefab.SetActive(true);
 			}
 			if(PlayerPrefs.HasKey ("Whistle"))
 			{
-				Whistle.SetActive(true);
+				_whistlePrefab.SetActive(true);
 			}
 			if (PlayerPrefs.HasKey ("Bell"))
 			{
-				bell.SetActive(true);
+				_bellPrefab.SetActive(true);
 			}
 			if(MenuManager.handcuffNo > 0)
 			{
-				handcuff.SetActive(true);
+				_handCuff.SetActive(true);
 			}
 		
 		}
 		
-		public void TikkiReached()
+		public void TikkiDone()
 		{
-			clickedTikkiDestinationFunction.ClickedDestination ();
+			ClickedFunktion.ClickedDestination ();
 		}
 
-		public void HotDogReached()
+		public void HotDogDone()
 		{
-			clickedHotDogDestinationFunction.OnDestinationClick ();
+			_burgerFood.OnDestinationClick ();
 		}
 
-		public void ObjectReached()
+		public void ReachObject()
 		{
-			clickedItemDestinationFunction.ClickedDestination ();
+			_objectMotion.ClickedDestination ();
 		}
 
 		private void Start()
@@ -117,46 +120,46 @@ namespace _Project.Scripts.Managers
 			Italy_Manager.tutorialEnd = false;
 			China_Manager.tutorialEnd = false;
 			if (LevelManager.levelNo == 31) {
-				starting_text.SetActive(true);
+				_startingTextPrefab.SetActive(true);
 			}
 			tutorialEnd = false;
 			if(LevelManager.levelNo == 31)
 			{
-				tomatoAdd.gameObject.SetActive (false);
+				_tomatoAddPrefab.gameObject.SetActive (false);
 
-				onionAdd.gameObject.SetActive (false);
+				_onionAddPrefab.gameObject.SetActive (false);
 
-				cabbageAdd.gameObject.SetActive (false);
+				_cabbageAddPrefab.gameObject.SetActive (false);
 
-				friesAdd.gameObject.SetActive (false);
+				_friesAddPrefab.gameObject.SetActive (false);
 
 			}
 			else if(LevelManager.levelNo == 32)  
 			{
-				tomatoAdd.gameObject.SetActive (false);
+				_tomatoAddPrefab.gameObject.SetActive (false);
 			
-				onionAdd.gameObject.SetActive (false);
+				_onionAddPrefab.gameObject.SetActive (false);
 			
-				cabbageAdd.gameObject.SetActive (false);
+				_cabbageAddPrefab.gameObject.SetActive (false);
 			}
 			else if(LevelManager.levelNo == 33) 
 			{
-				cabbageAdd.gameObject.SetActive (false);
+				_cabbageAddPrefab.gameObject.SetActive (false);
 			}
 			
 			int platesUpgradeValue =  (int)Encryption.Decrypt (PlayerPrefs.GetString("AusPlateUpgrade")); 
 			totalPlatesAvailable = 2+(platesUpgradeValue*2);
 			for(int i = 0; i < totalPlatesAvailable ; i++)
 			{
-				burgerPlates[i].color = new Color(1,1,1,1);
+				_burgerPanel[i].color = new Color(1,1,1,1);
 			}
 
 			int friesUpgradeValue =  (int)Encryption.Decrypt (PlayerPrefs.GetString("FriesUpgrade")); 
 			totalFriesAvailable = 2+(friesUpgradeValue*2);
-			fryer.sprite = fryerVariations[friesUpgradeValue];
+			_fryer.sprite = _fryerVariations[friesUpgradeValue];
 			for(int i = 0; i <= friesUpgradeValue ; i++)
 			{
-				friesCluster[i].SetActive (true);
+				_friesCluster[i].SetActive (true);
 			}
 
 			int cokeUpgradeValue =  (int)Encryption.Decrypt (PlayerPrefs.GetString("AusCokeUpgrade")); 
@@ -166,59 +169,59 @@ namespace _Project.Scripts.Managers
 			int grillVal = (int)totalGrillsAvailable/2;
 			for(int i = 0; i < grillVal ; i++)
 			{
-				grills[i].SetActive (true);
+				_grills[i].SetActive (true);
 			}
 
 			char []coverVal = PlayerPrefs.GetString ("Aus_TableCover").ToCharArray ();
 			_uiManager._tabelcover = int.Parse (coverVal[coverVal.Length - 1].ToString ());
 			char []coverVal2 = PlayerPrefs.GetString ("Aus_TableTop").ToCharArray ();
 			_uiManager._tabeltop= int.Parse (coverVal[coverVal.Length - 1].ToString ());
-			tableCover.sprite = Resources.Load<Sprite> (PlayerPrefs.GetString ("Aus_TableCover"));
-			tableTop.sprite =  Resources.Load<Sprite> (PlayerPrefs.GetString ("Aus_TableTop"));
+			_tableCover.sprite = Resources.Load<Sprite> (PlayerPrefs.GetString ("Aus_TableCover"));
+			_tableTop.sprite =  Resources.Load<Sprite> (PlayerPrefs.GetString ("Aus_TableTop"));
 			if(MenuManager.cupcakeNo <= 0)
 			{
-				cupCake.gameObject.SetActive (false);
+				_cupCakePrefab.gameObject.SetActive (false);
 			}
 			_uiManager.ForCoinAdd ();
 		}
 
 		public void AddMoreTikki()
 		{
-			if(clickFirstTikki || (tutorialEnd && !TutorialPanel.popupPanelActive))
+			if(IsClickFirstTikki || (tutorialEnd && !TutorialPanel.popupPanelActive))
 			{
 				AllClickedBoolsReset();
-				if(grillsFilledCount < totalGrillsAvailable)
+				if(GrillsFilled < totalGrillsAvailable)
 				{
 					for(int i = 0 ; i < totalGrillsAvailable ; i++)
 					{
-						if(grillPlaces[i].available)
+						if(grillPlaves[i].available)
 						{
-							grillTikkis[i].gameObject.SetActive (true);
-							grillTikkis[i].sprite = burgerTikkiVariations[0];
-							grillPlaces[i].available = false;
-							grillsFilledCount++;
+							_grillsTikkis[i].gameObject.SetActive (true);
+							_grillsTikkis[i].sprite = _burgerVariations[0];
+							grillPlaves[i].available = false;
+							GrillsFilled++;
 							break;
 						}
 					}
 				}
-				if(clickFirstTikki)
+				if(IsClickFirstTikki)
 				{
 					_uiManager.tutorialPanelBg.gameObject.SetActive (true);
 					_uiManager.tutorialPanelBg.OpenPopupAustralia ("WAIT FOR THE TIKKI \n TO BAKE",false,false , 2);
-					firstTikki.tutorialOn = true;
+					_firstTikkiPrefab.tutorialOn = true;
 				}
-				clickFirstTikki = false;
+				IsClickFirstTikki = false;
 			}
 		}
 
-		private void DeactivateTikkiSelection()
+		private void DeactivateTikki()
 		{
 			for(int i = 0 ; i < totalGrillsAvailable ; i++)
 			{
-				if(!grillPlaces[i].available)
+				if(!grillPlaves[i].available)
 				{
-					grillTikkis[i].transform.GetComponent<MakeTikki>().iAmSelected = false;
-					grillTikkis[i].transform.GetComponent<MakeTikki>().mySelection.SetActive (false);
+					_grillsTikkis[i].transform.GetComponent<MakeTikki>().iAmSelected = false;
+					_grillsTikkis[i].transform.GetComponent<MakeTikki>().mySelection.SetActive (false);
 				}
 			}
 		}
@@ -226,40 +229,40 @@ namespace _Project.Scripts.Managers
 
 		public void AddBurgerBuns()
 		{
-			if(clickfirstBun || (tutorialEnd && !TutorialPanel.popupPanelActive))
+			if(ClickFirstBun || (tutorialEnd && !TutorialPanel.popupPanelActive))
 			{
 				AllClickedBoolsReset();
-				if(platesFilledCount < totalPlatesAvailable)
+				if(PlatesFilled < totalPlatesAvailable)
 				{
 					for(int i = 0 ; i < totalPlatesAvailable ; i++)
 					{
-						if(burgerPlates[i].gameObject.GetComponent<Availability>().available)
+						if(_burgerPanel[i].gameObject.GetComponent<Availability>().available)
 						{
-							burgerOnPlates[i].gameObject.SetActive (true);
-							platesFilledCount++;
-							burgerPlates[i].gameObject.GetComponent<Availability>().available = false;
-							burgerOnPlates[i].transform.GetComponent<BurgerFood>().isPrefavet = false;
+							_burgelOnPlate[i].gameObject.SetActive (true);
+							PlatesFilled++;
+							_burgerPanel[i].gameObject.GetComponent<Availability>().available = false;
+							_burgelOnPlate[i].transform.GetComponent<BurgerFood>().isPrefavet = false;
 							break;
 						}
 					}
 				}
-				if(clickfirstBun)
+				if(ClickFirstBun)
 				{
-					clickFirstTikki = true;
+					IsClickFirstTikki = true;
 					_uiManager.tutorialPanelBg.gameObject.SetActive (true);
 					_uiManager.tutorialPanelBg.OpenPopup ("TAP TIKKI \n TO PUT ON THE GRILLS",false,false , 1);
 				}
-				clickfirstBun = false;
+				ClickFirstBun = false;
 			}
 		}
 
-		private void DeactivateBunSelection()
+		private void DeactivateSelectionBun()
 		{
 			for(int i = 0 ; i < totalPlatesAvailable ; i++)
 			{
-				if(!burgerPlates[i].gameObject.GetComponent<Availability>().available)
+				if(!_burgerPanel[i].gameObject.GetComponent<Availability>().available)
 				{
-					BurgerFood myBurger = burgerOnPlates[i].transform.GetComponent<BurgerFood>();
+					BurgerFood myBurger = _burgelOnPlate[i].transform.GetComponent<BurgerFood>();
 					myBurger.isSelected = false;
 					myBurger._selectionObject.SetActive (false);
 				}
@@ -272,17 +275,17 @@ namespace _Project.Scripts.Managers
 			if(tutorialEnd && !TutorialPanel.popupPanelActive)
 			{
 				AllClickedBoolsReset();
-				if(cokesFilled < totalCokesAvailable)
+				if(CokesFilled < totalCokesAvailable)
 				{
 					for(int i = 0 ; i < totalCokesAvailable ; i++)
 					{
-						if(cokePlaces[i].available)
+						if(_cokePlaces[i].available)
 						{
 							_levelSoundManager.bottle_click.Play();
-							cokeBottles[i].gameObject.SetActive (true);
-							cokeBottles[i].color = new Color(1,1,1,1);
-							cokesFilled++;
-							cokePlaces[i].available = false;
+							_bottles[i].gameObject.SetActive (true);
+							_bottles[i].color = new Color(1,1,1,1);
+							CokesFilled++;
+							_cokePlaces[i].available = false;
 							break;
 						}
 					}
@@ -290,16 +293,16 @@ namespace _Project.Scripts.Managers
 			}
 		}
 
-		private void DeactivateAllBottlesSelection()
+		private void DeactivateBottleSelect()
 		{
 			for(int i = 0 ; i < totalCokesAvailable ; i++)
 			{
-				if(cokeBottles[i].gameObject.activeInHierarchy)
+				if(_bottles[i].gameObject.activeInHierarchy)
 				{
-					if(cokeBottles[i].GetComponent<ObjectMotion>().iAmSelected)
+					if(_bottles[i].GetComponent<ObjectMotion>().iAmSelected)
 					{
-						cokeBottles[i].GetComponent<ObjectMotion>().iAmSelected = false;
-						cokeBottles[i].GetComponent<ObjectMotion>().mySelection.SetActive (false);
+						_bottles[i].GetComponent<ObjectMotion>().iAmSelected = false;
+						_bottles[i].GetComponent<ObjectMotion>().mySelection.SetActive (false);
 					}
 				}
 			}
@@ -307,46 +310,46 @@ namespace _Project.Scripts.Managers
 
 		public void AddFries()
 		{
-			if(tutorialEnd && !TutorialPanel.popupPanelActive || clickFirstFryer)
+			if(tutorialEnd && !TutorialPanel.popupPanelActive || FryerClick)
 			{
 				AllClickedBoolsReset();
 
-				if(friesFilled < totalFriesAvailable)
+				if(FriesFilled < totalFriesAvailable)
 				{
 					for(int i = 0 ; i < totalFriesAvailable; i++)
 					{
-						if(friesPlaces[i].available)
+						if(_friesPositions[i].available)
 						{
 
-							friesPack[i].gameObject.SetActive (true);
-							friesFilled++;
-							friesPlaces[i].available = false;
+							_friesPack[i].gameObject.SetActive (true);
+							FriesFilled++;
+							_friesPositions[i].available = false;
 							break;
 						}
 					}
 				}
 
-				if(clickFirstFryer)
+				if(FryerClick)
 				{
 					_uiManager.tutorialPanelBg.gameObject.SetActive (true);
 					_uiManager.tutorialPanelBg.OpenPopupAustralia ("TAP OR DRAG FRIES TO \n THE CUSTOMER.",false,false , 9);
-					firstFries.tutorialOn = true;
+					_firstFriesObjects.tutorialOn = true;
 
 				}
-				clickFirstFryer = false;
+				FryerClick = false;
 			}
 		}
 
-		private void DeactivateAllFriesSelection()
+		private void DeactivateFriesSelect()
 		{
 			for(int i = 0 ; i < totalFriesAvailable ; i++)
 			{
-				if(friesPack[i].gameObject.activeInHierarchy)
+				if(_friesPack[i].gameObject.activeInHierarchy)
 				{
-					if(friesPack[i].iAmSelected)
+					if(_friesPack[i].iAmSelected)
 					{
-						friesPack[i].iAmSelected = false;
-						friesPack[i].mySelection.SetActive (false);
+						_friesPack[i].iAmSelected = false;
+						_friesPack[i].mySelection.SetActive (false);
 					}
 				}
 			}
@@ -358,16 +361,16 @@ namespace _Project.Scripts.Managers
 		{
 			if(tutorialEnd)
 			{
-				if(clickedBurger)
+				if(IsBurgerClick)
 				{
-					clickedHotDogDestinationFunction.otherObject = dustbin;
-					HotDogReached();
+					_burgerFood.otherObject = _dustbin;
+					HotDogDone();
 				}
-				else if(clickedTikki)
+				else if(IsClickedTikki)
 				{
-					if(clickedTikkiDestinationFunction.isBurnt)
+					if(ClickedFunktion.isBurnt)
 					{
-						TikkiReached ();
+						TikkiDone ();
 					}
 				}
 
@@ -377,31 +380,31 @@ namespace _Project.Scripts.Managers
 
 		public void AllClickedBoolsReset()
 		{
-			DeactivateTikkiSelection();
-			DeactivateAllBottlesSelection();
-			DeactivateAllFriesSelection();
+			DeactivateTikki();
+			DeactivateBottleSelect();
+			DeactivateFriesSelect();
 			
-			onion.iAmSelected = false;
-			tomato.iAmSelected = false;
-			onion.transform.localScale = onion.myLocalScale;
-			tomato.transform.localScale = tomato.myLocalScale;
-			tomato.mySelection.SetActive (false);
-			onion.mySelection.SetActive (false);
+			_onionPrefab.iAmSelected = false;
+			_tomato.iAmSelected = false;
+			_onionPrefab.transform.localScale = _onionPrefab.myLocalScale;
+			_tomato.transform.localScale = _tomato.myLocalScale;
+			_tomato.mySelection.SetActive (false);
+			_onionPrefab.mySelection.SetActive (false);
 			
-			cabbage.iAmSelected = false;
-			cabbage.transform.localScale = cabbage.myLocalScale;
-			cabbage.mySelection.SetActive (false);
+			_cabbagePrefab.iAmSelected = false;
+			_cabbagePrefab.transform.localScale = _cabbagePrefab.myLocalScale;
+			_cabbagePrefab.mySelection.SetActive (false);
 
-			cupCake.iAmSelected = false;
-			cupCake.mySelection.gameObject.SetActive (false);
-			DeactivateBunSelection();
-			clickedBurger = false;
-			clickedTikki = false;
-			clickedTomato = false;
-			clickedOnion = false;
-			clickedCabbage = false;
-			cickedFries = false;
-			clickedCoke = false;
+			_cupCakePrefab.iAmSelected = false;
+			_cupCakePrefab.mySelection.gameObject.SetActive (false);
+			DeactivateSelectionBun();
+			IsBurgerClick = false;
+			IsClickedTikki = false;
+			IsClickedTomato = false;
+			IsClickedOnion = false;
+			IsClickedCabbage = false;
+			IsCickedFries = false;
+			IsClickedCoke = false;
 		}
 	}
 }

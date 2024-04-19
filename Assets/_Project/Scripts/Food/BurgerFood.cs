@@ -85,36 +85,36 @@ namespace _Project.Scripts.Food
 		{
 			if(!TutorialPanel.popupPanelActive || Australia_Manager.tutorialEnd || Australia_Manager.tutorialEnd || isTutorialOn)
 			{
-				_australiaManager.clickedHotDogDestinationFunction = this;
+				_australiaManager._burgerFood = this;
 				_isCanMove = true;
 				Vector3 myPos = Camera.main.WorldToScreenPoint (transform.position);
 				_touchPos =  Camera.main.ScreenToWorldPoint (new Vector3(Input.mousePosition.x, Input.mousePosition.y , myPos.z));
-				if(_australiaManager.clickedTikki && !isTikki)
+				if(_australiaManager.IsClickedTikki && !isTikki)
 				{
-					if(!_australiaManager.clickedTikkiDestinationFunction.isBurnt)
+					if(!_australiaManager.ClickedFunktion.isBurnt)
 					{
-						_australiaManager.clickedTikkiDestinationFunction.availableHotDog = this.GetComponent<Availability>();
-						_australiaManager.TikkiReached ();
+						_australiaManager.ClickedFunktion.availableHotDog = this.GetComponent<Availability>();
+						_australiaManager.TikkiDone ();
 
 					}
 					_australiaManager.AllClickedBoolsReset ();
 				}
-				else if(_australiaManager.clickedTomato && !IsTomato)
+				else if(_australiaManager.IsClickedTomato && !IsTomato)
 				{
-					_australiaManager.clickedItemDestinationFunction.availableBurger = this;
-					_australiaManager.ObjectReached ();
+					_australiaManager._objectMotion.availableBurger = this;
+					_australiaManager.ReachObject ();
 					_australiaManager.AllClickedBoolsReset ();
 				}
-				else if(_australiaManager.clickedOnion && !IsOnion)
+				else if(_australiaManager.IsClickedOnion && !IsOnion)
 				{
-					_australiaManager.clickedItemDestinationFunction.availableBurger = this;
-					_australiaManager.ObjectReached ();
+					_australiaManager._objectMotion.availableBurger = this;
+					_australiaManager.ReachObject ();
 					_australiaManager.AllClickedBoolsReset ();
 				}
-				else if(_australiaManager.clickedCabbage && !IsCabbage)
+				else if(_australiaManager.IsClickedCabbage && !IsCabbage)
 				{
-					_australiaManager.clickedItemDestinationFunction.availableBurger = this;
-					_australiaManager.ObjectReached ();
+					_australiaManager._objectMotion.availableBurger = this;
+					_australiaManager.ReachObject ();
 					_australiaManager.AllClickedBoolsReset ();
 				}
 				else 
@@ -123,10 +123,10 @@ namespace _Project.Scripts.Food
 					{
 						if(isTutorialOn)
 						{
-							_australiaManager.firstCustomer.tutorialOn = true;
+							_australiaManager.FirstCustomer.tutorialOn = true;
 						}
 						_australiaManager.AllClickedBoolsReset ();
-						_australiaManager.clickedBurger = true;
+						_australiaManager.IsBurgerClick = true;
 						
 						_isScale = true;
 						if(!_isOrder)
@@ -135,7 +135,7 @@ namespace _Project.Scripts.Food
 					}
 					else
 					{
-						_australiaManager.clickedHotDogDestinationFunction = null;
+						_australiaManager._burgerFood = null;
 						_isCanMove = false;
 						_errorObject.SetActive(true);
 					}
@@ -180,7 +180,7 @@ namespace _Project.Scripts.Food
 		
 		public void OnDestinationClick()
 		{
-			_australiaManager.platesFilledCount--;
+			_australiaManager.PlatesFilled--;
 			_plate.available = true;
 			if(!otherObject.name.Contains ("dustbin"))
 			{
@@ -250,12 +250,12 @@ namespace _Project.Scripts.Food
 
 					if(!wrongOrders)
 					{
-						wisitior.coinsSpent+=_australiaManager.perfectBurger;
+						wisitior.coinsSpent+=_australiaManager.PerfectBurger;
 						wisitior.perfect = true;
 					}
 					else
 					{
-						wisitior.coinsSpent+=(_australiaManager.perfectBurger/2);
+						wisitior.coinsSpent+=(_australiaManager.PerfectBurger/2);
 					
 					}
 				
@@ -267,11 +267,11 @@ namespace _Project.Scripts.Food
 				
 					if(!wrongOrders)
 					{
-						wisitior.coinsSpent+=_australiaManager.lessBakedBurger;
+						wisitior.coinsSpent+=_australiaManager.LessBaked;
 					}
 					else
 					{
-						wisitior.coinsSpent+=(_australiaManager.lessBakedBurger/2);
+						wisitior.coinsSpent+=(_australiaManager.LessBaked/2);
 					}
 				}
 			
@@ -300,23 +300,23 @@ namespace _Project.Scripts.Food
 			else
 			{
 				if(isPrefavet){
-					_uiManager.totalCoins-=_australiaManager.perfectBurger;
+					_uiManager.totalCoins-=_australiaManager.PerfectBurger;
 					_levelSoundManager.dustbin.Play();
 					if(_uiManager.totalCoins > 0){
 
 						_uiManager.dustbin_textparent.SetActive(true);
-						_uiManager.dustbin_text.text = "-"+_australiaManager.perfectBurger.ToString(); 
+						_uiManager.dustbin_text.text = "-"+_australiaManager.PerfectBurger.ToString(); 
 						Invoke(nameof(DeactivateDustbin),1.0f);
 					}}
 				else
 				{
-					_uiManager.totalCoins-=_australiaManager.lessBakedBurger;
+					_uiManager.totalCoins-=_australiaManager.LessBaked;
 					_levelSoundManager.dustbin.Play();
 					_uiManager.coinsText.text = _uiManager.totalCoins.ToString ();
 					if(_uiManager.totalCoins > 0){
 
 						_uiManager.dustbin_textparent.SetActive(true);
-						_uiManager.dustbin_text.text = "-"+_australiaManager.lessBakedBurger.ToString(); 
+						_uiManager.dustbin_text.text = "-"+_australiaManager.LessBaked.ToString(); 
 						Invoke(nameof(DeactivateDustbin),1.0f);
 					}}
 				if(_uiManager.totalCoins < 0)

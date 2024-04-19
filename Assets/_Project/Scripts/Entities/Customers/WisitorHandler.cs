@@ -207,10 +207,10 @@ namespace _Project.Scripts.Entities.Customers
 					_usManager.firstCustomer = _wisitorsPool[customerNo];
 				else if (LevelManager.levelNo == 31 || LevelManager.levelNo == 32)
 				{
-					_australiaManager.firstCustomer = _wisitorsPool[customerNo];
+					_australiaManager.FirstCustomer = _wisitorsPool[customerNo];
 					if (LevelManager.levelNo == 32)
 					{
-						_australiaManager.firstCustomer.tutorialOn = true;
+						_australiaManager.FirstCustomer.tutorialOn = true;
 					}
 				}
 				else if (LevelManager.levelNo == 11 || LevelManager.levelNo == 13)

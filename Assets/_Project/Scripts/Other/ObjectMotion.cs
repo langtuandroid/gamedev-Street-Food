@@ -121,8 +121,8 @@ namespace _Project.Scripts.Other
 						else if(_australiaManager != null)
 						{
 							_australiaManager.AllClickedBoolsReset ();
-							_australiaManager.clickedItemDestinationFunction = this;
-							_australiaManager.clickedCoke = true;
+							_australiaManager._objectMotion = this;
+							_australiaManager.IsClickedCoke = true;
 						}
 						iAmSelected = true;
 						_canMove = true;
@@ -238,29 +238,29 @@ namespace _Project.Scripts.Other
 					else if(isTomato)
 					{
 						_australiaManager.AllClickedBoolsReset ();
-						_australiaManager.clickedItemDestinationFunction = this;
-						_australiaManager.clickedTomato = true;
+						_australiaManager._objectMotion = this;
+						_australiaManager.IsClickedTomato = true;
 						iAmSelected = true;
 					}
 					else if(isOnion)
 					{
 						_australiaManager.AllClickedBoolsReset ();
-						_australiaManager.clickedItemDestinationFunction = this;
-						_australiaManager.clickedOnion = true;
+						_australiaManager._objectMotion = this;
+						_australiaManager.IsClickedOnion = true;
 						iAmSelected = true;
 					}
 					else if(isCabbage)
 					{
 						_australiaManager.AllClickedBoolsReset ();
-						_australiaManager.clickedItemDestinationFunction = this;
-						_australiaManager.clickedCabbage = true;
+						_australiaManager._objectMotion = this;
+						_australiaManager.IsClickedCabbage = true;
 						iAmSelected = true;
 					}
 					else if(isFries)
 					{
 						_australiaManager.AllClickedBoolsReset ();
-						_australiaManager.clickedItemDestinationFunction = this;
-						_australiaManager.cickedFries = true;
+						_australiaManager._objectMotion = this;
+						_australiaManager.IsCickedFries = true;
 						iAmSelected = true;
 					}
 				}
@@ -548,7 +548,7 @@ namespace _Project.Scripts.Other
 
 			if(_australiaManager != null)
 			{
-				_australiaManager.friesFilled--;
+				_australiaManager.FriesFilled--;
 			}
 
 			myParentHolder.available = true;
@@ -563,8 +563,8 @@ namespace _Project.Scripts.Other
 				}
 			}
 			
-			customer.coinsSpent+=_australiaManager.cokePrice;
-			_australiaManager.cickedFries = false;
+			customer.coinsSpent+=_australiaManager.CokePrice;
+			_australiaManager.IsCickedFries = false;
 
 			if(customer.shouldBePerfectIfServed)
 			{
@@ -937,7 +937,7 @@ namespace _Project.Scripts.Other
 			}
 			else if(_australiaManager != null)
 			{
-				_australiaManager.cokesFilled--;
+				_australiaManager.CokesFilled--;
 			}
 			myParentHolder.available = true;
 			customer._order.Remove (myType);
@@ -968,8 +968,8 @@ namespace _Project.Scripts.Other
 			}
 			else if(_australiaManager != null)
 			{
-				customer.coinsSpent+=_australiaManager.cokePrice;
-				_australiaManager.clickedCoke = false;
+				customer.coinsSpent+=_australiaManager.CokePrice;
+				_australiaManager.IsClickedCoke = false;
 			}
 
 

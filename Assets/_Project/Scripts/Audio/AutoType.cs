@@ -117,13 +117,13 @@ namespace _Project.Scripts.Audio
 				}
 				else if(LevelManager.levelNo == 31)
 				{
-					_australiaManager.clickfirstBun = true;
+					_australiaManager.ClickFirstBun = true;
 					_uiManager.tutorialPanelBg.gameObject.SetActive (true);
 					_uiManager.tutorialPanelBg.OpenPopupAustralia ("TAP THE BUN TO \n PUT IT ON THE PLATE.",false,false , 0);
 				}
 				else if(LevelManager.levelNo == 32)
 				{
-					_australiaManager.clickFirstFryer = true;
+					_australiaManager.FryerClick = true;
 					_uiManager.tutorialPanelBg.gameObject.SetActive (true);
 					_uiManager.tutorialPanelBg.OpenPopupAustralia ("TAP DEEP FRIYER \n TO MAKE FRIES.",false,false , 8);
 				}

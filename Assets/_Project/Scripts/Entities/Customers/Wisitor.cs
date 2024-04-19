@@ -238,17 +238,17 @@ namespace _Project.Scripts.Entities.Customers
 				}
 				else if(LevelManager.levelNo > 30 && LevelManager.levelNo <= 40)
 				{
-					if(_australiaManager.clickedBurger ) 
+					if(_australiaManager.IsBurgerClick ) 
 					{
-						_australiaManager.clickedHotDogDestinationFunction.wisitior = this;
-						_australiaManager.clickedHotDogDestinationFunction.otherObject = this.gameObject;
+						_australiaManager._burgerFood.wisitior = this;
+						_australiaManager._burgerFood.otherObject = this.gameObject;
 					
 						bool foundOrder = false;
 						for(int i = 0 ; i< _order.Count ; i++)
 						{
-							if(_australiaManager.clickedHotDogDestinationFunction.type == _order[i])
+							if(_australiaManager._burgerFood.type == _order[i])
 							{
-								_australiaManager.HotDogReached();
+								_australiaManager.HotDogDone();
 								foundOrder = true;
 								break;
 							}
@@ -257,34 +257,34 @@ namespace _Project.Scripts.Entities.Customers
 						{
 							if(iHaveAMultipleTypeOrder != LevelManager.Orders.NONE)
 							{
-								_australiaManager.clickedHotDogDestinationFunction.wrongOrders = true;
-								_australiaManager.HotDogReached();
+								_australiaManager._burgerFood.wrongOrders = true;
+								_australiaManager.HotDogDone();
 							}
 						}
 						_australiaManager.AllClickedBoolsReset ();
 					}
-					else if(_australiaManager.clickedCoke)
+					else if(_australiaManager.IsClickedCoke)
 					{
-						_australiaManager.clickedItemDestinationFunction.customer = this;
+						_australiaManager._objectMotion.customer = this;
 					
 						for(int i = 0 ; i< _order.Count ; i++)
 						{
-							if(_australiaManager.clickedItemDestinationFunction.myType == _order[i])
+							if(_australiaManager._objectMotion.myType == _order[i])
 							{
-								_australiaManager.ObjectReached();
+								_australiaManager.ReachObject();
 								break;
 							}
 						}
 						_australiaManager.AllClickedBoolsReset ();
 					}
-					else if(_australiaManager.cickedFries)
+					else if(_australiaManager.IsCickedFries)
 					{
-						_australiaManager.clickedItemDestinationFunction.customer = this;
+						_australiaManager._objectMotion.customer = this;
 						for(int i = 0 ; i< _order.Count ; i++)
 						{
-							if(_australiaManager.clickedItemDestinationFunction.myType == _order[i])
+							if(_australiaManager._objectMotion.myType == _order[i])
 							{
-								_australiaManager.ObjectReached();
+								_australiaManager.ReachObject();
 								break;
 							}
 						}
