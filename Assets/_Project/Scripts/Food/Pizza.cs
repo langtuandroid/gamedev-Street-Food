@@ -67,7 +67,7 @@ namespace _Project.Scripts.Food
 			_isOnCustomer = false;
 			_topping.gameObject.SetActive (false);
 			_cheesePrefav.gameObject.SetActive (false);
-			transform.GetComponent<SpriteRenderer>().sprite = _italyManager.pizzaBakedVariations[0];
+			transform.GetComponent<SpriteRenderer>().sprite = _italyManager._pizzaBakedVariations[0];
 			myType = LevelManager.Orders.NONE; 
 			transform.localScale = _localScale;
 			iAmSelected = false;
@@ -96,7 +96,7 @@ namespace _Project.Scripts.Food
 						_uiManager.tutorialPanelBg.OpenPopupItaly ("TAP OR DRAG THIS TO \n THE CUSTOMER.",false,false , 4);
 						tutorialOn = false;
 					}
-					if(_renderer.sprite == _italyManager.pizzaBakedVariations[0])
+					if(_renderer.sprite == _italyManager._pizzaBakedVariations[0])
 					{
 						perfect = true;
 						_pizzaBakedParticle.gameObject.SetActive(true);
@@ -105,12 +105,12 @@ namespace _Project.Scripts.Food
 						_topping.gameObject.SetActive (false);
 						if(myType == LevelManager.Orders.VEG_PIZZA)
 						{
-							_renderer.sprite = _italyManager.pizzaBakedVariations[1];
+							_renderer.sprite = _italyManager._pizzaBakedVariations[1];
 				
 						}
 						else
 						{
-							_renderer.sprite = _italyManager.pizzaBakedVariations[2];
+							_renderer.sprite = _italyManager._pizzaBakedVariations[2];
 
 						}
 					}
@@ -121,7 +121,7 @@ namespace _Project.Scripts.Food
 					if(!TutorialPanel.popupPanelActive)
 					{
 						perfect =false;
-						_renderer.sprite = _italyManager.pizzaBakedVariations[3];
+						_renderer.sprite = _italyManager._pizzaBakedVariations[3];
 						isBurnt = true;  // burnt
 						_pizzaBakedParticle.Stop();
 						_pizzaBakedParticle.gameObject.SetActive(false);
@@ -134,42 +134,42 @@ namespace _Project.Scripts.Food
 
 		private void OnMouseDown()
 		{
-			if((!TutorialPanel.popupPanelActive || Italy_Manager.tutorialEnd || _tutorialPick || (tutorialOn && !_isOnOven)) && (_isVegetable && _isCheese) )
+			if((!TutorialPanel.popupPanelActive || Italy_Manager._isEndTutorial || _tutorialPick || (tutorialOn && !_isOnOven)) && (_isVegetable && _isCheese) )
 			{
 				_isPick = true;
 				_isCanMove = true;
-				_italyManager.AllClickedBoolsReset ();
-				_italyManager.clickedPizzaDestinationFunction = this;
+				_italyManager.ResetAllBool ();
+				_italyManager._pizza = this;
 				iAmSelected = true;
 				if(_isOnOven)
 				{
 					transform.GetComponent<BoxCollider> ().size = new Vector3(_colliderSize.x/2f , _colliderSize.y/2f , _colliderSize.z);
-					_italyManager.clickedOvenPizza = true;
+					_italyManager.IsClickedOvenPizza = true;
 				}
 				else
-					_italyManager.clickedPlatePizza = true;
+					_italyManager.IsClickedPlatePizza = true;
 				
 				if(_tutorialPick)
 				{
-					_italyManager.firstCustomer.tutorialOn = true;
+					_italyManager._customerFirst.tutorialOn = true;
 				}
 				Vector3 myPos = Camera.main.WorldToScreenPoint (transform.position);
 				_touchPos =  Camera.main.ScreenToWorldPoint (new Vector3(Input.mousePosition.x, Input.mousePosition.y , myPos.z));
 			}
-			else if((!TutorialPanel.popupPanelActive || !Italy_Manager.tutorialEnd) && (!_isVegetable || !_isCheese)) // Click on it to place ingredients
+			else if((!TutorialPanel.popupPanelActive || !Italy_Manager._isEndTutorial) && (!_isVegetable || !_isCheese)) // Click on it to place ingredients
 			{
 
-				if(_italyManager.clickedVeg || _italyManager.clickedNonVeg && !_isVegetable)
+				if(_italyManager.IsClickedVeg || _italyManager.IsClickedNonVeg && !_isVegetable)
 				{
-					_italyManager.clickedItemDestinationFunction.availablePizza = this;
-					_italyManager.ObjectReached ();
-					_italyManager.AllClickedBoolsReset ();
+					_italyManager.IsClickedItemDestinationFunction.availablePizza = this;
+					_italyManager.OnObjectReach ();
+					_italyManager.ResetAllBool ();
 				}
-				else if(_italyManager.clickedCheese && !_isCheese)
+				else if(_italyManager.IsClickedCheese && !_isCheese)
 				{
-					_italyManager.clickedItemDestinationFunction.availablePizza = this;
-					_italyManager.ObjectReached ();
-					_italyManager.AllClickedBoolsReset ();
+					_italyManager.IsClickedItemDestinationFunction.availablePizza = this;
+					_italyManager.OnObjectReach ();
+					_italyManager.ResetAllBool ();
 				}
 				else
 				{
@@ -251,7 +251,7 @@ namespace _Project.Scripts.Food
 					PlayerPrefs.SetInt("claimvalue",AchievementBlock._claimCheck);
 					Invoke(nameof(Deactivate),4.0f);
 				}
-				_italyManager.platesFilledCount--;
+				_italyManager._platesFilledCount--;
 				string myTypeToEatSub = "PIZZA";
 				for(int count = 0; count < customer._order.Count; count++)
 				{
@@ -287,12 +287,12 @@ namespace _Project.Scripts.Food
 				
 					if(!wrongOrderGiven)
 					{
-						customer.coinsSpent+=_italyManager.perfectPizza;
+						customer.coinsSpent+=_italyManager.PerfectPizza;
 						customer.perfect = true;
 					}
 					else
 					{
-						customer.coinsSpent+=(_italyManager.perfectPizza/2);
+						customer.coinsSpent+=(_italyManager.PerfectPizza/2);
 					}
 				}
 				else
@@ -301,11 +301,11 @@ namespace _Project.Scripts.Food
 						customer.myWaitingTime-= 20;
 					if(!wrongOrderGiven)
 					{
-						customer.coinsSpent+=_italyManager.lessBakedPizza;
+						customer.coinsSpent+=_italyManager.LessBakedPizza;
 					}
 					else
 					{
-						customer.coinsSpent+=(_italyManager.lessBakedPizza/2);
+						customer.coinsSpent+=(_italyManager.LessBakedPizza/2);
 					
 					}
 				}
@@ -322,40 +322,40 @@ namespace _Project.Scripts.Food
 			{
 				if(tutorialOn)
 				{
-					pizzaDestinationAvailable = _italyManager.firstOvenAvailabe;
+					pizzaDestinationAvailable = _italyManager._firstOvenAvailabe;
 					_uiManager.tutorialPanelBg.OpenPopupItaly ("WAIT FOR PIZZA \n TO BAKE.",false,false , 4);
-					_italyManager.ovenPizzas[pizzaDestinationAvailable.myPositionInArray].tutorialOn = true;
+					_italyManager._ovenPizzas[pizzaDestinationAvailable.myPositionInArray].tutorialOn = true;
 					tutorialOn = false;
 				}
 
-				_italyManager.platesFilledCount--;
+				_italyManager._platesFilledCount--;
 				pizzaDestinationAvailable.available = false;
-				_italyManager.ovenPizzaRenderer[pizzaDestinationAvailable.myPositionInArray].gameObject.SetActive (true);
+				_italyManager._ovenPizzaRenderer[pizzaDestinationAvailable.myPositionInArray].gameObject.SetActive (true);
 
 
-				_italyManager.ovenPizzas[pizzaDestinationAvailable.myPositionInArray].myType = myType;
-				_italyManager.ovenPizzas[pizzaDestinationAvailable.myPositionInArray]._cheesePrefav.SetActive (true);
-				_italyManager.ovenPizzas[pizzaDestinationAvailable.myPositionInArray]._topping.gameObject.SetActive (true);
+				_italyManager._ovenPizzas[pizzaDestinationAvailable.myPositionInArray].myType = myType;
+				_italyManager._ovenPizzas[pizzaDestinationAvailable.myPositionInArray]._cheesePrefav.SetActive (true);
+				_italyManager._ovenPizzas[pizzaDestinationAvailable.myPositionInArray]._topping.gameObject.SetActive (true);
 				if(myType == LevelManager.Orders.VEG_PIZZA)
-					_italyManager.ovenPizzas[pizzaDestinationAvailable.myPositionInArray]._topping.sprite = _italyManager.pizzaToppings[0];
+					_italyManager._ovenPizzas[pizzaDestinationAvailable.myPositionInArray]._topping.sprite = _italyManager._pizzaToppings[0];
 				else
-					_italyManager.ovenPizzas[pizzaDestinationAvailable.myPositionInArray]._topping.sprite = _italyManager.pizzaToppings[1];
+					_italyManager._ovenPizzas[pizzaDestinationAvailable.myPositionInArray]._topping.sprite = _italyManager._pizzaToppings[1];
 				
-				_italyManager.ovenColliders[pizzaDestinationAvailable.myPositionInArray].enabled = false;
+				_italyManager._ovenColliders[pizzaDestinationAvailable.myPositionInArray].enabled = false;
 
 			}
 			else  
 			{
 				if(!_isOnOven)
-					_italyManager.platesFilledCount--;
+					_italyManager._platesFilledCount--;
 				if(perfect)
 				{
-					_uiManager.totalCoins-= _italyManager.perfectPizza;
+					_uiManager.totalCoins-= _italyManager.PerfectPizza;
 					_uiManager.coinsText.text = _uiManager.totalCoins.ToString ();
 					_levelSoundManager.dustbin.Play();
 					if(_uiManager.totalCoins > 0){
 						_uiManager.dustbin_textparent.SetActive(true);
-						_uiManager.dustbin_text.text = "-"+_italyManager.perfectPizza.ToString(); 
+						_uiManager.dustbin_text.text = "-"+_italyManager.PerfectPizza.ToString(); 
 						Invoke(nameof(DeactivateDubin),1.0f);
 					}
 					if(_uiManager.totalCoins < 0)
@@ -366,12 +366,12 @@ namespace _Project.Scripts.Food
 				}
 				else
 				{
-					_uiManager.totalCoins-=_italyManager.lessBakedPizza;
+					_uiManager.totalCoins-=_italyManager.LessBakedPizza;
 					_uiManager.coinsText.text = _uiManager.totalCoins.ToString ();
 					_levelSoundManager.dustbin.Play();
 					if(_uiManager.totalCoins > 0){
 						_uiManager.dustbin_textparent.SetActive(true);
-						_uiManager.dustbin_text.text = "-"+_italyManager.lessBakedPizza.ToString(); 
+						_uiManager.dustbin_text.text = "-"+_italyManager.LessBakedPizza.ToString(); 
 						Invoke(nameof(DeactivateDubin),1.0f);
 					}
 					if(_uiManager.totalCoins < 0)
@@ -448,7 +448,7 @@ namespace _Project.Scripts.Food
 					}
 				}
 			}
-			if(other.name.Contains ("dustbin") && Italy_Manager.tutorialEnd == true)
+			if(other.name.Contains ("dustbin") && Italy_Manager._isEndTutorial == true)
 			{
 				otherObject = other.gameObject;
 				_isOnCustomer = true;

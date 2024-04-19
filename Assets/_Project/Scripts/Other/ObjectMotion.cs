@@ -99,7 +99,7 @@ namespace _Project.Scripts.Other
 
 		private void OnMouseDown()
 		{
-			if(!TutorialPanel.popupPanelActive || US_Manager.tutorialEnd || China_Manager._endTutorial || Italy_Manager.tutorialEnd || tutorialOn || Australia_Manager.tutorialEnd)
+			if(!TutorialPanel.popupPanelActive || US_Manager.tutorialEnd || China_Manager._endTutorial || Italy_Manager._isEndTutorial || tutorialOn || Australia_Manager.tutorialEnd)
 			{
 				if(isCoke)
 				{
@@ -114,9 +114,9 @@ namespace _Project.Scripts.Other
 						}
 						else if(_italyManager != null)
 						{
-							_italyManager.AllClickedBoolsReset ();
-							_italyManager.clickedItemDestinationFunction = this;
-							_italyManager.clickedCoke = true;
+							_italyManager.ResetAllBool ();
+							_italyManager.IsClickedItemDestinationFunction = this;
+							_italyManager.IsClickedCoke = true;
 						}
 						else if(_australiaManager != null)
 						{
@@ -216,23 +216,23 @@ namespace _Project.Scripts.Other
 					}
 					else if(isPizzaVeg)
 					{
-						_italyManager.AllClickedBoolsReset ();
-						_italyManager.clickedItemDestinationFunction = this;
-						_italyManager.clickedVeg = true;
+						_italyManager.ResetAllBool ();
+						_italyManager.IsClickedItemDestinationFunction = this;
+						_italyManager.IsClickedVeg = true;
 						iAmSelected = true;
 					}
 					else if(isPizzaNonVeg)
 					{
-						_italyManager.AllClickedBoolsReset ();
-						_italyManager.clickedItemDestinationFunction = this;
-						_italyManager.clickedNonVeg = true;
+						_italyManager.ResetAllBool ();
+						_italyManager.IsClickedItemDestinationFunction = this;
+						_italyManager.IsClickedNonVeg = true;
 						iAmSelected = true;
 					}
 					else if(isCheese)
 					{
-						_italyManager.AllClickedBoolsReset ();
-						_italyManager.clickedItemDestinationFunction = this;
-						_italyManager.clickedCheese = true;
+						_italyManager.ResetAllBool ();
+						_italyManager.IsClickedItemDestinationFunction = this;
+						_italyManager.IsClickedCheese = true;
 						iAmSelected = true;
 					}
 					else if(isTomato)
@@ -619,13 +619,13 @@ namespace _Project.Scripts.Other
 			{
 				availablePizza.myType = LevelManager.Orders.VEG_PIZZA;
 				availablePizza._topping.gameObject.SetActive (true);
-				availablePizza._topping.sprite = _italyManager.pizzaToppings[0];
+				availablePizza._topping.sprite = _italyManager._pizzaToppings[0];
 				availablePizza._isVegetable = true;
-				_italyManager.clickedVeg = false;
+				_italyManager.IsClickedVeg = false;
 				if(tutorialOn)
 				{
 					tutorialOn = false;
-					_italyManager.cheese.tutorialOn = true;
+					_italyManager._cheese.tutorialOn = true;
 					_uiManager.tutorialPanelBg.gameObject.SetActive (true);
 					_uiManager.tutorialPanelBg.OpenPopupItaly ("TAP OR DRAG CHEESE TO \n PIZZA BASE.",false,false , 2);
 				}
@@ -636,11 +636,11 @@ namespace _Project.Scripts.Other
 		{
 			if(!availablePizza._isVegetable)
 			{
-				_italyManager.clickedNonVeg = false;
+				_italyManager.IsClickedNonVeg = false;
 			
 				availablePizza.myType = LevelManager.Orders.NON_VEG_PIZZA;
 				availablePizza._topping.gameObject.SetActive (true);
-				availablePizza._topping.sprite = _italyManager.pizzaToppings[1];
+				availablePizza._topping.sprite = _italyManager._pizzaToppings[1];
 				availablePizza._isVegetable = true;
 			}
 		}
@@ -649,13 +649,13 @@ namespace _Project.Scripts.Other
 		{
 			if(!availablePizza._isCheese)
 			{
-				_italyManager.clickedCheese = false;
+				_italyManager.IsClickedCheese = false;
 				availablePizza._cheesePrefav.SetActive (true);
 				availablePizza._isCheese = true;
 				if(tutorialOn)
 				{
 					tutorialOn = false;
-					_italyManager.firstPizza.tutorialOn = true;
+					_italyManager._firstPizza.tutorialOn = true;
 					_uiManager.tutorialPanelBg.gameObject.SetActive (true);
 					_uiManager.tutorialPanelBg.OpenPopupItaly ("TAP OR DRAG PIZZA \n TO OVEN.",false,false , 3);
 				}
@@ -933,7 +933,7 @@ namespace _Project.Scripts.Other
 			}
 			else if(_italyManager != null)
 			{
-				_italyManager.cokesFilled--;
+				_italyManager.CokesFilled--;
 			}
 			else if(_australiaManager != null)
 			{
@@ -959,12 +959,12 @@ namespace _Project.Scripts.Other
 			}
 			else if(_italyManager != null)
 			{
-				customer.coinsSpent+=_italyManager.cokePrice;
+				customer.coinsSpent+=_italyManager.CokePrice;
 				if(isChilled)
 				{
 					customer.coinsSpent+=15;
 				}
-				_italyManager.clickedCoke = false;
+				_italyManager.IsClickedCoke = false;
 			}
 			else if(_australiaManager != null)
 			{

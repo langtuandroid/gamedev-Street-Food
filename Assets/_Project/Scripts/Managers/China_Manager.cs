@@ -102,7 +102,7 @@ namespace _Project.Scripts.Managers
 		private void Start()
 		{
 			US_Manager.tutorialEnd = false;
-			Italy_Manager.tutorialEnd = false;
+			Italy_Manager._isEndTutorial = false;
 			Australia_Manager.tutorialEnd = false;
 			PlayerPrefs.SetInt ("ChinaOpen",1);
 			_endTutorial = false;

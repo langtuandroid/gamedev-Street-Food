@@ -98,13 +98,13 @@ namespace _Project.Scripts.Entities.Customers
 		{
 			if(_italyManager != null )
 			{
-				if(_italyManager.firstOvenPizza.tutorialOn)
+				if(_italyManager._firstOvenPizza.tutorialOn)
 				{
 					_isClick = true;
 				}
 
 			}
-			if(!TutorialPanel.popupPanelActive || US_Manager.tutorialEnd || tutorialOn || China_Manager._endTutorial || Italy_Manager.tutorialEnd || _isClick)
+			if(!TutorialPanel.popupPanelActive || US_Manager.tutorialEnd || tutorialOn || China_Manager._endTutorial || Italy_Manager._isEndTutorial || _isClick)
 			{
 				if(LevelManager.levelNo <= 10)
 				{
@@ -189,19 +189,19 @@ namespace _Project.Scripts.Entities.Customers
 				}
 				else if(LevelManager.levelNo > 20 && LevelManager.levelNo <= 30)
 				{
-					if(_italyManager.clickedOvenPizza)
+					if(_italyManager.IsClickedOvenPizza)
 					{
-						if(!_italyManager.clickedPizzaDestinationFunction.isBurnt)
+						if(!_italyManager._pizza.isBurnt)
 						{
-							_italyManager.clickedPizzaDestinationFunction.customer = this;
-							_italyManager.clickedPizzaDestinationFunction.otherObject = this.gameObject;
+							_italyManager._pizza.customer = this;
+							_italyManager._pizza.otherObject = this.gameObject;
 						
 							bool foundOrder = false;
 							for(int i = 0 ; i< _order.Count ; i++)
 							{
-								if(_italyManager.clickedPizzaDestinationFunction.myType == _order[i])
+								if(_italyManager._pizza.myType == _order[i])
 								{
-									_italyManager.PizzaReached();
+									_italyManager.OnPizzaReach();
 									foundOrder = true;
 									break;
 								}
@@ -210,30 +210,30 @@ namespace _Project.Scripts.Entities.Customers
 							{
 								if(iHaveAMultipleTypeOrder != LevelManager.Orders.NONE)
 								{
-									_italyManager.clickedPizzaDestinationFunction.wrongOrderGiven = true;
-									_italyManager.PizzaReached();
+									_italyManager._pizza.wrongOrderGiven = true;
+									_italyManager.OnPizzaReach();
 								}
 							}
-							_italyManager.AllClickedBoolsReset ();
+							_italyManager.ResetAllBool ();
 						}
 					}
-					else if(_italyManager.clickedCoke)
+					else if(_italyManager.IsClickedCoke)
 					{
-						_italyManager.clickedItemDestinationFunction.customer = this;
+						_italyManager.IsClickedItemDestinationFunction.customer = this;
 					
 						for(int i = 0 ; i< _order.Count ; i++)
 						{
-							if(_italyManager.clickedItemDestinationFunction.myType == _order[i])
+							if(_italyManager.IsClickedItemDestinationFunction.myType == _order[i])
 							{
-								_italyManager.ObjectReached();
+								_italyManager.OnObjectReach();
 								break;
 							}
 						}
-						_italyManager.AllClickedBoolsReset ();
+						_italyManager.ResetAllBool ();
 					}
 					else
 					{
-						_italyManager.AllClickedBoolsReset ();
+						_italyManager.ResetAllBool ();
 					}
 				}
 				else if(LevelManager.levelNo > 30 && LevelManager.levelNo <= 40)
@@ -339,7 +339,7 @@ namespace _Project.Scripts.Entities.Customers
 				}
 				else if(_italyManager != null)
 				{
-					if(myWaitingTime >= _waitingTime && Italy_Manager.tutorialEnd)
+					if(myWaitingTime >= _waitingTime && Italy_Manager._isEndTutorial)
 					{
 						_orderPlaces = false;
 						StartCoroutine (MoveToPositionRoutine (_customerHandler._customerEndPos.position , false));
@@ -1170,8 +1170,8 @@ namespace _Project.Scripts.Entities.Customers
 			}
 			else if(LevelManager.levelNo > 20 && LevelManager.levelNo <= 30)
 			{
-				_orderEat.sprite = _italyManager.pizzaBakedVariations[orderNo-6];
-				_pizzaDOt.sprite = _italyManager.pizzaDot[orderNo-6];
+				_orderEat.sprite = _italyManager._pizzaBakedVariations[orderNo-6];
+				_pizzaDOt.sprite = _italyManager._pizzaDot[orderNo-6];
 
 
 			}

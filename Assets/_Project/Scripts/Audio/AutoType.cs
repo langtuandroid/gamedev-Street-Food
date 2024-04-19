@@ -101,7 +101,7 @@ namespace _Project.Scripts.Audio
 				}
 				else if(LevelManager.levelNo == 21)
 				{
-					_italyManager.clickfirstBase = true;
+					_italyManager.IsClickFirstBase = true;
 					_uiManager.tutorialPanelBg.gameObject.SetActive (true);
 					_uiManager.tutorialPanelBg.OpenPopupItaly ("CLICK PIZZA\n BASE TO PUT ON \n THE PLATE",false,false , 0);
 				}
@@ -156,7 +156,7 @@ namespace _Project.Scripts.Audio
 						}
 						else if(LevelManager.levelNo <= 30)
 						{
-							Italy_Manager.tutorialEnd = true;
+							Italy_Manager._isEndTutorial = true;
 						}
 						else 
 						{
