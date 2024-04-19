@@ -11,8 +11,8 @@ namespace _Project.Scripts.Other
 	public class MakeTikki : MonoBehaviour 
 	{
 		[Inject] private SoundsAll _levelSoundManager;
-		[Inject] private US_Manager _usManager;
-		[Inject] private Australia_Manager _australiaManager;
+		[Inject] private USController _usManager;
+		[Inject] private AustraliaController _australiaManager;
 		[Inject] private UIManager _uiManager;   
 		private bool readyToPick;
 		private bool isPicked;
@@ -151,7 +151,7 @@ namespace _Project.Scripts.Other
 
 		private void OnMouseDown()
 		{
-			if((readyToPick && (!TutorialPanel.popupPanelActive || (US_Manager._isEndTutorial && Australia_Manager.tutorialEnd))) || (tutorialPick)) 
+			if((readyToPick && (!TutorialPanel.popupPanelActive || (USController._isEndTutorial && AustraliaController.tutorialEnd))) || (tutorialPick)) 
 			{
 				if(isUS)
 				{
@@ -394,7 +394,7 @@ namespace _Project.Scripts.Other
 			}
 			else
 			{
-				if(other.name.Contains ("dustbin") && (US_Manager._isEndTutorial == true || Australia_Manager.tutorialEnd== true))
+				if(other.name.Contains ("dustbin") && (USController._isEndTutorial == true || AustraliaController.tutorialEnd== true))
 				{
 					reachedPlate = true;
 				}

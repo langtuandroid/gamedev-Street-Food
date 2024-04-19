@@ -10,7 +10,7 @@ using Zenject;
 
 namespace _Project.Scripts.Managers
 {
-	public class China_Manager : MonoBehaviour 
+	public class ChinaController : MonoBehaviour 
 	{
 		public static bool _endTutorial;
 		[Inject] private SoundsAll _levelSoundManager;
@@ -101,9 +101,9 @@ namespace _Project.Scripts.Managers
 
 		private void Start()
 		{
-			US_Manager._isEndTutorial = false;
-			Italy_Manager._isEndTutorial = false;
-			Australia_Manager.tutorialEnd = false;
+			USController._isEndTutorial = false;
+			ItalyController._isEndTutorial = false;
+			AustraliaController.tutorialEnd = false;
 			PlayerPrefs.SetInt ("ChinaOpen",1);
 			_endTutorial = false;
 			

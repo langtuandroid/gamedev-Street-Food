@@ -16,10 +16,10 @@ namespace _Project.Scripts.Other
 	{
 		[Inject] private WisitorHandler _customerHandler;
 		[Inject] private SoundsAll _levelSoundManager;
-		[Inject] private US_Manager _usManager;
-		[Inject] private Italy_Manager _italyManager;
-		[Inject] private China_Manager _chinaManager;
-		[Inject] private Australia_Manager _australiaManager;
+		[Inject] private USController _usManager;
+		[Inject] private ItalyController _italyManager;
+		[Inject] private ChinaController _chinaManager;
+		[Inject] private AustraliaController _australiaManager;
 		[Inject] private UIManager _uiManager;   
 		private bool reachedDestination;
 		private bool scaleUp;
@@ -99,7 +99,7 @@ namespace _Project.Scripts.Other
 
 		private void OnMouseDown()
 		{
-			if(!TutorialPanel.popupPanelActive || US_Manager._isEndTutorial || China_Manager._endTutorial || Italy_Manager._isEndTutorial || tutorialOn || Australia_Manager.tutorialEnd)
+			if(!TutorialPanel.popupPanelActive || USController._isEndTutorial || ChinaController._endTutorial || ItalyController._isEndTutorial || tutorialOn || AustraliaController.tutorialEnd)
 			{
 				if(isCoke)
 				{
@@ -183,7 +183,7 @@ namespace _Project.Scripts.Other
 						}
 						else
 						{
-							if((tutorialOn && !_chinaManager.panUtils[0]._isTutorialOn ) || China_Manager._endTutorial)
+							if((tutorialOn && !_chinaManager.panUtils[0]._isTutorialOn ) || ChinaController._endTutorial)
 							{
 								transform.GetComponent<BoxCollider> ().size = new Vector3(colliderSize.x/2f , colliderSize.y/2f , colliderSize.z);
 								_chinaManager.ResetBowlsCliked ();
@@ -583,7 +583,7 @@ namespace _Project.Scripts.Other
 				_customerHandler.ConfigureCustomer ();
 				Destroy(_uiManager.tutorialPanelCanvas.gameObject); 
 				Destroy(_uiManager.tutorialPanelBg.gameObject);
-				Australia_Manager.tutorialEnd = true;
+				AustraliaController.tutorialEnd = true;
 			}
 		}
 

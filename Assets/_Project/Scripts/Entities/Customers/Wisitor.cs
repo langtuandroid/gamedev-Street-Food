@@ -17,10 +17,10 @@ namespace _Project.Scripts.Entities.Customers
 		public static bool _isRadioBought;
 		[Inject] private WisitorHandler _customerHandler;
 		[Inject] private SoundsAll _levelSoundManager;
-		[Inject] private US_Manager _usManager;
-		[Inject] private Italy_Manager _italyManager;
-		[Inject] private China_Manager _chinaManager;
-		[Inject] private Australia_Manager _australiaManager;
+		[Inject] private USController _usManager;
+		[Inject] private ItalyController _italyManager;
+		[Inject] private ChinaController _chinaManager;
+		[Inject] private AustraliaController _australiaManager;
 		[Inject] private UIManager _uiManager;
 		private Vector3 _orderScale;
 		private Vector3 _drinkScale;
@@ -104,7 +104,7 @@ namespace _Project.Scripts.Entities.Customers
 				}
 
 			}
-			if(!TutorialPanel.popupPanelActive || US_Manager._isEndTutorial || tutorialOn || China_Manager._endTutorial || Italy_Manager._isEndTutorial || _isClick)
+			if(!TutorialPanel.popupPanelActive || USController._isEndTutorial || tutorialOn || ChinaController._endTutorial || ItalyController._isEndTutorial || _isClick)
 			{
 				if(LevelManager.levelNo <= 10)
 				{
@@ -321,7 +321,7 @@ namespace _Project.Scripts.Entities.Customers
 				ShowNeededProduct();
 				if(_usManager != null)
 				{
-					if(myWaitingTime >= _waitingTime && US_Manager._isEndTutorial) 
+					if(myWaitingTime >= _waitingTime && USController._isEndTutorial) 
 					{
 						_orderPlaces = false;
 						StartCoroutine (MoveToPositionRoutine (_customerHandler._customerEndPos.position , false));
@@ -330,7 +330,7 @@ namespace _Project.Scripts.Entities.Customers
 				}
 				else if(_chinaManager != null)
 				{
-					if(myWaitingTime >= _waitingTime && China_Manager._endTutorial) 
+					if(myWaitingTime >= _waitingTime && ChinaController._endTutorial) 
 					{
 						_orderPlaces = false;
 						StartCoroutine (MoveToPositionRoutine (_customerHandler._customerEndPos.position , false));
@@ -339,7 +339,7 @@ namespace _Project.Scripts.Entities.Customers
 				}
 				else if(_italyManager != null)
 				{
-					if(myWaitingTime >= _waitingTime && Italy_Manager._isEndTutorial)
+					if(myWaitingTime >= _waitingTime && ItalyController._isEndTutorial)
 					{
 						_orderPlaces = false;
 						StartCoroutine (MoveToPositionRoutine (_customerHandler._customerEndPos.position , false));
@@ -348,7 +348,7 @@ namespace _Project.Scripts.Entities.Customers
 				}
 				else if(_australiaManager != null)
 				{
-					if(myWaitingTime >= _waitingTime && Australia_Manager.tutorialEnd) 
+					if(myWaitingTime >= _waitingTime && AustraliaController.tutorialEnd) 
 					{
 						_orderPlaces = false;
 						StartCoroutine (MoveToPositionRoutine (_customerHandler._customerEndPos.position , false));
@@ -521,7 +521,7 @@ namespace _Project.Scripts.Entities.Customers
 				}
 				else
 				{
-					US_Manager._perfectNums = 0;
+					USController._perfectNums = 0;
 				}
 
 				if(coinsSpent > 0)
@@ -611,7 +611,7 @@ namespace _Project.Scripts.Entities.Customers
 
 						if(perfect)
 						{
-							US_Manager._perfectNums++;
+							USController._perfectNums++;
 							_uiManager.n_Perfect_achieved++;
 							PlayerPrefs.SetInt ("Perfectachieved", _uiManager.n_Perfect_achieved);
 						
@@ -643,7 +643,7 @@ namespace _Project.Scripts.Entities.Customers
 							
 							}
 							
-							if(US_Manager._perfectNums >= 5)
+							if(USController._perfectNums >= 5)
 							{
 								_uiManager.gold_Collected.SetActive(false);
 								_uiManager.gold_Collected.SetActive(true);
@@ -651,14 +651,14 @@ namespace _Project.Scripts.Entities.Customers
 								Debug.Log ("added gold");
 								Invoke(nameof(AddGold),1.5f);
 								Invoke("Gold_Deactive ",1.5f);
-								US_Manager._perfectNums = 0;
+								USController._perfectNums = 0;
 							
 							}
 						}
 						else
 						{
 							Debug.Log ("perfects made 0");
-							US_Manager._perfectNums = 0;
+							USController._perfectNums = 0;
 						}
 						
 						_customerHandler._coins[positionTaken].coinCollected.Play ();

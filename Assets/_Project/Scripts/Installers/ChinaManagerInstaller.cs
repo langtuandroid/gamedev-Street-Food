@@ -6,10 +6,10 @@ namespace _Project.Scripts.Installers
 {
     public class ChinaManagerInstaller : MonoInstaller
     {
-        [SerializeField] private China_Manager _chinaManager;
+        [SerializeField] private ChinaController _chinaManager;
         public override void InstallBindings()
         {
-            Container.Bind<China_Manager>().FromInstance(_chinaManager).AsSingle();
+            Container.Bind<ChinaController>().FromInstance(_chinaManager).AsSingle();
         }
     }
 }

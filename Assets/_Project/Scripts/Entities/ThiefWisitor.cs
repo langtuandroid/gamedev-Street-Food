@@ -14,10 +14,10 @@ namespace _Project.Scripts.Entities
 	{
 		public static ThiefWisitor _instance ;
 		[Inject] private WisitorHandler _customerHandler;
-		[Inject] private US_Manager _usManager;
-		[Inject] private Italy_Manager _italyManager;
-		[Inject] private China_Manager _chinaManager;
-		[Inject] private Australia_Manager _australiaManager;
+		[Inject] private USController _usManager;
+		[Inject] private ItalyController _italyManager;
+		[Inject] private ChinaController _chinaManager;
+		[Inject] private AustraliaController _australiaManager;
 		[Inject] private UIManager _uiManager;
 		private float _speed = 1.5f;
 		private int _posReack = 4;

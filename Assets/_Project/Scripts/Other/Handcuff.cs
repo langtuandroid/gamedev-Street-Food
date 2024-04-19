@@ -10,7 +10,7 @@ namespace _Project.Scripts.Other
 {
 	public class Handcuff : MonoBehaviour 
 	{
-		[Inject] private US_Manager _usManager;
+		[Inject] private USController _usManager;
 		[Inject] private UIManager _uiManager;   
 		public Text stolentext;
 		private void OnEnable()

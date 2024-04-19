@@ -13,10 +13,10 @@ namespace _Project.Scripts.Entities.Customers
 	public class WisitorHandler : MonoBehaviour 
 	{
 		[Inject] private UIManager _uiManager;
-		[Inject] private Australia_Manager _australiaManager;
-		[Inject] private China_Manager _chinaManager;
-		[Inject] private US_Manager _usManager;
-		[Inject] private Italy_Manager _italyManager;
+		[Inject] private AustraliaController _australiaManager;
+		[Inject] private ChinaController _chinaManager;
+		[Inject] private USController _usManager;
+		[Inject] private ItalyController _italyManager;
 		private bool _isWait = true;
 		
 		[FormerlySerializedAs("gameTimer")] public float _timeOnGame = 120.0f;
@@ -234,7 +234,7 @@ namespace _Project.Scripts.Entities.Customers
 
 		public void BellPress()
 		{
-			if(_availablePositions.Count > 0 && _timeOnGame > 0 && _isWait && (China_Manager._endTutorial || US_Manager._isEndTutorial || Australia_Manager.tutorialEnd || Italy_Manager._isEndTutorial ) )
+			if(_availablePositions.Count > 0 && _timeOnGame > 0 && _isWait && (ChinaController._endTutorial || USController._isEndTutorial || AustraliaController.tutorialEnd || ItalyController._isEndTutorial ) )
 			{
 				_isWait = false ;
 				ConfigureCustomer();

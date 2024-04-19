@@ -10,7 +10,7 @@ using Zenject;
 
 namespace _Project.Scripts.Managers
 {
-	public class US_Manager : MonoBehaviour 
+	public class USController : MonoBehaviour 
 	{
 		public static bool _isEndTutorial;
 		public static int _perfectNums;

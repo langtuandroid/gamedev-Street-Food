@@ -10,7 +10,7 @@ using Zenject;
 
 namespace _Project.Scripts.Managers
 {
-	public class Italy_Manager : MonoBehaviour 
+	public class ItalyController : MonoBehaviour 
 	{
 		public static bool _isEndTutorial;
 		[Inject] private UIManager _uiManager;   
@@ -115,9 +115,9 @@ namespace _Project.Scripts.Managers
 		private void Start()
 		{
 			PlayerPrefs.SetInt ("ItalyOpen",1);
-			China_Manager._endTutorial = false;
-			US_Manager._isEndTutorial = false;
-			Australia_Manager.tutorialEnd = false;
+			ChinaController._endTutorial = false;
+			USController._isEndTutorial = false;
+			AustraliaController.tutorialEnd = false;
 			_isEndTutorial = false;
 			if(LevelManager.levelNo == 21)
 			{

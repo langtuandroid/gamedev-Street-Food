@@ -10,7 +10,7 @@ using Zenject;
 
 namespace _Project.Scripts.Managers
 {
-	public class Australia_Manager : MonoBehaviour
+	public class AustraliaController : MonoBehaviour
 	{
 		public static bool tutorialEnd;
 		[Inject] private SoundsAll _levelSoundManager;
@@ -116,9 +116,9 @@ namespace _Project.Scripts.Managers
 		private void Start()
 		{
 			PlayerPrefs.SetInt("AusOpen",1);
-			US_Manager._isEndTutorial = false;
-			Italy_Manager._isEndTutorial = false;
-			China_Manager._endTutorial = false;
+			USController._isEndTutorial = false;
+			ItalyController._isEndTutorial = false;
+			ChinaController._endTutorial = false;
 			if (LevelManager.levelNo == 31) {
 				_startingTextPrefab.SetActive(true);
 			}

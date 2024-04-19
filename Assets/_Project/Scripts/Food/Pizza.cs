@@ -14,7 +14,7 @@ namespace _Project.Scripts.Food
 	public class Pizza : MonoBehaviour
 	{
 		[Inject] private SoundsAll _levelSoundManager;
-		[Inject] private Italy_Manager _italyManager;
+		[Inject] private ItalyController _italyManager;
 		[Inject] private UIManager _uiManager;   
 		private Vector3 _colliderSize;
 		private bool _isCanMove;
@@ -134,7 +134,7 @@ namespace _Project.Scripts.Food
 
 		private void OnMouseDown()
 		{
-			if((!TutorialPanel.popupPanelActive || Italy_Manager._isEndTutorial || _tutorialPick || (tutorialOn && !_isOnOven)) && (_isVegetable && _isCheese) )
+			if((!TutorialPanel.popupPanelActive || ItalyController._isEndTutorial || _tutorialPick || (tutorialOn && !_isOnOven)) && (_isVegetable && _isCheese) )
 			{
 				_isPick = true;
 				_isCanMove = true;
@@ -156,7 +156,7 @@ namespace _Project.Scripts.Food
 				Vector3 myPos = Camera.main.WorldToScreenPoint (transform.position);
 				_touchPos =  Camera.main.ScreenToWorldPoint (new Vector3(Input.mousePosition.x, Input.mousePosition.y , myPos.z));
 			}
-			else if((!TutorialPanel.popupPanelActive || !Italy_Manager._isEndTutorial) && (!_isVegetable || !_isCheese)) // Click on it to place ingredients
+			else if((!TutorialPanel.popupPanelActive || !ItalyController._isEndTutorial) && (!_isVegetable || !_isCheese)) // Click on it to place ingredients
 			{
 
 				if(_italyManager.IsClickedVeg || _italyManager.IsClickedNonVeg && !_isVegetable)
@@ -448,7 +448,7 @@ namespace _Project.Scripts.Food
 					}
 				}
 			}
-			if(other.name.Contains ("dustbin") && Italy_Manager._isEndTutorial == true)
+			if(other.name.Contains ("dustbin") && ItalyController._isEndTutorial == true)
 			{
 				otherObject = other.gameObject;
 				_isOnCustomer = true;

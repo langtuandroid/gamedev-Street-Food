@@ -14,7 +14,7 @@ namespace _Project.Scripts.Food
 	public class HotDog : MonoBehaviour 
 	{
 		[Inject] private SoundsAll _levelSoundManager;
-		[Inject] private US_Manager _usManager;
+		[Inject] private USController _usManager;
 		[Inject] private UIManager _uiManager;
 		private bool _isOnCustomer;
 		private bool _isScale;
@@ -66,7 +66,7 @@ namespace _Project.Scripts.Food
 
 		private void OnMouseDown()
 		{
-			if(!TutorialPanel.popupPanelActive || US_Manager._isEndTutorial || Australia_Manager.tutorialEnd || isTutorial)
+			if(!TutorialPanel.popupPanelActive || USController._isEndTutorial || AustraliaController.tutorialEnd || isTutorial)
 			{
 				_usManager.HotDog = this;
 				_isCanMove = true;
@@ -321,7 +321,7 @@ namespace _Project.Scripts.Food
 					_isOnCustomer = true;
 				}
 			}
-			else if(other.name.Contains ("dustbin") && (US_Manager._isEndTutorial == true || Australia_Manager.tutorialEnd== true))
+			else if(other.name.Contains ("dustbin") && (USController._isEndTutorial == true || AustraliaController.tutorialEnd== true))
 			{
 				_otherObject = other.gameObject;
 				_isOnCustomer = true;

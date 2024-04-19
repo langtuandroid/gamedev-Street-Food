@@ -12,11 +12,11 @@ namespace _Project.Scripts.Audio
 	public class AutoType : MonoBehaviour
 	{
 		[Inject] private LevelManager _levelManager;
-		[Inject] private US_Manager _usManager;
-		[Inject] private China_Manager _chinaManager;
-		[Inject] private Australia_Manager _australiaManager;
+		[Inject] private USController _usManager;
+		[Inject] private ChinaController _chinaManager;
+		[Inject] private AustraliaController _australiaManager;
 		[Inject] private UIManager _uiManager;
-		[Inject] private Italy_Manager _italyManager;
+		[Inject] private ItalyController _italyManager;
 		[FormerlySerializedAs("myText")] [SerializeField] private Text _text;
 		[FormerlySerializedAs("isGoalAchieved")] [SerializeField] private bool _isGoalAchived;
 		private float _pauseLetter = 0.1f;
@@ -148,19 +148,19 @@ namespace _Project.Scripts.Audio
 					{
 						if(LevelManager.levelNo <= 10)
 						{
-							US_Manager._isEndTutorial = true;
+							USController._isEndTutorial = true;
 						}
 						else if(LevelManager.levelNo <= 20)
 						{
-							China_Manager._endTutorial = true;
+							ChinaController._endTutorial = true;
 						}
 						else if(LevelManager.levelNo <= 30)
 						{
-							Italy_Manager._isEndTutorial = true;
+							ItalyController._isEndTutorial = true;
 						}
 						else 
 						{
-							Australia_Manager.tutorialEnd = true;
+							AustraliaController.tutorialEnd = true;
 						}
 						TutorialPanel.popupPanelActive = false;
 						Destroy(_uiManager.tutorialPanelCanvas.gameObject); 

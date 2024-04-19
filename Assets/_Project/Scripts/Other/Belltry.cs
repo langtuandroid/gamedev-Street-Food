@@ -10,7 +10,7 @@ namespace _Project.Scripts.Other
 	public class Belltry : MonoBehaviour 
 	{
 		[Inject] private WisitorHandler _customerHandler;
-		[Inject] private US_Manager _usManager;
+		[Inject] private USController _usManager;
 		[Inject] private UIManager _uiManager;   
 		private void OnEnable()
 		{

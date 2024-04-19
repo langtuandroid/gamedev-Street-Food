@@ -14,7 +14,7 @@ namespace _Project.Scripts.Food
 	public class BurgerFood : MonoBehaviour 
 	{
 		[Inject] private SoundsAll _levelSoundManager;
-		[Inject] private Australia_Manager _australiaManager;
+		[Inject] private AustraliaController _australiaManager;
 		[Inject] private UIManager _uiManager;   
 		private bool _isScale;
 		private bool _isOnCustomer;
@@ -83,7 +83,7 @@ namespace _Project.Scripts.Food
 		
 		private void OnMouseDown()
 		{
-			if(!TutorialPanel.popupPanelActive || Australia_Manager.tutorialEnd || Australia_Manager.tutorialEnd || isTutorialOn)
+			if(!TutorialPanel.popupPanelActive || AustraliaController.tutorialEnd || AustraliaController.tutorialEnd || isTutorialOn)
 			{
 				_australiaManager._burgerFood = this;
 				_isCanMove = true;
@@ -376,7 +376,7 @@ namespace _Project.Scripts.Food
 					_isOnCustomer = true;
 				}
 			}
-			else if(other.name.Contains ("dustbin") && Australia_Manager.tutorialEnd== true )
+			else if(other.name.Contains ("dustbin") && AustraliaController.tutorialEnd== true )
 			{
 				wrongOrders = false;
 				otherObject = other.gameObject;

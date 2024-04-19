@@ -11,8 +11,8 @@ namespace _Project.Scripts.Other
 	{
 		[Inject] private WisitorHandler _customerHandler;
 		[Inject] private SoundsAll _levelSoundManager;
-		[Inject] private US_Manager _usManager;
-		[Inject] private China_Manager _chinaManager;
+		[Inject] private USController _usManager;
+		[Inject] private ChinaController _chinaManager;
 		[Inject] private UIManager _uiManager;   
 		public int positionTaken { get; set; }
 		public int myAmount { get; set; }

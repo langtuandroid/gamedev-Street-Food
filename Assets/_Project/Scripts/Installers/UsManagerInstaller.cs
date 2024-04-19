@@ -7,11 +7,11 @@ namespace _Project.Scripts.Installers
 {
     public class UsManagerInstaller : MonoInstaller
     {
-        [SerializeField] private US_Manager _usManager;
+        [SerializeField] private USController _usManager;
        
         public override void InstallBindings()
         {
-            Container.Bind<US_Manager>().FromInstance(_usManager).AsSingle();
+            Container.Bind<USController>().FromInstance(_usManager).AsSingle();
         }
     }
 }

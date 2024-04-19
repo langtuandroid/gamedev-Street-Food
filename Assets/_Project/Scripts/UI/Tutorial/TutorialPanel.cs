@@ -170,7 +170,7 @@ namespace _Project.Scripts.UI.Tutorial
 								_uiManager.tutorialPanelCanvas.gameObject.SetActive (false);
 								_uiManager.tutorialPanelBg.gameObject.SetActive (false);
 								_customerHandler.ConfigureCustomer ();
-								US_Manager._isEndTutorial = true;
+								USController._isEndTutorial = true;
 							}
 						}
 					}
@@ -185,7 +185,7 @@ namespace _Project.Scripts.UI.Tutorial
 							_customerHandler.ConfigureCustomer ();
 							_uiManager.tutorialPanelCanvas.gameObject.SetActive (false);
 							_uiManager.tutorialPanelBg.gameObject.SetActive (false);
-							US_Manager._isEndTutorial = true;
+							USController._isEndTutorial = true;
 						}
 					}
 					else if(LevelManager.levelNo == 11)
@@ -207,7 +207,7 @@ namespace _Project.Scripts.UI.Tutorial
 								_customerHandler.ConfigureCustomer ();
 								_uiManager.tutorialPanelCanvas.gameObject.SetActive (false);
 								_uiManager.tutorialPanelBg.gameObject.SetActive (false);
-								China_Manager._endTutorial = true;
+								ChinaController._endTutorial = true;
 							}
 						}
 					}
@@ -219,7 +219,7 @@ namespace _Project.Scripts.UI.Tutorial
 						}
 						else
 						{
-							China_Manager._endTutorial = true;
+							ChinaController._endTutorial = true;
 							_customerHandler.ConfigureCustomer ();
 							_uiManager.tutorialPanelCanvas.gameObject.SetActive (false);
 							_uiManager.tutorialPanelBg.gameObject.SetActive (false);
@@ -236,7 +236,7 @@ namespace _Project.Scripts.UI.Tutorial
 							_customerHandler.ConfigureCustomer ();
 							_uiManager.tutorialPanelCanvas.gameObject.SetActive (false);
 							_uiManager.tutorialPanelBg.gameObject.SetActive (false);
-							Italy_Manager._isEndTutorial = true;
+							ItalyController._isEndTutorial = true;
 						}
 					}
 					else if(LevelManager.levelNo == 22 || LevelManager.levelNo == 23)
@@ -247,7 +247,7 @@ namespace _Project.Scripts.UI.Tutorial
 						}
 						else
 						{
-							Italy_Manager._isEndTutorial = true;
+							ItalyController._isEndTutorial = true;
 							_customerHandler.ConfigureCustomer ();
 							_uiManager.tutorialPanelCanvas.gameObject.SetActive (false);
 							_uiManager.tutorialPanelBg.gameObject.SetActive (false);
@@ -264,7 +264,7 @@ namespace _Project.Scripts.UI.Tutorial
 							_customerHandler.ConfigureCustomer ();
 							_uiManager.tutorialPanelCanvas.gameObject.SetActive (false);
 							_uiManager.tutorialPanelBg.gameObject.SetActive (false);
-							Australia_Manager.tutorialEnd = true;
+							AustraliaController.tutorialEnd = true;
 						}
 					}
 					else
@@ -279,13 +279,13 @@ namespace _Project.Scripts.UI.Tutorial
 							_uiManager.tutorialPanelBg.gameObject.SetActive (false);
 							_customerHandler.ConfigureCustomer ();
 							if(LevelManager.levelNo <= 10)
-								US_Manager._isEndTutorial = true;
+								USController._isEndTutorial = true;
 							else if(LevelManager.levelNo <= 20)
-								China_Manager._endTutorial = true;
+								ChinaController._endTutorial = true;
 							if(LevelManager.levelNo <= 30)
-								Italy_Manager._isEndTutorial = true;
+								ItalyController._isEndTutorial = true;
 							else
-								Australia_Manager.tutorialEnd = true;
+								AustraliaController.tutorialEnd = true;
 						}
 					}
 					tutNo++;

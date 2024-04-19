@@ -12,7 +12,7 @@ namespace _Project.Scripts.Game
 	public class ChineseUtils : MonoBehaviour
 	{
 		[Inject] private SoundsAll _levelSoundManager;
-		[Inject] private China_Manager _chinaManager;
+		[Inject] private ChinaController _chinaManager;
 		[Inject] private UIManager _uiManager;   
 		private bool _isReachedDestination;
 		private bool _isScale;
@@ -100,7 +100,7 @@ namespace _Project.Scripts.Game
 
 		private void OnMouseDown()
 		{
-			if ((!TutorialPanel.popupPanelActive || China_Manager._endTutorial || _isTutorialPick ||
+			if ((!TutorialPanel.popupPanelActive || ChinaController._endTutorial || _isTutorialPick ||
 			     (_isSoup && _isTutorialOn)) && (_servingsAvailable > 0) && (_isNoodlesAdded && _isVegAdded))
 			{
 				_isPicked = true;
@@ -137,7 +137,7 @@ namespace _Project.Scripts.Game
 					Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, myPos.z));
 
 			}
-			else if ((!TutorialPanel.popupPanelActive || !China_Manager._endTutorial) &&
+			else if ((!TutorialPanel.popupPanelActive || !ChinaController._endTutorial) &&
 			         _servingsAvailable <= 0) 
 			{
 				if (_isPan)
@@ -422,7 +422,7 @@ namespace _Project.Scripts.Game
 						}
 					}
 				}
-				if(China_Manager._endTutorial)
+				if(ChinaController._endTutorial)
 				{
 					if(other.name.Contains("dustbin"))
 					{
@@ -477,7 +477,7 @@ namespace _Project.Scripts.Game
 					}
 				}
 			}
-			if(China_Manager._endTutorial)
+			if(ChinaController._endTutorial)
 			{
 				if(other.name.Contains("dustbin"))
 				{
