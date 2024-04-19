@@ -13,7 +13,7 @@ namespace _Project.Scripts.Other
 		[Inject] private UIManager _uiManager;   
 		private void OnEnable()
 		{
-			Invoke ("Timestop", 0.9f);
+			Invoke (nameof(Timestop), 0.9f);
 	
 		}
 		public void ActiveBell()
@@ -81,9 +81,7 @@ namespace _Project.Scripts.Other
 		}
 		public void PlayON()
 		{
-			{
-				gameObject.SetActive(false);
-			}
+			gameObject.SetActive(false);
 		}
 		public void Timestop()
 		{
@@ -93,6 +91,5 @@ namespace _Project.Scripts.Other
 		{
 			gameObject.SetActive (false);
 		}
-
 	}
 }

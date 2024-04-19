@@ -25,15 +25,15 @@ namespace _Project.Scripts.Other
 		private bool canMove;
 		private GameObject otherObject;
 		
-		public bool isBurnt;
-		public Availability availableHotDog;
+		public bool isBurnt { get; private set; }
+		public Availability availableHotDog { get; set; }
 		public Availability myGrill;
 		public Vector3 myOriginalPos, myTouchPos;
-		public float heatingTimer = 0;
-		public SpriteRenderer myRenderer;
-		public bool iAmSelected;
+		public float heatingTimer { get; set; }
+		public SpriteRenderer myRenderer { get; set; }
+		public bool iAmSelected { get; set; }
 		public GameObject mySelection;
-		public bool tutorialOn;
+		public bool tutorialOn { get; set; }
 		public ParticleSystem mySmoke;
 		public ParticleSystem tikkiCompletelyBaked;
 

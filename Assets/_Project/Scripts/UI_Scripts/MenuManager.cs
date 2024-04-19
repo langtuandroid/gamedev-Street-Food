@@ -35,7 +35,7 @@ namespace _Project.Scripts.UI_Scripts
 		void Start () 
 		{
 			Application.targetFrameRate = 120;
-			AchievementChild.check_claim = (PlayerPrefs.GetInt("claimvalue"));
+			AchievementBlock._claimCheck = (PlayerPrefs.GetInt("claimvalue"));
 
 			if(!PlayerPrefs.HasKey ("PlateUpgrade"))
 			{

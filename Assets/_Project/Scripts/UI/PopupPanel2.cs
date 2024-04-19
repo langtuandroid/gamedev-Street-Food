@@ -10,8 +10,6 @@ namespace _Project.Scripts.UI
 		public Text popupText3 ;
 		public Text popupText4 ;
 		public Text popupText5 ;
-		public Button popupYes;
-		public Button popupNo;
 		public GameObject yesNoContainer;
 		public GameObject crossButton;
 		public TweenScale myScale;

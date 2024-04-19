@@ -11,17 +11,17 @@ namespace _Project.Scripts.UI.Tutorial
 	{
 		[Inject] private UIManager _uiManager;   
 		public Text popupMessage;
-		public TextMesh popupMessageText , meshBg;
+		public TextMesh popupMessageText;
 		public Image childObject;
 		public bool inCanvas;
-		public GameObject upArrowObject, downArrowObject;
+		public GameObject upArrowObject;
+		public GameObject downArrowObject;
 		public static bool popupPanelActive;
 		public Vector3 posBun /*13 ; 8 for Italy*/;
 		public Vector3 posTikki /*13 ; 8 for Italy*/;
 		public Vector3 posCoins /*13 ; 8 for Italy*/;
 		public Vector3 posGold /*13 ; 8 for Italy*/;
 		public Vector3 positionPickCoins /*13 ; 8 for Italy*/;
-		public Vector3 posCustomer /*13 ; 8 for Italy*/;
 		public Vector3 posCoke /*13 ; 8 for Italy*/;
 		public Vector3 posSauce /*13 ; 8 for Italy*/;
 		public Vector3 posDustBin /*13 ; 8 for Italy*/;
@@ -48,12 +48,11 @@ namespace _Project.Scripts.UI.Tutorial
 		public Vector3 posFryer;
 		public Vector3 posFirstFries;
 		public Vector3 posBell ;
-		public Vector3 posHandcuff ;
 		public Vector3 posCake ;
 		public Vector3 posWhistle ;
 		public Vector3 posRadio ;
 		public TweenScale myScale;
-		public int noOfExtraPopup;
+		public int noOfExtraPopup { get; set; }
 		public Vector3 posBellArrow;
 		public Vector3 posWhistleArrow;
 		public Vector3 posRadioArrow;

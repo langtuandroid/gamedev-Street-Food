@@ -487,8 +487,8 @@ namespace _Project.Scripts.Entities.Customers
 					{
 						PlayerPrefs.SetInt ("CustomerLevel1",1);
 						_uiManager.achievment_text.SetActive(true);
-						AchievementChild.check_claim++;
-						PlayerPrefs.SetInt("claimvalue",AchievementChild.check_claim);
+						AchievementBlock._claimCheck++;
+						PlayerPrefs.SetInt("claimvalue",AchievementBlock._claimCheck);
 						Invoke(nameof(Stopa),4.0f);
 
 					}
@@ -496,8 +496,8 @@ namespace _Project.Scripts.Entities.Customers
 					{
 						PlayerPrefs.SetInt ("CustomerLevel2",1);
 						_uiManager.achievment_text.SetActive(true);
-						AchievementChild.check_claim++;
-						PlayerPrefs.SetInt("claimvalue",AchievementChild.check_claim);
+						AchievementBlock._claimCheck++;
+						PlayerPrefs.SetInt("claimvalue",AchievementBlock._claimCheck);
 						Invoke(nameof(Stopa),4.0f);
 						
 					}
@@ -506,8 +506,8 @@ namespace _Project.Scripts.Entities.Customers
 						MenuManager.golds += 5;
 						_uiManager.achievment_text.SetActive(true);
 						PlayerPrefs.SetInt ("CustomerLevel3",1);
-						AchievementChild.check_claim++;
-						PlayerPrefs.SetInt("claimvalue",AchievementChild.check_claim);
+						AchievementBlock._claimCheck++;
+						PlayerPrefs.SetInt("claimvalue",AchievementBlock._claimCheck);
 						Invoke(nameof(Stopa),4.0f);
 					}
 					
@@ -616,8 +616,8 @@ namespace _Project.Scripts.Entities.Customers
 							{
 								PlayerPrefs.SetInt ("PerfectLevel1",1)  ;
 								_uiManager.achievment_text.SetActive(true);
-								AchievementChild.check_claim++;
-								PlayerPrefs.SetInt("claimvalue",AchievementChild.check_claim);
+								AchievementBlock._claimCheck++;
+								PlayerPrefs.SetInt("claimvalue",AchievementBlock._claimCheck);
 								Invoke(nameof(Stopa),4.0f);
 							
 							}
@@ -625,8 +625,8 @@ namespace _Project.Scripts.Entities.Customers
 							{
 								PlayerPrefs.SetInt ("PerfectLevel2",1);
 								_uiManager.achievment_text.SetActive(true);
-								AchievementChild.check_claim++;
-								PlayerPrefs.SetInt("claimvalue",AchievementChild.check_claim);
+								AchievementBlock._claimCheck++;
+								PlayerPrefs.SetInt("claimvalue",AchievementBlock._claimCheck);
 								Invoke(nameof(Stopa),4.0f);
 							
 							}
@@ -634,8 +634,8 @@ namespace _Project.Scripts.Entities.Customers
 							{
 								PlayerPrefs.SetInt ("PerfectLevel3",1);
 								_uiManager.achievment_text.SetActive(true);
-								AchievementChild.check_claim++;
-								PlayerPrefs.SetInt("claimvalue",AchievementChild.check_claim);
+								AchievementBlock._claimCheck++;
+								PlayerPrefs.SetInt("claimvalue",AchievementBlock._claimCheck);
 								Invoke(nameof(Stopa),4.0f);
 							
 							}

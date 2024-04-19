@@ -128,24 +128,24 @@ namespace _Project.Scripts.Entities
 				{
 					PlayerPrefs.SetInt ("ThiefLevel1",1);
 					_uiManager.achievment_text.SetActive(true);
-					AchievementChild.check_claim++;
-					PlayerPrefs.SetInt("claimvalue",AchievementChild.check_claim);
+					AchievementBlock._claimCheck++;
+					PlayerPrefs.SetInt("claimvalue",AchievementBlock._claimCheck);
 					Invoke(nameof(Stopa),4.0f);
 				}
 				if(PlayerPrefs.GetInt("ThiefCaught") > 99 && PlayerPrefs.GetInt ("ThiefLevel2") == 0)
 				{
 					PlayerPrefs.SetInt ("ThiefLevel2",1);
 					_uiManager.achievment_text.SetActive(true);
-					AchievementChild.check_claim++;
-					PlayerPrefs.SetInt("claimvalue",AchievementChild.check_claim);
+					AchievementBlock._claimCheck++;
+					PlayerPrefs.SetInt("claimvalue",AchievementBlock._claimCheck);
 					Invoke(nameof(Stopa),4.0f);
 				}
 				if(PlayerPrefs.GetInt("ThiefCaught") > 999 && PlayerPrefs.GetInt ("ThiefLevel3") == 0)
 				{
 					PlayerPrefs.SetInt ("ThiefLevel3",1);
 					_uiManager.achievment_text.SetActive(true);
-					AchievementChild.check_claim++;
-					PlayerPrefs.SetInt("claimvalue",AchievementChild.check_claim);
+					AchievementBlock._claimCheck++;
+					PlayerPrefs.SetInt("claimvalue",AchievementBlock._claimCheck);
 					Invoke(nameof(Stopa),4.0f);
 				}
 

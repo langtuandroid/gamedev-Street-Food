@@ -14,14 +14,12 @@ namespace _Project.Scripts.Managers
 		[Inject] private UIManager _uiManager;   
 		[Inject] private LevelSoundManager _levelSoundManager;
 		public GameObject TheifPanel;
-		public int cokePrice;
-		public int lessBakedPizza;
-		public int perfectPizza;
+		public int cokePrice => 10;
+		public int lessBakedPizza => 30;
+		public int perfectPizza => 60;
 		public Sprite []pizzaBakedVariations;  //3 -- 0 - pizze base , 1-veg baked ,2- non veg baked  
 		public Sprite[]pizzaDot ;
 		public Sprite []pizzaToppings; //2  0 - veg , 1 - nonVeg
-		public SpriteRenderer []pizzaToppingsOnPlate; //6
-		public GameObject []pizzaCheeseOnPlate; //6
 		public SpriteRenderer []pizzaPlates; //6
 		public SpriteRenderer []pizzaOnPlates; //6
 		public BoxCollider []plateColliders; //6
@@ -35,20 +33,20 @@ namespace _Project.Scripts.Managers
 		public Availability []cokePlaces;  //9
 		public bool []fridePlaces;  //9
 		public GameObject []frideBottles;  //9
-		public int totalOvensAvailable;
-		public int platesFilledCount;
-		public int totalPlatesAvailable;
-		public int cokesFilled;
-		public int totalCokesAvailable;
-		public int fridgeFilledCount;
-		public bool clickedNonVeg;
-		public bool clickedVeg;
-		public bool clickedCheese;
-		public bool clickedCoke;
-		public bool clickedOvenPizza;
-		public bool clickedPlatePizza;
-		public ObjectMotion clickedItemDestinationFunction;
-		public Pizza clickedPizzaDestinationFunction;
+		private int totalOvensAvailable;
+		public int platesFilledCount { get; set; }
+		private int totalPlatesAvailable;
+		public int cokesFilled { get; set; }
+		private int totalCokesAvailable;
+		private int fridgeFilledCount;
+		public bool clickedNonVeg { get; set; }
+		public bool clickedVeg { get; set; }
+		public bool clickedCheese { get; set; }
+		public bool clickedCoke { get; set; }
+		public bool clickedOvenPizza { get; set; }
+		public bool clickedPlatePizza { get; set; }
+		public ObjectMotion clickedItemDestinationFunction { get; set; }
+		public Pizza clickedPizzaDestinationFunction { get; set; }
 		public GameObject dustbin;
 		public ObjectMotion nonVeg;
 		public ObjectMotion vegetables;
@@ -56,17 +54,15 @@ namespace _Project.Scripts.Managers
 		public ObjectMotion cupCake;
 		public SpriteRenderer cokeAdd ;
 		public SpriteRenderer nonVegAdd ;
-		public static int noOfPerfects;
 		public Pizza firstPizza ;
 		public Availability firstOvenAvailabe;
 		public Pizza firstOvenPizza;
-		public Coins firstCoins;
-		public Customer firstCustomer;
-		public bool clickfirstBase ;
+		public Customer firstCustomer { get; set; }
+		public bool clickfirstBase { get; set; }
 		public SpriteRenderer tableTop;
 		public SpriteRenderer tableCover;
 		public GameObject cokeFridge;
-		public bool hasFridge;
+		private bool hasFridge;
 		public static bool tutorialEnd;
 		public GameObject Radio ;
 		public GameObject Whistle ;
@@ -74,7 +70,6 @@ namespace _Project.Scripts.Managers
 		public GameObject handcuff ;
 		public GameObject nonvegflag;  
 		public GameObject starting_text ;
-		public GameObject upgrade_bttn ;
 		public Sprite []cokeBottlesSprites;
 		private void OnEnable()
 		{
@@ -327,7 +322,6 @@ namespace _Project.Scripts.Managers
 					if(cokeBottles[i].GetComponent<ObjectMotion>().iAmSelected)
 					{
 						cokeBottles[i].GetComponent<ObjectMotion>().iAmSelected = false;
-						cokeBottles[i].GetComponent<ObjectMotion>().startAnimating = false;
 						cokeBottles[i].GetComponent<ObjectMotion>().mySelection.SetActive (false);
 						cokeBottles[i].gameObject.transform.localScale = Vector3.one;
 					}
@@ -455,21 +449,16 @@ namespace _Project.Scripts.Managers
 			DeactivateOvenSelection();
 			DeactivatePlateSelection();
 			DeactivateAllBottlesSelection();
-
-
-			nonVeg.startAnimating = false;
+			
 			nonVeg.iAmSelected = false;
 			nonVeg.mySelection.SetActive (false); 
-
-			vegetables.startAnimating = false;
+			
 			vegetables.iAmSelected = false;
 			vegetables.mySelection.SetActive (false);
-
-			cheese.startAnimating = false;
+			
 			cheese.iAmSelected = false;
 			cheese.mySelection.SetActive (false);
-
-			cupCake.startAnimating = false;
+			
 			cupCake.iAmSelected = false;
 			cupCake.mySelection.SetActive (false);;
 	

@@ -25,14 +25,14 @@ namespace _Project.Scripts.Other
 		private bool _canMove;
 		private GameObject otherObject;
 
-		public ChineseUtensils utensil;
+		public ChineseUtensils utensil { get; set; }
 		public bool isRedSauce;
 		public bool isYellowSauce;
-		public HotDog availableHotDog;
+		public HotDog availableHotDog { get; set; }
 		public bool isCoke;
 		public Availability myParentHolder;
 		public LevelManager.Orders myType = LevelManager.Orders.COKE;
-		public bool isChilled;
+		public bool isChilled { get; set; }
 		public bool isNoodlesToCook;
 		public bool isSoupVeg;
 		public bool isNoodlesVeg;
@@ -44,21 +44,21 @@ namespace _Project.Scripts.Other
 		public bool isPizzaVeg;
 		public bool isPizzaNonVeg;
 		public bool isCheese;
-		public Pizza availablePizza;
-		public Burger availableBurger;
+		public Pizza availablePizza { get; set; }
+		public Burger availableBurger { get; set; }
 		public bool isTomato;
 		public bool isOnion;
 		public bool isCabbage;
 		public bool isFries;
-		public Customer customer;
+		public Customer customer { get; set; }
 		public bool isCupCake;
 		public ParticleSystem newCupcakeCame;
 		public Vector3 myOriginalPos , myTouchPos;
-		public bool iAmSelected , startAnimating;
+		public bool iAmSelected { get; set; }
 		public Vector3 myLocalScale;
 		public GameObject mySelection;
-		public bool  perfect;
-		public bool tutorialOn;
+		public bool  perfect { get; set; }
+		public bool tutorialOn { get; set; }
 		public Vector3 colliderSize;
 
 		private void Start () 
@@ -77,7 +77,6 @@ namespace _Project.Scripts.Other
 			isChilled = false;
 			perfect = false;
 			reachedDestination = false;
-			startAnimating = false;
 			iAmSelected = false;
 			customer = null;
 			mySelection.SetActive (false);
@@ -105,7 +104,6 @@ namespace _Project.Scripts.Other
 				{
 					if(!myParentHolder.available)
 					{
-						startAnimating = false;
 						scaleUp = true;
 						if(_usManager != null)
 						{
@@ -133,7 +131,6 @@ namespace _Project.Scripts.Other
 				}
 				else
 				{
-					startAnimating = false;
 					scaleUp = true;
 					_canMove = true;
 					if(isRedSauce)
@@ -298,9 +295,6 @@ namespace _Project.Scripts.Other
 		{
 			if(_canMove)
 			{
-
-				startAnimating = true;
-			
 				if(!reachedDestination)
 					StartCoroutine(MoveToPosition());
 				else
@@ -327,21 +321,18 @@ namespace _Project.Scripts.Other
 					{
 						NoodlesToCookReachedDestination();
 						iAmSelected = false;
-						startAnimating = false;
 						StartCoroutine(MoveToPosition(false));
 					}
 					else if(isNoodlesVeg)
 					{
 						VegForNoodlesReachedDestination();
 						iAmSelected = false;
-						startAnimating = false;
 						StartCoroutine(MoveToPosition(false));
 					}
 					else if(isSoupVeg)
 					{
 						VegForSoupReachedDestination ();
 						iAmSelected = false;
-						startAnimating = false;
 						StartCoroutine(MoveToPosition(false));;
 					}
 					else if(isNoodlesPlate)
@@ -356,42 +347,36 @@ namespace _Project.Scripts.Other
 					{
 						PizzaVegReachedDestination();
 						iAmSelected = false;
-						startAnimating = false;
 						StartCoroutine(MoveToPosition(false));
 					}
 					else if(isPizzaNonVeg)
 					{
 						PizzaNonVegReachedDestination ();
 						iAmSelected = false;
-						startAnimating = false;
 						StartCoroutine(MoveToPosition(false));;
 					}
 					else if(isCheese)
 					{
 						PizzaCheeseReachedDestination ();
 						iAmSelected = false;
-						startAnimating = false;
 						StartCoroutine(MoveToPosition(false));;
 					}
 					else if(isTomato)
 					{
 						TomatoReachedDestination();
 						iAmSelected = false;
-						startAnimating = false;
 						StartCoroutine(MoveToPosition(false));
 					}
 					else if(isOnion)
 					{
 						OnionReachedDestination ();
 						iAmSelected = false;
-						startAnimating = false;
 						StartCoroutine(MoveToPosition(false));;
 					}
 					else if(isCabbage)
 					{
 						CabbageReachedDestination ();
 						iAmSelected = false;
-						startAnimating = false;
 						StartCoroutine(MoveToPosition(false));;
 					}
 					else if(isFries)
@@ -539,24 +524,24 @@ namespace _Project.Scripts.Other
 			{
 				PlayerPrefs.SetInt ("FrenchfriesLevel1",1);
 				_uiManager.achievment_text.SetActive(true);
-				AchievementChild.check_claim++;
-				PlayerPrefs.SetInt("claimvalue",AchievementChild.check_claim);
+				AchievementBlock._claimCheck++;
+				PlayerPrefs.SetInt("claimvalue",AchievementBlock._claimCheck);
 				Invoke(nameof(Stopa),4.0f);
 			}
 			if(PlayerPrefs.GetInt("FrenchfriesServed") > 99 && PlayerPrefs.GetInt ("FrenchfriesLevel2")==0)
 			{
 				PlayerPrefs.SetInt ("FrenchfriesLevel2",1);
 				_uiManager.achievment_text.SetActive(true);
-				AchievementChild.check_claim++;
-				PlayerPrefs.SetInt("claimvalue",AchievementChild.check_claim);
+				AchievementBlock._claimCheck++;
+				PlayerPrefs.SetInt("claimvalue",AchievementBlock._claimCheck);
 				Invoke(nameof(Stopa),4.0f);
 			}
 			if(PlayerPrefs.GetInt("FrenchfriesServed") > 999 && PlayerPrefs.GetInt ("FrenchfriesLevel3")==0)
 			{
 				PlayerPrefs.SetInt ("FrenchfriesLevel3" ,1);
 				_uiManager.achievment_text.SetActive(true);
-				AchievementChild.check_claim++;
-				PlayerPrefs.SetInt("claimvalue",AchievementChild.check_claim);
+				AchievementBlock._claimCheck++;
+				PlayerPrefs.SetInt("claimvalue",AchievementBlock._claimCheck);
 				Invoke(nameof(Stopa),4.0f);
 			}
 
@@ -772,16 +757,16 @@ namespace _Project.Scripts.Other
 				PlayerPrefs.SetInt ("NoodlesLevel1",1);
 				MenuManager.totalscore+=100;
 				_uiManager.achievment_text.SetActive(true);
-				AchievementChild.check_claim++;
-				PlayerPrefs.SetInt("claimvalue",AchievementChild.check_claim);
+				AchievementBlock._claimCheck++;
+				PlayerPrefs.SetInt("claimvalue",AchievementBlock._claimCheck);
 				Invoke(nameof(Stopa),4.0f);
 			}
 			if(PlayerPrefs.GetInt("NoodlesServed") > 99 && PlayerPrefs.GetInt ("NoodlesLevel2")==0)
 			{
 				PlayerPrefs.SetInt ("NoodlesLevel2",1);
 				_uiManager.achievment_text.SetActive(true);
-				AchievementChild.check_claim++;
-				PlayerPrefs.SetInt("claimvalue",AchievementChild.check_claim);
+				AchievementBlock._claimCheck++;
+				PlayerPrefs.SetInt("claimvalue",AchievementBlock._claimCheck);
 				Invoke(nameof(Stopa),4.0f);
 
 			}
@@ -789,8 +774,8 @@ namespace _Project.Scripts.Other
 			{
 				PlayerPrefs.SetInt ("NoodlesLevel3",1);
 				_uiManager.achievment_text.SetActive(true);
-				AchievementChild.check_claim++;
-				PlayerPrefs.SetInt("claimvalue",AchievementChild.check_claim);
+				AchievementBlock._claimCheck++;
+				PlayerPrefs.SetInt("claimvalue",AchievementBlock._claimCheck);
 				Invoke(nameof(Stopa),4.0f);
 			}
 			_chinaManager.platesFilledCount--;
@@ -920,24 +905,24 @@ namespace _Project.Scripts.Other
 			{
 				PlayerPrefs.SetInt ("CokeLevel1",1);
 				_uiManager.achievment_text.SetActive(true);
-				AchievementChild.check_claim++;
-				PlayerPrefs.SetInt("claimvalue",AchievementChild.check_claim);
+				AchievementBlock._claimCheck++;
+				PlayerPrefs.SetInt("claimvalue",AchievementBlock._claimCheck);
 				Invoke(nameof(Stopa),4.0f);
 			}
 			if(PlayerPrefs.GetInt("CokesServed") > 99 && PlayerPrefs.GetInt ("CokeLevel2")==0)
 			{
 				PlayerPrefs.SetInt ("CokeLevel2",1);
 				_uiManager.achievment_text.SetActive(true);
-				AchievementChild.check_claim++;
-				PlayerPrefs.SetInt("claimvalue",AchievementChild.check_claim);
+				AchievementBlock._claimCheck++;
+				PlayerPrefs.SetInt("claimvalue",AchievementBlock._claimCheck);
 				Invoke(nameof(Stopa),4.0f);
 			}
 			if(PlayerPrefs.GetInt("CokesServed") > 999 && PlayerPrefs.GetInt ("CokeLevel3")==0)
 			{
 				PlayerPrefs.SetInt ("CokeLevel3",1);
 				_uiManager.achievment_text.SetActive(true);
-				AchievementChild.check_claim++;
-				PlayerPrefs.SetInt("claimvalue",AchievementChild.check_claim);
+				AchievementBlock._claimCheck++;
+				PlayerPrefs.SetInt("claimvalue",AchievementBlock._claimCheck);
 				Invoke(nameof(Stopa),4.0f);
 			}
 

@@ -10,8 +10,8 @@ namespace _Project.Scripts.UI_Scripts
 	{
 		[Inject] private DiContainer _diContainer;
 		[Inject] private MenuManager _menuManager;  
-		[Inject] private UIManager _uiManager;   
-		int noOfLevelsOpen;
+		[Inject] private UIManager _uiManager;
+		private int noOfLevelsOpen;
 		public Text totalCoinsText;
 		public Text totalGoldText;
 		public GameObject Aus_lock ;

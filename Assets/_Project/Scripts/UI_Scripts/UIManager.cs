@@ -12,6 +12,7 @@ namespace _Project.Scripts.UI_Scripts
 {
 	public class UIManager : MonoBehaviour
 	{
+		[Inject] private LevelManager _levelManager;
 		[Inject] private DiContainer _diContainer;
 		[Inject] private LevelSoundManager _levelSoundManager;
 		public int totalCoins;
@@ -183,7 +184,7 @@ namespace _Project.Scripts.UI_Scripts
 			uiPanel.SetActive (false);
 			gameOverPanel.SetActive (true);
 			radio_audio.Stop ();
-			if(totalCoins >= LevelManager._instance.targetScore[LevelManager.levelNo])
+			if(totalCoins >= _levelManager.targetScore[LevelManager.levelNo])
 			{
 				gameover_effect.SetActive(true);
 
@@ -254,7 +255,7 @@ namespace _Project.Scripts.UI_Scripts
 		private IEnumerator EarningsSlider()
 		{
 			float a = 1.5f;
-			float finalSliderValue = (totalCoins*1f)/(LevelManager._instance.targetScore[LevelManager.levelNo]*(a));
+			float finalSliderValue = (totalCoins*1f)/(_levelManager.targetScore[LevelManager.levelNo]*(a));
 			if(finalSliderValue > 1)
 			{
 				finalSliderValue = 1;
@@ -266,7 +267,7 @@ namespace _Project.Scripts.UI_Scripts
 			}
 			sliderValue.value = finalSliderValue;
 
-			int expertValue = (int)(LevelManager._instance.targetScore[LevelManager.levelNo]*(a));
+			int expertValue = (int)(_levelManager.targetScore[LevelManager.levelNo]*(a));
 			int usStars = (int)EncryptionHandler64.Decrypt (PlayerPrefs.GetString(MenuManager.envNo+"Stars"));
 			if(totalCoins >= expertValue)
 			{
@@ -304,7 +305,7 @@ namespace _Project.Scripts.UI_Scripts
 
 		public void NextLevel()
 		{
-			if(totalCoins >= LevelManager._instance.targetScore[LevelManager.levelNo])
+			if(totalCoins >= _levelManager.targetScore[LevelManager.levelNo])
 			{
 
 				LevelManager.levelNo++;
@@ -506,7 +507,7 @@ namespace _Project.Scripts.UI_Scripts
 				yield return 0;
 			}
 			coinsText.text = totalCoins.ToString ();
-			if(totalCoins > LevelManager._instance.targetScore[LevelManager.levelNo] && !_once)
+			if(totalCoins > _levelManager.targetScore[LevelManager.levelNo] && !_once)
 			{
 				goalMet.SetActive(true);
 				StartCoroutine (goalMet.GetComponent<AutoType>().TypeText());

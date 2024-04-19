@@ -14,7 +14,7 @@ namespace _Project.Scripts.Game
 		public string []itemUsage3 ;
 		public string []itemUsage4 ;
 		public string []itemUsage5 ;
-		public int itemNo;
+		public int itemNo { get; set; }
 
 		private void Awake () 
 		{

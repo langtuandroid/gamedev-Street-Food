@@ -14,15 +14,11 @@ namespace _Project.Scripts.Managers
 		[Inject] private LevelSoundManager _levelSoundManager;
 		[Inject] private UIManager _uiManager;
 		public GameObject TheifPanel;
-		public int cokePrice;
-		public int lessBakedBurger;
-		public int perfectBurger;
-		public int friesPrice;
+		public int cokePrice => 10;
+		public int lessBakedBurger => 20;
+		public int perfectBurger => 50;
 		public Sprite []burgerTikkiVariations;   //3	
-		public SpriteRenderer []burgerTomatoOnPlates; //6
 		public SpriteRenderer []burgerTikkiOnPlates; //6
-		public SpriteRenderer []burgerCabbageOnPlates; //6
-		public SpriteRenderer []burgerOnionOnPlates; //6
 		public SpriteRenderer []burgerPlates; //6
 		public SpriteRenderer []burgerOnPlates; //6
 		public GameObject []grills; //3
@@ -35,25 +31,24 @@ namespace _Project.Scripts.Managers
 		public GameObject []friesCluster;   //3
 		public ObjectMotion []friesPack; //9
 		public Availability []friesPlaces;  //9
-		public int grillsFilledCount;
-		public int totalGrillsAvailable;
-		public int platesFilledCount;
-		public int totalPlatesAvailable;
-		public int cokesFilled;
-		public int totalCokesAvailable;
-		public int friesFilled;
-		public int totalFriesAvailable;
-		
-		public bool clickedBurger;
-		public bool clickedTikki;
-		public bool clickedTomato;
-		public bool clickedOnion;
-		public bool clickedCabbage;
-		public bool cickedFries;
-		public bool clickedCoke;
-		public MakeTikki clickedTikkiDestinationFunction;
-		public ObjectMotion clickedItemDestinationFunction;
-		public Burger clickedHotDogDestinationFunction;
+		public int grillsFilledCount{ get; set; }
+		public int totalGrillsAvailable{ get; set; }
+		public int platesFilledCount{ get; set; }
+		public int totalPlatesAvailable{ get; set; }
+		public int cokesFilled{ get; set; }
+		public int totalCokesAvailable{ get; set; }
+		public int friesFilled{ get; set; }
+		public int totalFriesAvailable{ get; set; }
+		public bool clickedBurger{ get; set; }
+		public bool clickedTikki{ get; set; }
+		public bool clickedTomato{ get; set; }
+		public bool clickedOnion{ get; set; }
+		public bool clickedCabbage{ get; set; }
+		public bool cickedFries{ get; set; }
+		public bool clickedCoke{ get; set; }
+		public MakeTikki clickedTikkiDestinationFunction { get; set; }
+		public ObjectMotion clickedItemDestinationFunction { get; set; }
+		public Burger clickedHotDogDestinationFunction { get; set; }
 		public GameObject dustbin;
 		public ObjectMotion tomato;
 		public ObjectMotion onion;
@@ -66,10 +61,10 @@ namespace _Project.Scripts.Managers
 		public Burger firstBurger;
 		public MakeTikki firstTikki;
 		public ObjectMotion firstFries;
-		public Customer firstCustomer;
-		public bool clickfirstBun;
-		public bool clickFirstTikki;
-		public bool clickFirstFryer;
+		public Customer firstCustomer { get; set; }
+		public bool clickfirstBun { get; set; }
+		public bool clickFirstTikki { get; set; }
+		public bool clickFirstFryer { get; set; }
 		public SpriteRenderer tableCover;
 		public SpriteRenderer tableTop;
 		public GameObject Radio ;
@@ -304,7 +299,6 @@ namespace _Project.Scripts.Managers
 					if(cokeBottles[i].GetComponent<ObjectMotion>().iAmSelected)
 					{
 						cokeBottles[i].GetComponent<ObjectMotion>().iAmSelected = false;
-						cokeBottles[i].GetComponent<ObjectMotion>().startAnimating = false;
 						cokeBottles[i].GetComponent<ObjectMotion>().mySelection.SetActive (false);
 					}
 				}
@@ -352,7 +346,6 @@ namespace _Project.Scripts.Managers
 					if(friesPack[i].iAmSelected)
 					{
 						friesPack[i].iAmSelected = false;
-						friesPack[i].startAnimating = false;
 						friesPack[i].mySelection.SetActive (false);
 					}
 				}
@@ -387,17 +380,14 @@ namespace _Project.Scripts.Managers
 			DeactivateTikkiSelection();
 			DeactivateAllBottlesSelection();
 			DeactivateAllFriesSelection();
-
-			onion.startAnimating = false;
-			tomato.startAnimating = false;
+			
 			onion.iAmSelected = false;
 			tomato.iAmSelected = false;
 			onion.transform.localScale = onion.myLocalScale;
 			tomato.transform.localScale = tomato.myLocalScale;
 			tomato.mySelection.SetActive (false);
 			onion.mySelection.SetActive (false);
-
-			cabbage.startAnimating = false;
+			
 			cabbage.iAmSelected = false;
 			cabbage.transform.localScale = cabbage.myLocalScale;
 			cabbage.mySelection.SetActive (false);

@@ -1,5 +1,6 @@
 ﻿using _Project.Scripts.UI_Scripts;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Zenject;
 
@@ -9,15 +10,16 @@ namespace _Project.Scripts.Achivments
 	{
 		[Inject] private MenuManager _menuManager;  
 		[Inject] private UIManager _uiManager;   
-		[SerializeField] private  Text totalCoinsText;
-		[SerializeField] private  Text totalGoldText;
+		[FormerlySerializedAs("totalCoinsText")] [SerializeField] private Text _coinsText;
+		[FormerlySerializedAs("totalGoldText")] [SerializeField] private Text _goldText;
 
-		private void Start () {
-			totalGoldText.text = MenuManager.golds.ToString ();
-			totalCoinsText.text = MenuManager.totalscore.ToString ();
+		private void Start () 
+		{
+			_goldText.text = MenuManager.golds.ToString ();
+			_coinsText.text = MenuManager.totalscore.ToString ();
 		}
 	
-		public void Close()
+		public void ClosePanel()
 		{
 			if(_menuManager != null)
 				_menuManager.EnableFadePanel ();

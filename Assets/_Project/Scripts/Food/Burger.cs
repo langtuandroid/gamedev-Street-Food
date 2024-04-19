@@ -190,24 +190,24 @@ namespace _Project.Scripts.Food
 				{
 					PlayerPrefs.SetInt ("BurgerLevel1",1);
 					_uiManager.achievment_text.SetActive(true);
-					AchievementChild.check_claim++;
-					PlayerPrefs.SetInt("claimvalue",AchievementChild.check_claim);
+					AchievementBlock._claimCheck++;
+					PlayerPrefs.SetInt("claimvalue",AchievementBlock._claimCheck);
 					Invoke(nameof(Stopa),4.0f);
 				}
 				if(PlayerPrefs.GetInt("BurgerServed") > 99 && PlayerPrefs.GetInt ("BurgerLevel2")==1)
 				{
 					PlayerPrefs.SetInt ("BurgerLevel2",1);
 					_uiManager.achievment_text.SetActive(true);
-					AchievementChild.check_claim++;
-					PlayerPrefs.SetInt("claimvalue",AchievementChild.check_claim);
+					AchievementBlock._claimCheck++;
+					PlayerPrefs.SetInt("claimvalue",AchievementBlock._claimCheck);
 					Invoke(nameof(Stopa),4.0f);
 				}
 				if(PlayerPrefs.GetInt("BurgerServed") > 999 && PlayerPrefs.GetInt ("BurgerLevel3")==2)
 				{
 					PlayerPrefs.SetInt ("BurgerLevel3",1);
 					_uiManager.achievment_text.SetActive(true);
-					AchievementChild.check_claim++;
-					PlayerPrefs.SetInt("claimvalue",AchievementChild.check_claim);
+					AchievementBlock._claimCheck++;
+					PlayerPrefs.SetInt("claimvalue",AchievementBlock._claimCheck);
 					Invoke(nameof(Stopa),4.0f);
 				}
 				if(tutorialOn)

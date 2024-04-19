@@ -794,14 +794,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adc2e59889a30478b8671fb721acd6a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  utensil: {fileID: 0}
   isRedSauce: 0
   isYellowSauce: 0
-  availableHotDog: {fileID: 0}
   isCoke: 1
   myParentHolder: {fileID: 714065684}
   myType: 9
-  isChilled: 0
   isNoodlesToCook: 0
   isSoupVeg: 0
   isNoodlesVeg: 0
@@ -813,23 +810,16 @@ MonoBehaviour:
   isPizzaVeg: 0
   isPizzaNonVeg: 0
   isCheese: 0
-  availablePizza: {fileID: 0}
-  availableBurger: {fileID: 0}
   isTomato: 0
   isOnion: 0
   isCabbage: 0
   isFries: 0
-  customer: {fileID: 0}
   isCupCake: 0
   newCupcakeCame: {fileID: 0}
   myOriginalPos: {x: 0, y: 0, z: 0}
   myTouchPos: {x: 0, y: 0, z: 0}
-  iAmSelected: 0
-  startAnimating: 0
   myLocalScale: {x: 0, y: 0, z: 0}
   mySelection: {fileID: 350056902}
-  perfect: 0
-  tutorialOn: 0
   colliderSize: {x: 0, y: 0, z: 0}
 --- !u!54 &28129823
 Rigidbody:
@@ -2247,7 +2237,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   popupMessage: {fileID: 1267974196}
   popupMessageText: {fileID: 0}
-  meshBg: {fileID: 0}
   childObject: {fileID: 40303524}
   inCanvas: 1
   upArrowObject: {fileID: 1856271094}
@@ -2257,7 +2246,6 @@ MonoBehaviour:
   posCoins: {x: -160, y: 150, z: 0}
   posGold: {x: 80, y: 150, z: 0}
   positionPickCoins: {x: 0, y: 0, z: 0}
-  posCustomer: {x: 0, y: 0, z: 0}
   posCoke: {x: 0, y: 0, z: 0}
   posSauce: {x: 0, y: 0, z: 0}
   posDustBin: {x: 0, y: 0, z: 0}
@@ -2284,12 +2272,10 @@ MonoBehaviour:
   posFryer: {x: 0, y: 0, z: 0}
   posFirstFries: {x: 0, y: 0, z: 0}
   posBell: {x: 0, y: 0, z: 0}
-  posHandcuff: {x: 0, y: 0, z: 0}
   posCake: {x: 0, y: 0, z: 0}
   posWhistle: {x: 0, y: 0, z: 0}
   posRadio: {x: 0, y: 0, z: 0}
   myScale: {fileID: 40303526}
-  noOfExtraPopup: 0
   posBellArrow: {x: 0, y: 0, z: 0}
   posWhistleArrow: {x: 0, y: 0, z: 0}
   posRadioArrow: {x: 0, y: 0, z: 0}
@@ -3133,14 +3119,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adc2e59889a30478b8671fb721acd6a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  utensil: {fileID: 0}
   isRedSauce: 0
   isYellowSauce: 0
-  availableHotDog: {fileID: 0}
   isCoke: 0
   myParentHolder: {fileID: 0}
   myType: 0
-  isChilled: 0
   isNoodlesToCook: 0
   isSoupVeg: 0
   isNoodlesVeg: 0
@@ -3152,23 +3135,16 @@ MonoBehaviour:
   isPizzaVeg: 1
   isPizzaNonVeg: 0
   isCheese: 0
-  availablePizza: {fileID: 0}
-  availableBurger: {fileID: 0}
   isTomato: 0
   isOnion: 0
   isCabbage: 0
   isFries: 0
-  customer: {fileID: 0}
   isCupCake: 0
   newCupcakeCame: {fileID: 0}
   myOriginalPos: {x: 0, y: 0, z: 0}
   myTouchPos: {x: 0, y: 0, z: 0}
-  iAmSelected: 0
-  startAnimating: 0
   myLocalScale: {x: 0, y: 0, z: 0}
   mySelection: {fileID: 1485131403}
-  perfect: 0
-  tutorialOn: 0
   colliderSize: {x: 0, y: 0, z: 0}
 --- !u!1 &150274967
 GameObject:
@@ -5159,14 +5135,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adc2e59889a30478b8671fb721acd6a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  utensil: {fileID: 0}
   isRedSauce: 0
   isYellowSauce: 0
-  availableHotDog: {fileID: 0}
   isCoke: 1
   myParentHolder: {fileID: 1458988650}
   myType: 9
-  isChilled: 0
   isNoodlesToCook: 0
   isSoupVeg: 0
   isNoodlesVeg: 0
@@ -5178,23 +5151,16 @@ MonoBehaviour:
   isPizzaVeg: 0
   isPizzaNonVeg: 0
   isCheese: 0
-  availablePizza: {fileID: 0}
-  availableBurger: {fileID: 0}
   isTomato: 0
   isOnion: 0
   isCabbage: 0
   isFries: 0
-  customer: {fileID: 0}
   isCupCake: 0
   newCupcakeCame: {fileID: 0}
   myOriginalPos: {x: 0, y: 0, z: 0}
   myTouchPos: {x: 0, y: 0, z: 0}
-  iAmSelected: 0
-  startAnimating: 0
   myLocalScale: {x: 0, y: 0, z: 0}
   mySelection: {fileID: 1083904773}
-  perfect: 0
-  tutorialOn: 0
   colliderSize: {x: 0, y: 0, z: 0}
 --- !u!54 &241271934
 Rigidbody:
@@ -5365,16 +5331,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b91ab6aa3bcb047ecbab0850675e00dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positionTaken: 0
-  myAmount: 0
   perfectText: {fileID: 208968446}
   addValue: {fileID: 2041903600}
-  tutorialOn: 0
   coinCollected: {fileID: 1090462087}
   highlight: {fileID: 1952360086}
   uiCoins: {fileID: 1217708313}
   Bonus_value: {fileID: 192179312}
-  bonusVal: 0
 --- !u!95 &241878750
 Animator:
   serializedVersion: 5
@@ -5940,14 +5902,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adc2e59889a30478b8671fb721acd6a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  utensil: {fileID: 0}
   isRedSauce: 0
   isYellowSauce: 0
-  availableHotDog: {fileID: 0}
   isCoke: 1
   myParentHolder: {fileID: 298203170}
   myType: 9
-  isChilled: 0
   isNoodlesToCook: 0
   isSoupVeg: 0
   isNoodlesVeg: 0
@@ -5959,23 +5918,16 @@ MonoBehaviour:
   isPizzaVeg: 0
   isPizzaNonVeg: 0
   isCheese: 0
-  availablePizza: {fileID: 0}
-  availableBurger: {fileID: 0}
   isTomato: 0
   isOnion: 0
   isCabbage: 0
   isFries: 0
-  customer: {fileID: 0}
   isCupCake: 0
   newCupcakeCame: {fileID: 0}
   myOriginalPos: {x: 0, y: 0, z: 0}
   myTouchPos: {x: 0, y: 0, z: 0}
-  iAmSelected: 0
-  startAnimating: 0
   myLocalScale: {x: 0, y: 0, z: 0}
   mySelection: {fileID: 1472602994}
-  perfect: 0
-  tutorialOn: 0
   colliderSize: {x: 0, y: 0, z: 0}
 --- !u!54 &262930515
 Rigidbody:
@@ -16920,14 +16872,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adc2e59889a30478b8671fb721acd6a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  utensil: {fileID: 0}
   isRedSauce: 0
   isYellowSauce: 0
-  availableHotDog: {fileID: 0}
   isCoke: 0
   myParentHolder: {fileID: 0}
   myType: 0
-  isChilled: 0
   isNoodlesToCook: 0
   isSoupVeg: 0
   isNoodlesVeg: 0
@@ -16939,23 +16888,16 @@ MonoBehaviour:
   isPizzaVeg: 0
   isPizzaNonVeg: 0
   isCheese: 1
-  availablePizza: {fileID: 0}
-  availableBurger: {fileID: 0}
   isTomato: 0
   isOnion: 0
   isCabbage: 0
   isFries: 0
-  customer: {fileID: 0}
   isCupCake: 0
   newCupcakeCame: {fileID: 0}
   myOriginalPos: {x: 0, y: 0, z: 0}
   myTouchPos: {x: 0, y: 0, z: 0}
-  iAmSelected: 0
-  startAnimating: 0
   myLocalScale: {x: 0, y: 0, z: 0}
   mySelection: {fileID: 235167560}
-  perfect: 0
-  tutorialOn: 0
   colliderSize: {x: 0, y: 0, z: 0}
 --- !u!1 &369896894
 GameObject:
@@ -22643,16 +22585,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b91ab6aa3bcb047ecbab0850675e00dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positionTaken: 0
-  myAmount: 0
   perfectText: {fileID: 688357939}
   addValue: {fileID: 1928474724}
-  tutorialOn: 0
   coinCollected: {fileID: 2132294788}
   highlight: {fileID: 270119506}
   uiCoins: {fileID: 1217708313}
   Bonus_value: {fileID: 220883220}
-  bonusVal: 0
 --- !u!95 &405892310
 Animator:
   serializedVersion: 5
@@ -24169,9 +24107,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f2493083eca44001a1b22e348096f59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wrongOrderGiven: 0
-  heatingTimer: 0
-  customer: {fileID: 0}
   cheese: 0
   vegetable: 0
   myToppings: {fileID: 1707059634}
@@ -24179,12 +24114,8 @@ MonoBehaviour:
   myPlate: {fileID: 1234103582}
   myOriginalPos: {x: 0, y: 0, z: 0}
   myTouchPos: {x: 0, y: 0, z: 0}
-  myType: 0
-  perfect: 0
-  iAmSelected: 0
   myLocalScale: {x: 0, y: 0, z: 0}
   mySelection: {fileID: 1744456356}
-  tutorialOn: 0
   isInOven: 0
   isBurnt: 0
   mySmoke: {fileID: 0}
@@ -29216,16 +29147,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b91ab6aa3bcb047ecbab0850675e00dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positionTaken: 0
-  myAmount: 0
   perfectText: {fileID: 1358383559}
   addValue: {fileID: 488225948}
-  tutorialOn: 0
   coinCollected: {fileID: 458162262}
   highlight: {fileID: 504376974}
   uiCoins: {fileID: 1217708313}
   Bonus_value: {fileID: 911781191}
-  bonusVal: 0
 --- !u!95 &520927122
 Animator:
   serializedVersion: 5
@@ -48024,6 +47951,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3370963012577099790, guid: ef98d143b4d84434394d21accb6ad543,
+        type: 3}
+      propertyPath: _levelManager
+      value: 
+      objectReference: {fileID: 58018003}
     - target: {fileID: 7317665530187434627, guid: ef98d143b4d84434394d21accb6ad543,
         type: 3}
       propertyPath: _levelSoundManager
@@ -48178,9 +48110,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f2493083eca44001a1b22e348096f59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wrongOrderGiven: 0
-  heatingTimer: 0
-  customer: {fileID: 0}
   cheese: 0
   vegetable: 0
   myToppings: {fileID: 1048428443}
@@ -48188,12 +48117,8 @@ MonoBehaviour:
   myPlate: {fileID: 76331357}
   myOriginalPos: {x: 0, y: 0, z: 0}
   myTouchPos: {x: 0, y: 0, z: 0}
-  myType: 0
-  perfect: 0
-  iAmSelected: 0
   myLocalScale: {x: 0, y: 0, z: 0}
   mySelection: {fileID: 406850576}
-  tutorialOn: 0
   isInOven: 0
   isBurnt: 0
   mySmoke: {fileID: 0}
@@ -49928,9 +49853,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f2493083eca44001a1b22e348096f59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wrongOrderGiven: 0
-  heatingTimer: 0
-  customer: {fileID: 0}
   cheese: 0
   vegetable: 0
   myToppings: {fileID: 1564759366}
@@ -49938,12 +49860,8 @@ MonoBehaviour:
   myPlate: {fileID: 1523971929}
   myOriginalPos: {x: 0, y: 0, z: 0}
   myTouchPos: {x: 0, y: 0, z: 0}
-  myType: 0
-  perfect: 0
-  iAmSelected: 0
   myLocalScale: {x: 0, y: 0, z: 0}
   mySelection: {fileID: 794497177}
-  tutorialOn: 0
   isInOven: 0
   isBurnt: 0
   mySmoke: {fileID: 0}
@@ -50602,9 +50520,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f2493083eca44001a1b22e348096f59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wrongOrderGiven: 0
-  heatingTimer: 0
-  customer: {fileID: 0}
   cheese: 1
   vegetable: 1
   myToppings: {fileID: 1424809518}
@@ -50612,12 +50527,8 @@ MonoBehaviour:
   myPlate: {fileID: 1406252898}
   myOriginalPos: {x: 0, y: 0, z: 0}
   myTouchPos: {x: 0, y: 0, z: 0}
-  myType: 0
-  perfect: 0
-  iAmSelected: 0
   myLocalScale: {x: 0, y: 0, z: 0}
   mySelection: {fileID: 341780202}
-  tutorialOn: 0
   isInOven: 1
   isBurnt: 0
   mySmoke: {fileID: 2058283295}
@@ -56533,9 +56444,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f2493083eca44001a1b22e348096f59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wrongOrderGiven: 0
-  heatingTimer: 0
-  customer: {fileID: 0}
   cheese: 0
   vegetable: 0
   myToppings: {fileID: 733614661}
@@ -56543,12 +56451,8 @@ MonoBehaviour:
   myPlate: {fileID: 84885008}
   myOriginalPos: {x: 0, y: 0, z: 0}
   myTouchPos: {x: 0, y: 0, z: 0}
-  myType: 0
-  perfect: 0
-  iAmSelected: 0
   myLocalScale: {x: 0, y: 0, z: 0}
   mySelection: {fileID: 1467952539}
-  tutorialOn: 0
   isInOven: 0
   isBurnt: 0
   mySmoke: {fileID: 0}
@@ -58676,14 +58580,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adc2e59889a30478b8671fb721acd6a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  utensil: {fileID: 0}
   isRedSauce: 0
   isYellowSauce: 0
-  availableHotDog: {fileID: 0}
   isCoke: 0
   myParentHolder: {fileID: 0}
   myType: 0
-  isChilled: 0
   isNoodlesToCook: 0
   isSoupVeg: 0
   isNoodlesVeg: 0
@@ -58695,23 +58596,16 @@ MonoBehaviour:
   isPizzaVeg: 0
   isPizzaNonVeg: 1
   isCheese: 0
-  availablePizza: {fileID: 0}
-  availableBurger: {fileID: 0}
   isTomato: 0
   isOnion: 0
   isCabbage: 0
   isFries: 0
-  customer: {fileID: 0}
   isCupCake: 0
   newCupcakeCame: {fileID: 0}
   myOriginalPos: {x: 0, y: 0, z: 0}
   myTouchPos: {x: 0, y: 0, z: 0}
-  iAmSelected: 0
-  startAnimating: 0
   myLocalScale: {x: 0, y: 0, z: 0}
   mySelection: {fileID: 897092199}
-  perfect: 0
-  tutorialOn: 0
   colliderSize: {x: 0, y: 0, z: 0}
 --- !u!54 &1130605629
 Rigidbody:
@@ -60799,14 +60693,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adc2e59889a30478b8671fb721acd6a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  utensil: {fileID: 0}
   isRedSauce: 0
   isYellowSauce: 0
-  availableHotDog: {fileID: 0}
   isCoke: 1
   myParentHolder: {fileID: 908103638}
   myType: 9
-  isChilled: 0
   isNoodlesToCook: 0
   isSoupVeg: 0
   isNoodlesVeg: 0
@@ -60818,23 +60709,16 @@ MonoBehaviour:
   isPizzaVeg: 0
   isPizzaNonVeg: 0
   isCheese: 0
-  availablePizza: {fileID: 0}
-  availableBurger: {fileID: 0}
   isTomato: 0
   isOnion: 0
   isCabbage: 0
   isFries: 0
-  customer: {fileID: 0}
   isCupCake: 0
   newCupcakeCame: {fileID: 0}
   myOriginalPos: {x: 0, y: 0, z: 0}
   myTouchPos: {x: 0, y: 0, z: 0}
-  iAmSelected: 0
-  startAnimating: 0
   myLocalScale: {x: 0, y: 0, z: 0}
   mySelection: {fileID: 2015800002}
-  perfect: 0
-  tutorialOn: 0
   colliderSize: {x: 0, y: 0, z: 0}
 --- !u!54 &1210522681
 Rigidbody:
@@ -61796,9 +61680,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f2493083eca44001a1b22e348096f59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wrongOrderGiven: 0
-  heatingTimer: 0
-  customer: {fileID: 0}
   cheese: 0
   vegetable: 0
   myToppings: {fileID: 891083494}
@@ -61806,12 +61687,8 @@ MonoBehaviour:
   myPlate: {fileID: 1188661187}
   myOriginalPos: {x: 0, y: 0, z: 0}
   myTouchPos: {x: 0, y: 0, z: 0}
-  myType: 0
-  perfect: 0
-  iAmSelected: 0
   myLocalScale: {x: 0, y: 0, z: 0}
   mySelection: {fileID: 380714291}
-  tutorialOn: 0
   isInOven: 0
   isBurnt: 0
   mySmoke: {fileID: 0}
@@ -69590,9 +69467,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f2493083eca44001a1b22e348096f59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wrongOrderGiven: 0
-  heatingTimer: 0
-  customer: {fileID: 0}
   cheese: 1
   vegetable: 1
   myToppings: {fileID: 1860530954}
@@ -69600,12 +69474,8 @@ MonoBehaviour:
   myPlate: {fileID: 8632639}
   myOriginalPos: {x: 0, y: 0, z: 0}
   myTouchPos: {x: 0, y: 0, z: 0}
-  myType: 0
-  perfect: 0
-  iAmSelected: 0
   myLocalScale: {x: 0, y: 0, z: 0}
   mySelection: {fileID: 1418076105}
-  tutorialOn: 0
   isInOven: 1
   isBurnt: 0
   mySmoke: {fileID: 1018453061}
@@ -70932,9 +70802,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f2493083eca44001a1b22e348096f59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wrongOrderGiven: 0
-  heatingTimer: 0
-  customer: {fileID: 0}
   cheese: 1
   vegetable: 1
   myToppings: {fileID: 1292553871}
@@ -70942,12 +70809,8 @@ MonoBehaviour:
   myPlate: {fileID: 87337930}
   myOriginalPos: {x: 0, y: 0, z: 0}
   myTouchPos: {x: 0, y: 0, z: 0}
-  myType: 0
-  perfect: 0
-  iAmSelected: 0
   myLocalScale: {x: 0, y: 0, z: 0}
   mySelection: {fileID: 255519818}
-  tutorialOn: 0
   isInOven: 1
   isBurnt: 0
   mySmoke: {fileID: 1118256760}
@@ -73768,14 +73631,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adc2e59889a30478b8671fb721acd6a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  utensil: {fileID: 0}
   isRedSauce: 0
   isYellowSauce: 0
-  availableHotDog: {fileID: 0}
   isCoke: 1
   myParentHolder: {fileID: 1510766067}
   myType: 9
-  isChilled: 0
   isNoodlesToCook: 0
   isSoupVeg: 0
   isNoodlesVeg: 0
@@ -73787,23 +73647,16 @@ MonoBehaviour:
   isPizzaVeg: 0
   isPizzaNonVeg: 0
   isCheese: 0
-  availablePizza: {fileID: 0}
-  availableBurger: {fileID: 0}
   isTomato: 0
   isOnion: 0
   isCabbage: 0
   isFries: 0
-  customer: {fileID: 0}
   isCupCake: 0
   newCupcakeCame: {fileID: 0}
   myOriginalPos: {x: 0, y: 0, z: 0}
   myTouchPos: {x: 0, y: 0, z: 0}
-  iAmSelected: 0
-  startAnimating: 0
   myLocalScale: {x: 0, y: 0, z: 0}
   mySelection: {fileID: 1779032558}
-  perfect: 0
-  tutorialOn: 0
   colliderSize: {x: 0, y: 0, z: 0}
 --- !u!54 &1570395169
 Rigidbody:
@@ -81216,16 +81069,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b91ab6aa3bcb047ecbab0850675e00dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positionTaken: 0
-  myAmount: 0
   perfectText: {fileID: 98454431}
   addValue: {fileID: 1507304393}
-  tutorialOn: 0
   coinCollected: {fileID: 1382153715}
   highlight: {fileID: 1640744110}
   uiCoins: {fileID: 1217708313}
   Bonus_value: {fileID: 2084258296}
-  bonusVal: 0
 --- !u!95 &1652232330
 Animator:
   serializedVersion: 5
@@ -81816,9 +81665,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f2493083eca44001a1b22e348096f59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wrongOrderGiven: 0
-  heatingTimer: 0
-  customer: {fileID: 0}
   cheese: 0
   vegetable: 0
   myToppings: {fileID: 697605065}
@@ -81826,12 +81672,8 @@ MonoBehaviour:
   myPlate: {fileID: 322982832}
   myOriginalPos: {x: 0, y: 0, z: 0}
   myTouchPos: {x: 0, y: 0, z: 0}
-  myType: 0
-  perfect: 0
-  iAmSelected: 0
   myLocalScale: {x: 0, y: 0, z: 0}
   mySelection: {fileID: 150274967}
-  tutorialOn: 0
   isInOven: 0
   isBurnt: 0
   mySmoke: {fileID: 0}
@@ -88333,9 +88175,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f2493083eca44001a1b22e348096f59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wrongOrderGiven: 0
-  heatingTimer: 0
-  customer: {fileID: 0}
   cheese: 1
   vegetable: 1
   myToppings: {fileID: 392637550}
@@ -88343,12 +88182,8 @@ MonoBehaviour:
   myPlate: {fileID: 831307572}
   myOriginalPos: {x: 0, y: 0, z: 0}
   myTouchPos: {x: 0, y: 0, z: 0}
-  myType: 0
-  perfect: 0
-  iAmSelected: 0
   myLocalScale: {x: 0, y: 0, z: 0}
   mySelection: {fileID: 185882505}
-  tutorialOn: 0
   isInOven: 1
   isBurnt: 0
   mySmoke: {fileID: 364300884}
@@ -89172,9 +89007,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f2493083eca44001a1b22e348096f59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wrongOrderGiven: 0
-  heatingTimer: 0
-  customer: {fileID: 0}
   cheese: 1
   vegetable: 1
   myToppings: {fileID: 870061731}
@@ -89182,12 +89014,8 @@ MonoBehaviour:
   myPlate: {fileID: 237839535}
   myOriginalPos: {x: 0, y: 0, z: 0}
   myTouchPos: {x: 0, y: 0, z: 0}
-  myType: 0
-  perfect: 0
-  iAmSelected: 0
   myLocalScale: {x: 0, y: 0, z: 0}
   mySelection: {fileID: 523790150}
-  tutorialOn: 0
   isInOven: 1
   isBurnt: 0
   mySmoke: {fileID: 682483240}
@@ -90644,9 +90472,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TheifPanel: {fileID: 1077014697}
-  cokePrice: 10
-  lessBakedPizza: 30
-  perfectPizza: 60
   pizzaBakedVariations:
   - {fileID: 21300000, guid: fd4789fdbacb84a639737c5cb14822a3, type: 3}
   - {fileID: 21300000, guid: 4166215af3b314605aeb288b8808e3f5, type: 3}
@@ -90659,20 +90484,6 @@ MonoBehaviour:
   pizzaToppings:
   - {fileID: 21300000, guid: bf2a7e50b7a9f46b0bfa85afdb2b9ac4, type: 3}
   - {fileID: 21300000, guid: bf86ad8bd7f694657bbf7f8ecc5222cf, type: 3}
-  pizzaToppingsOnPlate:
-  - {fileID: 1707059634}
-  - {fileID: 891083494}
-  - {fileID: 1564759366}
-  - {fileID: 1048428443}
-  - {fileID: 733614661}
-  - {fileID: 697605065}
-  pizzaCheeseOnPlate:
-  - {fileID: 376260153}
-  - {fileID: 1592770750}
-  - {fileID: 916950650}
-  - {fileID: 1160680821}
-  - {fileID: 455785528}
-  - {fileID: 1461376387}
   pizzaPlates:
   - {fileID: 1234103581}
   - {fileID: 1188661186}
@@ -90752,20 +90563,6 @@ MonoBehaviour:
   - {fileID: 1671355631}
   - {fileID: 738666665}
   - {fileID: 1387224790}
-  totalOvensAvailable: 0
-  platesFilledCount: 0
-  totalPlatesAvailable: 0
-  cokesFilled: 0
-  totalCokesAvailable: 0
-  fridgeFilledCount: 0
-  clickedNonVeg: 0
-  clickedVeg: 0
-  clickedCheese: 0
-  clickedCoke: 0
-  clickedOvenPizza: 0
-  clickedPlatePizza: 0
-  clickedItemDestinationFunction: {fileID: 0}
-  clickedPizzaDestinationFunction: {fileID: 0}
   dustbin: {fileID: 1043526822}
   nonVeg: {fileID: 1130605628}
   vegetables: {fileID: 150050280}
@@ -90776,20 +90573,15 @@ MonoBehaviour:
   firstPizza: {fileID: 497063295}
   firstOvenAvailabe: {fileID: 831307572}
   firstOvenPizza: {fileID: 1744771271}
-  firstCoins: {fileID: 0}
-  firstCustomer: {fileID: 0}
-  clickfirstBase: 0
   tableTop: {fileID: 1312768085}
   tableCover: {fileID: 1597891409}
   cokeFridge: {fileID: 1019037845}
-  hasFridge: 0
   Radio: {fileID: 1779694765}
   Whistle: {fileID: 485388087}
   bell: {fileID: 1686507659}
   handcuff: {fileID: 1802418257}
   nonvegflag: {fileID: 435058820}
   starting_text: {fileID: 1599886365}
-  upgrade_bttn: {fileID: 1499019454}
   cokeBottlesSprites:
   - {fileID: 21300000, guid: 305a253a34c9c463ab86309969c77df6, type: 3}
   - {fileID: 21300000, guid: ad1623c9087f44a9a8dc599351e5368d, type: 3}
@@ -91696,9 +91488,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f2493083eca44001a1b22e348096f59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wrongOrderGiven: 0
-  heatingTimer: 0
-  customer: {fileID: 0}
   cheese: 1
   vegetable: 1
   myToppings: {fileID: 290755135}
@@ -91706,12 +91495,8 @@ MonoBehaviour:
   myPlate: {fileID: 772414066}
   myOriginalPos: {x: 0, y: 0, z: 0}
   myTouchPos: {x: 0, y: 0, z: 0}
-  myType: 0
-  perfect: 0
-  iAmSelected: 0
   myLocalScale: {x: 0, y: 0, z: 0}
   mySelection: {fileID: 1036470602}
-  tutorialOn: 0
   isInOven: 1
   isBurnt: 0
   mySmoke: {fileID: 345592433}
@@ -97995,14 +97780,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adc2e59889a30478b8671fb721acd6a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  utensil: {fileID: 0}
   isRedSauce: 0
   isYellowSauce: 0
-  availableHotDog: {fileID: 0}
   isCoke: 1
   myParentHolder: {fileID: 1408630284}
   myType: 9
-  isChilled: 0
   isNoodlesToCook: 0
   isSoupVeg: 0
   isNoodlesVeg: 0
@@ -98014,23 +97796,16 @@ MonoBehaviour:
   isPizzaVeg: 0
   isPizzaNonVeg: 0
   isCheese: 0
-  availablePizza: {fileID: 0}
-  availableBurger: {fileID: 0}
   isTomato: 0
   isOnion: 0
   isCabbage: 0
   isFries: 0
-  customer: {fileID: 0}
   isCupCake: 0
   newCupcakeCame: {fileID: 0}
   myOriginalPos: {x: 0, y: 0, z: 0}
   myTouchPos: {x: 0, y: 0, z: 0}
-  iAmSelected: 0
-  startAnimating: 0
   myLocalScale: {x: 0, y: 0, z: 0}
   mySelection: {fileID: 115946287}
-  perfect: 0
-  tutorialOn: 0
   colliderSize: {x: 0, y: 0, z: 0}
 --- !u!54 &1955215685
 Rigidbody:
@@ -98202,14 +97977,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adc2e59889a30478b8671fb721acd6a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  utensil: {fileID: 0}
   isRedSauce: 0
   isYellowSauce: 0
-  availableHotDog: {fileID: 0}
   isCoke: 0
   myParentHolder: {fileID: 0}
   myType: 4
-  isChilled: 0
   isNoodlesToCook: 0
   isSoupVeg: 0
   isNoodlesVeg: 0
@@ -98221,23 +97993,16 @@ MonoBehaviour:
   isPizzaVeg: 0
   isPizzaNonVeg: 0
   isCheese: 0
-  availablePizza: {fileID: 0}
-  availableBurger: {fileID: 0}
   isTomato: 0
   isOnion: 0
   isCabbage: 0
   isFries: 0
-  customer: {fileID: 0}
   isCupCake: 1
   newCupcakeCame: {fileID: 1452430999}
   myOriginalPos: {x: 0, y: 0, z: 0}
   myTouchPos: {x: 0, y: 0, z: 0}
-  iAmSelected: 0
-  startAnimating: 0
   myLocalScale: {x: 0, y: 0, z: 0}
   mySelection: {fileID: 54184782}
-  perfect: 0
-  tutorialOn: 0
   colliderSize: {x: 0, y: 0, z: 0}
 --- !u!54 &1957245944
 Rigidbody:
@@ -103508,7 +103273,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   popupMessage: {fileID: 0}
   popupMessageText: {fileID: 1999916323}
-  meshBg: {fileID: 0}
   childObject: {fileID: 0}
   inCanvas: 0
   upArrowObject: {fileID: 395985853}
@@ -103518,7 +103282,6 @@ MonoBehaviour:
   posCoins: {x: 0, y: 0, z: 0}
   posGold: {x: 0, y: 0, z: 0}
   positionPickCoins: {x: 0, y: 0, z: 0}
-  posCustomer: {x: 0, y: 0, z: 0}
   posCoke: {x: -4.38, y: -1.68, z: 0}
   posSauce: {x: 0, y: 0, z: 0}
   posDustBin: {x: -4.38, y: -1.8, z: 0}
@@ -103545,12 +103308,10 @@ MonoBehaviour:
   posFryer: {x: 0, y: 0, z: 0}
   posFirstFries: {x: 0, y: 0, z: 0}
   posBell: {x: 4.62, y: 1.83, z: 0}
-  posHandcuff: {x: 0, y: 0, z: 0}
   posCake: {x: 1.43, y: 2.03, z: 0}
   posWhistle: {x: 4.65, y: 0.81, z: 0}
   posRadio: {x: -4.67, y: 2.43, z: 0}
   myScale: {fileID: 1991024673}
-  noOfExtraPopup: 0
   posBellArrow: {x: 1.79, y: 0, z: 0}
   posWhistleArrow: {x: 1.79, y: 0, z: 0}
   posRadioArrow: {x: 0, y: 0, z: 0}
@@ -104319,16 +104080,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b91ab6aa3bcb047ecbab0850675e00dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positionTaken: 0
-  myAmount: 0
   perfectText: {fileID: 710165732}
   addValue: {fileID: 1797777747}
-  tutorialOn: 0
   coinCollected: {fileID: 1445286527}
   highlight: {fileID: 528181712}
   uiCoins: {fileID: 1217708313}
   Bonus_value: {fileID: 1751439506}
-  bonusVal: 0
 --- !u!95 &2021502291
 Animator:
   serializedVersion: 5

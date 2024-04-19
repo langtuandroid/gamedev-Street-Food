@@ -20,23 +20,22 @@ namespace _Project.Scripts.Food
 		private Vector3 colliderSize;
 		private bool canMove;
 		private int a=1;
+		[SerializeField] private GameObject errorObject;
+		[SerializeField] private Availability myPlate;
+		[SerializeField] private Vector3 myOriginalPos , myTouchPos;
 		
+		public Vector3 myLocalScale;
+		public GameObject mySelection;
 		public GameObject otherObject;
+		public bool tikki;
+		public bool tutorialOn { get; set; }
+		public LevelManager.Orders myType { get; set; }
+		public bool perfect { get; set; }
+		public bool iAmSelected { get; set; }
 		public bool wrongOrderGiven{ get; set; }
 		public Customer customer{ get; set; }
 		public bool redSauce { get; set; }
 		public bool yellowSauce { get; set; }
-		public bool tikki;
-		[SerializeField] private Availability myPlate;
-		[SerializeField] private Vector3 myOriginalPos , myTouchPos;
-		public LevelManager.Orders myType { get; set; }
-		public bool perfect { get; set; }
-		public bool iAmSelected { get; set; }
-		public Vector3 myLocalScale;
-		public GameObject mySelection;
-		public bool tutorialOn { get; set; }
-		[SerializeField] private GameObject errorObject;
-
 		private void Start()
 		{
 			_uiManager.n_Hotdogs_served = PlayerPrefs.GetInt ("hotdogServed");
@@ -164,24 +163,24 @@ namespace _Project.Scripts.Food
 
 					PlayerPrefs.SetInt ("hotdogLevel1",1);
 					_uiManager.achievment_text.SetActive(true);
-					AchievementChild.check_claim++;
-					PlayerPrefs.SetInt("claimvalue",AchievementChild.check_claim);
+					AchievementBlock._claimCheck++;
+					PlayerPrefs.SetInt("claimvalue",AchievementBlock._claimCheck);
 					Invoke(nameof(Stopa),4.0f);
 				}
 				if(PlayerPrefs.GetInt("hotdogServed") > 99 && PlayerPrefs.GetInt ("hotdogLevel2")==0)
 				{
 					PlayerPrefs.SetInt ("hotdogLevel2",1);
 					_uiManager.achievment_text.SetActive(true);
-					AchievementChild.check_claim++;
-					PlayerPrefs.SetInt("claimvalue",AchievementChild.check_claim);
+					AchievementBlock._claimCheck++;
+					PlayerPrefs.SetInt("claimvalue",AchievementBlock._claimCheck);
 					Invoke(nameof(Stopa),4.0f);
 				}
 				if(PlayerPrefs.GetInt("hotdogServed") > 999 && PlayerPrefs.GetInt ("hotdogLevel3")==0)
 				{
 					PlayerPrefs.SetInt ("hotdogLevel3",1);
 					_uiManager.achievment_text.SetActive(true);
-					AchievementChild.check_claim++;
-					PlayerPrefs.SetInt("claimvalue",AchievementChild.check_claim);
+					AchievementBlock._claimCheck++;
+					PlayerPrefs.SetInt("claimvalue",AchievementBlock._claimCheck);
 					Invoke(nameof(Stopa),4.0f);
 				}
 				if(tutorialOn)

@@ -19,30 +19,27 @@ namespace _Project.Scripts.Game
 		private float heatingTimer;
 		private float perfectTimer = 6f;
 		private float burningTimer = 18f;
-		public bool isSoupContainer , isPan;
+		public bool isSoupContainer;
+		public bool isPan;
 		public LevelManager.Orders myType;
-		public bool vegAdded;
+		public bool vegAdded { get; set; }
 		public bool noodlesAdded;
-		public bool initialIngredientsAdded;
 		public int noOfServingsAvailable;
 		public SpriteRenderer myImage;
 		public Sprite []ladleVariations;
 		public SpriteRenderer myFood;
 		public GameObject myReadyFood;
 		public Vector3 myOriginalPos , myTouchPos;
-		public bool iAmSelected;
-		public Vector3 myLocalScale;
+		public bool iAmSelected { get; set; }
 		public GameObject mySelection;
 		public BoxCollider []fullCollider ;
 		public BoxCollider tipCollider;
-		public bool isBurnt;
-		public bool tutorialOn;
-		public ParticleSystem foodCooked;
+		public bool isBurnt { get; set; }
+		public bool tutorialOn { get; set; }
 		public ParticleSystem mySmoke;
 		public TweenScale myScale;
 		public TweenAlpha myAlpha;
 		public TweenScale scaledImage;
-	
 		public GameObject Pan_error;
 		public GameObject soup_error;
 
@@ -58,7 +55,6 @@ namespace _Project.Scripts.Game
 			}
 
 			myOriginalPos = transform.position;
-			myLocalScale = transform.localScale;
 		}
 
 

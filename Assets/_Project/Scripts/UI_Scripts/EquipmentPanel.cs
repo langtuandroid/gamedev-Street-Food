@@ -13,7 +13,6 @@ namespace _Project.Scripts.UI_Scripts
 		[Inject] private UIManager _uiManager;   
 		public static EquipmentPanel _instance ;
 		public Image upgradeImage;
-		public GameObject coinsObject;
 		public GameObject goldObject;
 		public Text coinsText;
 		public Text goldText;
@@ -42,8 +41,7 @@ namespace _Project.Scripts.UI_Scripts
 		{
 			_instance = this;
 		}
-
-
+		
 		private void OnEnable()
 		{
 			if(PlayerPrefs.HasKey ("ChinaOpen")) {

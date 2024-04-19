@@ -11,10 +11,11 @@ namespace _Project.Scripts.UI_Scripts
 		[Inject] private DiContainer _diContainer;
 		[Inject] private MenuManager _menuManager;  
 		[Inject] private UIManager _uiManager;   
-		public int noOfPanels;
+		private int noOfPanels => 4;
+		private int selectedPanel = 1;
+		
 		public GameObject leftArrow , rightArrow;
 		public GameObject []panels;
-		public int selectedPanel = 1;
 		public Text totalCoinsText;
 		public Text totalGoldText;
 		public static DecorationPanel _instance;

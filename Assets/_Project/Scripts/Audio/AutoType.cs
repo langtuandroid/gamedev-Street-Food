@@ -10,6 +10,7 @@ namespace _Project.Scripts.Audio
 {
 	public class AutoType : MonoBehaviour
 	{
+		[Inject] private LevelManager _levelManager;
 		[Inject] private US_Manager _usManager;
 		[Inject] private China_Manager _chinaManager;
 		[Inject] private Australia_Manager _australiaManager;
@@ -28,7 +29,7 @@ namespace _Project.Scripts.Audio
 		{
 			if(!isGoalAchieved)
 			{
-				_message = "level goal: $"+LevelManager._instance.targetScore[LevelManager.levelNo];
+				_message = "level goal: $"+_levelManager.targetScore[LevelManager.levelNo];
 				myText.text = "";
 				if (PlayerPrefs.GetInt ("BellsTut") == 1)
 				{

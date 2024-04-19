@@ -5486,7 +5486,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11452148}
-        m_MethodName: ClaimThiefAchievement1
+        m_MethodName: ClaimThiefRewardLvl1
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5989,7 +5989,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11452148}
-        m_MethodName: ClaimHotdogAchievement2
+        m_MethodName: ClaimHotdogRewardLvl2
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6349,7 +6349,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11408370}
-        m_MethodName: Close
+        m_MethodName: ClosePanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6773,7 +6773,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11452148}
-        m_MethodName: ClaimThiefAchievement3
+        m_MethodName: ClaimThiefRewardLvl3
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8016,7 +8016,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11452148}
-        m_MethodName: ClaimPizzaAchievement3
+        m_MethodName: ClaimPizzaRewardLvl3
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8464,7 +8464,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11452148}
-        m_MethodName: ClaimPerfectAchievement3
+        m_MethodName: ClaimMaxReward3
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9085,7 +9085,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11452148}
-        m_MethodName: ClaimCokeAchievement3
+        m_MethodName: ClaimCokeReward3Lvl
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9515,7 +9515,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11452148}
-        m_MethodName: ClaimPerfectAchievement1
+        m_MethodName: ClaimMaxReward
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9662,7 +9662,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11452148}
-        m_MethodName: ClaimPizzaAchievement1
+        m_MethodName: ClaimPizzaRewardLvl1
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9856,7 +9856,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11452148}
-        m_MethodName: ClaimCustomerAchievement3
+        m_MethodName: ClaimReward3
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10200,7 +10200,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11452148}
-        m_MethodName: ClaimPerfectAchievement2
+        m_MethodName: ClaimMaxReward2
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10304,7 +10304,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11452148}
-        m_MethodName: ClaimNoodlesAchievement2
+        m_MethodName: ClaimNoodlesRewardLvl2
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10942,7 +10942,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11452148}
-        m_MethodName: ClaimNoodlesAchievement1
+        m_MethodName: ClaimNoodlesRewardLvl1
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11925,7 +11925,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11452148}
-        m_MethodName: ClaimThiefAchievement2
+        m_MethodName: ClaimThiefRewardLvl2
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -12349,7 +12349,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11452148}
-        m_MethodName: ClaimCustomerAchievement1
+        m_MethodName: ClaimRevard
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13088,7 +13088,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11452148}
-        m_MethodName: ClaimBurgerAchievement2
+        m_MethodName: ClaimBurgerReward2Lvl
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13564,7 +13564,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11452148}
-        m_MethodName: ClaimBurgerAchievement1
+        m_MethodName: ClaimBurgerReward1Lvl
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13976,7 +13976,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11452148}
-        m_MethodName: ClaimFrieseAchievement3
+        m_MethodName: ClaimFriesReward3Lvl
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14181,7 +14181,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11452148}
-        m_MethodName: ClaimPizzaAchievement2
+        m_MethodName: ClaimPizzaRewardLvl2
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14244,7 +14244,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11452148}
-        m_MethodName: ClaimNoodlesAchievement2
+        m_MethodName: ClaimNoodlesRewardLvl2
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -15130,7 +15130,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11452148}
-        m_MethodName: ClaimCokeAchievement1
+        m_MethodName: ClaimCokeReward1Lvl
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -15553,7 +15553,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11452148}
-        m_MethodName: ClaimFriesAchievement2
+        m_MethodName: ClaimFriesReward2Lvl
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -16029,7 +16029,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11452148}
-        m_MethodName: ClaimCustomerAchievement2
+        m_MethodName: ClaimReward
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -16184,7 +16184,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11452148}
-        m_MethodName: ClaimHotdogAchievement3
+        m_MethodName: ClaimHotdogRewardLvl3
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -16372,7 +16372,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11452148}
-        m_MethodName: ClaimBurgerAchievement3
+        m_MethodName: ClaimBurgerReward3Lvl
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -16870,7 +16870,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11452148}
-        m_MethodName: ClaimFriesAchievement1
+        m_MethodName: ClaimFriesReward1Lvl
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -17244,7 +17244,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11452148}
-        m_MethodName: ClaimCokeAchievement2
+        m_MethodName: ClaimCokeReward2Lvl
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -17321,7 +17321,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11452148}
-        m_MethodName: ClaimHotdogAchievement1
+        m_MethodName: ClaimHotdogRewardLvl1
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -14,9 +14,9 @@ namespace _Project.Scripts.Managers
 		[Inject] private LevelSoundManager _levelSoundManager;
 		[Inject] private UIManager _uiManager;   
 		public GameObject TheifPanel;
-		public int soupPrice;
-		public int lessBakedNoodlesPrice;
-		public int perfectNoodlesPrice;
+		public int soupPrice => 40;
+		public int lessBakedNoodlesPrice => 30;
+		public int perfectNoodlesPrice => 60;
 		public Sprite []noodlesInPanVariations;   //4  0- noodles , 1 - noodles with veg ,2 only veg , 3 cooked noodles 4 burnt noodles
 		public Sprite []noodlesInPlateVariations;   //4  0- uncooked , 1 cooked
 		public Sprite []soupContainerVariations;  //2 -- 0 - water , 1 - cooked
@@ -25,24 +25,22 @@ namespace _Project.Scripts.Managers
 		public ObjectMotion []noodlesPlatesMotion; //6
 		public ObjectMotion firstSoupBowl;
 		public GameObject []pans; //3
-		public Availability []panPlaces; //3
 		public GameObject []soupContainer; //3
-		public Availability []soupContainerPlaces; //3
 		public SpriteRenderer []bowlImages; //6
 		public Availability []bowlPlaces;  //6
-		public int platesFilledCount;
-		public int totalPlatesAvailable;
-		public int bowlsFilled;
-		public int totalBowlsAvailable;
-		public bool clickedNoodlesToCook;
-		public bool clickedNoodlesVeg;
-		public bool clickedSoupVeg;
-		public bool clickedPan;
-		public bool clickedSoupContainer;
-		public bool clickSoupBowl;
-		public bool clickedNoodlePlate;
-		public ChineseUtensils clickedUtensilsDestinationFunction;
-		public ObjectMotion clickedItemDestinationFunction;
+		public int platesFilledCount { get; set; }
+		private int totalPlatesAvailable;
+		public int bowlsFilled { get; set; }
+		private int totalBowlsAvailable;
+		public bool clickedNoodlesToCook { get; set; }
+		public bool clickedNoodlesVeg { get; set; }
+		public bool clickedSoupVeg { get; set; }
+		public bool clickedPan { get; set; }
+		public bool clickedSoupContainer { get; set; }
+		public bool clickSoupBowl { get; set; }
+		public bool clickedNoodlePlate { get; set; }
+		public ChineseUtensils clickedUtensilsDestinationFunction { get; set; }
+		public ObjectMotion clickedItemDestinationFunction { get; set; }
 		public ChineseUtensils []soupUtensils;
 		public ChineseUtensils []panUtensil;
 		public GameObject dustbin;
@@ -51,20 +49,19 @@ namespace _Project.Scripts.Managers
 		public ObjectMotion noodlesVeg;
 		public ObjectMotion soupVeg;
 		public SpriteRenderer bowlAdd;
-		public Customer firstCustomer;
-		public bool clickBowlTut;
-		public bool clickPlateTut;
+		public Customer firstCustomer { get; set; }
+		public bool clickBowlTut { get; set; }
+		public bool clickPlateTut { get; set; }
 		public SpriteRenderer tableTop;
 		public SpriteRenderer tableCover;
-		public int pansUpgrade;
-		public int soupContainerUpgrade;
+		public int pansUpgrade { get; set; }
+		public int soupContainerUpgrade { get; set; }
 		public static bool tutorialEnd;
 		public GameObject Radio ;
 		public GameObject Whistle ;
 		public GameObject bell ;
 		public GameObject handcuff ;
 		public GameObject starting_text ;
-		public bool c ;
 		private void OnEnable()
 		{
 			if (LevelManager.levelNo == 11) {
@@ -104,7 +101,6 @@ namespace _Project.Scripts.Managers
 			Italy_Manager.tutorialEnd = false;
 			Australia_Manager.tutorialEnd = false;
 			PlayerPrefs.SetInt ("ChinaOpen",1);
-			c = true;
 			tutorialEnd = false;
 			
 			if(LevelManager.levelNo <= 12)
@@ -201,7 +197,6 @@ namespace _Project.Scripts.Managers
 				if(!noodlePlaces[i].available)
 				{
 					noodlesPlatesMotion[i].iAmSelected = false;
-					noodlesPlatesMotion[i].startAnimating = false;
 					noodlesPlatesMotion[i].mySelection.SetActive (false);
 					noodlesPlatesMotion[i].transform.localScale = noodlesPlatesMotion[i].myLocalScale;
 				}
@@ -248,7 +243,6 @@ namespace _Project.Scripts.Managers
 					if(bowlImages[i].GetComponent<ObjectMotion>().iAmSelected)
 					{
 						bowlImages[i].GetComponent<ObjectMotion>().iAmSelected = false;
-						bowlImages[i].GetComponent<ObjectMotion>().startAnimating = false;
 						bowlImages[i].GetComponent<ObjectMotion>().mySelection.SetActive (false);
 					}
 				}

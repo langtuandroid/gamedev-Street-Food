@@ -14,9 +14,9 @@ namespace _Project.Scripts.Managers
 		[Inject] private UIManager _uiManager;   
 		[Inject] private LevelSoundManager _levelSoundManager;
 		public GameObject TheifPanel;
-		public int cokePrice;
-		public int lessBakedHotdog;
-		public int perfectHotDog;
+		public int cokePrice => 10;
+		public int lessBakedHotdog => 20;
+		public int perfectHotDog => 40;
 		public Sprite []hotDogTikkiVariations;   //3
 		public Sprite []hotDogOrderVariations;   //3
 		public Sprite []hotDogVariations;  //2 -- 0 - empty , 1 - filled
@@ -29,20 +29,20 @@ namespace _Project.Scripts.Managers
 		public Availability []grillPlaces; //6
 		public SpriteRenderer []cokeBottles; //9
 		public Availability []cokePlaces;  //9
-		public int grillsFilledCount;
-		public int totalGrillsAvailable;
-		public int platesFilledCount;
-		public int totalPlatesAvailable;
-		public int cokesFilled;
-		public int totalCokesAvailable;
-		public bool clickedHotDog;
-		public bool clickedTikki;
-		public bool clickedRedSauce;
-		public bool clickedYellowSauce;
-		public bool clickedCoke;
-		public MakeTikki clickedTikkiDestinationFunction;
-		public ObjectMotion clickedItemDestinationFunction;
-		public HotDog clickedHotDogDestinationFunction;
+		public int grillsFilledCount { get; set; }
+		public int totalGrillsAvailable { get; set; } = 2;
+		public int platesFilledCount { get; set; }
+		public int totalPlatesAvailable { get; set; } = 2;
+		public int cokesFilled { get; set; }
+		public int totalCokesAvailable { get; set; } = 3;
+		public bool clickedHotDog { get; set; }
+		public bool clickedTikki { get; set; }
+		public bool clickedRedSauce { get; set; }
+		public bool clickedYellowSauce { get; set; }
+		public bool clickedCoke { get; set; }
+		public MakeTikki clickedTikkiDestinationFunction { get; set; }
+		public ObjectMotion clickedItemDestinationFunction { get; set; }
+		public HotDog clickedHotDogDestinationFunction { get; set; }
 		public GameObject dustbin;
 		public ObjectMotion redSauce;
 		public ObjectMotion yellowSauce;
@@ -54,9 +54,9 @@ namespace _Project.Scripts.Managers
 		public HotDog firstHotDog;
 		public MakeTikki firstTikki;
 		public Coins firstCoins;
-		public Customer firstCustomer;
-		public bool clickfirstBun;
-		public bool clickFirstTikki;
+		public Customer firstCustomer { get; set; }
+		public bool clickfirstBun { get; set; }
+		public bool clickFirstTikki { get; set; }
 		public SpriteRenderer tableTop, tableCover;
 		public static bool tutorialEnd;
 		public GameObject Radio ;
@@ -275,7 +275,6 @@ namespace _Project.Scripts.Managers
 					if(cokeBottles[i].GetComponent<ObjectMotion>().iAmSelected)
 					{
 						cokeBottles[i].GetComponent<ObjectMotion>().iAmSelected = false;
-						cokeBottles[i].GetComponent<ObjectMotion>().startAnimating = false;
 						cokeBottles[i].GetComponent<ObjectMotion>().mySelection.SetActive (false);
 						cokeBottles[i].gameObject.transform.localScale = Vector3.one;
 					}
@@ -308,8 +307,6 @@ namespace _Project.Scripts.Managers
 		{
 			DeactivateTikkiSelection();
 			DeactivateAllBottlesSelection();
-			yellowSauce.startAnimating = false;
-			redSauce.startAnimating = false;
 			yellowSauce.iAmSelected = false;
 			redSauce.iAmSelected = false;
 			yellowSauce.transform.localScale = yellowSauce.myLocalScale;

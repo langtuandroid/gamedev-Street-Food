@@ -13,17 +13,17 @@ namespace _Project.Scripts.Other
 		[Inject] private US_Manager _usManager;
 		[Inject] private China_Manager _chinaManager;
 		[Inject] private UIManager _uiManager;   
-		public int positionTaken;
-		public int myAmount;
+		public int positionTaken { get; set; }
+		public int myAmount { get; set; }
 		public GameObject perfectText;
 		public TextMesh addValue;
-		public bool tutorialOn;
+		public bool tutorialOn { get; set; }
 		public ParticleSystem coinCollected;
 		public ParticleSystem highlight ;
 		public GameObject uiCoins;
 		public TextMesh Bonus_value ;
-		public int bonusVal;
-		public static int visible ;
+		public int bonusVal { get; set; }
+		public static int visible;
 		
 		private Vector3 coinsToMoveInitialPosition;
 		

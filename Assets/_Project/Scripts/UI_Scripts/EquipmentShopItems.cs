@@ -9,7 +9,6 @@ namespace _Project.Scripts.UI_Scripts
 	public class EquipmentShopItems : MonoBehaviour 
 	{
 		[Inject] private MenuManager _menuManager;  
-		public static EquipmentShopItems _instance;
 		public GameObject []upgradeNoImages;
 		public Sprite []upgradeImages;
 		public int []coinsToUpgradeLevel;
@@ -17,14 +16,9 @@ namespace _Project.Scripts.UI_Scripts
 		public string []upgradeValues;
 		public EquipmentPanel equipmentPanel;
 		public string myName;
+		public int equ_number;
+		
 		private int upgradeValue;
-		public int equ_number ;
-
-		private void Awake () 
-		{
-			_instance = this;
-		}
-
 		private void OnEnable()
 		{
 

@@ -228,16 +228,16 @@ namespace _Project.Scripts.Food
 				{
 					PlayerPrefs.SetInt ("PizzaLevel1",1);
 					_uiManager.achievment_text.SetActive(true);
-					AchievementChild.check_claim++;
-					PlayerPrefs.SetInt("claimvalue",AchievementChild.check_claim);
+					AchievementBlock._claimCheck++;
+					PlayerPrefs.SetInt("claimvalue",AchievementBlock._claimCheck);
 					Invoke(nameof(Stopa),4.0f);
 				}
 				if(PlayerPrefs.GetInt("PizzaServed") > 99 && PlayerPrefs.GetInt ("PizzaLevel2")==0)
 				{
 					PlayerPrefs.SetInt ("PizzaLevel2",1);
 
-					AchievementChild.check_claim++;
-					PlayerPrefs.SetInt("claimvalue",AchievementChild.check_claim);
+					AchievementBlock._claimCheck++;
+					PlayerPrefs.SetInt("claimvalue",AchievementBlock._claimCheck);
 					_uiManager.achievment_text.SetActive(true);
 					Invoke(nameof(Stopa),4.0f);
 				}
@@ -245,8 +245,8 @@ namespace _Project.Scripts.Food
 				{
 					PlayerPrefs.SetInt ("PizzaLevel3",1);
 					_uiManager.achievment_text.SetActive(true);
-					AchievementChild.check_claim++;
-					PlayerPrefs.SetInt("claimvalue",AchievementChild.check_claim);
+					AchievementBlock._claimCheck++;
+					PlayerPrefs.SetInt("claimvalue",AchievementBlock._claimCheck);
 					Invoke(nameof(Stopa),4.0f);
 				}
 				_italyManager.platesFilledCount--;
