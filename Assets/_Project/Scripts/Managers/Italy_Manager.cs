@@ -14,7 +14,7 @@ namespace _Project.Scripts.Managers
 	{
 		public static bool _isEndTutorial;
 		[Inject] private UIManager _uiManager;   
-		[Inject] private LevelSoundManager _levelSoundManager;
+		[Inject] private SoundsAll _levelSoundManager;
 		private int _ovensAvailable;
 		private int _platesAvailable;
 		private int _cockeAvailable;
@@ -251,7 +251,7 @@ namespace _Project.Scripts.Managers
 					{
 						if(_places[i].available)
 						{
-							_levelSoundManager.bottle_click.Play();
+							_levelSoundManager.bottleClickSound.Play();
 							_cokeBottles[i].gameObject.SetActive (true);
 							_cokeBottles[i].color = new Color(1,1,1,1);
 							_cokeBottles[i].sprite = _cokeBottlesSprites[1];
@@ -289,7 +289,7 @@ namespace _Project.Scripts.Managers
 					{
 						if(_fridgePlaces[i])
 						{
-							_levelSoundManager.bottle_click.Play();
+							_levelSoundManager.bottleClickSound.Play();
 							_bottlesFridge[i].SetActive (true);
 							_fridgeFilled++;
 							_fridgePlaces[i] = false;
@@ -304,7 +304,7 @@ namespace _Project.Scripts.Managers
 					{
 						if(_places[i].available)
 						{
-							_levelSoundManager.bottle_click.Play();
+							_levelSoundManager.bottleClickSound.Play();
 							_cokeBottles[i].gameObject.SetActive (true);
 							_cokeBottles[i].color = new Color(1,1,1,1);
 							_cokeBottles[i].sprite = _cokeBottlesSprites[0];

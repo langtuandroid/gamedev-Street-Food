@@ -14,7 +14,7 @@ namespace _Project.Scripts.UI_Scripts
 	{
 		[Inject] private LevelManager _levelManager;
 		[Inject] private DiContainer _diContainer;
-		[Inject] private LevelSoundManager _levelSoundManager;
+		[Inject] private SoundsAll _levelSoundManager;
 		public int totalCoins;
 		public GameObject uiPanel;
 		public GameObject fadePanel;
@@ -188,7 +188,7 @@ namespace _Project.Scripts.UI_Scripts
 			{
 				gameover_effect.SetActive(true);
 
-				_levelSoundManager.successful_level.Play();
+				_levelSoundManager.successfulLevelSound.Play();
 
 				Invoke("gameoversoundf",1.5f);
 				gameoverHeading.text = "successful day!";
@@ -205,7 +205,7 @@ namespace _Project.Scripts.UI_Scripts
 			{
 			
 				nextButton.interactable = false;
-				_levelSoundManager.unsuccessful_level.Play();
+				_levelSoundManager.unsuccessfulLevelSound.Play();
 				gameoverHeading.text = "unsuccessful day!";
 				if(LevelManager.levelNo == 4 && ((!PlayerPrefs.HasKey("Radio") || MenuManager.handcuffNo <= 0)) )
 				{
@@ -244,7 +244,7 @@ namespace _Project.Scripts.UI_Scripts
 		}
 		public void gameoversoundf()
 		{
-			_levelSoundManager.Gameoverpanel.Play ();
+			_levelSoundManager.GameoverpanelSound.Play ();
 		}
 
 		private void BringRadiopopup()
@@ -497,7 +497,7 @@ namespace _Project.Scripts.UI_Scripts
 
 		private IEnumerator IncrementCoins()
 		{
-			_levelSoundManager.coinAdd.Play ();
+			_levelSoundManager.coinAddSound.Play ();
 			int textCoins = int.Parse(coinsText.text);
 			coinsText.transform.localScale = new Vector3(1.6f , 2.4f,1);
 			while (textCoins < totalCoins)

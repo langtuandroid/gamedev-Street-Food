@@ -13,7 +13,7 @@ namespace _Project.Scripts.Food
 {
 	public class BurgerFood : MonoBehaviour 
 	{
-		[Inject] private LevelSoundManager _levelSoundManager;
+		[Inject] private SoundsAll _levelSoundManager;
 		[Inject] private Australia_Manager _australiaManager;
 		[Inject] private UIManager _uiManager;   
 		private bool _isScale;
@@ -185,7 +185,7 @@ namespace _Project.Scripts.Food
 			if(!otherObject.name.Contains ("dustbin"))
 			{
 				_uiManager.n_Burger_served++ ;
-				_levelSoundManager.customerEat.Play();
+				_levelSoundManager.customerEatSound.Play();
 				PlayerPrefs.SetInt ("BurgerServed", _uiManager.n_Burger_served);
 				if(PlayerPrefs.GetInt("BurgerServed") > 9 && PlayerPrefs.GetInt ("BurgerLevel1")==0 )
 				{
@@ -301,7 +301,7 @@ namespace _Project.Scripts.Food
 			{
 				if(isPrefavet){
 					_uiManager.totalCoins-=_australiaManager.PerfectBurger;
-					_levelSoundManager.dustbin.Play();
+					_levelSoundManager.dustbinSound.Play();
 					if(_uiManager.totalCoins > 0){
 
 						_uiManager.dustbin_textparent.SetActive(true);
@@ -311,7 +311,7 @@ namespace _Project.Scripts.Food
 				else
 				{
 					_uiManager.totalCoins-=_australiaManager.LessBaked;
-					_levelSoundManager.dustbin.Play();
+					_levelSoundManager.dustbinSound.Play();
 					_uiManager.coinsText.text = _uiManager.totalCoins.ToString ();
 					if(_uiManager.totalCoins > 0){
 

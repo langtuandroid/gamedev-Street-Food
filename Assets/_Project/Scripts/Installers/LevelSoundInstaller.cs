@@ -6,10 +6,10 @@ namespace _Project.Scripts.Installers
 {
     public class LevelSoundInstaller : MonoInstaller
     {
-        [SerializeField] private LevelSoundManager _levelSoundManager;
+        [SerializeField] private SoundsAll _levelSoundManager;
         public override void InstallBindings()
         {
-            Container.Bind<LevelSoundManager>().FromInstance(_levelSoundManager).AsSingle();
+            Container.Bind<SoundsAll>().FromInstance(_levelSoundManager).AsSingle();
         }
     }
 }

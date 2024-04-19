@@ -13,7 +13,7 @@ namespace _Project.Scripts.Managers
 	public class Australia_Manager : MonoBehaviour
 	{
 		public static bool tutorialEnd;
-		[Inject] private LevelSoundManager _levelSoundManager;
+		[Inject] private SoundsAll _levelSoundManager;
 		[Inject] private UIManager _uiManager;
 		private int totalGrillsAvailable;
 		private int totalPlatesAvailable;
@@ -281,7 +281,7 @@ namespace _Project.Scripts.Managers
 					{
 						if(_cokePlaces[i].available)
 						{
-							_levelSoundManager.bottle_click.Play();
+							_levelSoundManager.bottleClickSound.Play();
 							_bottles[i].gameObject.SetActive (true);
 							_bottles[i].color = new Color(1,1,1,1);
 							CokesFilled++;

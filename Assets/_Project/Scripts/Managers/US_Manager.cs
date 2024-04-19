@@ -12,23 +12,43 @@ namespace _Project.Scripts.Managers
 	public class US_Manager : MonoBehaviour 
 	{
 		[Inject] private UIManager _uiManager;   
-		[Inject] private LevelSoundManager _levelSoundManager;
+		[Inject] private SoundsAll _levelSoundManager;
+		
 		public GameObject TheifPanel;
-		public int cokePrice => 10;
-		public int lessBakedHotdog => 20;
-		public int perfectHotDog => 40;
-		public Sprite []hotDogTikkiVariations;   //3
-		public Sprite []hotDogOrderVariations;   //3
-		public Sprite []hotDogVariations;  //2 -- 0 - empty , 1 - filled
-		public Sprite []hotDogSauces; //2  0 - red , 1 - yellow
-		public SpriteRenderer []hotDogSaucesOnPlates; //6
-		public SpriteRenderer []hotdogPlates; //6
-		public SpriteRenderer []hotdogOnPlates; //6
-		public GameObject []grills; //3
-		public SpriteRenderer []grillTikkis;  //6
-		public Availability []grillPlaces; //6
-		public SpriteRenderer []cokeBottles; //9
-		public Availability []cokePlaces;  //9
+		public Sprite []hotDogTikkiVariations;  
+		public Sprite []hotDogOrderVariations;  
+		public Sprite []hotDogVariations;  
+		public Sprite []hotDogSauces; 
+		public SpriteRenderer []hotDogSaucesOnPlates; 
+		public SpriteRenderer []hotdogPlates; 
+		public SpriteRenderer []hotdogOnPlates;
+		public GameObject []grills;
+		public SpriteRenderer []grillTikkis;
+		public Availability []grillPlaces;
+		public SpriteRenderer []cokeBottles;
+		public Availability []cokePlaces;
+		public GameObject dustbin;
+		public ObjectMotion redSauce;
+		public ObjectMotion yellowSauce;
+		public ObjectMotion cupCake;
+		public SpriteRenderer cokeAdd;
+		public SpriteRenderer yellowSauceAdd;
+		public SpriteRenderer redSauceAdd;
+		public static int noOfPerfects;
+		public HotDog firstHotDog;
+		public MakeTikki firstTikki;
+		public Coins firstCoins;
+		public SpriteRenderer tableTop, tableCover;
+		public static bool tutorialEnd;
+		public GameObject Radio ;
+		public GameObject whistle ;
+		public GameObject Bell ;
+		public GameObject handcuff ;
+		public GameObject starting_text ;
+
+		public Wisitor firstCustomer { get; set; }
+		public bool clickfirstBun { get; set; }
+		public bool clickFirstTikki { get; set; }
 		public int grillsFilledCount { get; set; }
 		public int totalGrillsAvailable { get; set; } = 2;
 		public int platesFilledCount { get; set; }
@@ -43,28 +63,9 @@ namespace _Project.Scripts.Managers
 		public MakeTikki clickedTikkiDestinationFunction { get; set; }
 		public ObjectMotion clickedItemDestinationFunction { get; set; }
 		public HotDog clickedHotDogDestinationFunction { get; set; }
-		public GameObject dustbin;
-		public ObjectMotion redSauce;
-		public ObjectMotion yellowSauce;
-		public ObjectMotion cupCake;
-		public SpriteRenderer cokeAdd;
-		public SpriteRenderer yellowSauceAdd;
-		public SpriteRenderer redSauceAdd;
-		public static int noOfPerfects;
-		public HotDog firstHotDog;
-		public MakeTikki firstTikki;
-		public Coins firstCoins;
-		public Wisitor firstCustomer { get; set; }
-		public bool clickfirstBun { get; set; }
-		public bool clickFirstTikki { get; set; }
-		public SpriteRenderer tableTop, tableCover;
-		public static bool tutorialEnd;
-		public GameObject Radio ;
-		public GameObject whistle ;
-		public GameObject Bell ;
-		public GameObject handcuff ;
-		public GameObject starting_text ;
-		
+		public int cokePrice => 10;
+		public int lessBakedHotdog => 20;
+		public int perfectHotDog => 40;
 		private void OnEnable()
 		{
 			if (LevelManager.levelNo == 1) {
@@ -254,7 +255,7 @@ namespace _Project.Scripts.Managers
 					{
 						if(cokePlaces[i].available)
 						{
-							_levelSoundManager.bottle_click.Play();
+							_levelSoundManager.bottleClickSound.Play();
 							cokeBottles[i].gameObject.SetActive (true);
 							cokeBottles[i].color = new Color(1,1,1,1);
 							cokesFilled++;

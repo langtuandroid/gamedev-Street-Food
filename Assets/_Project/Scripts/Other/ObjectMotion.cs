@@ -15,7 +15,7 @@ namespace _Project.Scripts.Other
 	public class ObjectMotion : MonoBehaviour 
 	{
 		[Inject] private WisitorHandler _customerHandler;
-		[Inject] private LevelSoundManager _levelSoundManager;
+		[Inject] private SoundsAll _levelSoundManager;
 		[Inject] private US_Manager _usManager;
 		[Inject] private Italy_Manager _italyManager;
 		[Inject] private China_Manager _chinaManager;
@@ -517,7 +517,7 @@ namespace _Project.Scripts.Other
 
 		private void FriesReachedDestination()
 		{
-			_levelSoundManager.customerEat.Play ();
+			_levelSoundManager.customerEatSound.Play ();
 			_uiManager.n_French_fries_served++;
 			PlayerPrefs.SetInt ("FrenchfriesServed", _uiManager.n_French_fries_served);
 	
@@ -749,7 +749,7 @@ namespace _Project.Scripts.Other
 
 		private void NoodlesPlateReachedDestination()
 		{
-			_levelSoundManager.customerEat.Play ();
+			_levelSoundManager.customerEatSound.Play ();
 			_uiManager.n_Noodles_served++;
 			PlayerPrefs.SetInt ("NoodlesServed",_uiManager.n_Noodles_served);
 
@@ -822,7 +822,7 @@ namespace _Project.Scripts.Other
 
 		private void SoupBowlReachedDestination()
 		{
-			_levelSoundManager.drink.Play ();
+			_levelSoundManager.drinkSound.Play ();
 			_chinaManager.FilledBowls--;
 			myParentHolder.available = true;
 			customer._order.Remove (myType);
@@ -896,9 +896,9 @@ namespace _Project.Scripts.Other
 			_uiManager.n_Cokes_served++;
 			int rad = Random.Range (0, 6);
 			if (rad <= 4) {
-				_levelSoundManager.drink.Play ();
+				_levelSoundManager.drinkSound.Play ();
 			} else {
-				_levelSoundManager.drink2.Play ();
+				_levelSoundManager.drink2Sound.Play ();
 			}
 			PlayerPrefs.SetInt ("CokesServed",_uiManager.n_Cokes_served);
 	
@@ -990,7 +990,7 @@ namespace _Project.Scripts.Other
 
 		private void CupCakeReachedDestination()
 		{
-			_levelSoundManager.customerEat.Play ();
+			_levelSoundManager.customerEatSound.Play ();
 			customer.myWaitingTime = 0;
 			customer._facialExpression.sprite = customer._expressions[0];
 			customer._sliderWait.color = Color.green;

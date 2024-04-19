@@ -10,7 +10,7 @@ namespace _Project.Scripts.Other
 {
 	public class MakeTikki : MonoBehaviour 
 	{
-		[Inject] private LevelSoundManager _levelSoundManager;
+		[Inject] private SoundsAll _levelSoundManager;
 		[Inject] private US_Manager _usManager;
 		[Inject] private Australia_Manager _australiaManager;
 		[Inject] private UIManager _uiManager;   
@@ -287,7 +287,7 @@ namespace _Project.Scripts.Other
 					}
 					if(heatingTimer > perfectTimer)
 					{
-						_levelSoundManager.bttn_click.Play();
+						_levelSoundManager.buttnClickSound.Play();
 						if(isUS)
 						{
 							availableHotDog.transform.GetComponent<HotDog>().isPerfect = true;
@@ -302,7 +302,7 @@ namespace _Project.Scripts.Other
 					}
 					else
 					{
-						_levelSoundManager.bttn_click.Play();
+						_levelSoundManager.buttnClickSound.Play();
 						if(isUS)
 							_usManager.hotdogOnPlates[availableHotDog.myPositionInArray].sprite = _usManager.hotDogVariations[1];
 						else
@@ -340,7 +340,7 @@ namespace _Project.Scripts.Other
 					_australiaManager.IsClickedTikki = false;
 				}
 				_uiManager.totalCoins-=10;
-				_levelSoundManager.dustbin.Play();
+				_levelSoundManager.dustbinSound.Play();
 				if(_uiManager.totalCoins > 0){
 					_uiManager.dustbin_textparent.SetActive(true);
 					_uiManager.dustbin_text.text = "-10" ; 

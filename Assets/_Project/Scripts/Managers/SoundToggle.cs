@@ -1,28 +1,29 @@
 ﻿using _Project.Scripts.UI_Scripts;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace _Project.Scripts.Managers
 {
-	public class SoundManager : MonoBehaviour 
+	public class SoundToggle : MonoBehaviour 
 	{
 		[Inject] private MenuManager _menuManager;  
-		public GameObject SoundON ;
-		public GameObject SoundOFF ;
+		[FormerlySerializedAs("SoundON")] public GameObject _onObject ;
+		[FormerlySerializedAs("SoundOFF")] public GameObject _offObject ;
 
 		private void Start () {
 
 			if (PlayerPrefs.GetInt ("SOUNDON") == 1)
 			{
 				AudioListener.volume = 0;
-				SoundOFF.SetActive (true);
-				SoundON.SetActive (false);
+				_offObject.SetActive (true);
+				_onObject.SetActive (false);
 			}
 			if(PlayerPrefs.GetInt ("SOUNDON") == 0)
 			{
 				AudioListener.volume = 1;
-				SoundOFF.SetActive (false);
-				SoundON.SetActive (true);
+				_offObject.SetActive (false);
+				_onObject.SetActive (true);
 			}
 		}
 
@@ -31,14 +32,14 @@ namespace _Project.Scripts.Managers
 			if (PlayerPrefs.GetInt ("SOUNDON") == 1)
 			{
 				AudioListener.volume = 0;
-				SoundOFF.SetActive (true);
-				SoundON.SetActive (false);
+				_offObject.SetActive (true);
+				_onObject.SetActive (false);
 			}
 			if(PlayerPrefs.GetInt ("SOUNDON") == 0)
 			{
 				AudioListener.volume = 1;
-				SoundOFF.SetActive (false);
-				SoundON.SetActive (true);
+				_offObject.SetActive (false);
+				_onObject.SetActive (true);
 			}
 		}
 
@@ -47,14 +48,14 @@ namespace _Project.Scripts.Managers
 			if (PlayerPrefs.GetInt ("SOUNDON") == 1)
 			{
 				AudioListener.volume = 0;
-				SoundOFF.SetActive (true);
-				SoundON.SetActive (false);
+				_offObject.SetActive (true);
+				_onObject.SetActive (false);
 			}
 			if(PlayerPrefs.GetInt ("SOUNDON") == 0)
 			{
 				AudioListener.volume = 1;
-				SoundOFF.SetActive (false);
-				SoundON.SetActive (true);
+				_offObject.SetActive (false);
+				_onObject.SetActive (true);
 			}
 		}
 
@@ -76,14 +77,14 @@ namespace _Project.Scripts.Managers
 
 		public void buttonsOn()
 		{
-			SoundOFF.SetActive (true);
-			SoundON.SetActive (false);
+			_offObject.SetActive (true);
+			_onObject.SetActive (false);
 		}
 
 		public void ButtonsOff()
 		{
-			SoundOFF.SetActive (false);
-			SoundON.SetActive (true);
+			_offObject.SetActive (false);
+			_onObject.SetActive (true);
 		}
 	}
 }

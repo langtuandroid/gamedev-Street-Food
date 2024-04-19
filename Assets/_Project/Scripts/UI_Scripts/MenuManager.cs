@@ -25,7 +25,7 @@ namespace _Project.Scripts.UI_Scripts
 		public static int handcuffNo;
 		public GameObject lastPanel;
 		public string lastPanelName;
-		public SoundManager menuSoundButton;
+		public SoundToggle menuSoundButton;
 		public GameObject loader; 
 		public GameObject loader2 ;
 		public GameObject achievement_bttn;

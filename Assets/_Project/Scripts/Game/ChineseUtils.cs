@@ -11,7 +11,7 @@ namespace _Project.Scripts.Game
 {
 	public class ChineseUtils : MonoBehaviour
 	{
-		[Inject] private LevelSoundManager _levelSoundManager;
+		[Inject] private SoundsAll _levelSoundManager;
 		[Inject] private China_Manager _chinaManager;
 		[Inject] private UIManager _uiManager;   
 		private bool _isReachedDestination;
@@ -264,7 +264,7 @@ namespace _Project.Scripts.Game
 					_chinaManager.IsPanClick = false;
 					_uiManager.totalCoins-=_chinaManager.perfectNoodlesPrice;
 					_uiManager.coinsText.text = _uiManager.totalCoins.ToString ();
-					_levelSoundManager.dustbin.Play();
+					_levelSoundManager.dustbinSound.Play();
 					if(_uiManager.totalCoins > 0) 
 					{
 						_uiManager.dustbin_textparent.SetActive(true);
@@ -399,7 +399,7 @@ namespace _Project.Scripts.Game
 					
 						if(!otherObjectMotion.mySoup.activeInHierarchy)
 						{
-							_levelSoundManager.bttn_click.Play();
+							_levelSoundManager.buttnClickSound.Play();
 							_isReachedDestination = true;
 						}
 					}
@@ -416,7 +416,7 @@ namespace _Project.Scripts.Game
 						
 							if(!otherObjectMotion.myNoodles.activeInHierarchy)
 							{
-								_levelSoundManager.bttn_click.Play();
+								_levelSoundManager.buttnClickSound.Play();
 								_isReachedDestination = true;
 							}
 						}

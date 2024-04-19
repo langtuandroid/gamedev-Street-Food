@@ -16,7 +16,7 @@ namespace _Project.Scripts.Entities.Customers
 	{
 		public static bool _isRadioBought;
 		[Inject] private WisitorHandler _customerHandler;
-		[Inject] private LevelSoundManager _levelSoundManager;
+		[Inject] private SoundsAll _levelSoundManager;
 		[Inject] private US_Manager _usManager;
 		[Inject] private Italy_Manager _italyManager;
 		[Inject] private China_Manager _chinaManager;
@@ -131,7 +131,7 @@ namespace _Project.Scripts.Entities.Customers
 						{
 							if(_usManager.clickedHotDogDestinationFunction.isTape == _order[i])
 							{
-								_levelSoundManager.customerEat.Play();
+								_levelSoundManager.customerEatSound.Play();
 								_usManager.HotDogReached();
 								foundOrder = true;
 								break;
@@ -299,7 +299,7 @@ namespace _Project.Scripts.Entities.Customers
 				if(_isLeavingNoPay && _customerHandler._timeOnGame > 0 )
 				{
 
-					_levelSoundManager.caught.Play();
+					_levelSoundManager.caughtSound.Play();
 		
 					_uiManager.totalCoins+=_coinsNoPay;
 					_uiManager.CallIncrementCoint ();
@@ -568,7 +568,7 @@ namespace _Project.Scripts.Entities.Customers
 						_collider.enabled = true;
 						if(PlayerPrefs.HasKey ("Whistle"))
 						{
-							_levelSoundManager.whistle.Play();
+							_levelSoundManager.whistleSound.Play();
 							_uiManager.whistle.transform.localScale = new Vector3(1.2f,1.2f,0);
 							_uiManager.blow.SetActive(true);
 							_uiManager.Invoke("WhistleInitialpos",1.2f);
@@ -751,7 +751,7 @@ namespace _Project.Scripts.Entities.Customers
 
 			int rand = Random.Range (0, 8);
 			if (rand == 4) {
-				_levelSoundManager.come_random.Play();
+				_levelSoundManager.comeRandomSound.Play();
 			}
 			perfect = false;
 		}
@@ -818,7 +818,7 @@ namespace _Project.Scripts.Entities.Customers
 			MenuManager.golds++;
 			PlayerPrefs.SetString("Golds",Encryption.Encrypt (MenuManager.golds.ToString ()));
 			_uiManager.goldText.text = MenuManager.golds.ToString ();
-			_levelSoundManager.coinAdd.Play ();
+			_levelSoundManager.coinAddSound.Play ();
 		}
 
 		private void OrderChina()

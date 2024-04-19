@@ -13,7 +13,7 @@ namespace _Project.Scripts.Managers
 	public class China_Manager : MonoBehaviour 
 	{
 		public static bool _endTutorial;
-		[Inject] private LevelSoundManager _levelSoundManager;
+		[Inject] private SoundsAll _levelSoundManager;
 		[Inject] private UIManager _uiManager; 
 		
 		private int _pansUpgradeNum;
@@ -176,7 +176,7 @@ namespace _Project.Scripts.Managers
 					{
 						if(_placesNoodle[i].available)
 						{
-							_levelSoundManager.bowl_click.Play();
+							_levelSoundManager.bowlClickSound.Play();
 							_platesNoodle[i].gameObject.SetActive (true);
 							_platesNoodle[i].color = new Color(1,1,1,1);
 							FiledCountClick++;
@@ -219,7 +219,7 @@ namespace _Project.Scripts.Managers
 					{
 						if(_bowlPlaces[i].available)
 						{
-							_levelSoundManager.bowl_click.Play();
+							_levelSoundManager.bowlClickSound.Play();
 							_bowImage[i].gameObject.SetActive (true);
 							_bowImage[i].color = new Color(1,1,1,1);
 							FilledBowls++;
