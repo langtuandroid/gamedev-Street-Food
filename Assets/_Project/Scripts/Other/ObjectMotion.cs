@@ -26,7 +26,7 @@ namespace _Project.Scripts.Other
 		private bool _canMove;
 		private GameObject otherObject;
 
-		public ChineseUtensils utensil { get; set; }
+		public ChineseUtils utensil { get; set; }
 		public bool isRedSauce;
 		public bool isYellowSauce;
 		public HotDog availableHotDog { get; set; }
@@ -174,7 +174,7 @@ namespace _Project.Scripts.Other
 					{
 						if(_chinaManager.clickedPan)
 						{
-							if(!_chinaManager.clickedUtensilsDestinationFunction.isBurnt)
+							if(!_chinaManager.clickedUtensilsDestinationFunction._isBurnt)
 							{
 								_chinaManager.clickedUtensilsDestinationFunction.otherObject = this.gameObject;
 								_chinaManager.UtensilReached ();
@@ -183,7 +183,7 @@ namespace _Project.Scripts.Other
 						}
 						else
 						{
-							if((tutorialOn && !_chinaManager.panUtensil[0].tutorialOn ) || China_Manager.tutorialEnd)
+							if((tutorialOn && !_chinaManager.panUtensil[0]._isTutorialOn ) || China_Manager.tutorialEnd)
 							{
 								transform.GetComponent<BoxCollider> ().size = new Vector3(colliderSize.x/2f , colliderSize.y/2f , colliderSize.z);
 								_chinaManager.AllClickedBoolsReset ();
@@ -668,17 +668,17 @@ namespace _Project.Scripts.Other
 
 		private void NoodlesToCookReachedDestination()
 		{
-			if(!utensil.noodlesAdded)
+			if(!utensil._isNoodlesAdded)
 			{
-				utensil.noodlesAdded = true;
-				utensil.myFood.gameObject.SetActive (true);
-				if(utensil.vegAdded)
+				utensil._isNoodlesAdded = true;
+				utensil._foodSpriteRenderer.gameObject.SetActive (true);
+				if(utensil._isVegAdded)
 				{
-					utensil.noOfServingsAvailable = 2;
-					utensil.scaledImage.gameObject.SetActive (true);
-					utensil.scaledImage.ResetToBeginning ();
-					utensil.scaledImage.PlayForward();
-					utensil.scaledImage.GetComponent<SpriteRenderer>().sprite =  _chinaManager.noodlesInPanVariations[0];
+					utensil._servingsAvailable = 2;
+					utensil._scaledImage.gameObject.SetActive (true);
+					utensil._scaledImage.ResetToBeginning ();
+					utensil._scaledImage.PlayForward();
+					utensil._scaledImage.GetComponent<SpriteRenderer>().sprite =  _chinaManager.noodlesInPanVariations[0];
 				}
 				else 
 				{
@@ -688,10 +688,10 @@ namespace _Project.Scripts.Other
 						_chinaManager.noodlesVeg.tutorialOn = true;
 						_uiManager.tutorialPanelBg.OpenPopupChina ("TAP OR DRAG INGREDIENTS\nTO THE SKILLET.",false,false , 1);
 					}
-					utensil.myFood.sprite = _chinaManager.noodlesInPanVariations[0];
-					utensil.myScale.enabled = true;
-					utensil.myScale.ResetToBeginning ();
-					utensil.myScale.PlayForward();
+					utensil._foodSpriteRenderer.sprite = _chinaManager.noodlesInPanVariations[0];
+					utensil._tweenScale.enabled = true;
+					utensil._tweenScale.ResetToBeginning ();
+					utensil._tweenScale.PlayForward();
 				}
 			}
 			_chinaManager.clickedNoodlesToCook = false;
@@ -699,32 +699,32 @@ namespace _Project.Scripts.Other
 
 		private void VegForNoodlesReachedDestination()
 		{
-			if(!utensil.vegAdded)
+			if(!utensil._isVegAdded)
 			{
-				utensil.vegAdded = true;
-				utensil.myFood.gameObject.SetActive (true);
+				utensil._isVegAdded = true;
+				utensil._foodSpriteRenderer.gameObject.SetActive (true);
 
-				if(utensil.noodlesAdded)
+				if(utensil._isNoodlesAdded)
 				{
 					if(tutorialOn)
 					{
 						tutorialOn = false;
-						_chinaManager.panUtensil[0].tutorialOn = true;
+						_chinaManager.panUtensil[0]._isTutorialOn = true;
 						_uiManager.tutorialPanelBg.OpenPopupChina ("WAIT FOR THE \n NOODLES TO COOK",false,false , 3);
 					}
-					utensil.scaledImage.gameObject.SetActive (true);
-					utensil.scaledImage.ResetToBeginning ();
-					utensil.scaledImage.PlayForward();
-					utensil.scaledImage.GetComponent<SpriteRenderer>().sprite =  _chinaManager.noodlesInPanVariations[2];
-					utensil.noOfServingsAvailable = 2;
+					utensil._scaledImage.gameObject.SetActive (true);
+					utensil._scaledImage.ResetToBeginning ();
+					utensil._scaledImage.PlayForward();
+					utensil._scaledImage.GetComponent<SpriteRenderer>().sprite =  _chinaManager.noodlesInPanVariations[2];
+					utensil._servingsAvailable = 2;
 				}
 				else 
 				{
 
-					utensil.myScale.enabled = true;
-					utensil.myScale.ResetToBeginning ();
-					utensil.myScale.PlayForward();
-					utensil.myFood.sprite = _chinaManager.noodlesInPanVariations[2];
+					utensil._tweenScale.enabled = true;
+					utensil._tweenScale.ResetToBeginning ();
+					utensil._tweenScale.PlayForward();
+					utensil._foodSpriteRenderer.sprite = _chinaManager.noodlesInPanVariations[2];
 				}
 			}
 			_chinaManager.clickedNoodlesVeg = false;
@@ -732,17 +732,17 @@ namespace _Project.Scripts.Other
 
 		private void VegForSoupReachedDestination()
 		{
-			utensil.vegAdded = true;
-			utensil.myFood.gameObject.SetActive (true);
-			utensil.noOfServingsAvailable = 2;
-			utensil.myAlpha.gameObject.SetActive (true);
-			utensil.myAlpha.ResetToBeginning ();
-			utensil.myAlpha.PlayForward ();
+			utensil._isVegAdded = true;
+			utensil._foodSpriteRenderer.gameObject.SetActive (true);
+			utensil._servingsAvailable = 2;
+			utensil._alphaTween.gameObject.SetActive (true);
+			utensil._alphaTween.ResetToBeginning ();
+			utensil._alphaTween.PlayForward ();
 			_chinaManager.clickedSoupVeg = false;
 			if(tutorialOn)
 			{
 				tutorialOn = false;
-				_chinaManager.soupUtensils[0].tutorialOn = true;
+				_chinaManager.soupUtensils[0]._isTutorialOn = true;
 				_uiManager.tutorialPanelBg.OpenPopupChina ("TAP OR DRAG THIS TO \n  SOUP BOWL.",false,false , 5);
 			}
 		}
@@ -1056,19 +1056,19 @@ namespace _Project.Scripts.Other
 				otherObject = other.gameObject;
 				if(other.name.Contains ("pan"))
 				{
-					utensil = other.GetComponent<ChineseUtensils>();
-					if(utensil.noOfServingsAvailable == 0)
+					utensil = other.GetComponent<ChineseUtils>();
+					if(utensil._servingsAvailable == 0)
 					{
 						if(isNoodlesToCook)
 						{
-							if(!utensil.noodlesAdded)
+							if(!utensil._isNoodlesAdded)
 							{
 								reachedDestination = true;
 							}
 						}
 						else if(isNoodlesVeg)
 						{
-							if(!utensil.vegAdded)
+							if(!utensil._isVegAdded)
 							{
 								reachedDestination = true;
 							}
@@ -1082,10 +1082,10 @@ namespace _Project.Scripts.Other
 				otherObject = other.gameObject;
 				if(other.name.Contains ("pot"))
 				{
-					utensil = other.GetComponent<ChineseUtensils>();
-					if(utensil.noOfServingsAvailable == 0)
+					utensil = other.GetComponent<ChineseUtils>();
+					if(utensil._servingsAvailable == 0)
 					{
-						if(!utensil.vegAdded)
+						if(!utensil._isVegAdded)
 						{
 							reachedDestination = true;
 						}

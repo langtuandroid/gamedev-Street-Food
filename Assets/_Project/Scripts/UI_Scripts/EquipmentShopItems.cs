@@ -81,7 +81,7 @@ namespace _Project.Scripts.UI_Scripts
 				equipmentPanel.purchaseButton.SetActive (false);
 			
 			}
-			EquimentShowInfo._instance.itemNo = equ_number;
+			EquimentData._instance.itemNumber = equ_number;
 
 		}
 

@@ -1,20 +1,21 @@
 ﻿using _Project.Scripts.UI_Scripts;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace _Project.Scripts.Game
 {
-	public class EquimentShowInfo : MonoBehaviour 
+	public class EquimentData : MonoBehaviour 
 	{
 		[Inject] private DiContainer _diContainer;
 		[Inject] private MenuManager _menuManager;  
-		public static EquimentShowInfo _instance ;
-		public string []itemUsage ;
-		public string []itemUsage2 ;
-		public string []itemUsage3 ;
-		public string []itemUsage4 ;
-		public string []itemUsage5 ;
-		public int itemNo { get; set; }
+		public static EquimentData _instance ;
+		[FormerlySerializedAs("itemUsage")] public string []_itemsUsage1 ;
+		[FormerlySerializedAs("itemUsage2")] public string []_itemsUsage2 ;
+		[FormerlySerializedAs("itemUsage3")] public string []itemUsed3 ;
+		[FormerlySerializedAs("itemUsage4")] public string []itemUsed4 ;
+		[FormerlySerializedAs("itemUsage5")] public string []itemUsed5 ;
+		public int itemNumber { get; set; }
 
 		private void Awake () 
 		{
@@ -29,18 +30,18 @@ namespace _Project.Scripts.Game
 			return popupPanel;
 		}
 
-		private void MenuPopup(string messagePopup,string messagePopup2,string messagePopup3,string messagePopup4,string messagePopup5)
+		private void PopUpMenu(string messagePopup,string messagePopup2,string messagePopup3,string messagePopup4,string messagePopup5)
 		{
 			_menuManager.popupPanel2.gameObject.SetActive (true);
 			_menuManager.popupPanel2.EnablePopup (messagePopup,messagePopup2,messagePopup3,messagePopup4,messagePopup5,false);
 		}
 	
-		public void ClickedHelp()
+		public void OpenHelp()
 		{
 			EquipmentPanel._instance.help_bttn.GetComponent<Animator> ().enabled = false;
 			if(_menuManager != null)
 			{
-				MenuPopup(itemUsage[itemNo],itemUsage2[itemNo],itemUsage3[itemNo],itemUsage4[itemNo],itemUsage5[itemNo]);
+				PopUpMenu(_itemsUsage1[itemNumber],_itemsUsage2[itemNumber],itemUsed3[itemNumber],itemUsed4[itemNumber],itemUsed5[itemNumber]);
 			}
 		
 		}

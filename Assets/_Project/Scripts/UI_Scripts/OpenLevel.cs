@@ -62,8 +62,8 @@ namespace _Project.Scripts.UI_Scripts
 
 		public void SelectLevel()
 		{
-			AllScence._instance.loader.SetActive (true);
-			DontDestroyOnLoad (AllScence._instance.loader);
+			ScenesController._instance._loader.SetActive (true);
+			DontDestroyOnLoad (ScenesController._instance._loader);
 			switch (MenuManager.envNo)
 			{
 				case "US":

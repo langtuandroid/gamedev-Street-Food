@@ -39,10 +39,10 @@ namespace _Project.Scripts.Managers
 		public bool clickedSoupContainer { get; set; }
 		public bool clickSoupBowl { get; set; }
 		public bool clickedNoodlePlate { get; set; }
-		public ChineseUtensils clickedUtensilsDestinationFunction { get; set; }
+		public ChineseUtils clickedUtensilsDestinationFunction { get; set; }
 		public ObjectMotion clickedItemDestinationFunction { get; set; }
-		public ChineseUtensils []soupUtensils;
-		public ChineseUtensils []panUtensil;
+		public ChineseUtils []soupUtensils;
+		public ChineseUtils []panUtensil;
 		public GameObject dustbin;
 		public ObjectMotion cupCake;
 		public ObjectMotion noodles;
@@ -87,7 +87,7 @@ namespace _Project.Scripts.Managers
 		}
 		public void UtensilReached()
 		{
-			clickedUtensilsDestinationFunction.ClickedDestination ();
+			clickedUtensilsDestinationFunction.OnDestinationClick ();
 		}
 		
 		public void ObjectReached()
@@ -147,8 +147,8 @@ namespace _Project.Scripts.Managers
 		{
 			for(int i = 0 ; i < pansUpgrade ; i++)
 			{
-				panUtensil[i].iAmSelected = false;
-				panUtensil[i].mySelection.SetActive (false);
+				panUtensil[i]._isSelected = false;
+				panUtensil[i]._selection.SetActive (false);
 			}
 		}
 
@@ -156,8 +156,8 @@ namespace _Project.Scripts.Managers
 		{
 			for(int i = 0 ; i < soupContainerUpgrade ; i++)
 			{
-				soupUtensils[i].iAmSelected = false;
-				soupUtensils[i].mySelection.SetActive (false);
+				soupUtensils[i]._isSelected = false;
+				soupUtensils[i]._selection.SetActive (false);
 			}
 		}
 
