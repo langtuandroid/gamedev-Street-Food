@@ -1,83 +1,84 @@
 ﻿using _Project.Scripts.Entities.Customers;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace _Project.Scripts.Other
 {
-	public class Radio : MonoBehaviour {
-	
-		public GameObject node1;
-		public GameObject node2;
-		public GameObject node3 ;
-		public GameObject node4 ;
-		public GameObject radiofront;
+	public class Radio : MonoBehaviour 
+	{
+		[FormerlySerializedAs("node1")] [SerializeField] private GameObject play1;
+		[FormerlySerializedAs("node2")] [SerializeField] private GameObject play2;
+		[FormerlySerializedAs("node3")] [SerializeField] private GameObject play3 ;
+		[FormerlySerializedAs("node4")] [SerializeField] private GameObject play4 ;
+		[FormerlySerializedAs("radiofront")] [SerializeField] private GameObject _frontRadio;
 
 		private void Start () 
 		{
 			Wisitor._isRadioBought = false;
 		}
 
-		private void Nodef1()
+		private void Play1()
 		{
-			node2.SetActive (false);
-			node3.SetActive (false);
-			node4.SetActive (false);
-			node1.SetActive (true);
+			play2.SetActive (false);
+			play3.SetActive (false);
+			play4.SetActive (false);
+			play1.SetActive (true);
 
 		}
-		public void Nodef2()
+		public void Play2()
 		{
-			node3.SetActive (false);
-			node4.SetActive (false);
-			node1.SetActive (false);
-			node2.SetActive (true);
+			play3.SetActive (false);
+			play4.SetActive (false);
+			play1.SetActive (false);
+			play2.SetActive (true);
 
 		}
-		public void Nodef3()
+		public void Play3()
 		{
-			node4.SetActive (false);
-			node1.SetActive (false);
-			node2.SetActive (false);
-			node3.SetActive (true);
+			play4.SetActive (false);
+			play1.SetActive (false);
+			play2.SetActive (false);
+			play3.SetActive (true);
 
 		}
-		public void Nodef4()
+		public void Play4()
 		{
-			node1.SetActive (false);
-			node2.SetActive (false);
-			node3.SetActive (false);
-			node4.SetActive (true);
+			play1.SetActive (false);
+			play2.SetActive (false);
+			play3.SetActive (false);
+			play4.SetActive (true);
 
 		}
-		public void Restart()
+		public void Reset()
 		{
-			Nodef1();
-			Invoke (nameof(Nodef2), 0.671f);
-			Invoke (nameof(Nodef3), 1.171f);
-			Invoke (nameof(Nodef4), 2.0f);
-			Invoke (nameof(Restart), 2.5f);
+			Play1();
+			Invoke (nameof(Play2), 0.671f);
+			Invoke (nameof(Play3), 1.171f);
+			Invoke (nameof(Play4), 2.0f);
+			Invoke (nameof(Reset), 2.5f);
 		}
 
 		private void OnMouseDown()
 		{
 			if (!gameObject.GetComponent<AudioSource> ().isPlaying) {
 				Wisitor._isRadioBought = true ;
-				radiofront.GetComponent<Animator>().enabled = true ;
+				_frontRadio.GetComponent<Animator>().enabled = true ;
 
 				gameObject.GetComponent<AudioSource> ().Play ();
-				Nodef1();
-				Invoke (nameof(Nodef2), 0.671f);
-				Invoke (nameof(Nodef3), 1.171f);
-				Invoke (nameof(Nodef4), 2.0f);
-				Invoke (nameof(Restart), 2.5f);
+				Play1();
+				Invoke (nameof(Play2), 0.671f);
+				Invoke (nameof(Play3), 1.171f);
+				Invoke (nameof(Play4), 2.0f);
+				Invoke (nameof(Reset), 2.5f);
 
 			} else {
 				Wisitor._isRadioBought = false ;
 				gameObject.GetComponent<AudioSource> ().Stop();
-				radiofront.GetComponent<Animator>().enabled = false ;
-				node1.SetActive(false);
-				node2.SetActive(false);
-				node3.SetActive(false);
-				node4.SetActive(false);
+				_frontRadio.GetComponent<Animator>().enabled = false ;
+				play1.SetActive(false);
+				play2.SetActive(false);
+				play3.SetActive(false);
+				play4.SetActive(false);
 				CancelInvoke();
 			}
 

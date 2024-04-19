@@ -592,7 +592,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11421706}
-        m_MethodName: Close
+        m_MethodName: ClosePanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -644,7 +644,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11421706}
-        m_MethodName: Gold
+        m_MethodName: OpenGoldPanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

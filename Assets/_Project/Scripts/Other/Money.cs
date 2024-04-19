@@ -3,81 +3,81 @@ using _Project.Scripts.Entities.Customers;
 using _Project.Scripts.Managers;
 using _Project.Scripts.UI_Scripts;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace _Project.Scripts.Other
 {
-	public class Coins : MonoBehaviour 
+	public class Money : MonoBehaviour 
 	{
+		public static int _visible;
 		[Inject] private WisitorHandler _customerHandler;
 		[Inject] private SoundsAll _levelSoundManager;
 		[Inject] private USController _usManager;
 		[Inject] private ChinaController _chinaManager;
 		[Inject] private UIManager _uiManager;   
-		public int positionTaken { get; set; }
-		public int myAmount { get; set; }
-		public GameObject perfectText;
-		public TextMesh addValue;
-		public bool tutorialOn { get; set; }
-		public ParticleSystem coinCollected;
-		public ParticleSystem highlight ;
-		public GameObject uiCoins;
-		public TextMesh Bonus_value ;
-		public int bonusVal { get; set; }
-		public static int visible;
 		
-		private Vector3 coinsToMoveInitialPosition;
+		[FormerlySerializedAs("perfectText")] public GameObject _textObject;
+		[FormerlySerializedAs("addValue")] public TextMesh _textMashAdd;
+		[FormerlySerializedAs("coinCollected")] public ParticleSystem _collectedParticle;
+		[FormerlySerializedAs("highlight")] public ParticleSystem _highLightParticle;
+		[FormerlySerializedAs("uiCoins")] public GameObject coinsPrefab;
+		[FormerlySerializedAs("Bonus_value")] public TextMesh _bonusText ;
 		
-
+		private Vector3 CoinsMovePos;
+		public int posTaken { get; set; }
+		public int Amount { get; set; }
+		public bool IsTutorialOn { get; set; }
+		public int Bonus { get; set; }
 		private void Start () 
 		{
-			coinsToMoveInitialPosition = transform.position;
+			CoinsMovePos = transform.position;
 		}
 
 		private void OnEnable()
 		{
-			visible++;
+			_visible++;
 			if (_customerHandler._timeOnGame <= 15 ) {
 
 				{
-					highlight.Play();
+					_highLightParticle.Play();
 				}
 			}
 
-			if (coinsToMoveInitialPosition != Vector3.zero)
+			if (CoinsMovePos != Vector3.zero)
 			{
-				transform.position = coinsToMoveInitialPosition;
+				transform.position = CoinsMovePos;
 			}
 		
 			transform.localScale = new Vector3(1,1,1);
-			StartCoroutine (ScaleObject());
-			addValue.gameObject.SetActive (true);
-			addValue.text = "+"+myAmount;
-			if (bonusVal > 0) {
+			StartCoroutine (ScaleRoutine());
+			_textMashAdd.gameObject.SetActive (true);
+			_textMashAdd.text = "+"+Amount;
+			if (Bonus > 0) {
 	
-				Bonus_value.gameObject.SetActive (true);
-				Bonus_value.text = "Bonus +" + bonusVal;
-				Invoke(nameof(deactive),1.3f);
+				_bonusText.gameObject.SetActive (true);
+				_bonusText.text = "Bonus +" + Bonus;
+				Invoke(nameof(DeactivateObject),1.3f);
 			} 
 			else 
 			{
-				Bonus_value.gameObject.SetActive (false);
+				_bonusText.gameObject.SetActive (false);
 			}
 		}
 
-		private void deactive()
+		private void DeactivateObject()
 		{
-			Bonus_value.gameObject.SetActive (false);
+			_bonusText.gameObject.SetActive (false);
 		}
 
 		private void OnDisable()
 		{
-			highlight.Stop ();
-			visible--;
-			StopCoroutine (ScaleObject());
+			_highLightParticle.Stop ();
+			_visible--;
+			StopCoroutine (ScaleRoutine());
 		}
 
-		private IEnumerator ScaleObject()
+		private IEnumerator ScaleRoutine()
 		{
 			while(transform.localScale.x < 3)
 			{
@@ -86,11 +86,11 @@ namespace _Project.Scripts.Other
 			}
 		}
 
-		private IEnumerator MoveCoins()
+		private IEnumerator MoveCoinRoutine()
 		{
-			Vector3 finalPos = uiCoins.transform.position;
-			finalPos = new Vector3(finalPos.x , finalPos.y,coinsToMoveInitialPosition.z);
-			transform.position = coinsToMoveInitialPosition;
+			Vector3 finalPos = coinsPrefab.transform.position;
+			finalPos = new Vector3(finalPos.x , finalPos.y,CoinsMovePos.z);
+			transform.position = CoinsMovePos;
 			while(Vector3.Distance(transform.position, finalPos) > 1f)
 			{
 				transform.position = Vector3.MoveTowards(transform.position, finalPos, 0.25f);
@@ -104,9 +104,9 @@ namespace _Project.Scripts.Other
 		private void OnMouseDown()
 		{
 			_levelSoundManager.coinClickSound.Play ();
-			if(tutorialOn)
+			if(IsTutorialOn)
 			{
-				tutorialOn = false;
+				IsTutorialOn = false;
 				_uiManager.tutorialPanelBg.gameObject.SetActive (false);
 				_uiManager.tutorialPanelCanvas.gameObject.SetActive (true);
 				_uiManager.tutorialPanelCanvas.OpenPopup ("YOUR EARNINGS HELP TO BUY UPGRADES.",true,false , 5 , 1);
@@ -126,10 +126,10 @@ namespace _Project.Scripts.Other
 			}
 
 			_uiManager.totalCoins+=_uiManager.Bonus_coin;
-			_uiManager.totalCoins+=myAmount;
+			_uiManager.totalCoins+=Amount;
 
-			StartCoroutine (MoveCoins());
-			_customerHandler._availablePositions.Add (positionTaken);
+			StartCoroutine (MoveCoinRoutine());
+			_customerHandler._availablePositions.Add (posTaken);
 
 			if(_customerHandler.timerStopped ||  _customerHandler._timeOnGame <= 0)
 			{
@@ -140,9 +140,9 @@ namespace _Project.Scripts.Other
 			}
 		}
 
-		public void CoinsStolen()
+		public void StolenMoney()
 		{
-			_customerHandler._availablePositions.Add (positionTaken);
+			_customerHandler._availablePositions.Add (posTaken);
 		
 			if(_customerHandler.timerStopped || _customerHandler._timeOnGame <= 0)
 			{

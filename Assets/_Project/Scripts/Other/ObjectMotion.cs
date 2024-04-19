@@ -103,7 +103,7 @@ namespace _Project.Scripts.Other
 			{
 				if(isCoke)
 				{
-					if(!myParentHolder.available)
+					if(!myParentHolder.isAvailable)
 					{
 						scaleUp = true;
 						if(_usManager != null)
@@ -551,7 +551,7 @@ namespace _Project.Scripts.Other
 				_australiaManager.FriesFilled--;
 			}
 
-			myParentHolder.available = true;
+			myParentHolder.isAvailable = true;
 			customer._order.Remove (myType);
 			customer.RemoveOrderFromBoard (myType);
 			if(customer._order.Count > 0)
@@ -780,7 +780,7 @@ namespace _Project.Scripts.Other
 				Invoke(nameof(Stopa),4.0f);
 			}
 			_chinaManager.FiledCountClick--;
-			myParentHolder.available = true;
+			myParentHolder.isAvailable = true;
 			customer._order.Remove (myType);
 			customer.RemoveOrderFromBoard (myType);
 
@@ -824,7 +824,7 @@ namespace _Project.Scripts.Other
 		{
 			_levelSoundManager.drinkSound.Play ();
 			_chinaManager.FilledBowls--;
-			myParentHolder.available = true;
+			myParentHolder.isAvailable = true;
 			customer._order.Remove (myType);
 			customer.RemoveOrderFromBoard (myType);
 		
@@ -867,8 +867,8 @@ namespace _Project.Scripts.Other
 		private void RedSauceReachedDestination()
 		{
 			availableHotDog.isSauce = true;
-			_usManager.HotDogSaucesOnPlatesSR[availableHotDog.GetComponent<Availability>().myPositionInArray].gameObject.SetActive (true);
-			_usManager.HotDogSaucesOnPlatesSR[availableHotDog.GetComponent<Availability>().myPositionInArray].sprite = _usManager.HotDogSaucesSprites[0];
+			_usManager.HotDogSaucesOnPlatesSR[availableHotDog.GetComponent<Availability>()._arrayPos].gameObject.SetActive (true);
+			_usManager.HotDogSaucesOnPlatesSR[availableHotDog.GetComponent<Availability>()._arrayPos].sprite = _usManager.HotDogSaucesSprites[0];
 			if(availableHotDog.isTikki)
 			{
 				availableHotDog.transform.GetComponent<HotDog>().isTape = LevelManager.Orders.HOTDOG_RED;
@@ -880,8 +880,8 @@ namespace _Project.Scripts.Other
 		private void YellowSauceReachedDestination()
 		{
 			availableHotDog.yellowSauce = true;
-			_usManager.HotDogSaucesOnPlatesSR[availableHotDog.GetComponent<Availability>().myPositionInArray].gameObject.SetActive (true);
-			_usManager.HotDogSaucesOnPlatesSR[availableHotDog.GetComponent<Availability>().myPositionInArray].sprite = _usManager.HotDogSaucesSprites[1];
+			_usManager.HotDogSaucesOnPlatesSR[availableHotDog.GetComponent<Availability>()._arrayPos].gameObject.SetActive (true);
+			_usManager.HotDogSaucesOnPlatesSR[availableHotDog.GetComponent<Availability>()._arrayPos].sprite = _usManager.HotDogSaucesSprites[1];
 			if(availableHotDog.isTikki)
 			{
 				availableHotDog.transform.GetComponent<HotDog>().isTape = LevelManager.Orders.HOTDOG_YELLOW;
@@ -939,7 +939,7 @@ namespace _Project.Scripts.Other
 			{
 				_australiaManager.CokesFilled--;
 			}
-			myParentHolder.available = true;
+			myParentHolder.isAvailable = true;
 			customer._order.Remove (myType);
 			customer.RemoveOrderFromBoard (myType);
 			

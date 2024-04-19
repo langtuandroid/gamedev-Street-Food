@@ -50,7 +50,7 @@ namespace _Project.Scripts.Managers
 		[FormerlySerializedAs("hotDogSaucesOnPlates")] public SpriteRenderer []HotDogSaucesOnPlatesSR;
 		[FormerlySerializedAs("hotdogOnPlates")] public SpriteRenderer []HotdogOnPlatesSR;
 		[FormerlySerializedAs("firstHotDog")] public HotDog FirstHotDog;
-		[FormerlySerializedAs("firstCoins")] public Coins FirstCoins;
+		[FormerlySerializedAs("firstCoins")] public Money FirstCoins;
 		[FormerlySerializedAs("Bell")] public GameObject BellObject ;
 		[FormerlySerializedAs("handcuff")] public GameObject HandCuff;
 		public Wisitor firstWisitor { get; set; }
@@ -169,11 +169,11 @@ namespace _Project.Scripts.Managers
 				{
 					for(int i = 0 ; i < _girlsAwaiable ; i++)
 					{
-						if(_grillPlaces[i].available)
+						if(_grillPlaces[i].isAvailable)
 						{
 							_grillTikkis[i].gameObject.SetActive (true);
 							_grillTikkis[i].sprite = HotDogVariants[0];
-							_grillPlaces[i].available = false;
+							_grillPlaces[i].isAvailable = false;
 							GrillsFilledCount++;
 							break;
 						}
@@ -193,7 +193,7 @@ namespace _Project.Scripts.Managers
 		{
 			for(int i = 0 ; i < _girlsAwaiable ; i++)
 			{
-				if(!_grillPlaces[i].available)
+				if(!_grillPlaces[i].isAvailable)
 				{
 					_grillTikkis[i].transform.GetComponent<MakeTikki>().iAmSelected = false;
 					_grillTikkis[i].transform.GetComponent<MakeTikki>().mySelection.SetActive (false);
@@ -211,12 +211,12 @@ namespace _Project.Scripts.Managers
 				{
 					for(int i = 0 ; i < _platesAwailable ; i++)
 					{
-						if(_hotdogPlates[i].gameObject.GetComponent<Availability>().available)
+						if(_hotdogPlates[i].gameObject.GetComponent<Availability>().isAvailable)
 						{
 							HotdogOnPlatesSR[i].gameObject.SetActive (true);
 							HotdogOnPlatesSR[i].sprite = HotDogVariations[0];
 							PlatesFilledCount++;
-							_hotdogPlates[i].gameObject.GetComponent<Availability>().available = false;
+							_hotdogPlates[i].gameObject.GetComponent<Availability>().isAvailable = false;
 							HotdogOnPlatesSR[i].transform.GetComponent<HotDog>().isPerfect = false;
 							break;
 						}
@@ -236,7 +236,7 @@ namespace _Project.Scripts.Managers
 		{
 			for(int i = 0 ; i < _platesAwailable ; i++)
 			{
-				if(!_hotdogPlates[i].gameObject.GetComponent<Availability>().available)
+				if(!_hotdogPlates[i].gameObject.GetComponent<Availability>().isAvailable)
 				{
 					HotDog myHotDog = HotdogOnPlatesSR[i].transform.GetComponent<HotDog>();
 					myHotDog.isSelected = false;
@@ -256,13 +256,13 @@ namespace _Project.Scripts.Managers
 				{
 					for(int i = 0 ; i < _cokesAwailaable ; i++)
 					{
-						if(_cokePlaces[i].available)
+						if(_cokePlaces[i].isAvailable)
 						{
 							_levelSoundManager.bottleClickSound.Play();
 							_cokeBottles[i].gameObject.SetActive (true);
 							_cokeBottles[i].color = new Color(1,1,1,1);
 							CokesFilledNum++;
-							_cokePlaces[i].available = false;
+							_cokePlaces[i].isAvailable = false;
 							break;
 						}
 					}

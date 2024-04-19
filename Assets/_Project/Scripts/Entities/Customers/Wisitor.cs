@@ -593,21 +593,21 @@ namespace _Project.Scripts.Entities.Customers
 								bonusVal = Mathf.CeilToInt (bonusVal/2f);
 							}
 							Debug.Log("bonus Val = "+bonusVal);
-							_customerHandler._coins[positionTaken].bonusVal = bonusVal;
-							_customerHandler._coins[positionTaken].myAmount = coinsSpent +bonusVal;
+							_customerHandler._coins[positionTaken].Bonus = bonusVal;
+							_customerHandler._coins[positionTaken].Amount = coinsSpent +bonusVal;
 						}
 						else
 						{
-							_customerHandler._coins[positionTaken].myAmount = coinsSpent;
+							_customerHandler._coins[positionTaken].Amount = coinsSpent;
 						}
 
 						_customerHandler._coins[positionTaken].gameObject.SetActive (true);
 						if(perfect)
 						{
-							_customerHandler._coins[positionTaken].perfectText.SetActive (true);
+							_customerHandler._coins[positionTaken]._textObject.SetActive (true);
 						}
 						else
-							_customerHandler._coins[positionTaken].perfectText.SetActive (false);
+							_customerHandler._coins[positionTaken]._textObject.SetActive (false);
 
 						if(perfect)
 						{
@@ -661,9 +661,9 @@ namespace _Project.Scripts.Entities.Customers
 							USController._perfectNums = 0;
 						}
 						
-						_customerHandler._coins[positionTaken].coinCollected.Play ();
-						_customerHandler._coins[positionTaken].positionTaken = positionTaken;
-						_customerHandler._coins[positionTaken].addValue.text = "+"+coinsSpent;
+						_customerHandler._coins[positionTaken]._collectedParticle.Play ();
+						_customerHandler._coins[positionTaken].posTaken = positionTaken;
+						_customerHandler._coins[positionTaken]._textMashAdd.text = "+"+coinsSpent;
 					}
 				}
 				else

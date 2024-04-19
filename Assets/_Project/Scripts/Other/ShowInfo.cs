@@ -1,16 +1,17 @@
 ﻿using _Project.Scripts.UI_Scripts;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace _Project.Scripts.Other
 {
-	public class Forshowinfo : MonoBehaviour 
+	public class ShowInfo : MonoBehaviour 
 	{
 		[Inject] private DiContainer _diContainer;
 		[Inject] private MenuManager _menuManager;  
 		[Inject] private UIManager _uiManager;   
-		public string []itemUsage;
-		private GameObject GeneratePopupPanel()
+		[FormerlySerializedAs("itemUsage")] public string []_tiems;
+		private GameObject SpawnPopupPanel()
 		{
 			GameObject popupPanel = _diContainer.InstantiatePrefab(Resources.Load ("PopupPanel"));
 			popupPanel.transform.SetParent(transform.parent,false);
@@ -19,7 +20,7 @@ namespace _Project.Scripts.Other
 			return popupPanel;
 		}
 
-		private void MenuPopup(string messagePopup)
+		private void OpenmenuPopUp(string messagePopup)
 		{
 			if(_menuManager.popupPanel != null)
 			{
@@ -28,13 +29,13 @@ namespace _Project.Scripts.Other
 			}
 			else
 			{
-				GameObject popupPanel = GeneratePopupPanel();
+				GameObject popupPanel = SpawnPopupPanel();
 				_menuManager.popupPanel = popupPanel.GetComponent<PopupPanel>();
 				_menuManager.popupPanel.EnablePopup (messagePopup,false);
 			}
 		}
 
-		private void GamePopup(string messagePopup)
+		private void OpenGamePopup(string messagePopup)
 		{
 			if(_uiManager.popupPanel != null)
 			{
@@ -43,22 +44,21 @@ namespace _Project.Scripts.Other
 			}
 			else
 			{
-				GameObject popupPanel = GeneratePopupPanel();
+				GameObject popupPanel = SpawnPopupPanel();
 				_uiManager.popupPanel = popupPanel.GetComponent<PopupPanel>();
 				_uiManager.popupPanel.EnablePopup (messagePopup,false);
 			}
 		}
 
-		public void ClickedHelp(int itemNo)
+		public void HelpClick(int itemNo)
 		{
-
 			if(_menuManager != null)
 			{
-				MenuPopup(itemUsage[itemNo]);
+				OpenmenuPopUp(_tiems[itemNo]);
 			}
 			else
 			{
-				GamePopup(itemUsage[itemNo]);
+				OpenGamePopup(_tiems[itemNo]);
 			}
 		}
 	}

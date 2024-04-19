@@ -2757,7 +2757,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1185975936}
         m_TargetAssemblyTypeName: 
-        m_MethodName: Closetutorialpanel
+        m_MethodName: CloseTutorial
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3111,7 +3111,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1185975936}
         m_TargetAssemblyTypeName: 
-        m_MethodName: Ontotorialpanel
+        m_MethodName: OpenTutorial
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10908,7 +10908,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 585757099}
         m_TargetAssemblyTypeName: 
-        m_MethodName: ClickedHelp
+        m_MethodName: HelpClick
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

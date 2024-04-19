@@ -7,17 +7,17 @@ using Zenject;
 
 namespace _Project.Scripts.Other
 {
-	public class Belltry : MonoBehaviour 
+	public class BelltrMenu : MonoBehaviour 
 	{
 		[Inject] private WisitorHandler _customerHandler;
 		[Inject] private USController _usManager;
 		[Inject] private UIManager _uiManager;   
 		private void OnEnable()
 		{
-			Invoke (nameof(Timestop), 0.9f);
+			Invoke (nameof(Pause), 0.9f);
 	
 		}
-		public void ActiveBell()
+		public void BellActivate()
 		{
 			_usManager.BellObject.SetActive (true);
 			_customerHandler.stop = false ;
@@ -50,7 +50,7 @@ namespace _Project.Scripts.Other
 				_uiManager.EarnGold();
 			}
 		}
-		public void BuyBell()
+		public void BeltBuy()
 		{
 			if (MenuManager.golds >= 30) {
 				MenuManager.golds -= 30;
@@ -71,7 +71,7 @@ namespace _Project.Scripts.Other
 		{
 			Time.timeScale = 1f;
 		}
-		public void SetFalse()
+		public void DeactivateObject()
 		{
 			gameObject.SetActive (false);
 		}
@@ -80,11 +80,11 @@ namespace _Project.Scripts.Other
 			gameObject.SetActive (false);
 			_uiManager.IAPGold ();
 		}
-		public void PlayON()
+		public void ActivateObject()
 		{
 			gameObject.SetActive(false);
 		}
-		public void Timestop()
+		public void Pause()
 		{
 			Time.timeScale = 0f ;
 		}

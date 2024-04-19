@@ -1,36 +1,38 @@
 ﻿using _Project.Scripts.Additional;
 using _Project.Scripts.UI_Scripts;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace _Project.Scripts.Other
 {
-	public class RadioChech : MonoBehaviour 
+	public class RadioCheck : MonoBehaviour 
 	{
 		[Inject] private UIManager _uiManager;   
-		public GameObject radio_bttn ;
-		public GameObject cup_bttn ;
-		public GameObject radio_text ;
-		public GameObject cupcake_text ;
+		 
+		[FormerlySerializedAs("radio_bttn")] [SerializeField] private GameObject _radioButton ;
+		[FormerlySerializedAs("cup_bttn")] [SerializeField] private GameObject _cupButton ;
+		[FormerlySerializedAs("radio_text")] [SerializeField] private GameObject _radioText ;
+		[FormerlySerializedAs("cupcake_text")] [SerializeField] private GameObject _cupCakeText ;
 
-		void OnEnable()
+		private void OnEnable()
 		{
 			if (MenuManager.cupcakeNo <= 0) {
-				cup_bttn.SetActive (true);
-				cupcake_text.SetActive(false);
+				_cupButton.SetActive (true);
+				_cupCakeText.SetActive(false);
 			} else {
-				cupcake_text.SetActive(true);
-				cup_bttn.SetActive (false);
+				_cupCakeText.SetActive(true);
+				_cupButton.SetActive (false);
 			}
 			if (!PlayerPrefs.HasKey ("Radio")) {
-				radio_bttn.SetActive (true);
-				radio_text.SetActive(false);
+				_radioButton.SetActive (true);
+				_radioText.SetActive(false);
 			} else {
-				radio_text.SetActive(true);
-				radio_bttn.SetActive (false);
+				_radioText.SetActive(true);
+				_radioButton.SetActive (false);
 			}
 		}
-		public void BuyRadio()
+		public void Buy()
 		{
 			if (MenuManager.golds >= 20)
 			{

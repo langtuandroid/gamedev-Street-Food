@@ -174,13 +174,13 @@ namespace _Project.Scripts.Managers
 				{
 					for(int i = 0 ; i < _totalPlatesAvailable ; i++)
 					{
-						if(_placesNoodle[i].available)
+						if(_placesNoodle[i].isAvailable)
 						{
 							_levelSoundManager.bowlClickSound.Play();
 							_platesNoodle[i].gameObject.SetActive (true);
 							_platesNoodle[i].color = new Color(1,1,1,1);
 							FiledCountClick++;
-							_placesNoodle[i].available = false;
+							_placesNoodle[i].isAvailable = false;
 							break;
 						}
 					}
@@ -198,7 +198,7 @@ namespace _Project.Scripts.Managers
 		{
 			for(int i = 0 ; i < _totalPlatesAvailable ; i++)
 			{
-				if(!_placesNoodle[i].available)
+				if(!_placesNoodle[i].isAvailable)
 				{
 					MotionNoodlesPlates[i].iAmSelected = false;
 					MotionNoodlesPlates[i].mySelection.SetActive (false);
@@ -217,13 +217,13 @@ namespace _Project.Scripts.Managers
 				{
 					for(int i = 0 ; i < _blowsAvailable ; i++)
 					{
-						if(_bowlPlaces[i].available)
+						if(_bowlPlaces[i].isAvailable)
 						{
 							_levelSoundManager.bowlClickSound.Play();
 							_bowImage[i].gameObject.SetActive (true);
 							_bowImage[i].color = new Color(1,1,1,1);
 							FilledBowls++;
-							_bowlPlaces[i].available = false;
+							_bowlPlaces[i].isAvailable = false;
 							break;
 						}
 					}

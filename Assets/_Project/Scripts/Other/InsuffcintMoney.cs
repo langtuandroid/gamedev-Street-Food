@@ -4,7 +4,7 @@ using Zenject;
 
 namespace _Project.Scripts.Other
 {
-	public class InsuffcintCoin : MonoBehaviour 
+	public class InsuffcintMoney : MonoBehaviour 
 	{
 		[Inject] private DiContainer _diContainer;
 		[Inject] private MenuManager _menuManager;  
@@ -13,7 +13,7 @@ namespace _Project.Scripts.Other
 		{
 			transform.SetAsLastSibling ();
 		}
-		public void Gold()
+		public void OpenGoldPanel()
 		{
 			GameObject specialPanel = _diContainer.InstantiatePrefab(Resources.Load ("GoldPanel"));
 			specialPanel.transform.SetParent(transform.parent,false);
@@ -29,7 +29,7 @@ namespace _Project.Scripts.Other
 	    
 		}
 
-		public void Close()
+		public void ClosePanel()
 		{
 			_menuManager.lastPanel = null;
 			_menuManager.lastPanelName = "";

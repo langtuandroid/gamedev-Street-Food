@@ -218,7 +218,7 @@ namespace _Project.Scripts.Food
 		public void DestinationClick()
 		{
 			_colliderConteiner.enabled = true;
-			_plate.available = true;
+			_plate.isAvailable = true;
 			if(otherObject.name.Contains ("customer"))
 			{
 				_uiManager.n_Pizzas_served++;
@@ -324,24 +324,24 @@ namespace _Project.Scripts.Food
 				{
 					pizzaDestinationAvailable = _italyManager._firstOvenAvailabe;
 					_uiManager.tutorialPanelBg.OpenPopupItaly ("WAIT FOR PIZZA \n TO BAKE.",false,false , 4);
-					_italyManager._ovenPizzas[pizzaDestinationAvailable.myPositionInArray].tutorialOn = true;
+					_italyManager._ovenPizzas[pizzaDestinationAvailable._arrayPos].tutorialOn = true;
 					tutorialOn = false;
 				}
 
 				_italyManager._platesFilledCount--;
-				pizzaDestinationAvailable.available = false;
-				_italyManager._ovenPizzaRenderer[pizzaDestinationAvailable.myPositionInArray].gameObject.SetActive (true);
+				pizzaDestinationAvailable.isAvailable = false;
+				_italyManager._ovenPizzaRenderer[pizzaDestinationAvailable._arrayPos].gameObject.SetActive (true);
 
 
-				_italyManager._ovenPizzas[pizzaDestinationAvailable.myPositionInArray].myType = myType;
-				_italyManager._ovenPizzas[pizzaDestinationAvailable.myPositionInArray]._cheesePrefav.SetActive (true);
-				_italyManager._ovenPizzas[pizzaDestinationAvailable.myPositionInArray]._topping.gameObject.SetActive (true);
+				_italyManager._ovenPizzas[pizzaDestinationAvailable._arrayPos].myType = myType;
+				_italyManager._ovenPizzas[pizzaDestinationAvailable._arrayPos]._cheesePrefav.SetActive (true);
+				_italyManager._ovenPizzas[pizzaDestinationAvailable._arrayPos]._topping.gameObject.SetActive (true);
 				if(myType == LevelManager.Orders.VEG_PIZZA)
-					_italyManager._ovenPizzas[pizzaDestinationAvailable.myPositionInArray]._topping.sprite = _italyManager._pizzaToppings[0];
+					_italyManager._ovenPizzas[pizzaDestinationAvailable._arrayPos]._topping.sprite = _italyManager._pizzaToppings[0];
 				else
-					_italyManager._ovenPizzas[pizzaDestinationAvailable.myPositionInArray]._topping.sprite = _italyManager._pizzaToppings[1];
+					_italyManager._ovenPizzas[pizzaDestinationAvailable._arrayPos]._topping.sprite = _italyManager._pizzaToppings[1];
 				
-				_italyManager._ovenColliders[pizzaDestinationAvailable.myPositionInArray].enabled = false;
+				_italyManager._ovenColliders[pizzaDestinationAvailable._arrayPos].enabled = false;
 
 			}
 			else  
@@ -420,7 +420,7 @@ namespace _Project.Scripts.Food
 				{
 					otherObject = other.gameObject;
 					pizzaDestinationAvailable = other.GetComponent<Availability>();
-					if(pizzaDestinationAvailable.available)
+					if(pizzaDestinationAvailable.isAvailable)
 					{
 						_isOnCustomer = true;
 					}

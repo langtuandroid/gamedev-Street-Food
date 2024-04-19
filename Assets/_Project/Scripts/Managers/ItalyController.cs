@@ -143,12 +143,12 @@ namespace _Project.Scripts.Managers
 			int ovenToUpgrade =  (int)Encryption.Decrypt (PlayerPrefs.GetString("OvenUpgrade")); 
 			_ovensAvailable = 2+(ovenToUpgrade*2);
 	
-			_ovensPlaces[0].available = true;
+			_ovensPlaces[0].isAvailable = true;
 			_ovenColliders[0].enabled = true;
 			for(int i = 1; i < _ovensAvailable ; i++)
 			{
 				_ovens[i].sprite = _hotOvenSprite;
-				_ovensPlaces[i].available = true;
+				_ovensPlaces[i].isAvailable = true;
 				_ovenColliders[i].enabled = true;
 			}
 
@@ -194,12 +194,12 @@ namespace _Project.Scripts.Managers
 				{
 					for(int i = 0 ; i < _platesAvailable ; i++)
 					{
-						if(_platesPizza[i].gameObject.GetComponent<Availability>().available)
+						if(_platesPizza[i].gameObject.GetComponent<Availability>().isAvailable)
 						{
 							_platesCollers[i].enabled = false;
 							_pizzaPlates[i].gameObject.SetActive (true);
 							_platesFilledCount++;
-							_platesPizza[i].gameObject.GetComponent<Availability>().available = false;
+							_platesPizza[i].gameObject.GetComponent<Availability>().isAvailable = false;
 							_pizzaPlates[i].transform.GetComponent<Pizza>().perfect = false;
 							break;
 						}
@@ -219,7 +219,7 @@ namespace _Project.Scripts.Managers
 		{
 			for(int i = 0 ; i < _platesAvailable ; i++)
 			{
-				if(!_platesPizza[i].gameObject.GetComponent<Availability>().available)
+				if(!_platesPizza[i].gameObject.GetComponent<Availability>().isAvailable)
 				{
 					Pizza myPizza = _pizzaPlates[i].transform.GetComponent<Pizza>();
 					myPizza.iAmSelected = false;
@@ -232,7 +232,7 @@ namespace _Project.Scripts.Managers
 		{
 			for(int i = 0 ; i < _ovensAvailable ; i++)
 			{
-				if(!_ovensPlaces[i].available)
+				if(!_ovensPlaces[i].isAvailable)
 				{
 					_ovenPizzas[i].iAmSelected = false;
 					_ovenPizzas[i]._selectionObject.SetActive (false);
@@ -249,7 +249,7 @@ namespace _Project.Scripts.Managers
 				{
 					for(int i = 0 ; i < _cockeAvailable ; i++)
 					{
-						if(_places[i].available)
+						if(_places[i].isAvailable)
 						{
 							_levelSoundManager.bottleClickSound.Play();
 							_cokeBottles[i].gameObject.SetActive (true);
@@ -267,7 +267,7 @@ namespace _Project.Scripts.Managers
 									break;
 								}
 							}
-							_places[i].available = false;
+							_places[i].isAvailable = false;
 							break;
 						}
 					}
@@ -302,14 +302,14 @@ namespace _Project.Scripts.Managers
 				{
 					for(int i = 0 ; i < _cockeAvailable ; i++)
 					{
-						if(_places[i].available)
+						if(_places[i].isAvailable)
 						{
 							_levelSoundManager.bottleClickSound.Play();
 							_cokeBottles[i].gameObject.SetActive (true);
 							_cokeBottles[i].color = new Color(1,1,1,1);
 							_cokeBottles[i].sprite = _cokeBottlesSprites[0];
 							CokesFilled++;
-							_places[i].available = false;
+							_places[i].isAvailable = false;
 							break;
 						}
 					}

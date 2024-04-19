@@ -224,7 +224,7 @@ namespace _Project.Scripts.Other
 		{
 			if(!isBurnt)
 			{
-				if(availableHotDog.available)
+				if(availableHotDog.isAvailable)
 				{
 					if(tutorialPick)
 					{
@@ -242,8 +242,8 @@ namespace _Project.Scripts.Other
 					}
 					readyToPick = false;
 					isBurnt = false;
-					myGrill.available = true;
-					availableHotDog.available = false;
+					myGrill.isAvailable = true;
+					availableHotDog.isAvailable = false;
 
 				
 					transform.position = myOriginalPos;
@@ -291,22 +291,22 @@ namespace _Project.Scripts.Other
 						if(isUS)
 						{
 							availableHotDog.transform.GetComponent<HotDog>().isPerfect = true;
-							_usManager.HotdogOnPlatesSR[availableHotDog.myPositionInArray].sprite = _usManager.HotDogVariations[2];
+							_usManager.HotdogOnPlatesSR[availableHotDog._arrayPos].sprite = _usManager.HotDogVariations[2];
 
 						}
 						else
 						{
 							availableHotDog.transform.GetComponent<BurgerFood>().isPrefavet = true;
-							_australiaManager._tikkiPlates[availableHotDog.myPositionInArray].sprite = _australiaManager._burgerVariations[1];
+							_australiaManager._tikkiPlates[availableHotDog._arrayPos].sprite = _australiaManager._burgerVariations[1];
 						}
 					}
 					else
 					{
 						_levelSoundManager.buttnClickSound.Play();
 						if(isUS)
-							_usManager.HotdogOnPlatesSR[availableHotDog.myPositionInArray].sprite = _usManager.HotDogVariations[1];
+							_usManager.HotdogOnPlatesSR[availableHotDog._arrayPos].sprite = _usManager.HotDogVariations[1];
 						else
-							_australiaManager._tikkiPlates[availableHotDog.myPositionInArray].sprite = _australiaManager._burgerVariations[0];
+							_australiaManager._tikkiPlates[availableHotDog._arrayPos].sprite = _australiaManager._burgerVariations[0];
 					}
 					if(isUS)
 					{
@@ -326,7 +326,7 @@ namespace _Project.Scripts.Other
 			{
 				readyToPick = false;
 				isBurnt = false;
-				myGrill.available = true;
+				myGrill.isAvailable = true;
 				transform.position = myOriginalPos;
 				transform.gameObject.SetActive(false);
 				if(isUS)
@@ -368,7 +368,7 @@ namespace _Project.Scripts.Other
 				{
 
 					availableHotDog = other.GetComponent<Availability>();
-					if(availableHotDog.available)
+					if(availableHotDog.isAvailable)
 					{
 						otherObject = other.gameObject;
 						reachedPlate = true;
@@ -381,7 +381,7 @@ namespace _Project.Scripts.Other
 				if(other.name.Contains ("burger") && otherObject == null)
 				{
 					availableHotDog = other.GetComponent<Availability>();
-					if(availableHotDog.available)
+					if(availableHotDog.isAvailable)
 					{
 						otherObject = other.gameObject;
 						reachedPlate = true;
@@ -410,7 +410,7 @@ namespace _Project.Scripts.Other
 				{
 					if(otherObject != null)
 					{
-						if(otherObject == other.gameObject && availableHotDog.available)
+						if(otherObject == other.gameObject && availableHotDog.isAvailable)
 						{
 							otherObject = null;
 							reachedPlate = false;

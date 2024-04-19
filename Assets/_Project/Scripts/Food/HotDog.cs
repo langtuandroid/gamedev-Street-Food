@@ -55,8 +55,8 @@ namespace _Project.Scripts.Food
 			yellowSauce  = false;
 			isTikki  = false;
 			_isOnCustomer = false;
-			transform.GetComponent<Availability>().available = true;
-			_usManager.HotDogSaucesOnPlatesSR[transform.GetComponent<Availability>().myPositionInArray].gameObject.SetActive (false);
+			transform.GetComponent<Availability>().isAvailable = true;
+			_usManager.HotDogSaucesOnPlatesSR[transform.GetComponent<Availability>()._arrayPos].gameObject.SetActive (false);
 			isTape = LevelManager.Orders.NONE; 
 			transform.localScale = _localScale;
 			isSelected = false;
@@ -151,7 +151,7 @@ namespace _Project.Scripts.Food
 		public void OnDistinationClick()
 		{
 			_usManager.PlatesFilledCount--;
-			_plate.available = true;
+			_plate.isAvailable = true;
 			if(!_otherObject.name.Contains ("dustbin"))
 			{
 		
@@ -188,7 +188,7 @@ namespace _Project.Scripts.Food
 				if(isTutorial)
 				{
 					isTutorial = false;
-					_usManager.FirstCoins.tutorialOn = true;
+					_usManager.FirstCoins.IsTutorialOn = true;
 					_uiManager.tutorialPanelBg.gameObject.SetActive (true);
 					_uiManager.tutorialPanelBg.OpenPopup ("COLLECT THE COINS.",false,false , 4);
 				}

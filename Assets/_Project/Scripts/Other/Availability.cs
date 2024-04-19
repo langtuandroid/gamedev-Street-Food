@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace _Project.Scripts.Other
 {
 	public class Availability : MonoBehaviour 
 	{
-		public bool available;
-		public int myPositionInArray;
+		[FormerlySerializedAs("available")] public bool isAvailable;
+		[FormerlySerializedAs("myPositionInArray")] public int _arrayPos;
 	}
 }

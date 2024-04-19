@@ -43,7 +43,7 @@ namespace _Project.Scripts.Entities
 			     LevelManager.levelNo == 20 || LevelManager.levelNo == 27 || LevelManager.levelNo == 28 ||
 			     LevelManager.levelNo == 29 || LevelManager.levelNo == 30 || LevelManager.levelNo == 37 ||
 			     LevelManager.levelNo == 38 || LevelManager.levelNo == 39 || LevelManager.levelNo == 40) &&
-			    Coins.visible > 3)
+			    Money._visible > 3)
 			{
 				ThiefCome();
 			}
@@ -99,8 +99,8 @@ namespace _Project.Scripts.Entities
 					{
 						if(_customerHandler._coins[_posReack].gameObject.activeInHierarchy)
 						{
-							coinsStolen+=_customerHandler._coins[_posReack].myAmount;
-							_customerHandler._coins[_posReack].CoinsStolen ();
+							coinsStolen+=_customerHandler._coins[_posReack].Amount;
+							_customerHandler._coins[_posReack].StolenMoney ();
 						}
 						_posReack--;
 					}

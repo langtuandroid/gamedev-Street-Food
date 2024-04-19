@@ -194,11 +194,11 @@ namespace _Project.Scripts.Managers
 				{
 					for(int i = 0 ; i < totalGrillsAvailable ; i++)
 					{
-						if(grillPlaves[i].available)
+						if(grillPlaves[i].isAvailable)
 						{
 							_grillsTikkis[i].gameObject.SetActive (true);
 							_grillsTikkis[i].sprite = _burgerVariations[0];
-							grillPlaves[i].available = false;
+							grillPlaves[i].isAvailable = false;
 							GrillsFilled++;
 							break;
 						}
@@ -218,7 +218,7 @@ namespace _Project.Scripts.Managers
 		{
 			for(int i = 0 ; i < totalGrillsAvailable ; i++)
 			{
-				if(!grillPlaves[i].available)
+				if(!grillPlaves[i].isAvailable)
 				{
 					_grillsTikkis[i].transform.GetComponent<MakeTikki>().iAmSelected = false;
 					_grillsTikkis[i].transform.GetComponent<MakeTikki>().mySelection.SetActive (false);
@@ -236,11 +236,11 @@ namespace _Project.Scripts.Managers
 				{
 					for(int i = 0 ; i < totalPlatesAvailable ; i++)
 					{
-						if(_burgerPanel[i].gameObject.GetComponent<Availability>().available)
+						if(_burgerPanel[i].gameObject.GetComponent<Availability>().isAvailable)
 						{
 							_burgelOnPlate[i].gameObject.SetActive (true);
 							PlatesFilled++;
-							_burgerPanel[i].gameObject.GetComponent<Availability>().available = false;
+							_burgerPanel[i].gameObject.GetComponent<Availability>().isAvailable = false;
 							_burgelOnPlate[i].transform.GetComponent<BurgerFood>().isPrefavet = false;
 							break;
 						}
@@ -260,7 +260,7 @@ namespace _Project.Scripts.Managers
 		{
 			for(int i = 0 ; i < totalPlatesAvailable ; i++)
 			{
-				if(!_burgerPanel[i].gameObject.GetComponent<Availability>().available)
+				if(!_burgerPanel[i].gameObject.GetComponent<Availability>().isAvailable)
 				{
 					BurgerFood myBurger = _burgelOnPlate[i].transform.GetComponent<BurgerFood>();
 					myBurger.isSelected = false;
@@ -279,13 +279,13 @@ namespace _Project.Scripts.Managers
 				{
 					for(int i = 0 ; i < totalCokesAvailable ; i++)
 					{
-						if(_cokePlaces[i].available)
+						if(_cokePlaces[i].isAvailable)
 						{
 							_levelSoundManager.bottleClickSound.Play();
 							_bottles[i].gameObject.SetActive (true);
 							_bottles[i].color = new Color(1,1,1,1);
 							CokesFilled++;
-							_cokePlaces[i].available = false;
+							_cokePlaces[i].isAvailable = false;
 							break;
 						}
 					}
@@ -318,12 +318,12 @@ namespace _Project.Scripts.Managers
 				{
 					for(int i = 0 ; i < totalFriesAvailable; i++)
 					{
-						if(_friesPositions[i].available)
+						if(_friesPositions[i].isAvailable)
 						{
 
 							_friesPack[i].gameObject.SetActive (true);
 							FriesFilled++;
-							_friesPositions[i].available = false;
+							_friesPositions[i].isAvailable = false;
 							break;
 						}
 					}

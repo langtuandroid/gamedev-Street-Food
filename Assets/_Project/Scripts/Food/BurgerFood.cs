@@ -70,7 +70,7 @@ namespace _Project.Scripts.Food
 			if(transform.GetComponent<Availability>())
 			{
 				_tikkiSpriteRenderer.gameObject.SetActive (false);
-				transform.GetComponent<Availability>().available = true;
+				transform.GetComponent<Availability>().isAvailable = true;
 			}
 			type = LevelManager.Orders.NONE; 
 			transform.localScale = _scale;
@@ -181,7 +181,7 @@ namespace _Project.Scripts.Food
 		public void OnDestinationClick()
 		{
 			_australiaManager.PlatesFilled--;
-			_plate.available = true;
+			_plate.isAvailable = true;
 			if(!otherObject.name.Contains ("dustbin"))
 			{
 				_uiManager.n_Burger_served++ ;

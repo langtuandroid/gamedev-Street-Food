@@ -26,7 +26,7 @@ namespace _Project.Scripts.Entities.Customers
 		[FormerlySerializedAs("availablePositions")] public List <int> _availablePositions = new List<int>();
 		[FormerlySerializedAs("customerPool")] public List<Wisitor> _wisitorsPool;
 		[FormerlySerializedAs("timerText")] [SerializeField] private TextMesh _timerText;
-		[FormerlySerializedAs("coinImages")] public Coins[]_coins;
+		[FormerlySerializedAs("coinImages")] public Money[]_coins;
 		public bool timerStopped { get; set; }
 		public bool canBeAnUnPayingCustomer { get; set; }
 		public int noOfUnpayingCustomers { get; set; }

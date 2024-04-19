@@ -3,28 +3,29 @@ using _Project.Scripts.Entities;
 using _Project.Scripts.Managers;
 using _Project.Scripts.UI_Scripts;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Zenject;
 
 namespace _Project.Scripts.Other
 {
-	public class Handcuff : MonoBehaviour 
+	public class HandcuffMenu : MonoBehaviour 
 	{
 		[Inject] private USController _usManager;
 		[Inject] private UIManager _uiManager;   
-		public Text stolentext;
+		[FormerlySerializedAs("stolentext")] [SerializeField] private Text _textStolen;
 		private void OnEnable()
 		{
-			Invoke (nameof(Timestop), 0.9f);
-			stolentext.text = ThiefWisitor._instance.coinsStolen.ToString();
+			Invoke (nameof(Pause), 0.9f);
+			_textStolen.text = ThiefWisitor._instance.coinsStolen.ToString();
 		}
 	
-		public void Timestop()
+		public void Pause()
 		{
 			Time.timeScale = 0f;
 		}
 
-		public void Buyhandcuff()
+		public void Buy()
 		{
 			if (MenuManager.totalscore >= 1000) {
 				MenuManager.totalscore -= 1000;
@@ -45,7 +46,7 @@ namespace _Project.Scripts.Other
 			gameObject.SetActive (false);
 		}
 
-		public void Cross()
+		public void Deactivate()
 		{
 			gameObject.SetActive (false);
 		}

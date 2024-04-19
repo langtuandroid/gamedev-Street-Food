@@ -1478,7 +1478,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 11462790}
         m_TargetAssemblyTypeName: 
-        m_MethodName: ClickedHelp
+        m_MethodName: HelpClick
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
