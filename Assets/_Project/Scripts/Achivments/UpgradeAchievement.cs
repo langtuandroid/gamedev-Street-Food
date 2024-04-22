@@ -59,7 +59,7 @@ namespace _Project.Scripts.Achivments
 		
 		}
 
-		public void ClaimRevard()
+		public void CustomersReward1()
 		{
 			if (PlayerPrefs.GetInt ("CustomerLevel1") == 1 && !PlayerPrefs.HasKey ("Customer1Claimed")) {
 				MenuManager.totalscore+=100;
@@ -72,7 +72,7 @@ namespace _Project.Scripts.Achivments
 				PlayerPrefs.SetInt("claimvalue",AchievementBlock._claimCheck);
 			}
 		}
-		public void ClaimReward()
+		public void CustomersReward2()
 		{
 			if (PlayerPrefs.GetInt ("CustomerLevel2") == 1 && !PlayerPrefs.HasKey ("Customer2Claimed")) 
 			{
@@ -86,7 +86,7 @@ namespace _Project.Scripts.Achivments
 				PlayerPrefs.SetInt("claimvalue",AchievementBlock._claimCheck);
 			}
 		}
-		public void ClaimReward3()
+		public void CustomersReward3()
 		{
 			if (PlayerPrefs.GetInt ("CustomerLevel3") == 1 && !PlayerPrefs.HasKey ("Customer3Claimed")) 
 			{
@@ -102,7 +102,7 @@ namespace _Project.Scripts.Achivments
 		}
 
 
-		public void ClaimMaxReward()
+		public void ClaimPerfectReward1()
 		{
 			if (PlayerPrefs.GetInt ("PerfectLevel1") == 1 && !PlayerPrefs.HasKey ("Perfect1Claimed")) 
 			{
@@ -116,7 +116,7 @@ namespace _Project.Scripts.Achivments
 				PlayerPrefs.SetInt("claimvalue",AchievementBlock._claimCheck);
 			}
 		}
-		public void ClaimMaxReward2()
+		public void ClaimPerfectReward2()
 		{
 			if (PlayerPrefs.GetInt ("PerfectLevel2") == 1 && !PlayerPrefs.HasKey ("Perfect2Claimed"))
 			{
@@ -130,7 +130,7 @@ namespace _Project.Scripts.Achivments
 				PlayerPrefs.SetInt("claimvalue",AchievementBlock._claimCheck);
 			}
 		}
-		public void ClaimMaxReward3()
+		public void ClaimPerfectReward3()
 		{
 			if (PlayerPrefs.GetInt ("PerfectLevel3") == 1 && !PlayerPrefs.HasKey ("Perfect3Claimed")) 
 			{

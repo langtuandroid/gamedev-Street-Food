@@ -8,8 +8,6 @@ namespace _Project.Scripts.UI_Scripts
 	{
 		[Inject] private MenuManager _menuManager;  
 		public Text popupText;
-		public Button popupYes;
-		public Button popupNo;
 		public GameObject yesNoContainer;
 		public GameObject crossButton;
 		public TweenScale myScale;

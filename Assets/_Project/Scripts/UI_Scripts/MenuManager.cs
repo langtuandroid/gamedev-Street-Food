@@ -23,12 +23,10 @@ namespace _Project.Scripts.UI_Scripts
 		public static int totalscore;
 		public static int cupcakeNo;
 		public static int handcuffNo;
-		public GameObject lastPanel;
-		public string lastPanelName;
+		public string lastPanelName { get; set; }
 		public SoundToggle menuSoundButton;
 		public GameObject loader; 
 		public GameObject loader2 ;
-		public GameObject achievement_bttn;
 		public Animator achievment;
 
 
@@ -236,21 +234,7 @@ namespace _Project.Scripts.UI_Scripts
 		
 			EnableFadePanel();
 		}
-
-		public void GoldPanel()
-		{
-			GameObject specialPanel = _diContainer.InstantiatePrefab(Resources.Load ("GoldPanel"));
-			specialPanel.transform.SetParent(transform.parent,false);
-			specialPanel.transform.localScale = Vector3.one;
-			specialPanel.transform.localPosition = Vector3.zero;
-			EnableFadePanel ();
-
-			if (false)
-			{
-				//_uiManager.EnableFadePanel ();
-			}
-			Destroy (gameObject);
-		}
+		
 		public GameObject GeneratePopupPanel()
 		{
 		

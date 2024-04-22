@@ -1,18 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Serialization;
 
 public class LevelAnimation : MonoBehaviour 
 {
-	public GameObject level1 ;
-	public GameObject level2 ;
-	public GameObject level3 ;
-	public GameObject level4 ;
-	public GameObject level5 ;
-	public GameObject level6 ;
-	public GameObject level7 ;
-	public GameObject level8 ;
-	public GameObject level9 ;
-	public GameObject level10 ;
+	[FormerlySerializedAs("level1")] public GameObject[] levelButtons ;
+
 	readonly float timervalue = 0.1f ;
 
 	private void OnEnable()
@@ -22,59 +15,18 @@ public class LevelAnimation : MonoBehaviour
 
 	private IEnumerator level_animation()
 	{
-	
-		level1.GetComponent<Animator>().enabled = true ;
-		yield return new WaitForSeconds(timervalue);
-	
-		level2.GetComponent<Animator>().enabled = true ;
-		yield return new WaitForSeconds(timervalue);
-	;
-		level3.GetComponent<Animator>().enabled = true ;
-		yield return new WaitForSeconds(timervalue);
-	
-		level4.GetComponent<Animator>().enabled = true ;
-		yield return new WaitForSeconds(timervalue);
-
-		level5.GetComponent<Animator>().enabled = true ;
-		yield return new WaitForSeconds(timervalue);
-
-		level6.GetComponent<Animator>().enabled = true ;
-		yield return new WaitForSeconds(timervalue);
-	
-		level7.GetComponent<Animator>().enabled = true ;
-		yield return new WaitForSeconds(timervalue);
-
-		level8.GetComponent<Animator>().enabled = true ;
-		yield return new WaitForSeconds(timervalue);
-
-		level9.GetComponent<Animator>().enabled = true ;
-		yield return new WaitForSeconds(timervalue);
-
-		level10.GetComponent<Animator>().enabled = true ;
-		yield return new WaitForSeconds(timervalue);
+		foreach (var button in levelButtons)
+		{
+			button.GetComponent<Animator>().enabled = true ;
+			yield return new WaitForSeconds(timervalue);
+		}
 	}
 
 	private void OnDisable()
 	{
-		level1.GetComponent<Animator>().enabled = false ;
-
-		level2.GetComponent<Animator>().enabled =  false ;
-
-		level3.GetComponent<Animator>().enabled =  false ;
-
-		level4.GetComponent<Animator>().enabled =  false;
-
-		level5.GetComponent<Animator>().enabled =  false ;
-
-		level6.GetComponent<Animator>().enabled =  false;
-
-		level7.GetComponent<Animator>().enabled =  false;
-	
-		level8.GetComponent<Animator>().enabled =  false ;
-
-		level9.GetComponent<Animator>().enabled =  false;
-
-		level10.GetComponent<Animator>().enabled =  false ;
-
+		foreach (var button in levelButtons)
+		{
+			button.GetComponent<Animator>().enabled = false ;
+		}
 	}
 }

@@ -11,8 +11,8 @@ namespace _Project.Scripts.UI_Scripts
 		[Inject] private DiContainer _diContainer;
 		[Inject] private MenuManager _menuManager;  
 		[Inject] private UIManager _uiManager;   
-		private int noOfPanels => 4;
-		private int selectedPanel = 1;
+		private int noOfPanels => panels.Length;
+		private int selectedPanel;
 		
 		public GameObject leftArrow , rightArrow;
 		public GameObject []panels;

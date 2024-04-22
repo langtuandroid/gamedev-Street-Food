@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using _Project.Scripts.UI.Tutorial;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -11,16 +12,14 @@ namespace _Project.Scripts.UI_Scripts
 		[Inject] private DiContainer _diContainer;
 		[Inject] private MenuManager _menuManager;  
 		[Inject] private UIManager _uiManager;   
-		public static EquipmentPanel _instance ;
 		public Image upgradeImage;
 		public GameObject goldObject;
 		public Text coinsText;
 		public Text goldText;
 		public Text totalCoinsText;
 		public Text totalGoldText;
-		public Text upgradeValueText;
+		public TMP_Text upgradeValueText;
 		public GameObject purchaseButton;
-		public GameObject help_bttn ;
 	
 		public GameObject China_1 ;
 		public GameObject China_2;
@@ -36,11 +35,7 @@ namespace _Project.Scripts.UI_Scripts
 		public GameObject Aus_2 ;
 		public GameObject Aus_3 ;
 		public GameObject Aus_4 ;
-
-		private void Awake () 
-		{
-			_instance = this;
-		}
+		
 		
 		private void OnEnable()
 		{

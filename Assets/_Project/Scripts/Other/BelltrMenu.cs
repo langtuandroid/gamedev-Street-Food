@@ -75,11 +75,7 @@ namespace _Project.Scripts.Other
 		{
 			gameObject.SetActive (false);
 		}
-		public void IAP()
-		{
-			gameObject.SetActive (false);
-			_uiManager.IAPGold ();
-		}
+		
 		public void ActivateObject()
 		{
 			gameObject.SetActive(false);

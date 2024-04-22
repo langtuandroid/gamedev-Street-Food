@@ -132,7 +132,6 @@ namespace _Project.Scripts.UI_Scripts
 				}
 				else
 				{
-					_menuManager.lastPanel = gameObject;
 					_menuManager.lastPanelName = "SpecialPanel";
 					_menuManager.Insufficinetgold();
 				}
@@ -163,7 +162,6 @@ namespace _Project.Scripts.UI_Scripts
 				}
 				else
 				{
-					_menuManager.lastPanel = gameObject;
 					_menuManager.lastPanelName = "SpecialPanel";
 					_menuManager.Insufficinetgold();
 				}
@@ -194,7 +192,6 @@ namespace _Project.Scripts.UI_Scripts
 				}
 				else
 				{
-					_menuManager.lastPanel = gameObject;
 					_menuManager.lastPanelName = "SpecialPanel";
 					_menuManager.Insufficinetgold();
 				}
@@ -222,7 +219,6 @@ namespace _Project.Scripts.UI_Scripts
 			}
 			else
 			{
-				_menuManager.lastPanel = gameObject;
 				_menuManager.lastPanelName = "SpecialPanel";
 				_menuManager.Insufficinetcoin();
 			}

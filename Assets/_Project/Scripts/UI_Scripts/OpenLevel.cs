@@ -1,6 +1,7 @@
 ﻿using _Project.Scripts.Additional;
 using _Project.Scripts.Entities.Loader;
 using _Project.Scripts.Game;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -9,7 +10,8 @@ namespace _Project.Scripts.UI_Scripts
 {
 	public class OpenLevel : MonoBehaviour 
 	{
-		[Inject] private MenuManager _menuManager;  
+		[Inject] private MenuManager _menuManager;
+		[SerializeField] private TMP_Text _levelNum;
 		public GameObject myTick;
 		public GameObject myLock;
 		public int myLevel;
@@ -21,7 +23,7 @@ namespace _Project.Scripts.UI_Scripts
 		{
 			myName = MenuManager.envNo + "Stars";
 			int noOfLevelsCompleted = (int)Encryption.Decrypt(PlayerPrefs.GetString(MenuManager.envNo+"Levels"));
-	
+			_levelNum.text = myLevel.ToString();
 			myTick.SetActive (false);
 
 			if(myLevel <= 1000) //TODO noOfLevelsCompleted

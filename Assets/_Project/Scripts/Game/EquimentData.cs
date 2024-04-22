@@ -33,17 +33,12 @@ namespace _Project.Scripts.Game
 		private void PopUpMenu(string messagePopup,string messagePopup2,string messagePopup3,string messagePopup4,string messagePopup5)
 		{
 			_menuManager.popupPanel2.gameObject.SetActive (true);
-			_menuManager.popupPanel2.EnablePopup (messagePopup,messagePopup2,messagePopup3,messagePopup4,messagePopup5,false);
+			_menuManager.popupPanel2.EnablePopup(messagePopup,messagePopup2,messagePopup3,messagePopup4,messagePopup5,false);
 		}
 	
 		public void OpenHelp()
 		{
-			EquipmentPanel._instance.help_bttn.GetComponent<Animator> ().enabled = false;
-			if(_menuManager != null)
-			{
-				PopUpMenu(_itemsUsage1[itemNumber],_itemsUsage2[itemNumber],itemUsed3[itemNumber],itemUsed4[itemNumber],itemUsed5[itemNumber]);
-			}
-		
+			_menuManager.popupPanel.EnablePopup(_itemsUsage1[itemNumber], false);
 		}
 	}
 }

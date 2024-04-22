@@ -47,7 +47,6 @@ namespace _Project.Scripts.UI_Scripts
 	
 		public void OnClickToShow()
 		{
-			EquipmentPanel._instance.help_bttn.GetComponent<Animator> ().enabled = true;
 			if(upgradeValue < 2)
 			{
 				equipmentPanel.upgradeImage.sprite = upgradeImages[upgradeValue];
@@ -108,7 +107,6 @@ namespace _Project.Scripts.UI_Scripts
 			{
 				if((MenuManager.totalscore < coinsToUpgradeLevel[upgradeValue]) )
 				{
-					_menuManager.lastPanel = equipmentPanel.gameObject;
 					_menuManager.lastPanelName = "EquipmentUpdrade";
 					_menuManager.Insufficinetcoin();	
 
@@ -116,7 +114,6 @@ namespace _Project.Scripts.UI_Scripts
 				else if((MenuManager.golds < goldToUpgradeLevel[upgradeValue]))
 				{
 					_menuManager.Insufficinetgold();
-					_menuManager.lastPanel = equipmentPanel.gameObject;
 					_menuManager.lastPanelName = "EquipmentUpdrade";
 
 				}

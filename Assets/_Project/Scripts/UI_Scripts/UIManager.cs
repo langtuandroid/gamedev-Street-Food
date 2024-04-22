@@ -414,14 +414,6 @@ namespace _Project.Scripts.UI_Scripts
 			upgradePanel.transform.localPosition = Vector3.zero;
 			EnableFadePanel();
 		}
-		public void IAPGold()
-		{
-			GameObject upgradePanel = _diContainer.InstantiatePrefab(Resources.Load ("GoldPanel"));
-			upgradePanel.transform.SetParent(transform,false);
-			upgradePanel.transform.localScale = Vector3.one;
-			upgradePanel.transform.localPosition = Vector3.zero;
-			EnableFadePanel();
-		}
 
 		private void Radio()
 		{

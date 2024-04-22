@@ -1,11 +1,12 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace _Project.Scripts.UI
 {
 	public class PopupPanel2 : MonoBehaviour {
 
-		public Text popupText;
+		public TMP_Text popupText;
 		public Text popupText2 ;
 		public Text popupText3 ;
 		public Text popupText4 ;

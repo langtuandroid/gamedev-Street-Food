@@ -64,19 +64,7 @@ namespace _Project.Scripts.UI_Scripts
 			totalGoldText.text = MenuManager.golds.ToString ();
 		
 		}
-		public void GoldPanel()
-		{
-			GameObject specialPanel = _diContainer.InstantiatePrefab(Resources.Load ("GoldPanel"));
-			specialPanel.transform.SetParent(transform.parent,false);
-			specialPanel.transform.localScale = Vector3.one;
-			specialPanel.transform.localPosition = Vector3.zero;
-			if(_menuManager != null)
-				_menuManager.EnableFadePanel ();
-			else
-				_uiManager.EnableFadePanel();
-			Destroy (gameObject);
 
-		}
 
 		public void EquipmentPanel()
 		{

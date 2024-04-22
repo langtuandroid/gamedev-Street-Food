@@ -13,12 +13,11 @@ namespace _Project.Scripts.UI.Tutorial
 		public GameObject tutorial_hand;
 		public GameObject price_text;
 		public GameObject select_bttn_text ;
-		public GameObject i_bttn ;
+	
 	
 		public void Tutorial_panel()
 		{
 			PlayerPrefs.SetInt ("Stop", 2);
-			i_bttn.GetComponent<Animator> ().enabled = false;
 			_menuManager.EnableFadePanel ();
 			tutorialpanel.SetActive (true);
 			tutorial_hand.GetComponent<Animator> ().enabled = true;

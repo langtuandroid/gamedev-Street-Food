@@ -122,13 +122,11 @@ namespace _Project.Scripts.UI_Scripts
 			{
 				if((MenuManager.totalscore < elementsCoinPrice[clickedItem]) )
 				{
-					_menuManager.lastPanel = myParent;
 					_menuManager.lastPanelName = "DecorationPanel";
 					_menuManager.Insufficinetcoin();
 				}
 				else if((MenuManager.golds < elementsGoldPrice[clickedItem]))
 				{
-					_menuManager.lastPanel = myParent;
 					_menuManager.lastPanelName = "DecorationPanel";
 					_menuManager.Insufficinetgold() ;
 				}
