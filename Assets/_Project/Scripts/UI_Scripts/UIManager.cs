@@ -12,71 +12,68 @@ namespace _Project.Scripts.UI_Scripts
 {
 	public class UIManager : MonoBehaviour
 	{
+		public static bool upgrade_ground_sound;
 		[Inject] private LevelManager _levelManager;
 		[Inject] private DiContainer _diContainer;
 		[Inject] private SoundsAll _levelSoundManager;
-		public int totalCoins;
+		public Text goldText;
+		public Text gameoverHeading;
+		public Text dayEarningsHeading;
+		public Text dayEarningsLabel;
+		public Text coinsText;
+		public Text totalScore;
+		public Image fadePanelImage;
+		public Image gameStartImage;
+		public Image expertStar;
+		public Image []stars;
+		public Sprite starSprite;
+		public Slider sliderValue;
+		public Button nextButton;
+		public GameObject achivment_bttn;
+		public GameObject upgrade_bttn ;
 		public GameObject uiPanel;
 		public GameObject fadePanel;
-		public Image fadePanelImage;
-		public Text goldText; 
 		public GameObject gameOverPanel;
-		public Text gameoverHeading;
-		public Text dayEarningsHeading , dayEarningsLabel;
-		public Image []stars;
-		public Slider sliderValue;
-		public Image expertStar;
-		public Text totalScore;
 		public GameObject loader ;
-		public Sprite starSprite;
-		public Sprite unfillSprite;
-		public Image gameStartImage;
-		public AutoType targetText;
-		public TutorialPanel tutorialPanelCanvas;
-		public TutorialPanel tutorialPanelBg;
 		public GameObject goalMet;
-		public ParticleSystem expertStarAchieved;
-		public PopupPanel popupPanel;
-		public Text coinsText;
-		public Button nextButton;
 		public GameObject Pausepanel;
-		public GameObject Pop_panel ;
-		public ParticleSystem coincollect ;
-		public int _tabelcover ;
-		public int _tabeltop ;
-		public int Bonus_coin ;
-		public int n_Customer_served ;
-		public int n_Perfect_achieved ;
-		public int n_Burger_served ;
-		public int n_French_fries_served ;
-		public int n_Cokes_served ;
-		public int n_Thieves_caught ;
-		public int n_Noodles_served ;
-		public int n_Pizzas_served ;
-		public int n_Hotdogs_served ;
-		public GameObject gold_Collected ;
-		public GameObject upgrade_bttn ;
-		public GameObject gameover_effect ;
 		public GameObject achievment_text ;
 		public GameObject upback;
-		public GameObject achivment_bttn ;
 		public GameObject upgrade_hand;
-		public TextMesh dustbin_text ;
-		public GameObject dustbin_textparent ;
-	
-		[HideInInspector]
-		public Vector3 dustbintextintialposition ;
-		public int Unsucces;
-		public GameObject whistle;
-	
-		public GameObject blow ;
 		public GameObject loader2;
+		public ParticleSystem expertStarAchieved;
+		public TutorialPanel tutorialPanelCanvas;
+		
+		public PopupPanel popupPanel;
+		public TutorialPanel tutorialPanelBg;
+		public AutoType targetText;
 		public AudioSource radio_audio ;
-		public static bool upgrade_ground_sound;
-	
+		public GameObject dustbin_textparent ;
+		public GameObject whistle;
+		public GameObject blow ;
+		public TextMesh dustbin_text ;
+		public ParticleSystem coincollect ;
+		public GameObject gold_Collected ;
+		public GameObject gameover_effect ;
+		
+		private int Unsucces;
 		private bool _once;
 		private int levelNoOfEnv;
 		private Vector3 whistleinitposition ;
+		public Vector3 dustbintextintialposition { get; }
+		public int totalCoins { get; set; }
+		public int _tabelcover { get; set; }
+		public int _tabeltop { get; set; }
+		public int Bonus_coin { get; private set; }
+		public int n_Customer_served { get; set; }
+		public int n_Perfect_achieved { get; set; }
+		public int n_Burger_served { get; set; }
+		public int n_French_fries_served { get; set; }
+		public int n_Cokes_served { get; set; }
+		public int n_Thieves_caught { get; set; }
+		public int n_Noodles_served { get; set; }
+		public int n_Pizzas_served { get; set; }
+		public int n_Hotdogs_served { get; set; }
 	
 		private void Awake () 
 		{

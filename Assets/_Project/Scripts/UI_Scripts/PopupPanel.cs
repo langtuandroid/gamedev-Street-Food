@@ -27,6 +27,7 @@ namespace _Project.Scripts.UI_Scripts
 
 		public void EnablePopup(string messagePopup , bool yesNo)
 		{
+		
 			popupText.text = messagePopup.ToUpper ();
 			if(yesNo)
 			{

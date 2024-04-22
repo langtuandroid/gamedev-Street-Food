@@ -81,7 +81,6 @@ namespace _Project.Scripts.UI_Scripts
 			
 			}
 			EquimentData._instance.itemNumber = equ_number;
-
 		}
 
 		public void OnPurchase()

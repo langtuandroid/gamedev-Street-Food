@@ -293,7 +293,6 @@ GameObject:
   - component: {fileID: 11430814}
   - component: {fileID: 11400454}
   - component: {fileID: 11418110}
-  - component: {fileID: 11460738}
   - component: {fileID: 8293246}
   m_Layer: 5
   m_Name: EquipmentUpdrade
@@ -386,7 +385,6 @@ MonoBehaviour:
   totalGoldText: {fileID: 4276053854009525686}
   upgradeValueText: {fileID: 8671156381018889589}
   purchaseButton: {fileID: 181630}
-  help_bttn: {fileID: 3220577227644066153}
   China_1: {fileID: 6647719903027417330}
   China_2: {fileID: 3129273738774099138}
   China_3: {fileID: 4958255313640093523}
@@ -413,69 +411,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tiems:
   - This are All Equipments.
---- !u!114 &11460738
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 107836}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86df088f2b6fd422eb938f2db4b462cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _itemsUsage1:
-  - 
-  - Grill up - from 2 to 4 it increases the capacity of grill from 2 to 4 from 4
-    to 6 it increases the capacity of grill from 4 to 6
-  - Cola - from 3 to 6 it increases the number of cola from 3 to 6 from 6 to 9 it
-    increases the number of cola from 6 to 9
-  - plate- from 2 to 4 - it increases the number of plates from 2 to 4 from 4 to
-    6 - it increases the number of plates from 4 to 6
-  - bowl- from 2 to 4 - it increases the number of bowls from 2 to 4 from 4 to 6
-    - it increases the number of bowls from 4 to 6
-  - pan- from 1 to 2 - it increases the number of pans from 1 to 2 from 2 to 3 -
-    it increases the number of pans from 2 to 3
-  - container from 1 to 4 - it increases the number of container from 1 to 4 from
-    4 to 6 - it increases the number of container from 4 to 6
-  - plate- from 2 to 4 - it increases the number of plates from 2 to 4 from 4 to
-    6 - it increases the number of plates from 4 to 6
-  - cola from 2 to 4 - it increases the number of coke from 2 to 4 from 4 to 6 -
-    it increases the number of coke from 4 to 6
-  - oven- from 2 to 4 - it increases the capacity of oven from 2 to 4 from 4 to 6
-    - it increases the capacity of oven from 4 to 6
-  - fridge- buy fridge to serve chilled coke.
-  - plate- from 2 to 4 - it increases the number of plates from 2 to 4 from 4 to
-    6 - it increases the number of plates from 4 to 6
-  - plate- from 2 to 4 - it increases the number of plates from 2 to 4 from 4 to
-    6 - it increases the number of plates from 4 to 6
-  - cola from 2 to 4 - it increases the number of coke from 2 to 4 from 4 to 6 -
-    it increases the number of coke from 4 to 6
-  - Grill up - from 2 to 4 it increases the capacity of grill from 2 to 4 from 4
-    to 6 it increases the capacity of grill from 4 to 6
-  - fries- from 2 to 4 - it increases the number of  fries from 2 to 4 from 4 to
-    6 - it increases the number of fries from 4 to 6
-  _itemsUsage2:
-  - 1
-  - 23
-  - 444
-  - 44
-  - 44
-  - 444
-  - 44
-  - 4444
-  - 3
-  - 4
-  - 44
-  - 3
-  - 3
-  - 2
-  - 22
-  - 2
-  itemUsed3: []
-  itemUsed4: []
-  itemUsed5: []
 --- !u!82 &8293246
 AudioSource:
   m_ObjectHideFlags: 0
@@ -24914,7 +24849,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 11460738}
+      objectReference: {fileID: 11460238}
     - target: {fileID: 1459535916265886872, guid: 49b3999d2eb00074894c73806abbc531,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
@@ -25081,12 +25016,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 49b3999d2eb00074894c73806abbc531, type: 3}
---- !u!1 &3220577227644066153 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6564913188774386141, guid: 49b3999d2eb00074894c73806abbc531,
-    type: 3}
-  m_PrefabInstance: {fileID: 8622854174671061172}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &4545332574631872684 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5241851090784389144, guid: 49b3999d2eb00074894c73806abbc531,
