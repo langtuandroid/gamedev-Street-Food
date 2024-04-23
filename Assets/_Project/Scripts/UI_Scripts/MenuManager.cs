@@ -130,15 +130,6 @@ namespace _Project.Scripts.UI_Scripts
 			levelPanel.SetActive (false);
 			EnableFadePanel();
 		}
-		public void Exitpanel()
-		{
-			GameObject upgradePanel = _diContainer.InstantiatePrefab(Resources.Load ("ExitPanel"));
-			upgradePanel.transform.SetParent(transform,false);
-			upgradePanel.transform.localScale = Vector3.one;
-			upgradePanel.transform.localPosition = Vector3.zero;
-	
-			EnableFadePanel();
-		}
 
 		public void FadeInOff()
 		{

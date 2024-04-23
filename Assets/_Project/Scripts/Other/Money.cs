@@ -38,7 +38,7 @@ namespace _Project.Scripts.Other
 
 		private void OnEnable()
 		{
-			if (_usManager.IsCoinTutorial)
+			if (_usManager != null && _usManager.IsCoinTutorial)
 			{
 				_usManager.IsCoinTutorial = false;
 				IsTutorialOn = true;

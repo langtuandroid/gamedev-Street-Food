@@ -211,7 +211,6 @@ namespace _Project.Scripts.UI_Scripts
 					{
 						if(PlayerPrefs.GetInt("Unsuccessful") ==2 )
 						{
-							Invoke("BringRadiopopup",1.25f);
 							print ("bring radio popup");
 
 						}
@@ -243,12 +242,7 @@ namespace _Project.Scripts.UI_Scripts
 		{
 			_levelSoundManager.GameoverpanelSound.Play ();
 		}
-
-		private void BringRadiopopup()
-		{
-			Radio();
-		}
-
+		
 		private IEnumerator EarningsSlider()
 		{
 			float a = 1.5f;
@@ -375,23 +369,7 @@ namespace _Project.Scripts.UI_Scripts
 			EnableFadePanel();
 		
 		}
-		public void BellPanelTry()
-		{
-			GameObject upgradePanel = _diContainer.InstantiatePrefab(Resources.Load ("BellPopupPanel"));
-			upgradePanel.transform.SetParent(transform,false);
-			upgradePanel.transform.localScale = Vector3.one;
-			upgradePanel.transform.localPosition = Vector3.zero;
-			EnableFadePanel();
-		
-		}
-		public void BellPanelBuy()
-		{
-			GameObject upgradePanel = _diContainer.InstantiatePrefab(Resources.Load ("BellPopupPanel2"));
-			upgradePanel.transform.SetParent(transform,false);
-			upgradePanel.transform.localScale = Vector3.one;
-			upgradePanel.transform.localPosition = Vector3.zero;
-			EnableFadePanel();
-		}
+
 		public void EarnGold()
 		{
 			Debug.Log ("GOld");
@@ -411,24 +389,7 @@ namespace _Project.Scripts.UI_Scripts
 			upgradePanel.transform.localPosition = Vector3.zero;
 			EnableFadePanel();
 		}
-
-		private void Radio()
-		{
-			GameObject upgradePanel = _diContainer.InstantiatePrefab(Resources.Load ("Radio"));
-			upgradePanel.transform.SetParent(transform,false);
-			upgradePanel.transform.localScale = Vector3.one;
-			upgradePanel.transform.localPosition = Vector3.zero;
-			EnableFadePanel();
-		}
-
-		public void Whistle()
-		{
-			GameObject upgradePanel = _diContainer.InstantiatePrefab(Resources.Load ("Whistle"));
-			upgradePanel.transform.SetParent(transform,false);
-			upgradePanel.transform.localScale = Vector3.one;
-			upgradePanel.transform.localPosition = Vector3.zero;
-			EnableFadePanel();
-		}
+		
 		public void Handcuff()
 		{
 			GameObject upgradePanel = _diContainer.InstantiatePrefab(Resources.Load ("Handcuff"));

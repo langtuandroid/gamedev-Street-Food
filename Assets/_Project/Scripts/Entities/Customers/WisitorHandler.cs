@@ -156,16 +156,7 @@ namespace _Project.Scripts.Entities.Customers
 				_uiManager.OnGameOver ();
 			}
 		}
-
-		public void PanelCheck()
-		{
-			_uiManager.BellPanelTry();
-		}
-
-		public void BellPanelSeven()
-		{
-			_uiManager.BellPanelBuy ();
-		}
+		
 
 		public void ConfigureCustomer()
 		{
@@ -177,7 +168,6 @@ namespace _Project.Scripts.Entities.Customers
 						if (PlayerPrefs.GetInt("belltrydone") != 2)
 						{
 							PlayerPrefs.SetInt("belltrydone", 2);
-							Invoke(nameof(PanelCheck), 10.0f);
 							stop = true;
 						}
 					}
@@ -190,7 +180,6 @@ namespace _Project.Scripts.Entities.Customers
 					if (PlayerPrefs.GetInt("belltrydone2") != 2)
 					{
 						PlayerPrefs.SetInt("belltrydone2", 2);
-						Invoke(nameof(BellPanelSeven), 20.0f);
 						stop = true;
 					}
 				}

@@ -24,7 +24,6 @@ namespace _Project.Scripts.Audio
 		private int _extraPopUp;
 		public GameObject _deactivateImage { get; set; }
 		
-
 		private void Start () 
 		{
 			if(!_isGoalAchived)
@@ -47,7 +46,6 @@ namespace _Project.Scripts.Audio
 				{
 					_extraPopUp++;
 				}
-
 			}
 		}
 	
