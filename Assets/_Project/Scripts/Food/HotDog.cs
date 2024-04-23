@@ -188,9 +188,12 @@ namespace _Project.Scripts.Food
 				if(isTutorial)
 				{
 					isTutorial = false;
-					_usManager.FirstCoins.IsTutorialOn = true;
+					//_usManager.FirstCoins.IsTutorialOn = true;
+					_usManager.IsCoinTutorial = true;
+					/*
 					_uiManager.tutorialPanelBg.gameObject.SetActive (true);
 					_uiManager.tutorialPanelBg.OpenPopup ("COLLECT THE COINS.",false,false , 4);
+					*/
 				}
 				
 				string myTypeToEatSub = "HOTDOG";

@@ -3450,7 +3450,7 @@ PrefabInstance:
     - target: {fileID: 1459535916265886872, guid: 49b3999d2eb00074894c73806abbc531,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1459535916265886872, guid: 49b3999d2eb00074894c73806abbc531,
         type: 3}
@@ -3466,7 +3466,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1784967133}
+      objectReference: {fileID: 585757102}
     - target: {fileID: 1459535916265886872, guid: 49b3999d2eb00074894c73806abbc531,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
@@ -3485,7 +3485,7 @@ PrefabInstance:
     - target: {fileID: 1459535916265886872, guid: 49b3999d2eb00074894c73806abbc531,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Upgrades
+      value: Play
       objectReference: {fileID: 0}
     - target: {fileID: 1459535916265886872, guid: 49b3999d2eb00074894c73806abbc531,
         type: 3}
@@ -6597,7 +6597,7 @@ PrefabInstance:
     - target: {fileID: 1459535916265886872, guid: 49b3999d2eb00074894c73806abbc531,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1459535916265886872, guid: 49b3999d2eb00074894c73806abbc531,
         type: 3}
@@ -6613,7 +6613,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1784967133}
+      objectReference: {fileID: 585757102}
     - target: {fileID: 1459535916265886872, guid: 49b3999d2eb00074894c73806abbc531,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
@@ -6632,7 +6632,7 @@ PrefabInstance:
     - target: {fileID: 1459535916265886872, guid: 49b3999d2eb00074894c73806abbc531,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Upgrades
+      value: Play
       objectReference: {fileID: 0}
     - target: {fileID: 1459535916265886872, guid: 49b3999d2eb00074894c73806abbc531,
         type: 3}
@@ -6778,7 +6778,12 @@ PrefabInstance:
     - target: {fileID: 6452538912436185086, guid: 49b3999d2eb00074894c73806abbc531,
         type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnSoundOFFClick
+      value: OnSoundONClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 6452538912436185086, guid: 49b3999d2eb00074894c73806abbc531,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: _Project.Scripts.Managers.SoundToggle, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6452538912436185086, guid: 49b3999d2eb00074894c73806abbc531,
         type: 3}

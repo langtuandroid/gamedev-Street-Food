@@ -53,6 +53,8 @@ namespace _Project.Scripts.Managers
 		[FormerlySerializedAs("firstCoins")] public Money FirstCoins;
 		[FormerlySerializedAs("Bell")] public GameObject BellObject ;
 		[FormerlySerializedAs("handcuff")] public GameObject HandCuff;
+		
+		public bool IsCoinTutorial { get; set; }
 		public Wisitor firstWisitor { get; set; }
 		public bool ClickBun { get; set; }
 		public int GrillsFilledCount { get; set; }

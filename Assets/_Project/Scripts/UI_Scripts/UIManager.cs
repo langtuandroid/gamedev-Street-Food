@@ -43,10 +43,10 @@ namespace _Project.Scripts.UI_Scripts
 		public GameObject loader2;
 		public ParticleSystem expertStarAchieved;
 		public TutorialPanel tutorialPanelCanvas;
-		
-		public PopupPanel popupPanel;
-		public TutorialPanel tutorialPanelBg;
 		public AutoType targetText;
+		public PopupPanel popupPanel;
+		[Space]
+		public TutorialPanel tutorialPanelBg;
 		public AudioSource radio_audio ;
 		public GameObject dustbin_textparent ;
 		public GameObject whistle;
@@ -488,7 +488,7 @@ namespace _Project.Scripts.UI_Scripts
 		{
 			_levelSoundManager.coinAddSound.Play ();
 			int textCoins = int.Parse(coinsText.text);
-			coinsText.transform.localScale = new Vector3(1.6f , 2.4f,1);
+			coinsText.transform.localScale = new Vector3(1.5f , 1.5f,1);
 			while (textCoins < totalCoins)
 			{
 				textCoins+=1;
@@ -503,7 +503,7 @@ namespace _Project.Scripts.UI_Scripts
 				_once = true;
 			}
 
-			coinsText.transform.localScale = new Vector3(1.76f , 1.6f,1);
+			coinsText.transform.localScale = new Vector3(1f , 1f,1);
 		
 		}
 		public void ForCoinAdd()

@@ -27,7 +27,7 @@ namespace _Project.Scripts.UI_Scripts
 		public SoundToggle menuSoundButton;
 		public GameObject loader; 
 		public GameObject loader2 ;
-		public Animator achievment;
+	
 
 
 		void Start () 
@@ -87,20 +87,7 @@ namespace _Project.Scripts.UI_Scripts
 			cupcakeNo = (int)Encryption.Decrypt (PlayerPrefs.GetString("Cupcake"));
 			handcuffNo = (int)Encryption.Decrypt (PlayerPrefs.GetString("Handcuff"));
 		}
-	
-		void Update () 
-		{
-			if (PlayerPrefs.GetInt("claimvalue") > 0) 
-			{
-				achievment.enabled = true;
-			} 
-			else 
-			{
-
-				achievment.enabled = false;
-			}
-		}
-	
+		
 		public void USLevel()
 		{
 			GameObject upgradePanel = _diContainer.InstantiatePrefab(Resources.Load ("EnvPanel"));

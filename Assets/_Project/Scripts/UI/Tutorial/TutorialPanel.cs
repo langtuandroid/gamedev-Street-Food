@@ -1,4 +1,5 @@
-﻿using _Project.Scripts.Entities.Customers;
+﻿using System;
+using _Project.Scripts.Entities.Customers;
 using _Project.Scripts.Managers;
 using _Project.Scripts.UI_Scripts;
 using UnityEngine;
@@ -9,6 +10,7 @@ namespace _Project.Scripts.UI.Tutorial
 {
 	public class TutorialPanel : MonoBehaviour 
 	{
+		public static bool popupPanelActive;
 		[Inject] private WisitorHandler _customerHandler;
 		[Inject] private UIManager _uiManager;   
 		public Text popupMessage;
@@ -17,7 +19,7 @@ namespace _Project.Scripts.UI.Tutorial
 		public bool inCanvas;
 		public GameObject upArrowObject;
 		public GameObject downArrowObject;
-		public static bool popupPanelActive;
+		public TweenScale myScale;
 		public Vector3 posBun /*13 ; 8 for Italy*/;
 		public Vector3 posTikki /*13 ; 8 for Italy*/;
 		public Vector3 posCoins /*13 ; 8 for Italy*/;
@@ -52,8 +54,8 @@ namespace _Project.Scripts.UI.Tutorial
 		public Vector3 posCake ;
 		public Vector3 posWhistle ;
 		public Vector3 posRadio ;
-		public TweenScale myScale;
-		public int noOfExtraPopup { get; set; }
+	
+		
 		public Vector3 posBellArrow;
 		public Vector3 posWhistleArrow;
 		public Vector3 posRadioArrow;
@@ -64,6 +66,12 @@ namespace _Project.Scripts.UI.Tutorial
 		
 		private bool clickToNext;
 		private static int tutNo;
+		private int noOfExtraPopup;
+
+		private void OnEnable()
+		{
+			transform.localScale = Vector3.one;
+		}
 
 		private void Start()
 		{
@@ -138,6 +146,12 @@ namespace _Project.Scripts.UI.Tutorial
 
 		private void Update () 
 		{
+			if (!inCanvas)
+			{
+				Vector3 parentScale = transform.parent.localScale;
+				transform.localScale = new Vector3(1 / parentScale.x, 1 / parentScale.y, 1) * 0.7f;
+			}
+			
 			if(clickToNext)
 			{
 				if(Input.GetMouseButtonDown (0))
@@ -151,7 +165,7 @@ namespace _Project.Scripts.UI.Tutorial
 						if(tutNo == 1)
 						{
 							_uiManager.tutorialPanelCanvas.gameObject.SetActive (true);
-							_uiManager.tutorialPanelCanvas.OpenPopup ("GOLD CAN BE PURCHASED OR BY 5 PERFECT SERVES!",true,false , 6 , 1);
+							_uiManager.tutorialPanelCanvas.OpenPopup ("GOLD CAN BE OBTAINED BY 5 PERFECT SERVES!",true,false , 6 , 1);
 						}
 						else if(tutNo == 2)
 						{
@@ -303,49 +317,50 @@ namespace _Project.Scripts.UI.Tutorial
 				switch(posNo)
 				{
 					case 0:
-						gameObject.transform.localPosition = posbunStack;
+						transform.localPosition = posbunStack;
 						break;
 					case 1:
-						gameObject.transform.localPosition = posTikkiStack;
+						transform.localPosition = posTikkiStack;
 						break;
 					case 2:
-						gameObject.transform.localPosition = posTikki;
+						transform.localPosition = posTikki;
 						break;
 					case 3:
-						gameObject.transform.localPosition = posBun;
+						transform.localPosition = posBun;
 						break;
 					case 4:
-						gameObject.transform.localPosition = positionPickCoins;
+						Debug.Log(2);
+						transform.localPosition = positionPickCoins;
 						break;
 					case 5:
-						gameObject.transform.localPosition = posCoins;
+						transform.localPosition = posCoins;
 						break;
 					case 6:
-						gameObject.transform.localPosition = posGold;
+						transform.localPosition = posGold;
 						break;
 					case 7:
-						gameObject.transform.localPosition = posSauce;
+						transform.localPosition = posSauce;
 						break;
 					case 8:
-						gameObject.transform.localPosition = posCoke;
+						transform.localPosition = posCoke;
 						break;
 					case 9:
-						gameObject.transform.localPosition = posDustBin;
+						transform.localPosition = posDustBin;
 						break;
 					case 10:
-						gameObject.transform.localPosition = noArrow;
+						transform.localPosition = noArrow;
 						break;
 					case 11:
-						gameObject.transform.localPosition = posWhistle ;
+						transform.localPosition = posWhistle ;
 						break;
 					case 12 :
-						gameObject.transform.localPosition =  posBell ;
+						transform.localPosition =  posBell ;
 						break;
 					case 13 :
-						gameObject.transform.localPosition =  posCake ;
+						transform.localPosition =  posCake ;
 						break;
 					case 14 :
-						gameObject.transform.localPosition = posRadio ;
+						transform.localPosition = posRadio ;
 						break ;
 				}
 			}
@@ -477,7 +492,6 @@ namespace _Project.Scripts.UI.Tutorial
 						gameObject.transform.localPosition = posWhistle ;
 						break;
 					case 9 :
-
 						gameObject.transform.localPosition =  posBell ;
 						break;
 					case 10 :
