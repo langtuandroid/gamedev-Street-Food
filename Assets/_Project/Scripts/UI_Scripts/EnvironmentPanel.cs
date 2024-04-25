@@ -63,7 +63,7 @@ namespace _Project.Scripts.UI_Scripts
 		
 			MenuManager.envNo = "Aus";
 			int noOfItalyLevelsOpen = (int)Encryption.Decrypt (PlayerPrefs.GetString("ItalyLevels"));
-			if(noOfItalyLevelsOpen >= 0 || PlayerPrefs.HasKey ("AusOpen")) //TODO noOfItalyLevelsOpen >= 10
+			if(noOfItalyLevelsOpen >= 30 || PlayerPrefs.HasKey ("AusOpen"))
 			{
 				Aus_lock.SetActive (false);
 				Destroy (gameObject);
@@ -101,7 +101,7 @@ namespace _Project.Scripts.UI_Scripts
 			MenuManager.envNo = "Italy";
 			int noOfChinaLevelsOpen = (int)Encryption.Decrypt(PlayerPrefs.GetString("ChinaLevels"));
 
-			if (noOfChinaLevelsOpen >= 0 || PlayerPrefs.HasKey("ItalyOpen")) //TODO noOfChinaLevelsOpen >= 10
+			if (noOfChinaLevelsOpen >= 20 || PlayerPrefs.HasKey("ItalyOpen"))
 			{
 				Italy_lock.SetActive(false);
 				Destroy(gameObject);
@@ -140,7 +140,7 @@ namespace _Project.Scripts.UI_Scripts
 		{
 			MenuManager.envNo = "China";
 			int noOfUSLevelsOpen = (int)Encryption.Decrypt (PlayerPrefs.GetString("USLevels"));
-			if(noOfUSLevelsOpen >= 0 || PlayerPrefs.HasKey ("ChinaOpen")) //TODO noOfUSLevelsOpen >= 10
+			if(noOfUSLevelsOpen >= 10 || PlayerPrefs.HasKey ("ChinaOpen")) 
 			{
 				China_lock.SetActive (false);
 				Destroy (gameObject);

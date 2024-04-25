@@ -264,7 +264,7 @@ PlayerSettings:
   AndroidTargetArchitectures: 1
   AndroidTargetDevices: 0
   AndroidSplashScreenScale: 2
-  androidSplashScreen: {fileID: 2800000, guid: 200a62d24222c40869faaee10c4df298, type: 3}
+  androidSplashScreen: {fileID: 0}
   AndroidKeystoreName: /Users/muhammadzubairazeem/Desktop/deerhunt.keystore
   AndroidKeyaliasName: 
   AndroidEnableArmv9SecurityFeatures: 0

@@ -218,7 +218,7 @@ namespace _Project.Scripts.Other
 		}
 
 
-		//TODO: availableHotDog
+	
 
 		public void ClickedDestination()
 		{

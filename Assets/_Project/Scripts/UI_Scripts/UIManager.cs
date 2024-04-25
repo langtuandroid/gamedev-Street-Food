@@ -123,8 +123,8 @@ namespace _Project.Scripts.UI_Scripts
 				PlayerPrefs.SetInt ("Aus/top-shed-1",3);
 
 			}
-			PlayerPrefs.SetString("Golds",Encryption.Encrypt ("10000")); //TODO Comnet 2 lines
-			PlayerPrefs.SetString ("TotalScore",Encryption.Encrypt ("10000")); //TODO
+			//PlayerPrefs.SetString("Golds",Encryption.Encrypt ("10000")); //TODO Comnet 2 lines
+			//PlayerPrefs.SetString ("TotalScore",Encryption.Encrypt ("10000")); //TODO
 			goldText.text = Encryption.Decrypt (PlayerPrefs.GetString("Golds")).ToString ();
 			StartCoroutine (ShowTarget());
 		}

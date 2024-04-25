@@ -26,7 +26,7 @@ namespace _Project.Scripts.UI_Scripts
 			_levelNum.text = myLevel.ToString();
 			myTick.SetActive (false);
 
-			if(myLevel <= 1000) //TODO noOfLevelsCompleted
+			if(myLevel <= noOfLevelsCompleted) 
 			{
 				myTick.SetActive (true);
 				myLock.SetActive (false);
@@ -42,7 +42,7 @@ namespace _Project.Scripts.UI_Scripts
 				myLock.SetActive (false);
 			}
 		
-			if (myLevel > 100000)//TODO  (noOfLevelsCompleted + 1)
+			if (myLevel > noOfLevelsCompleted + 1)
 			{
 				transform.GetComponent<Button> ().enabled = false;
 			} 

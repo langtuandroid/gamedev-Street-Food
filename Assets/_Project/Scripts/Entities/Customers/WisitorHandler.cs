@@ -6,6 +6,7 @@ using _Project.Scripts.UI_Scripts;
 using _Project.Scripts.UI.Tutorial;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 using Zenject;
 
 namespace _Project.Scripts.Entities.Customers
@@ -25,7 +26,7 @@ namespace _Project.Scripts.Entities.Customers
 		[FormerlySerializedAs("customerEndPosition")] public Transform _customerEndPos;
 		[FormerlySerializedAs("availablePositions")] public List <int> _availablePositions = new List<int>();
 		[FormerlySerializedAs("customerPool")] public List<Wisitor> _wisitorsPool;
-		[FormerlySerializedAs("timerText")] [SerializeField] private TextMesh _timerText;
+		[SerializeField] private Text _timerText;
 		[FormerlySerializedAs("coinImages")] public Money[]_coins;
 		public bool timerStopped { get; set; }
 		public bool canBeAnUnPayingCustomer { get; set; }

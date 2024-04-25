@@ -23,7 +23,6 @@ public class CFX_Demo_GTToggle : MonoBehaviour
 	
 	void Awake()
 	{
-		//TODO FIX CollisionRect = this.GetComponent<Texture>().GetScreenRect(Camera.main);
 		Label = this.GetComponentInChildren<Text>();
 		
 		UpdateTexture();

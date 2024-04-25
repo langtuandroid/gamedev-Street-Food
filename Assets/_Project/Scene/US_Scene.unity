@@ -19801,12 +19801,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 544712714}
   m_PrefabAsset: {fileID: 0}
---- !u!102 &544712718 stripped
-TextMesh:
-  m_CorrespondingSourceObject: {fileID: 2018072488361611043, guid: 438fa2c0085381c44afd067b7799a7b7,
+--- !u!114 &544712718 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2327993605783801505, guid: 438fa2c0085381c44afd067b7799a7b7,
     type: 3}
   m_PrefabInstance: {fileID: 544712714}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &559612105
 GameObject:
   m_ObjectHideFlags: 0
@@ -76858,7 +76864,6 @@ GameObject:
   - component: {fileID: 1830592656}
   - component: {fileID: 1830592662}
   - component: {fileID: 1830592661}
-  - component: {fileID: 1830592663}
   - component: {fileID: 1830592664}
   m_Layer: 0
   m_Name: Main Camera
@@ -77090,18 +77095,6 @@ MonoBehaviour:
   FirstCoins: {fileID: 1652232329}
   BellObject: {fileID: 2111292819}
   HandCuff: {fileID: 450144758}
---- !u!114 &1830592663
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1830592655}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b6451fed27584d9e9d47ef5b7b6423f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!82 &1830592664
 AudioSource:
   m_ObjectHideFlags: 0

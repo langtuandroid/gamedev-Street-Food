@@ -16,12 +16,6 @@ public class CFX_Demo_GTButton : MonoBehaviour
 	private Rect CollisionRect;
 	private bool Over;
 	
-	//-------------------------------------------------------------
-	
-	void Awake()
-	{
-		//TODO FIX CollisionRect = this.GetComponent<Texture>().GetScreenRect(Camera.main);
-	}
 	
 	void Update ()
 	{
