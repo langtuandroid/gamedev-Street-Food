@@ -101621,6 +101621,16 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -112.19992
       objectReference: {fileID: 0}
+    - target: {fileID: 360589289154421132, guid: 438fa2c0085381c44afd067b7799a7b7,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 360589289154421132, guid: 438fa2c0085381c44afd067b7799a7b7,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 697338487105989683, guid: 438fa2c0085381c44afd067b7799a7b7,
         type: 3}
       propertyPath: m_IsActive
@@ -101631,6 +101641,16 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1830592659}
+    - target: {fileID: 2040454448635335220, guid: 438fa2c0085381c44afd067b7799a7b7,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2040454448635335220, guid: 438fa2c0085381c44afd067b7799a7b7,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2129006064601130231, guid: 438fa2c0085381c44afd067b7799a7b7,
         type: 3}
       propertyPath: blow

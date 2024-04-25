@@ -1539,8 +1539,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -14.5}
-  m_SizeDelta: {x: 0, y: 29}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &22204698
 CanvasRenderer:
@@ -1570,7 +1570,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 311d5391acc90440ba1038ee77430f7c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 81b674a52552af348a32626f0f28cfb3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7317,6 +7317,16 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 8231432}
+    - target: {fileID: 5262355467095998468, guid: 6d56be68b2d842440b9cb3bddfe1f95e,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Cupcake
+      objectReference: {fileID: 0}
+    - target: {fileID: 5262355467095998468, guid: 6d56be68b2d842440b9cb3bddfe1f95e,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: _Project.Scripts.UI_Scripts.SpecialPanel, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 5262355467106537280, guid: 6d56be68b2d842440b9cb3bddfe1f95e,
         type: 3}
       propertyPath: m_IsActive
@@ -7482,6 +7492,16 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 8231432}
+    - target: {fileID: 5262355467095998468, guid: 6d56be68b2d842440b9cb3bddfe1f95e,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Whistle
+      objectReference: {fileID: 0}
+    - target: {fileID: 5262355467095998468, guid: 6d56be68b2d842440b9cb3bddfe1f95e,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: _Project.Scripts.UI_Scripts.SpecialPanel, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 5262355467106561356, guid: 6d56be68b2d842440b9cb3bddfe1f95e,
         type: 3}
       propertyPath: m_Name
@@ -8534,6 +8554,16 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 8231432}
+    - target: {fileID: 5262355467095998468, guid: 6d56be68b2d842440b9cb3bddfe1f95e,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: HandCuffs
+      objectReference: {fileID: 0}
+    - target: {fileID: 5262355467095998468, guid: 6d56be68b2d842440b9cb3bddfe1f95e,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: _Project.Scripts.UI_Scripts.SpecialPanel, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 5262355467106537280, guid: 6d56be68b2d842440b9cb3bddfe1f95e,
         type: 3}
       propertyPath: m_IsActive
@@ -8704,6 +8734,16 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 8231432}
+    - target: {fileID: 5262355467095998468, guid: 6d56be68b2d842440b9cb3bddfe1f95e,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Radio
+      objectReference: {fileID: 0}
+    - target: {fileID: 5262355467095998468, guid: 6d56be68b2d842440b9cb3bddfe1f95e,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: _Project.Scripts.UI_Scripts.SpecialPanel, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 5262355467106561356, guid: 6d56be68b2d842440b9cb3bddfe1f95e,
         type: 3}
       propertyPath: m_Name

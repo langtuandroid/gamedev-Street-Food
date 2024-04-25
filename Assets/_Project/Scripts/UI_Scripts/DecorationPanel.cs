@@ -11,7 +11,6 @@ namespace _Project.Scripts.UI_Scripts
 		[Inject] private DiContainer _diContainer;
 		[Inject] private MenuManager _menuManager;  
 		[Inject] private UIManager _uiManager;   
-		private int noOfPanels => panels.Length;
 		private int selectedPanel;
 		
 		public GameObject leftArrow , rightArrow;
@@ -31,12 +30,6 @@ namespace _Project.Scripts.UI_Scripts
 			_instance = this;
 			totalGoldText.text = MenuManager.golds.ToString ();
 			totalCoinsText.text = MenuManager.totalscore.ToString ();
-
-			if(selectedPanel == noOfPanels)
-			{
-				leftArrow.SetActive (false);
-				rightArrow.SetActive (false);
-			}
 		}
 
 		private void OnEnable()
@@ -75,13 +68,13 @@ namespace _Project.Scripts.UI_Scripts
 
 		public void MoveRight()
 		{
-			if(selectedPanel < noOfPanels )
+			if(selectedPanel < panels.Length - 1)
 			{
 				_menuManager.EnableFadePanel();
 				panels[selectedPanel].SetActive (false);
 				selectedPanel++;
 				panels[selectedPanel].SetActive (true);
-				if(selectedPanel == noOfPanels)
+				if(selectedPanel == panels.Length - 1)
 				{
 					rightArrow.SetActive (false);
 				}
@@ -91,15 +84,14 @@ namespace _Project.Scripts.UI_Scripts
 
 		public void MoveLeft()
 		{
-			if(selectedPanel > 1)
+			if(selectedPanel > 0)
 			{
 				_menuManager.EnableFadePanel();
 				panels[selectedPanel].SetActive (false);
 				selectedPanel--;
 				panels[selectedPanel].SetActive (true);
-				if(selectedPanel == 1)
+				if(selectedPanel == 0)
 				{
-
 					leftArrow.SetActive (false);
 				}
 	
@@ -109,10 +101,10 @@ namespace _Project.Scripts.UI_Scripts
 
 		public void CallDecrementCoin()
 		{
-			StopCoroutine ("DecrementCoins");
-			StopCoroutine ("DecrementGold");
-			StartCoroutine ("DecrementCoins");
-			StartCoroutine ("DecrementGold");
+			StopCoroutine (nameof(DecrementCoins));
+			StopCoroutine (nameof(DecrementGold));
+			StartCoroutine (nameof(DecrementCoins));
+			StartCoroutine (nameof(DecrementGold));
 		}
 
 		private IEnumerator DecrementCoins()
