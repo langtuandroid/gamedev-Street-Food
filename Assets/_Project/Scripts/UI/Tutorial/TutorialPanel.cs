@@ -306,7 +306,7 @@ namespace _Project.Scripts.UI.Tutorial
 				}
 			}
 		}
-
+		
 		public void OpenPopup(string message , bool upArrow , bool isCoke , int posNo , int clickToGo = 0)
 		{
 			popupPanelActive = true;
@@ -329,14 +329,15 @@ namespace _Project.Scripts.UI.Tutorial
 						transform.localPosition = posBun;
 						break;
 					case 4:
-						Debug.Log(2);
 						transform.localPosition = positionPickCoins;
 						break;
 					case 5:
-						transform.localPosition = posCoins;
+						Debug.Log(1);
+						transform.localPosition = _uiManager.coinsText.transform.position;
 						break;
 					case 6:
-						transform.localPosition = posGold;
+						Debug.Log(2);
+						transform.localPosition = _uiManager.goldText.transform.position;
 						break;
 					case 7:
 						transform.localPosition = posSauce;
@@ -385,10 +386,10 @@ namespace _Project.Scripts.UI.Tutorial
 						transform.position = positionPickCoins;
 						break;
 					case 5:
-						childObject.transform.localPosition = posCoins;
+						childObject.transform.position = _uiManager.coinsText.transform.position + Vector3.down * 2.5f;
 						break;
 					case 6:
-						childObject.transform.localPosition = posGold;
+						childObject.transform.position = _uiManager.goldText.transform.position + Vector3.down * 2.5f;
 						break;
 					case 7:
 						childObject.rectTransform.position = posSauce;

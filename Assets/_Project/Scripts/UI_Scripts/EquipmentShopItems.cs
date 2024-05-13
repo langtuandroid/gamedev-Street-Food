@@ -1,14 +1,17 @@
 ﻿using _Project.Scripts.Additional;
 using _Project.Scripts.Game;
+using Integration;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
 namespace _Project.Scripts.UI_Scripts
 {
-	public class EquipmentShopItems : MonoBehaviour 
+	public class EquipmentShopItems : MonoBehaviour
 	{
-		[Inject] private MenuManager _menuManager;  
+		[Inject] private RewardedAdController _rewardedAdController;
+		[Inject] private MenuManager _menuManager;
+		[SerializeField] private bool _isVideo;
 		public GameObject []upgradeNoImages;
 		public Sprite []upgradeImages;
 		public int []coinsToUpgradeLevel;
@@ -19,6 +22,7 @@ namespace _Project.Scripts.UI_Scripts
 		public int equ_number;
 		
 		private int upgradeValue;
+		public bool IsVideo => _isVideo;
 		private void OnEnable()
 		{
 
@@ -69,38 +73,47 @@ namespace _Project.Scripts.UI_Scripts
 				}
 			
 				equipmentPanel.coinsText.text = coinsToUpgradeLevel[upgradeValue].ToString ();
-				equipmentPanel.purchaseButton.GetComponent<Button>().onClick.RemoveAllListeners ();
-				equipmentPanel.purchaseButton.GetComponent<Button>().onClick.AddListener (()=>OnPurchase());
-			
+				
+				Button purchaseButton = equipmentPanel.purchaseButton.GetComponent<Button>();
+				
+				(_isVideo ? equipmentPanel.VideoButton : purchaseButton).onClick.RemoveAllListeners();
+				(_isVideo ? equipmentPanel.VideoButton : purchaseButton).onClick.AddListener(OnPurchase);
+				purchaseButton.gameObject.SetActive(!_isVideo);
+				equipmentPanel.VideoButton.gameObject.SetActive(_isVideo);
 			}
 			else
 			{
 				equipmentPanel.upgradeImage.sprite = upgradeImages[1];
 				equipmentPanel.upgradeValueText.text = upgradeValues[2];
 				equipmentPanel.purchaseButton.SetActive (false);
-			
+				equipmentPanel.VideoButton.gameObject.SetActive (false);
 			}
 			EquimentData._instance.itemNumber = equ_number;
 		}
 
-		public void OnPurchase()
+		private void OnPurchase()
+		{
+			if (_isVideo)
+			{
+				RequestVideo();
+			}
+			else
+			{
+				BuyWithCoins();
+			}
+		}
+
+		private void BuyWithCoins()
 		{
 			if(MenuManager.totalscore >= coinsToUpgradeLevel[upgradeValue] && MenuManager.golds >= goldToUpgradeLevel[upgradeValue])
 			{
 				MenuManager.golds-=goldToUpgradeLevel[upgradeValue];
 				MenuManager.totalscore-=coinsToUpgradeLevel[upgradeValue];
-				upgradeNoImages[upgradeValue+1].SetActive (true);
 				PlayerPrefs.SetString("TotalScore",Encryption.Encrypt (MenuManager.totalscore.ToString ()));
 				PlayerPrefs.SetString("Golds",Encryption.Encrypt (MenuManager.golds.ToString ()));
-				upgradeValue++;
-				PlayerPrefs.SetString(myName+"Upgrade",Encryption.Encrypt (upgradeValue.ToString ()));
 				equipmentPanel.CallDecrementCoin();
-				OnClickToShow();
-				if(equ_number == 10)
-				{
-					PlayerPrefs.SetInt("Fridge" , 1);
-					equipmentPanel.purchaseButton.SetActive (false);
-				}
+					
+				UpgradeItem();
 			}
 			else
 			{
@@ -116,6 +129,32 @@ namespace _Project.Scripts.UI_Scripts
 					_menuManager.lastPanelName = "EquipmentUpdrade";
 
 				}
+			}
+		}
+
+		private void RequestVideo()
+		{
+			_rewardedAdController.ShowAd();
+			_rewardedAdController.OnVideoClosed += CancelVideo;
+			_rewardedAdController.GetRewarded += UpgradeItem;
+		}
+
+		private void CancelVideo()
+		{
+			_rewardedAdController.OnVideoClosed -= CancelVideo;
+			_rewardedAdController.GetRewarded -= UpgradeItem;
+		}
+
+		private void UpgradeItem()
+		{
+			upgradeValue++;
+			upgradeNoImages[upgradeValue].SetActive (true);
+			PlayerPrefs.SetString(myName+"Upgrade",Encryption.Encrypt (upgradeValue.ToString ()));
+			OnClickToShow();
+			if(equ_number == 10)
+			{
+				PlayerPrefs.SetInt("Fridge" , 1);
+				equipmentPanel.purchaseButton.SetActive (false);
 			}
 		}
 	}

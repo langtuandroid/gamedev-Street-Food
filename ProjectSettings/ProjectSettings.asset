@@ -163,7 +163,7 @@ PlayerSettings:
     Android: com.syedgames.cookingmaniafree
     Standalone: com.gvs.mexianmasterchef
     Tizen: com.gameconcept.fastfood
-    iPhone: com.syedgames.mexicanmasterpro
+    iPhone: com.gamedev.digital.test
     tvOS: com.gameconcept.fastfood
   buildNumber:
     Standalone: 0

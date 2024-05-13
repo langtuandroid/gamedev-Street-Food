@@ -1,8 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using _Project.Scripts.Achivments;
 using _Project.Scripts.Additional;
 using _Project.Scripts.Managers;
 using _Project.Scripts.UI;
+using GoogleMobileAds.Api;
+using Integration;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -11,6 +14,9 @@ namespace _Project.Scripts.UI_Scripts
 {
 	public class MenuManager : MonoBehaviour
 	{
+		[Inject] private IAPService _iapService;
+		[Inject] private AdMobController _adMobController;
+		[Inject] private BannerViewController _bannerView;
 		[Inject] private DiContainer _diContainer;
 		public static string envNo = "US";
 		public GameObject levelPanel;
@@ -27,11 +33,16 @@ namespace _Project.Scripts.UI_Scripts
 		public SoundToggle menuSoundButton;
 		public GameObject loader; 
 		public GameObject loader2 ;
-	
-
-
+		
 		void Start () 
 		{
+			if (!_iapService.IsPanelActive)
+			{
+				_adMobController.ShowBanner(true);
+				_bannerView.ChangeBannerPosition(AdPosition.Bottom);
+			}
+			
+		
 			Application.targetFrameRate = 120;
 			AchievementBlock._claimCheck = (PlayerPrefs.GetInt("claimvalue"));
 
@@ -83,7 +94,9 @@ namespace _Project.Scripts.UI_Scripts
 			}
 		
 			golds = (int)Encryption.Decrypt (PlayerPrefs.GetString("Golds"));
+			
 			totalscore = (int)Encryption.Decrypt (PlayerPrefs.GetString("TotalScore"));
+			
 			cupcakeNo = (int)Encryption.Decrypt (PlayerPrefs.GetString("Cupcake"));
 			handcuffNo = (int)Encryption.Decrypt (PlayerPrefs.GetString("Handcuff"));
 		}

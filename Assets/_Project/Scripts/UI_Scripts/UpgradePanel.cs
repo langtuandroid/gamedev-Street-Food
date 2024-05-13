@@ -104,6 +104,20 @@ namespace _Project.Scripts.UI_Scripts
 				_uiManager.EnableFadePanel ();
 			Destroy (gameObject);
 		}
+		
+		public void GoldShopPanel()
+		{
+			GameObject decorationPanel = _diContainer.InstantiatePrefab(Resources.Load ("GoldShop"));
+			decorationPanel.transform.SetParent(transform.parent,false);
+			decorationPanel.transform.localScale = Vector3.one;
+			decorationPanel.transform.localPosition = Vector3.zero;
+			if(_menuManager != null)
+				_menuManager.EnableFadePanel ();
+			else
+				_uiManager.EnableFadePanel ();
+			Destroy (gameObject);
+		}
+
 
 		public void Close()
 		{
@@ -116,7 +130,6 @@ namespace _Project.Scripts.UI_Scripts
 				if(UIManager.upgrade_ground_sound)
 				{
 					PlayerPrefs.SetInt("SOUNDON",0);
-			
 				}
 			}
 			Destroy (gameObject);

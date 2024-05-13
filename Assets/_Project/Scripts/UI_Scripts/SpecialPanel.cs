@@ -19,13 +19,10 @@ namespace _Project.Scripts.UI_Scripts
 		public Text totalCoinsText;
 		public Text totalGoldText;
 		public string []itemUsage;
-		public GameObject bell_tex;
 		public GameObject bell_gold;
 		public GameObject bell_tick ;
-		public GameObject radio_tex;
 		public GameObject radio_gold;
 		public GameObject radio_tick ;
-		public GameObject whistle_tex;
 		public GameObject whistle_gold;
 		public GameObject whistle_tick ;
 
@@ -39,20 +36,16 @@ namespace _Project.Scripts.UI_Scripts
 		{
 			if(PlayerPrefs.HasKey("Radio"))
 			{
-				radio_tex.SetActive(false);
 				radio_tick.SetActive(true);
 				radio_gold.SetActive(false);
-
 			}
 			if(PlayerPrefs.HasKey("Bell"))
 			{
-				bell_tex.SetActive(false);
 				bell_tick.SetActive(true);
 				bell_gold.SetActive(false);
 			}
 			if(PlayerPrefs.HasKey("Whistle"))
 			{
-				whistle_tex.SetActive(false);
 				whistle_tick.SetActive(true);
 				whistle_gold.SetActive(false);	
 			}
@@ -126,7 +119,6 @@ namespace _Project.Scripts.UI_Scripts
 					PlayerPrefs.SetString("Golds",Encryption.Encrypt (MenuManager.golds.ToString ()));
 					PlayerPrefs.SetInt ("Bell" , 1);
 					CallDecrementCoin();
-					bell_tex.SetActive(false);
 					bell_tick.SetActive(true);
 					bell_gold.SetActive(false);
 				}
@@ -156,7 +148,6 @@ namespace _Project.Scripts.UI_Scripts
 					PlayerPrefs.SetString("Golds",Encryption.Encrypt (MenuManager.golds.ToString ()));
 					PlayerPrefs.SetInt ("Whistle" , 1);
 					CallDecrementCoin();
-					whistle_tex.SetActive(false);
 					whistle_tick.SetActive(true);
 					whistle_gold.SetActive(false);
 				}
@@ -186,7 +177,6 @@ namespace _Project.Scripts.UI_Scripts
 					PlayerPrefs.SetString("Golds",Encryption.Encrypt (MenuManager.golds.ToString ()));
 					PlayerPrefs.SetInt ("Radio" , 1);
 					CallDecrementCoin();
-					radio_tex.SetActive(false);
 					radio_tick.SetActive(true);
 					radio_gold.SetActive(false);
 				}

@@ -14,7 +14,11 @@ namespace _Project.Scripts.UI_Scripts
 	
 		public void Cross()
 		{
-			_menuManager.EnableFadePanel ();
+			if (_menuManager != null)
+			{
+				_menuManager.EnableFadePanel ();
+			}
+			
 			gameObject.SetActive (false);
 		}
 

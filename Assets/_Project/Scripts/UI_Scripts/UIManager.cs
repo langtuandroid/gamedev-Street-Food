@@ -4,6 +4,8 @@ using _Project.Scripts.Audio;
 using _Project.Scripts.Entities.Loader;
 using _Project.Scripts.Managers;
 using _Project.Scripts.UI.Tutorial;
+using GoogleMobileAds.Api;
+using Integration;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -123,8 +125,8 @@ namespace _Project.Scripts.UI_Scripts
 				PlayerPrefs.SetInt ("Aus/top-shed-1",3);
 
 			}
-			//PlayerPrefs.SetString("Golds",Encryption.Encrypt ("10000")); //TODO Comnet 2 lines
-			//PlayerPrefs.SetString ("TotalScore",Encryption.Encrypt ("10000")); //TODO
+			//PlayerPrefs.SetString("Golds",Encryption.Encrypt ("10000")); 
+			//PlayerPrefs.SetString ("TotalScore",Encryption.Encrypt ("10000")); 
 			goldText.text = Encryption.Decrypt (PlayerPrefs.GetString("Golds")).ToString ();
 			StartCoroutine (ShowTarget());
 		}
@@ -158,8 +160,8 @@ namespace _Project.Scripts.UI_Scripts
 			targetText._deactivateImage = gameStartImage.gameObject;
 			StartCoroutine (targetText.PrintAnimation());
 		}
-	
-	
+
+		[Inject] private BannerViewController _bannerView;
 		public void OnGameOver()
 		{
 			levelNoOfEnv = LevelManager.levelNo%10;
@@ -180,6 +182,7 @@ namespace _Project.Scripts.UI_Scripts
 
 			uiPanel.SetActive (false);
 			gameOverPanel.SetActive (true);
+			_bannerView.ChangeBannerPosition(AdPosition.Bottom);
 			radio_audio.Stop ();
 			if(totalCoins >= _levelManager.targetScore[LevelManager.levelNo])
 			{

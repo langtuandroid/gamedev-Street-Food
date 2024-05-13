@@ -1089,7 +1089,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e24a50394e42f4b06bc7b21a0bb975ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myParent: {fileID: 122262}
+  _isVideo: 0
+  _videoButton: {fileID: 0}
   myImage: {fileID: 11411136}
   elementsToShow:
   - {fileID: 21300000, guid: 59714cabbb9d34a22be823495d472aa4, type: 3}
@@ -1207,7 +1208,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e24a50394e42f4b06bc7b21a0bb975ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myParent: {fileID: 122262}
+  _isVideo: 0
+  _videoButton: {fileID: 0}
   myImage: {fileID: 11491180}
   elementsToShow:
   - {fileID: 21300000, guid: 1f9fadb4132954fb0b587c34546ba329, type: 3}
@@ -6150,7 +6152,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 400, y: -62}
+  m_AnchoredPosition: {x: 356, y: -33}
   m_SizeDelta: {x: 80, y: 97}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &22285316
@@ -8461,7 +8463,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e24a50394e42f4b06bc7b21a0bb975ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myParent: {fileID: 122262}
+  _isVideo: 0
+  _videoButton: {fileID: 0}
   myImage: {fileID: 11414386}
   elementsToShow:
   - {fileID: 21300000, guid: 0ec5ae21820944e0088eeba19ae8cdec, type: 3}
@@ -10315,7 +10318,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e24a50394e42f4b06bc7b21a0bb975ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myParent: {fileID: 122262}
+  _isVideo: 0
+  _videoButton: {fileID: 0}
   myImage: {fileID: 11470378}
   elementsToShow:
   - {fileID: 21300000, guid: 125369f368e0c4b64a401c0545887a85, type: 3}
@@ -10370,7 +10374,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -400, y: -62}
+  m_AnchoredPosition: {x: -356, y: -33}
   m_SizeDelta: {x: 80, y: 97}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &22233816
@@ -12046,7 +12050,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e24a50394e42f4b06bc7b21a0bb975ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myParent: {fileID: 122262}
+  _isVideo: 0
+  _videoButton: {fileID: 0}
   myImage: {fileID: 11401376}
   elementsToShow:
   - {fileID: 21300000, guid: b868dd70bf1524dd8ad3c5423365860d, type: 3}
@@ -12866,7 +12871,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e24a50394e42f4b06bc7b21a0bb975ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myParent: {fileID: 122262}
+  _isVideo: 0
+  _videoButton: {fileID: 0}
   myImage: {fileID: 11421838}
   elementsToShow:
   - {fileID: 21300000, guid: 84280a74b12f84d65bbf249e94eef7a6, type: 3}
@@ -14103,7 +14109,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e24a50394e42f4b06bc7b21a0bb975ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myParent: {fileID: 122262}
+  _isVideo: 0
+  _videoButton: {fileID: 0}
   myImage: {fileID: 11408196}
   elementsToShow:
   - {fileID: 21300000, guid: 4c316397b58204a4b827f77c141b7b96, type: 3}
@@ -14568,7 +14575,7 @@ RectTransform:
   m_GameObject: {fileID: 184198}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.65, y: 0.65, z: 0.65}
+  m_LocalScale: {x: 0.55, y: 0.55, z: 0.55}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7430071981839823720}
@@ -14580,7 +14587,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -94}
+  m_AnchoredPosition: {x: 0, y: -49}
   m_SizeDelta: {x: 1000, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &22215606
@@ -21347,7 +21354,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e24a50394e42f4b06bc7b21a0bb975ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myParent: {fileID: 0}
+  _isVideo: 0
+  _videoButton: {fileID: 0}
   myImage: {fileID: 11437202}
   elementsToShow:
   - {fileID: 21300000, guid: 84280a74b12f84d65bbf249e94eef7a6, type: 3}
@@ -22203,7 +22211,7 @@ PrefabInstance:
     - target: {fileID: 6935943662991976933, guid: 63394926d995ba5479f188581ce516e8,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 270
+      value: 116
       objectReference: {fileID: 0}
     - target: {fileID: 6935943662991976933, guid: 63394926d995ba5479f188581ce516e8,
         type: 3}
@@ -22354,7 +22362,7 @@ PrefabInstance:
     - target: {fileID: 339802618117547610, guid: 0d4384e1ceeb087498ee116c340979da,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 137
+      value: 153
       objectReference: {fileID: 0}
     - target: {fileID: 339802618117547610, guid: 0d4384e1ceeb087498ee116c340979da,
         type: 3}
@@ -22791,6 +22799,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8709877935767835211, guid: 46ba53dac3a9cb84c99ea434b36a5ab0,
         type: 3}
+      propertyPath: _isVideo
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8709877935767835211, guid: 46ba53dac3a9cb84c99ea434b36a5ab0,
+        type: 3}
       propertyPath: myParent
       value: 
       objectReference: {fileID: 122262}
@@ -23115,7 +23128,7 @@ PrefabInstance:
     - target: {fileID: 6935943662991976933, guid: 63394926d995ba5479f188581ce516e8,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -270
+      value: -116
       objectReference: {fileID: 0}
     - target: {fileID: 6935943662991976933, guid: 63394926d995ba5479f188581ce516e8,
         type: 3}
@@ -23182,6 +23195,11 @@ PrefabInstance:
         type: 3}
       propertyPath: myName
       value: China_TableCover
+      objectReference: {fileID: 0}
+    - target: {fileID: 8709877935767835211, guid: 46ba53dac3a9cb84c99ea434b36a5ab0,
+        type: 3}
+      propertyPath: _isVideo
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8709877935767835211, guid: 46ba53dac3a9cb84c99ea434b36a5ab0,
         type: 3}
@@ -24051,6 +24069,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8709877935767835211, guid: 46ba53dac3a9cb84c99ea434b36a5ab0,
         type: 3}
+      propertyPath: _isVideo
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8709877935767835211, guid: 46ba53dac3a9cb84c99ea434b36a5ab0,
+        type: 3}
       propertyPath: myParent
       value: 
       objectReference: {fileID: 122262}
@@ -24397,6 +24420,11 @@ PrefabInstance:
         type: 3}
       propertyPath: myName
       value: Italy_TableCover
+      objectReference: {fileID: 0}
+    - target: {fileID: 8709877935767835211, guid: 46ba53dac3a9cb84c99ea434b36a5ab0,
+        type: 3}
+      propertyPath: _isVideo
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8709877935767835211, guid: 46ba53dac3a9cb84c99ea434b36a5ab0,
         type: 3}

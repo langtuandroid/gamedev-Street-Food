@@ -20,6 +20,7 @@ namespace _Project.Scripts.UI_Scripts
 		public Text totalGoldText;
 		public TMP_Text upgradeValueText;
 		public GameObject purchaseButton;
+		[SerializeField] private Button _videoButton;
 	
 		public GameObject China_1 ;
 		public GameObject China_2;
@@ -35,8 +36,8 @@ namespace _Project.Scripts.UI_Scripts
 		public GameObject Aus_2 ;
 		public GameObject Aus_3 ;
 		public GameObject Aus_4 ;
-		
-		
+
+		public Button VideoButton => _videoButton;
 		private void OnEnable()
 		{
 			if(PlayerPrefs.HasKey ("ChinaOpen")) {

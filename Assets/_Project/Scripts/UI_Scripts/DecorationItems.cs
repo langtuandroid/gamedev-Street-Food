@@ -1,14 +1,17 @@
 ﻿using _Project.Scripts.Additional;
+using Integration;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
 namespace _Project.Scripts.UI_Scripts
 {
-	public class DecorationItems : MonoBehaviour 
+	public class DecorationItems : MonoBehaviour
 	{
-		[Inject] private MenuManager _menuManager;  
-		public GameObject myParent;
+		[Inject] private RewardedAdController _rewardedAdController;
+		[Inject] private MenuManager _menuManager;
+		[SerializeField] private bool _isVideo;
+		[SerializeField] private Button _videoButton;
 		public Image myImage;
 		public Sprite []elementsToShow;
 		public string []elementsName;
@@ -21,6 +24,7 @@ namespace _Project.Scripts.UI_Scripts
 		public GameObject selectButton;
 		public string myName;
 		private int clickedItem;
+		
 
 		private void OnEnable()
 		{
@@ -36,12 +40,14 @@ namespace _Project.Scripts.UI_Scripts
 				{
 					selectedButtonText.text = "SELECT";
 				}
-				priceButton.SetActive (false);
+				priceButton.SetActive(false);
+				_videoButton.gameObject.SetActive(false);
 			}
 			else
 			{
+				
 				selectButton.SetActive (false);
-				priceButton.SetActive (true);
+			    (_isVideo ? priceButton : _videoButton.gameObject).SetActive (true);
 				if(PlayerPrefs.HasKey (elementsName[0]))
 				{
 					if(!PlayerPrefs.HasKey (elementsName[1]))
@@ -72,6 +78,7 @@ namespace _Project.Scripts.UI_Scripts
 					myImage.sprite = elementsToShow[0];
 				}
 			}
+			SelectImage(0);
 		}
 
 		public void SelectImage(int imageNo)
@@ -109,13 +116,9 @@ namespace _Project.Scripts.UI_Scripts
 
 				PlayerPrefs.SetString("TotalScore",Encryption.Encrypt (MenuManager.totalscore.ToString ()));
 				PlayerPrefs.SetString("Golds",Encryption.Encrypt (MenuManager.golds.ToString ()));
-
-				selectButton.SetActive (true);
-				PlayerPrefs.SetString (myName ,elementsName[clickedItem]);
-				PlayerPrefs.SetInt (elementsName[clickedItem],1);
-				selectedButtonText.text = "SELECTED";
 				DecorationPanel._instance.CallDecrementCoin ();
-				priceButton.SetActive (false);
+				
+				GetItem();
 
 			}
 			else
@@ -131,6 +134,29 @@ namespace _Project.Scripts.UI_Scripts
 					_menuManager.Insufficinetgold() ;
 				}
 			}
+		}
+
+		public void RequestVideo()
+		{
+			_rewardedAdController.ShowAd();
+			_rewardedAdController.OnVideoClosed += VideoClosed;
+			_rewardedAdController.GetRewarded += GetItem;
+		}
+
+		private void VideoClosed()
+		{
+			_rewardedAdController.OnVideoClosed -= VideoClosed;
+			_rewardedAdController.GetRewarded -= GetItem;
+		}
+
+		private void GetItem()
+		{
+			priceButton.SetActive (false);
+			_videoButton.gameObject.SetActive(false);
+			selectButton.SetActive (true);
+			PlayerPrefs.SetString (myName ,elementsName[clickedItem]);
+			PlayerPrefs.SetInt (elementsName[clickedItem],1);
+			selectedButtonText.text = "SELECTED";
 		}
 
 		public void SelectItem()
